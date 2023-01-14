@@ -15,9 +15,11 @@ fn main() {
 
     let spaces = "   ";
     let spaces = spaces.len();  // 变量遮蔽
+    println!("{}", spaces);
 
     let spaces_mut= "   ";  // 类型:`&str`
     // 报错:expected `&str`, found `usize`
     // spaces_mut = spaces_mut.len()  // 类型: `usize`
+    println!("{}", spaces_mut)
     
 }
