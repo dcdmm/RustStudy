@@ -1,4 +1,4 @@
-// 布尔类型
+// 布尔类型与逻辑运算
 
 // The boolean type or bool is a primitive data type that can take on one of two values, called true and false.
 
