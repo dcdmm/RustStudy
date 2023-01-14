@@ -1,5 +1,6 @@
 [workspace]
 members = [
-  "a_basic"
+  "a_basic", 
+  "b_basic"
 ]
 
