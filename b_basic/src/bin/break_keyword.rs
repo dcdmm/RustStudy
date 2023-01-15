@@ -6,5 +6,6 @@ fn main() {
             println!("i={}", i);
             break;  // 跳出当前整个循环
         }
+        println!("i != 5");
     }
 }

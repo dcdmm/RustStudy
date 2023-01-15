@@ -19,7 +19,7 @@ fn main() {
     }
 
     let condition = true;
-    let number = if condition {5} else {6};  // 类似python/java三元表达式
+    let number = if condition {5} else {6};  // 类似python/Java三元表达式
     
     // 报错:expected integer, found `&str`
     // This won’t work because variables must have a single type, and Rust needs to know at compile time what type the number variable is, definitively. 
