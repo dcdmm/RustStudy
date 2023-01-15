@@ -1,4 +1,4 @@
-// 数值类型与算术运算,比较运算
+// 数值类型(Primitive Type)与算术运算,比较运算
 // 参考:https://doc.rust-lang.org/reference/types/numeric.html
 
 /*
@@ -42,10 +42,10 @@ fn main() {
     println!("{}", b'A'); // Byte (u8 only)
 
     // 算法运算符: +, -, *, /, %
-    println!("{}", 5 + 10);  // 加法
-    println!("{}", 5 / 10);  // 除法
-    println!("{}", 11 / 5);  // 整数与整数相除仍为整数
-    println!("{}", 43 % 6);  // 取余
+    println!("{}", 5 + 10); // 加法
+    println!("{}", 5 / 10); // 除法
+    println!("{}", 11 / 5); // 整数与整数相除仍为整数
+    println!("{}", 43 % 6); // 取余
 
     let mut x = 5;
     /*
@@ -55,9 +55,9 @@ fn main() {
     /=: fn div_assign(&mut self, rhs: Rhs)
     %=: fn rem_assign(&mut self, rhs: Rhs)
     */
-    x += 1;  
+    x += 1;
     println!("{}", x);
 
-    // 比较运算符:>, >=, <, <=, ==, != 
+    // 比较运算符:>, >=, <, <=, ==, !=
     println!("{}", 5 != 34)
 }

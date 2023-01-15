@@ -1,6 +1,2 @@
 [workspace]
-members = [
-  "a_basic", 
-  "b_basic"
-]
-
+members = ["a_basic", "b_basic", "c_basic"]
