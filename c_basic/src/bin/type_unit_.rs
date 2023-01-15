@@ -1,4 +1,4 @@
-// unit(Primitive Type)
+// ()(Primitive Type unit)
 
 /*
 The () type, also called “unit”.

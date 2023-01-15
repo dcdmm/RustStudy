@@ -5,8 +5,7 @@ fn main() {
     /*
     If you have loops within loops, break and continue apply to the innermost loop at that point. You can optionally specify a loop label on a loop that you can then use with break or continue to specify that those keywords apply to the labeled loop instead of the innermost loop. Loop labels must begin with a single quote.
     */
-    'counting_up: loop {
-        // 类似Java带标签的循环
+    'counting_up: loop { // 类似Java带标签的循环
         println!("count = {count}");
         let mut remaining = 10;
         loop {
