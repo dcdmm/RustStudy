@@ -7,6 +7,14 @@ fn main() {
     let first = a[0];
     println!("{first}");
 
+    for i in a { // 数组是实现了`Trait std::iter::IntoIterator`
+        println!("{i}")
+    }
+
+    for j in 0..a.len() {
+        println!("{}", a[j])
+    }
+
     // let _b = [3, 3, 3, 3, 3, 3]
     let _b = [3, 6]; // 与上等价,单更加简洁
 }
