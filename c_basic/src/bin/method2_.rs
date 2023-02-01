@@ -1,4 +1,4 @@
-// 方法
+// Multiple impl Blocks
 
 struct Rectangle {
     width: u32,
