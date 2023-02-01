@@ -42,17 +42,17 @@ fn main() {
     /*
       --> c_basic\src\bin\type_structs_basic1_.rs:40:20
        |
-    25 |       let user2 = User {
+    26 |       let user2 = User {
        |  _________________-
-    26 | |         email: String::from("another@example.com"),
-    27 | |
-    28 | |         // ..user1必须在结构体的尾部使用
-    29 | |         // ..user1不以分号(;)结尾
-    30 | |         ..user1
-    31 | |     };
+    27 | |         email: String::from("another@example.com"),
+    28 | |
+    29 | |         // ..user1必须在结构体的尾部使用
+    30 | |         // ..user1不以分号(;)结尾
+    31 | |         ..user1
+    32 | |     };
        | |_____- value moved here
     ...
-    40 |       println!("{}", user1.username); // true
+    60 |       println!("{}", user1.username); // 报错
        |                      ^^^^^^^^^^^^^^ value borrowed here after move
        |
     */

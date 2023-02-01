@@ -64,7 +64,7 @@ fn main() {
     error[E0277]: cannot add `Option<i8>` to `i8`
       --> c_basic\src\bin\type_enum3_option_.rs:64:17
        |
-    64 |     let sum = _x + _y;
+    85 |     let sum = _x + _y;
        |                  ^ no implementation for `i8 + Option<i8>`
        |
        = help: the trait `Add<Option<i8>>` is not implemented for `i8`
