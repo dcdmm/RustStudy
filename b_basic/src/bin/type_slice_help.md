@@ -1,4 +1,4 @@
-A slice is a dynamically sized type representing a 'view' into a sequence of elements of type T. The slice type is written as [T].
+A slice is a [dynamically sized type](https://doc.rust-lang.org/reference/dynamically-sized-types.html) representing a 'view' into a sequence of elements of type T. The slice type is written as [T].
 
 Slice types are generally used through pointer types. For example:
 

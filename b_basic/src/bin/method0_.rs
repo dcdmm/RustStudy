@@ -9,9 +9,9 @@ impl Rectangle {
     // `self`指代此类型的实例(本例中self指代的是Rectangle结构体实例)
     
     // `self`的使用跟函数参数一样,要严格遵守Rust的所有权规则
-    // * `self`表示Rectangle的所有权转移到该方法中
-    // * `&self`表示该方法对Rectangle的不可变借用
-    // * `&mut self`表示可变借用
+    // ===> `self`表示Rectangle的所有权转移到该方法中
+    // ===> `&self`表示该方法对Rectangle的不可变借用
+    // ===> `&mut self`表示可变借用
     fn area(&self) -> u32 {
         self.width * self.height
     }
