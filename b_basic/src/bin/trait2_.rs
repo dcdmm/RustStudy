@@ -1,4 +1,4 @@
-// 特征(Traits as Parameters)
+// trait(Traits as Parameters)
 
 use std::fmt::Debug;
 use std::fmt::Display;

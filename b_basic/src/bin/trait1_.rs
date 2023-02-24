@@ -1,4 +1,4 @@
-// 特征(Default Implementations)
+// trait(Default Implementations)
 
 trait Summary {
     // Default Implementations

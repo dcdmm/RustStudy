@@ -1,4 +1,4 @@
-// 特征(Using Trait Bounds to Conditionally Implement Methods)
+// trait(Using Trait Bounds to Conditionally Implement Methods)
 
 use std::fmt::Display;
 

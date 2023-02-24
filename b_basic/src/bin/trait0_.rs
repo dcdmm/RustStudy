@@ -1,4 +1,4 @@
-// 特征
+// trait
 
 #[allow(dead_code)]
 trait Summary {
