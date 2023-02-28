@@ -1,4 +1,4 @@
-// 模式匹配(Destructuring Enums)
+// 模式匹配(结构枚举)
 
 #[derive(Debug)]
 #[allow(dead_code)]
