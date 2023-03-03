@@ -1,49 +1,19 @@
-// 生命周期
+// 生命周期(Lifetime Annotations in Struct Definitions)
 
-// We’ve specified a lifetime parameter 'a for the parameter x and the return type, but not for the parameter _y, because the lifetime of _y does not have any relationship with the lifetime of x or the return value.
+// This struct has the single field part that holds a string slice, which is a reference.
+// As with generic data types, we declare the name of the generic lifetime parameter inside angle brackets after the name of the struct so we can use the lifetime parameter in the body of the struct definition.
+// This annotation means an instance of ImportantExcerpt can’t outlive the reference it holds in its part field.
 #[allow(dead_code)]
-fn longest<'a>(x: &'a str, _y: &str) -> &'a str {
-    x
+struct ImportantExcerpt<'a> {
+    part: &'a str, // a reference
 }
 
-// When returning a reference from a function, the lifetime parameter for the return type needs to match the lifetime parameter for one of the parameters.
-// If the reference returned does not refer to one of the parameters, it must refer to a value created within this function.
-// However, this would be a dangling reference because the value will go out of scope at the end of the function.
-// ======
-// #[allow(dead_code)]
-// fn longest1<'a>(_x: &str, _y: &str) -> &'a str {
-//     let result = String::from("really long string");
-//     result.as_str()
-// }
-// ======
-// 程序运行结果:
-// error[E0515]: cannot return reference to local variable `result`
-//   --> c_advanced\src\bin\lifetime2_.rs:15:5
-//    |
-// 15 |     result.as_str()
-//    |     ^^^^^^^^^^^^^^^ returns a reference to data owned by the current function
-
-// The problem is that result goes out of scope and gets cleaned up at the end of the longest function.
-// We’re also trying to return a reference to result from the function.
-// There is no way we can specify lifetime parameters that would change the dangling reference, and Rust won’t let us create a dangling reference.
-// In this case, the best fix would be to return an owned data type rather than a reference so the calling function is then responsible for cleaning up the value.
-
-fn longest1<'a>(_x: &str, _y: &str) -> String {
-    let result = String::from("really long string");
-    result
-}
-
+// The main function here creates an instance of the ImportantExcerpt struct that holds a reference to the first sentence of the String owned by the variable novel.
+// The data in novel exists before the ImportantExcerpt instance is created. In addition, novel doesn’t go out of scope until after the ImportantExcerpt goes out of scope, so the reference in the ImportantExcerpt instance is valid.
 fn main() {
-    let string1 = String::from("abcd");
-    let string2 = "efghijklmnopqrstuvwxyz";
-
-    let result = longest(string1.as_str(), string2);
-    println!("The longest string is {}", result);
-
-    // ********************************************************
-    let string11 = String::from("abcd");
-    let string21 = "xyz";
-
-    let result1 = longest1(string11.as_str(), string21);
-    println!("The longest string is {}", result1);
+    let novel = String::from("Call me Ishmael. Some years ago...");
+    let first_sentence = novel.split('.').next().expect("Could not find a '.'");
+    let _i = ImportantExcerpt {
+        part: first_sentence,
+    };
 }

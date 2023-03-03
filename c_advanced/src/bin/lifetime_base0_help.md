@@ -1,7 +1,7 @@
-生命周期
+## 生命周期
 
 ```rust
-// r变量被赋予了生命周期'a,x 被赋予了生命周期'b('b比'a小)
+// r变量被赋予了生命周期'a,x被赋予了生命周期'b('b比'a小)
 // At compile time, Rust compares the size of the two lifetimes and sees that r has a lifetime of 'a but that it refers to memory with a lifetime of 'b. The program is rejected because 'b is shorter than 'a: the subject of the reference doesn’t live as long as the reference.
 fn main() {
     let r;                // ---------+-- 'a
