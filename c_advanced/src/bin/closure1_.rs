@@ -1,23 +1,22 @@
 // 闭包
 
-// Closures can capture values from their environment in three ways, which directly map to the three ways a function can take a parameter: borrowing immutably, borrowing mutably, and taking ownership. 
 fn main() {
-    let list = vec![1, 2, 3];
-    println!("Before defining closure: {:?}", list);
+    let x = 4;
 
-    // 闭包拥有一项函数所不具备的特性:捕获作用域中的值
-    let only_borrows = || println!("From closure: {:?}", list);
-
-    println!("Before calling closure: {:?}", list);
-    only_borrows();
-    println!("After calling closure: {:?}", list);
-
-    println!("**************************************");
-    let mut list1 = vec![1, 2, 3];
-    println!("Before defining closure: {:?}", list1);
-
-    let mut borrows_mutably = || list1.push(7);
-
-    borrows_mutably();
-    println!("After calling closure: {:?}", list1);
+    // fn equal_to_x(z: i32) -> bool {
+    //     z == x
+    // }
+    // let _is_equal_func= equal_to_x(4);
+    // 程序运行结果:
+//     error[E0434]: can't capture dynamic environment in a fn item
+//  --> c_advanced\src\bin\closure1_.rs:7:14
+//   |
+// 7 |         z == x
+//   |              ^
+//   |
+//   = help: use the `|| { ... }` closure form instead
+    
+    // 闭包拥有一项函数所不具备的特性:获取作用域中的变量
+    let equal_to_x_c = |z| {z == x};
+    let _is_equal_closure = equal_to_x_c(4);
 }
