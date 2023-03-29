@@ -1,7 +1,10 @@
 // 数值类型(Primitive Type)与算术运算,比较运算
+
 // 参考:https://doc.rust-lang.org/reference/types/numeric.html
 
 /*
+# Integer types:
+
 The unsigned integer types consist of:
 Type	Minimum	Maximum
 u8	    0	    2^{8}-1
@@ -19,8 +22,12 @@ i64	    -(2^{63})	2^{63}-1
 i128	-(2^{127})	2^{127}-1
 
 
+# Floating-point types
+
 The IEEE 754-2008 "binary32" and "binary64" floating-point types are f32 and f64, respectively.
 
+
+# Machine-dependent integer types
 
 The usize type is an unsigned integer type with the same number of bits as the platform's pointer type. It can represent every memory address in the process.
 

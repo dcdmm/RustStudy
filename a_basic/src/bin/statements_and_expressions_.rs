@@ -14,7 +14,7 @@ fn main() {
     let z = {
         let x = 3;
         // Expressions do not include ending semicolons. If you add a semicolon to the end of an expression, you turn it into a statement, and it will then not return a value.
-        x + 1 // 表达式(不以分号结尾)
+        x + 1 // 表达式(结尾不含分号)
     };
     println!("The value of_z is {z}");
 }

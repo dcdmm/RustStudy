@@ -8,8 +8,6 @@ fn main() {
         println!("{i}")
     }
 
-    // 警告:warning: unused variable: `i`
-    // for i in 1..5 {
     for _ in 1..5 {
         println!("hello rust!")
     }

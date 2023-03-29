@@ -42,6 +42,11 @@ true	true	false
 true	false	true
 false	true	false
 false	false	false
+
+* a != b is the same as !(a == b)
+* a >= b is the same as a == b | a > b
+* a < b is the same as !(a >= b)
+* a <= b is the same as a == b | a < b
 */
 fn main() {
     let _x = true;
