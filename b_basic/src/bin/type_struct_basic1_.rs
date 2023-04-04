@@ -27,7 +27,7 @@ fn main() {
         email: String::from("another@example.com"),
 
         // ..user1必须在结构体的尾部使用
-        // ..user1结尾处不能包含分号(;)
+        // ..user1不以分号(;)结尾
         ..user1
     };
     println!("{}", user2.active); // true
@@ -38,25 +38,9 @@ fn main() {
     println!("{}", user1.active); // true
     println!("{}", user1.sign_in_count); // 1
     println!("{}", user1.email); // someone@example.com(正常访问)
-    
-    /*
-      --> c_basic\src\bin\type_structs_basic1_.rs:40:20
-       |
-    26 |       let user2 = User {
-       |  _________________-
-    27 | |         email: String::from("another@example.com"),
-    28 | |
-    29 | |         // ..user1必须在结构体的尾部使用
-    30 | |         // ..user1不以分号(;)结尾
-    31 | |         ..user1
-    32 | |     };
-       | |_____- value moved here
-    ...
-    60 |       println!("{}", user1.username); // 报错
-       |                      ^^^^^^^^^^^^^^ value borrowed here after move
-       |
-    */
+
+
+    // 报错:borrow of moved value: `user1.username`
     // Note that the struct update syntax uses = like an assignment; this is because it moves the data
-    // println!("{}", user1.username); // 报错
-    
+    // println!("{}", user1.username);
 }

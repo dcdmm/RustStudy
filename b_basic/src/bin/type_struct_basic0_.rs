@@ -11,20 +11,6 @@ struct User {
 }
 
 #[allow(dead_code)]
-fn build_user_complex(email: String, username: String) -> User {
-    User {
-        // parameter names and the struct field names are exactly the same
-        username: username,
-        email: email,
-
-        active: true,
-        sign_in_count: 1,
-    }
-}
-
-// 与上等价
-// 代码更加简洁
-#[allow(dead_code)]
 fn build_user_sample(email: String, username: String) -> User {
     User {
         username,  // 等价于:username: username 
@@ -39,7 +25,7 @@ fn main() {
     // Creating an instance of the User struct
     /*
     每个字段都需要进行初始化
-    初始化时的字段顺序不需要和结构体定义时的顺序一致
+    初始化时的字段顺序不需要和结构体定义时顺序一致
 
     Note that the entire instance must be mutable; Rust doesn’t allow us to mark only certain fields as mutable.
     */

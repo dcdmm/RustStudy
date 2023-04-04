@@ -15,7 +15,7 @@ fn returns_i64() -> i64 {
 }
 
 fn returns_unit() {
-    // The semicolon ; can be used to discard the result of an expression at the end of a block, making the expression (and thus the block) evaluate to (). 
+    // The semicolon `;` can be used to discard the result of an expression at the end of a block, making the expression (and thus the block) evaluate to ().
     1i64;
 }
 

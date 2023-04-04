@@ -1,6 +1,7 @@
 // tuple structs
 
 struct Color(i32, f32, i32); // 拥有3个字段,字段没有名称(★★★★★分号结尾)
+
 struct Point(i32, f32, f64);
 
 fn main() {
