@@ -6,16 +6,23 @@ struct Rectangle {
 }
 
 impl Rectangle {
-    // `self`指代此类型的实例(本例中self指代的是Rectangle结构体实例)
-    
-    // `self`的使用跟函数参数一样,要严格遵守Rust的所有权规则
-    // ===> `self`表示Rectangle的所有权转移到该方法中
-    // ===> `&self`表示该方法对Rectangle的不可变借用
-    // ===> `&mut self`表示可变借用
-    fn area(&self) -> u32 {
+    /*
+     The &self is actually short for self: &Self.
+     Within an impl block, the type Self is an alias for the type that the impl block is for.
+     Methods must have a parameter named self of type Self for their first parameter
+
+    Methods can take ownership of self, borrow self immutably, as we’ve done here, or borrow self mutably, just as they can any other parameter.
+    * `self`: 拥有所有权
+    * `&self`: 不可变借用
+    * `&mut self`: 可变借用
+     */
+
+    // self: &Rectangel <==等价于==> self: &Self <==等价于==> &self
+    fn area(self: &Rectangle) -> u32 {
         self.width * self.height
     }
 
+    // Each struct is allowed to have multiple impl blocks
     fn can_hold(&self, other: &Rectangle) -> bool {
         self.width > other.width && self.height > other.height
     }
@@ -40,6 +47,7 @@ fn main() {
         height: 45,
     };
 
+    // The method syntax goes after an instance: we add a dot followed by the method name, parentheses, and any arguments.
     println!("Can rect1 hold rect2? {}", rect1.can_hold(&rect2));
     println!("Can rect1 hold rect3? {}", rect1.can_hold(&rect3));
 }
