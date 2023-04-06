@@ -13,7 +13,7 @@ fn main() {
     // Arrays coerce to slices ([T]), so a slice method may be called on an array. Indeed, this provides most of the API for working with arrays.
     println!("{}", a.len());  // Returns the number of elements in the slice.
 
-    let first = a[0]; // 使用索引访问数组中的元素
+    let first = a[0]; // 通过索引访问数组中的元素
     println!("{first}");
 
     // let _b = [3, 3, 3, 3, 3, 3]
