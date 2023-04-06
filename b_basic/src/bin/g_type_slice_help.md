@@ -1,3 +1,5 @@
+Slices let you reference a contiguous sequence of elements in a collection rather than the whole collection. A slice is a kind of reference, so it does not have ownership.
+
 A slice is a [dynamically sized type](https://doc.rust-lang.org/reference/dynamically-sized-types.html) representing a 'view' into a sequence of elements of type T. The slice type is written as [T].
 
 Slice types are generally used through pointer types. For example:
