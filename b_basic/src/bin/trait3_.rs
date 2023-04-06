@@ -30,6 +30,5 @@ fn returns_summarizable() -> impl Summary {
         retweet: false,
     }
 }
-fn main() {
 
-}
+fn main() {}

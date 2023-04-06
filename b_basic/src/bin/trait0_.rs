@@ -2,11 +2,9 @@
 
 #[allow(dead_code)]
 trait Summary {
-    fn summarize(&self) -> String;  // 抽象方法(没有提供方法定义)
+    fn summarize(&self) -> String;  // 抽象方法(没有实现)
 }
 
-// Implementing a trait on a type is similar to implementing regular methods. 
-// The difference is that after impl, we put the trait name we want to implement, then use the for keyword, and then specify the name of the type we want to implement the trait for. 
 #[allow(dead_code)]
 struct Tweet {
     username: String,
@@ -15,6 +13,10 @@ struct Tweet {
     retweet: bool,
 }
 
+/*
+Implementing a trait on a type is similar to implementing regular methods.
+The difference is that after impl, we put the trait name we want to implement, then use the for keyword, and then specify the name of the type we want to implement the trait for.
+ */
 impl Summary for Tweet {
     // 必须实现trait中的抽象方法
     fn summarize(&self) -> String {

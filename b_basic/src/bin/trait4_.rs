@@ -1,42 +1,63 @@
-// trait(Using Trait Bounds to Conditionally Implement Methods)
+// trait(Returning Types that Implement Traits)
 
-use std::fmt::Display;
-
-#[allow(dead_code)]
-struct Pair<T> {
-    x: T,
-    y: T,
+pub trait Summary {
+    fn summarize(&self) -> String;
 }
 
-// 关联函数
-#[allow(dead_code)]
-impl<T> Pair<T> {
-    fn new(x: T, y: T) -> Self {
-        Self { x, y }
+pub struct NewsArticle {
+    pub headline: String,
+    pub location: String,
+    pub author: String,
+    pub content: String,
+}
+
+impl Summary for NewsArticle {
+    fn summarize(&self) -> String {
+        format!("{}, by {} ({})", self.headline, self.author, self.location)
     }
 }
 
-// 只有T同时实现了Display + PartialOrd trait结构体Pair才拥有cmp_display方法
-#[allow(dead_code)]
-impl<T: Display + PartialOrd> Pair<T> {
-    fn cmp_display(&self) {
-        if self.x >= self.y {
-            println!("The largest member is x = {}", self.x);
-        } else {
-            println!("The largest member is y = {}", self.y);
+pub struct Tweet {
+    pub username: String,
+    pub content: String,
+    pub reply: bool,
+    pub retweet: bool,
+}
+
+impl Summary for Tweet {
+    fn summarize(&self) -> String {
+        format!("{}: {}", self.username, self.content)
+    }
+}
+
+// 报错:`if` and `else` have incompatible types
+/*
+However, you can only use impl Trait if you’re returning a single type.
+For example, this code that returns either a NewsArticle or a Tweet with the return type specified as impl Summary wouldn’t work:
+ */
+fn returns_summarizable(switch: bool) -> impl Summary {
+    if switch {
+        NewsArticle {
+            headline: String::from(
+                "Penguins win the Stanley Cup Championship!",
+            ),
+            location: String::from("Pittsburgh, PA, USA"),
+            author: String::from("Iceburgh"),
+            content: String::from(
+                "The Pittsburgh Penguins once again are the best \
+                 hockey team in the NHL.",
+            ),
+        }
+    } else {
+        Tweet {
+            username: String::from("horse_ebooks"),
+            content: String::from(
+                "of course, as you probably already know, people",
+            ),
+            reply: false,
+            retweet: false,
         }
     }
 }
 
-trait ToString {}
-// We can also conditionally implement a trait for any type that implements another trait.
-// Implementations of a trait on any type that satisfies the trait bounds are called blanket implementations and are extensively used in the Rust standard library.
-// For example, the standard library implements the ToString trait on any type that implements the Display trait.
-// The impl block in the standard library looks similar to this code:
-impl<T: Display> ToString for T {}
-
-fn main() {
-    // Because the standard library has this blanket implementation, we can call the to_string method defined by the ToString trait on any type that implements the Display trait.
-    // For example, we can turn integers into their corresponding String values like this because integers implement Display:
-    let _s = 3.to_string();
-}
+fn main() {}

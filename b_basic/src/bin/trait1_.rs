@@ -16,11 +16,10 @@ struct NewsArticle {
 }
 
 impl Summary for NewsArticle {
-    // 重载默认方法
+    // 覆盖默认实现
     fn summarize(&self) -> String {
         format!("{}, by {} ({})", self.headline, self.author, self.location)
     }
-    
 }
 
 #[allow(dead_code)]
@@ -31,8 +30,7 @@ struct Tweet {
     retweet: bool,
 }
 
-impl Summary for Tweet {
-}
+impl Summary for Tweet {}
 
 fn main() {
     let article = NewsArticle {
@@ -45,7 +43,7 @@ fn main() {
         ),
     };
 
-    // 调用重载后的默认方法(重载)
+    // 调用覆盖后的默认实现(重载)
     println!("New article available! {}", article.summarize());
 
     let tweet = Tweet {
@@ -56,6 +54,6 @@ fn main() {
         reply: false,
         retweet: false,
     };
-    // 调用默认方法(未重载)
+    // 调用默认实现(未重载)
     println!("1 new tweet: {}", tweet.summarize());
 }
