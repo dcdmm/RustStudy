@@ -1,4 +1,4 @@
-// 模式匹配(结构结构体)
+// 模式匹配(解构结构体)
 
 struct Point {
     x: i32,
@@ -11,8 +11,9 @@ fn main() {
     let Point { x: a, y: b } = p;
     println!("a:{}", a);
     println!("b:{}", b);
-    
-    let Point { x, y } = p; // 简写(与上等价)
+
+    // 与上等价(简写)
+    let Point { x, y } = p;
     println!("x:{}", x);
     println!("y:{}", y);
 

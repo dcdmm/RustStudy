@@ -1,4 +1,4 @@
-// 模式匹配(结构枚举)
+// 模式匹配(解构枚举)
 
 #[derive(Debug)]
 #[allow(dead_code)]
@@ -20,6 +20,7 @@ fn value_in_cents(coin: Coin) -> u8 {
         Coin::Penny => 1,
         Coin::Nickel => 5,
         Coin::Dime => 10,
+        Coin::Quarter(UsState::Alabama) => 15,
         // Another useful feature of match arms is that they can bind to the parts of the values that match the pattern.
         Coin::Quarter(state) => {
             println!("State quarter from {:?}!", state);
@@ -30,5 +31,8 @@ fn value_in_cents(coin: Coin) -> u8 {
 
 fn main() {
     let c = Coin::Quarter(UsState::Alabama);
-    println!("{}", value_in_cents(c))
+    println!("{}", value_in_cents(c));
+
+    let d = Coin::Quarter(UsState::Alaska);
+    println!("{}", value_in_cents(d))
 }

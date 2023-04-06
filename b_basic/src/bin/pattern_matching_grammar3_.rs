@@ -20,13 +20,13 @@ fn main() {
             id: id_variable @ 3..=7,
         } => println!("Found an id in range: {}", id_variable),
         Message::Hello { id: 10..=12 } => {
-            // 无法使用字段中的值id
+            // 无法使用字段中的变量`id`
             println!("Found an id in another range")
         }
         Message::Hello { id } => println!("Found some other id: {}", id),
     }
     
-    // 绑定新变量p,同时对Point进行解构
+    // 绑定新变量`p`,同时对Point进行解构
     let p @ Point {x: px, y: py } = Point {x: 10, y: 23};
     println!("x: {}, y: {}", px, py);
     println!("{:?}", p);

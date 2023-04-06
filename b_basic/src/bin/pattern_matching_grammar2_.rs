@@ -13,8 +13,7 @@ fn main() {
     let y = false;
 
     match x {
-        // 优先级为:(4 | 5 | 6) if y
-        4 | 5 | 6 if y => println!("yes"),
+        4 | 5 | 6 if y => println!("yes"), // 优先级顺序为:(4 | 5 | 6) if y
         _ => println!("no"),
     }
 }

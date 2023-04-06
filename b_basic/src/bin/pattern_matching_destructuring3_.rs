@@ -1,4 +1,4 @@
-// 模式匹配
+// 模式匹配(解构嵌套项)
 
 #[allow(dead_code)]
 struct Point {
@@ -23,7 +23,7 @@ enum Message {
 fn main() {
     let msg = Message::ChangeColor(Color::Hsv(0, 160, 255));
 
-    // 解构嵌套的结构体和枚举
+    // 解构嵌套枚举
     match msg {
         Message::ChangeColor(Color::Rgb(r, g, b)) => {
             println!("Change the color to red {}, green {}, and blue {}", r, g, b)
@@ -44,7 +44,7 @@ fn main() {
     // *******************************************************************
 
     // 解构结构体和元组
-    let ((feet, inches), Point {x, y}) = ((3, 10), Point { x: 3, y: -10 });
+    let ((feet, inches), Point { x, y }) = ((3, 10), Point { x: 3, y: -10 });
     println!("feet: {}", feet);
     println!("inches: {}", inches);
     println!("Point x:: {}", x);

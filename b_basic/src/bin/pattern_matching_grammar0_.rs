@@ -1,9 +1,9 @@
 // 模式匹配(Multiple Patterns;Matching Ranges of Values)
 
 fn main() {
-    // Multiple Patterns
     let z = 1;
 
+    // Multiple Patterns
     match z {
         // In match expressions, you can match multiple patterns using the | syntax, which is the pattern or operator.
         1 | 2 => println!("one or two"),
@@ -12,9 +12,9 @@ fn main() {
     }
 
     // *******************************************************
-    // Matching Ranges of Values with ..=
     let s = 5;
 
+    // Matching Ranges of Values with ..=
     match s {
         // The ..= syntax allows us to match to an inclusive range of values.
 
