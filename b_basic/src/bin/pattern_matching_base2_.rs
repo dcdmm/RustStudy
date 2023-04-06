@@ -1,56 +1,25 @@
-// 模式匹配(while let Conditional Loops;for Loops;let Statements;Function Parameters)
+// 模式匹配(Matching Named Variables)
 
-fn main() {
-    let mut stack = Vec::new();
-    stack.push(1);
-    stack.push(2);
-    stack.push(3);
+fn main()
+{
+    let x = Some(5);
+    let y = 10;
 
-    // Similar in construction to if let
-    while let Some(top) = stack.pop() {
-        println!("{}", top);
+    match x {
+        Some(50) => println!("Got 50"),
+        /*
+        The pattern in the second match arm introduces a new variable named y that will match any value inside a Some value.
+        Because we’re in a new scope inside the match expression, this is a new y variable, not the y we declared at the beginning with the value 10.
+        This new y binding will match any value inside a Some, which is what we have in x.
+        Therefore, this new y binds to the inner value of the Some in x.
+        That value is 5, so the expression for that arm executes and prints Matched, y = 5.
+         */
+        Some(y) => println!("Matched, y = {y}"),
+
+        // If x had been a None value instead of Some(5), the patterns in the first two arms wouldn’t have matched, so the value would have matched to the underscore.
+        _ => println!("Default case, x = {:?}", x),
     }
 
-    // *****************************************************
-    let v = vec!['a', 'b', 'c'];
-    /*
-    In a for loop, the value that directly follows the keyword for is a pattern.
-    For example, in for x in y the x is the pattern.
-     */
-    for (index, value) in v.iter().enumerate() {
-        println!("{} is at index {}", value, index);
-    }
-
-    // *****************************************************
-    /*
-    Every time you've used a let statement like this you've been using patterns, although you might not have realized it! More formally, a let statement looks like this:
-    let PATTERN = EXPRESSION;
-
-    In statements like let x = 5; with a variable name in the PATTERN slot, the variable name is just a particularly simple form of a pattern.
-    Rust compares the expression against the pattern and assigns any names it finds.
-    So in the let x = 5; example, x is a pattern that means “bind what matches here to the variable x.” Because the name x is the whole pattern, this pattern effectively means “bind everything to the variable x, whatever the value is.”
-     */
-    let _a = 5;
-
-    /*
-    Here, we match a tuple against a pattern.
-    Rust compares the value (1, 2, 3) to the pattern (x, y, z) and sees that the value matches the pattern, so Rust binds 1 to x, 2 to y, and 3 to z.
-    You can think of this tuple pattern as nesting three individual variable patterns inside it.
-
-    If the number of elements in the pattern doesn’t match the number of elements in the tuple, the overall type won’t match and we’ll get a compiler error.
-     */
-    let (_x, _y, _z) = (1, 2, 3);
-
-    /*
-    Function parameters can also be patterns.
-    The x part is a pattern! As we did with let, we could match a tuple in a function’s arguments to the pattern.
-
-    This code prints Current location: (3, 5). The values &(3, 5) match the pattern &(x, y), so x is the value 3 and y is the value 5.
-     */
-    fn print_coordinates(&(x, y): &(i32, i32)) {
-        println!("Current location: ({}, {})", x, y);
-    }
-
-    let point = (3, 5);
-    print_coordinates(&point);
+    // When the match expression is done, its scope ends, and so does the scope of the inner y.
+    println!("at the end: x = {:?}, y = {y}", x);
 }
