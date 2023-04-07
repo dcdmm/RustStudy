@@ -14,8 +14,8 @@ fn main() {}
 #[test]
 fn len_is_empty_fn() {
     let a = vec![1, 2, 3];
-    assert_eq!(a.len(), 3); // true
-    assert!(!a.is_empty()); // true
+    assert_eq!(a.len(), 3);
+    assert!(!a.is_empty());
 }
 
 #[test]
@@ -27,10 +27,10 @@ fn get_fn() {
     * If given a position, returns a reference to the element at that position or None if out of bounds.
     * If given a range, returns the subslice corresponding to that range, or None if out of bounds.
      */
-    assert_eq!(Some(&40), v.get(1)); // true
-    assert_eq!(Some(&[10, 40][..]), v.get(0..2)); // true
-    assert_eq!(None, v.get(3)); // true
-    assert_eq!(None, v.get(0..4)); // true
+    assert_eq!(Some(&40), v.get(1));
+    assert_eq!(Some(&[10, 40][..]), v.get(0..2));
+    assert_eq!(None, v.get(3));
+    assert_eq!(None, v.get(0..4));
 }
 
 #[test]
@@ -46,8 +46,8 @@ fn push_fn() {
 fn remove_fn() {
     // Removes and returns the element at position index within the vector, shifting all elements after it to the left.
     let mut v = vec![1, 2, 3];
-    assert_eq!(v.remove(1), 2); // true
-    assert_eq!(v, vec![1, 3]); // true
+    assert_eq!(v.remove(1), 2);
+    assert_eq!(v, vec![1, 3]);
 
     //# Panics
     // Panics if index is out of bounds.

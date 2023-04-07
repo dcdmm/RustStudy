@@ -24,13 +24,13 @@ fn create() {
     let mut vec = Vec::new(); // The numbers we place inside are all of type i32, and Rust infers this from the data, so we don’t need the Vec<i32> annotation.
     vec.push(1);
     vec.push(2);
-    assert_eq!(vec.len(), 2); // true
-    assert_eq!(vec[0], 1); // true
+    assert_eq!(vec.len(), 2);
+    assert_eq!(vec[0], 1);
 
     // The vec! macro is provided for convenient initialization:
     let vec1 = vec![1, 2];
-    assert_eq!(vec1.len(), 2); // true
-    assert_eq!(vec1[0], 1); // true
+    assert_eq!(vec1.len(), 2);
+    assert_eq!(vec1[0], 1);
 }
 
 
