@@ -10,7 +10,7 @@ There are two syntactic forms for creating an array:
 
 fn main() {
     let a: [i32; 5] = [1, 2, 3, 4, 5];
-    // Arrays coerce to slices ([T]), so a slice method may be called on an array. Indeed, this provides most of the API for working with arrays.
+    // ★★★★★Arrays coerce to slices ([T]), so a slice method may be called on an array. Indeed, this provides most of the API for working with arrays.
     println!("{}", a.len());  // Returns the number of elements in the slice.
 
     let first = a[0]; // 通过索引访问数组中的元素
