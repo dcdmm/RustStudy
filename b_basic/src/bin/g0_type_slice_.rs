@@ -2,6 +2,10 @@
 
 fn main() {
     let s = String::from("hello world");
+
+    // 报错:the size for values of type `str` cannot be known at compilation time
+    // let s: str = s[0..2]; // A slice is a dynamically sized type
+
     let _s0: &str = &s[0..2];
     let _s1 = &s[..2]; // 与上等价
 
