@@ -1,2 +1,3 @@
 [workspace]
-members = ["a_basic", "b_basic", "z_std_collections", "z_std_string"]
+members = ["a_basic", "b_basic", "c_error_handling",
+    "z_std_collections", "z_std_string"]
