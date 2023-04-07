@@ -40,6 +40,12 @@ fn push_fn() {
     // Appends an element to the back of a collection.
     vec.push(3);
     assert_eq!(vec, [1, 2, 3]);
+
+    let mut vec_str = Vec::new();
+    let s = String::from("hello");
+    vec_str.push(s);
+    // 报错:borrow of moved value: `s`
+    // println!("{}", s);
 }
 
 #[test]
