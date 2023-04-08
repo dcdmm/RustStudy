@@ -7,13 +7,14 @@ insert
 entry
 remove
  */
-use std::collections::HashMap;
 
 fn main() {}
 
 
 #[test]
 fn len_is_empty_fn() {
+    use std::collections::HashMap;
+
     let mut a = HashMap::new();
     assert_eq!(a.len(), 0);
     assert!(a.is_empty());
@@ -24,6 +25,8 @@ fn len_is_empty_fn() {
 
 #[test]
 fn get_fn() {
+    use std::collections::HashMap;
+
     let mut map = HashMap::new();
     map.insert(1, "a");
     /*
@@ -37,6 +40,8 @@ fn get_fn() {
 
 #[test]
 fn insert_fn() {
+    use std::collections::HashMap;
+
     let mut map = HashMap::new();
     /*
     Inserts a key-value pair into the map.
@@ -55,6 +60,8 @@ fn insert_fn() {
 
 #[test]
 fn entry_fn() {
+    use std::collections::HashMap;
+
     let mut letters = HashMap::new();
     // Gets the given key’s corresponding entry in the map for in-place manipulation.
     for ch in "a short treatise on fungi".chars() {
@@ -69,6 +76,8 @@ fn entry_fn() {
 
 #[test]
 fn remove_fn() {
+    use std::collections::HashMap;
+
     let mut map = HashMap::new();
     map.insert(1, "a");
     /*
