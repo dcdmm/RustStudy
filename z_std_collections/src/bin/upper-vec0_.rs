@@ -12,7 +12,7 @@ fn main() {
     let v = vec![1, 2, 3, 4];
     println!("{}", v[3]); // 通过索引访问Vec中的元素
 
-    // thread 'main' panicked at 'index out of bounds: the len is 4 but the index is 4'
+    // panic:thread 'main' panicked at 'index out of bounds: the len is 4 but the index is 4'
     println!("{}", v[4])
 }
 

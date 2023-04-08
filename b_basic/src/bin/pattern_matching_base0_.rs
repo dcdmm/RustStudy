@@ -29,8 +29,27 @@ fn value_in_cents_placeholder(coin: Coin) -> u8 {
         // We don’t typically use curly brackets if the match arm code is short
         Coin::Penny => 1,
         Coin::Nickel => 5,
-        // _ is a special pattern that matches any value and does not bind to that value. This tells Rust we aren’t going to use the value, so Rust won’t warn us about an unused variable.
+        /*
+        Rust also has a pattern we can use when we want a catch-all but don’t want to use the value in the catch-all pattern:
+        _ is a special pattern that matches any value and does not bind to that value.
+        This tells Rust we aren’t going to use the value, so Rust won’t warn us about an unused variable.
+         */
         _ => 99,
+    }
+}
+
+#[allow(dead_code)]
+fn value_other() -> u8 {
+    fn add_fancy_hat(number: u8) -> u8 { number }
+    fn remove_fancy_hat(number: u8) -> u8 { number }
+    fn move_player(number: u8) -> u8 { number }
+
+    let dice_roll = 9;
+    match dice_roll {
+        3 => add_fancy_hat(3),
+        7 => remove_fancy_hat(7),
+        // This code compiles, even though we haven’t listed all the possible values a u8 can have, because the last pattern will match all values not specifically listed.
+        other => move_player(other)
     }
 }
 
