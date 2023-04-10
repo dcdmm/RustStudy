@@ -16,7 +16,7 @@ use std::io::ErrorKind;
 
 #[allow(unused)]
 fn main() {
-    // let greeting_file_result = File::open("hello.txt");
+    // let greeting_file_result: Result<T, E> = File::open("hello.txt");
     //
     // // panic:thread 'main' panicked at 'Problem opening the file: Os { code: 2, kind: NotFound, message: "系统找不到指定的文件。" }'
     // let greeting_file = match greeting_file_result {

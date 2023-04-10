@@ -76,6 +76,5 @@ fn last_char_of_first_line(text: &str) -> Option<char> {
 #[allow(unused)]
 fn main() -> Result<(), Box<dyn Error>> {
     let greeting_file = File::open("hello.txt")?;
-
     Ok(())
 }

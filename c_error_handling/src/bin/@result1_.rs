@@ -26,5 +26,5 @@ fn main() {
     Panics if the value is an Err, with a panic message including the passed message, and the content of the Err.
      */
     #[allow(unused)]
-    let greeting_file = File::open("hello.txt").expect("hello.txt should be included in this project");
+        let greeting_file = File::open("hello.txt").expect("hello.txt should be included in this project");
 }
