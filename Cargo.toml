@@ -1,3 +1,4 @@
 [workspace]
+# members — Packages to include in the workspace.
 members = ["a_basic", "b_basic", "c_error_handling", "c_project_demo",
     "z_std_collections", "z_std_string"]
