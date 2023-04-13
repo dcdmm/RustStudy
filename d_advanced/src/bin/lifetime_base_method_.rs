@@ -1,4 +1,4 @@
-// 生命周期(Lifetime Annotations in Method Definitions)
+// Lifetime Annotations in Method Definitions
 
 #[allow(dead_code)]
 struct ImportantExcerpt<'a> {
@@ -24,6 +24,4 @@ impl<'a> ImportantExcerpt<'a> {
     }
 }
 
-fn main() {
-    
-}
+fn main() {}

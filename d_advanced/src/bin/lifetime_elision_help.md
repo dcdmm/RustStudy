@@ -17,6 +17,7 @@ fn first_word(s: &str) -> &str {  // 实际项目中的手写代码
 fn first_word(s: &'a str) -> &str {
 
 // The second rule applies because there is exactly one input lifetime.
+// ======>applies the second rule 
 fn first_word<'a>(s: &'a str) -> &'a str { 
 ```
 
@@ -28,8 +29,11 @@ fn longest(x: &str, y: &str) -> &str { // 实际项目中的手写代码
 // ======>applies the first rule
 fn longest(x: &'a str, y: &'b str) -> &str { 
 
-// the second rule doesn’t apply because there is more than one input lifetime. 
-// The third rule doesn’t apply either, because longest is a function rather than a method
+/*
+the second rule doesn’t apply because there is more than one input lifetime. 
+The third rule doesn’t apply either, because longest is a function rather than a method
 
-// After working through all three rules, we still haven’t figured out what the return type’s lifetime is. This is why we got an error trying to compile the code in exaple2: the compiler worked through the lifetime elision rules but still couldn’t figure out all the lifetimes of the references in the signature.
+After working through all three rules, we still haven’t figured out what the return type’s lifetime is. 
+This is why we got an error trying to compile the code in exaple2: the compiler worked through the lifetime elision rules but still couldn’t figure out all the lifetimes of the references in the signature.
+ */
 ```
