@@ -1,4 +1,4 @@
-// 生命周期(Generic Type Parameters, Trait Bounds, and Lifetimes Together example)
+// Generic Type Parameters, Trait Bounds, and Lifetimes Together example
 
 use std::fmt::Display;
 

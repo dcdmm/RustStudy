@@ -5,9 +5,8 @@ struct ImportantExcerpt<'a> {
     part: &'a str, // a reference
 }
 
-// 类似方法中泛型的定义
 #[allow(dead_code)]
-impl<'a> ImportantExcerpt<'a> {
+impl<'a> ImportantExcerpt<'a> { // 类似方法中泛型的定义
     // 生命周期消除第一规则
     fn level(&self) -> i32 {
         3
