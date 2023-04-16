@@ -2,4 +2,5 @@
 # members — Packages to include in the workspace.
 members = ["a_basic", "b_basic", "c_error_handling",
     "d_advanced",
-    "y_project_demo", "y_test", "z_std_collections", "z_std_string"]
+    "y_project_demo", "y_test",
+    "z_std_collections", "z_std_string", "z_std_trait"]
