@@ -7,7 +7,7 @@ struct ImportantExcerpt<'a> {
 
 #[allow(dead_code)]
 impl<'a> ImportantExcerpt<'a> { // 类似方法中泛型的定义
-    // 生命周期消除第一规则
+    // ======>applies the first rule
     fn level(&self) -> i32 {
         3
     }
@@ -15,8 +15,8 @@ impl<'a> ImportantExcerpt<'a> { // 类似方法中泛型的定义
 
 #[allow(dead_code)]
 impl<'a> ImportantExcerpt<'a> {
-    // 生命周期消除第一规则
-    // 生命周期消除第三规则
+    // ======>applies the first rule
+    // ======>applies the third rule
     fn announce_and_return_part(&self, announcement: &str) -> &str {
         println!("Attention please: {}", announcement);
         self.part
