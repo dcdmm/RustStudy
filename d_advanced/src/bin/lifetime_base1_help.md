@@ -4,6 +4,8 @@ Lifetime Annotation Syntax:
 * a reference with an explicit lifetime:&'a i32
 * a mutable reference with an explicit lifetime:&'a mut i32
 
+Rather than ensuring that a type has the behavior we want, lifetimes ensure that references are valid as long as we need
+them to be.
 
 ```rust
 // Note that we want the function to take string slices, which are references, rather than strings, because we don’t want the longest function to take ownership of its parameters.
@@ -165,6 +167,8 @@ fn longest<'a>(_x: &str, y: &str) -> &'a str {
     let result = String::from("really long string");
     result.as_str()  // 改为:result
 }
+
+fn main() {}
 
 /*
 Here, even though we’ve specified a lifetime parameter 'a for the return type, this implementation will fail to compile because the return value lifetime is not related to the lifetime of the parameters at all. 
