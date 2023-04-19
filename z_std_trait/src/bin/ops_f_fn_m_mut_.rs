@@ -15,6 +15,7 @@ fn main() {
 
     // ******************************************************************
     // Using a FnMut parameter
+    // 隐式推断[Lifetime Elision]闭包生命周期为'a ===> FnMut(&'a str)参数生命周期也为'a
     fn do_twice<'a, F: FnMut(&'a str) -> ()>(mut func: F)
     {
         func("hello");
