@@ -9,21 +9,20 @@ Instances of FnMut can be called repeatedly and may mutate state.
 fn main() {
     // Calling a mutably capturing closure
     let mut s = String::new();
-    let mut update_string = |str| s.push_str(str);
+    let mut update_string = |x| s.push_str(x);
     update_string("hello");
     println!("{:?}", s);
 
     // ******************************************************************
     // Using a FnMut parameter
-    // 隐式推断[Lifetime Elision]闭包生命周期为'a ===> FnMut(&'a str)参数生命周期也为'a
-    fn do_twice<'a, F: FnMut(&'a str) -> ()>(mut func: F)
+    fn do_twice<F: FnMut(&str) -> ()>(mut func: F)
     {
         func("hello");
         func("world");
     }
 
     let mut s1 = String::new();
-    let update_string1 = |pstr| s1.push_str(pstr);
+    let update_string1 = |pstr: &str| s1.push_str(pstr);
     do_twice(update_string1);
     println!("{}", s1);
 }
