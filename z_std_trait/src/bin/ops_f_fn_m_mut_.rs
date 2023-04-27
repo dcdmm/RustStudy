@@ -14,7 +14,7 @@ fn main() {
 
     // ******************************************************************
     // Using a FnMut parameter
-    // 闭包生命周期为'a(隐式推断;Lifetime Elision) <+++> FnMut(&'a str)参数生命周期也为'a ===> 防止悬垂引用
+    // 闭包生命周期为'a(隐式推断;Lifetime Elision) <===and===> FnMut(&'a str)参数生命周期也为'a ===> 防止悬垂引用
     fn do_twice<'a, F: FnMut(&'a str) -> ()>(mut func: F)
     {
         func("hello");

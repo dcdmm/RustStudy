@@ -1,61 +1,46 @@
 // 迭代器
 
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn iterator_demonstration() {
-        let v1 = vec![1, 2, 3];
-
-        let mut v1_iter = v1.iter();
-        
-        // 返回Option类型====>有值时返回Some(i32),无值时返回None
-        // 依次取出迭代器中的元素
-        // Note that we needed to make v1_iter mutable: calling the next method on an iterator changes internal state that the iterator uses to keep track of where it is in the sequence. In other words, this code consumes, or uses up, the iterator. Each call to next eats up an item from the iterator. We didn’t need to make v1_iter mutable when we used a for loop because the loop took ownership of v1_iter and made it mutable behind the scenes.
-        assert_eq!(v1_iter.next(), Some(&1));
-        assert_eq!(v1_iter.next(), Some(&2));
-        assert_eq!(v1_iter.next(), Some(&3));
-        assert_eq!(v1_iter.next(), None);
-    }
-}
+// ======> 参考Z_std_trait/src/bin/iter_i_iterator_.rs
 
 fn main() {
-    let values = vec![1, 2, 3];
+    let v = vec!["a".to_string(), "b".to_string()];
+    println!("{:?}", v);
+    // Creates a consuming iterator, that is, one that moves each value out of the vector (from start to end). The vector cannot be used after calling this.
+    let mut v_iter = v.into_iter();
+    // 报错:error[E0382]: borrow of moved value: `v`
+    // println!("{:?}", v);
 
-    // into_iter:创建的迭代器获取values所有权
-    for v in values.into_iter() {
-        println!("{}", v)
+    let first_element: Option<String> = v_iter.next();
+
+    assert_eq!(first_element, Some("a".to_string()));
+    assert_eq!(v_iter.next(), Some("b".to_string()));
+    assert_eq!(v_iter.next(), None);
+
+
+    let x = vec![1, 2, 4];
+    /*
+    Returns an iterator over the slice.
+
+    The iterator yields all items from start to end.
+     */
+    let mut iterator = x.iter();
+
+    assert_eq!(iterator.next(), Some(&1));
+    assert_eq!(iterator.next(), Some(&2));
+    assert_eq!(iterator.next(), Some(&4));
+    assert_eq!(iterator.next(), None);
+
+    println!("{:?}", x);
+
+    let x = &mut [1, 2, 4];
+    /*
+    Returns an iterator that allows modifying each value.
+
+    The iterator yields all items from start to end.
+     */
+    for elem in x.iter_mut() {
+        *elem += 2;
     }
-    // println!("{:?}", values);
-    // 程序运行结果:
-//     error[E0382]: borrow of moved value: `values`
-//    --> c_advanced\src\bin\iterator0_.rs:24:22
-//     |
-// 22  |     let values = vec![1, 2, 3];
-//     |         ------ move occurs because `values` has type `Vec<i32>`, which does not implement the `Copy` trait
-// 25  |
-// 25  |     for v in values.into_iter() {
-//     |                     ----------- `values` moved due to this method call
-// ...
-// 28  |     println!("{:?}", values);
-//     |                      ^^^^^^ value borrowed here after move
-//     |
-// note: this function takes ownership of the receiver `self`, which moves `values`
-//    --> C:\Users\dcdmm\.rustup\toolchains\stable-x86_64-pc-windows-msvc\lib/rustlib/src/rust\library\core\src\iter\traits\collect.rs:261:18
-//     |
-// 261 |     fn into_iter(self) -> Self::IntoIter;
-//     |                  ^^^^
-
-    let values1 = vec![1, 2, 3];
-    // iter:创建的迭代器获取values1的不可变借用
-    let _values_iter = values1.iter();
-    println!("{:?}", values1);
-
-    let mut values2 = vec![1, 2, 3];
-    // iter:创建的迭代器获取values2的可变借用
-    let mut values_iter_mut = values2.iter_mut();
-    if let Some(v) = values_iter_mut.next() {
-        *v = 0;
-    }
-    println!("{:?}", values2);
+    assert_eq!(x, &[3, 4, 6]);
 }
 
