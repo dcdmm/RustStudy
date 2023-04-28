@@ -1,5 +1,19 @@
 // Trait std::iter::Iterato
 /*
+A trait for dealing with iterators.
+
+pub trait Iterator {
+    type Item;
+
+    // Required method
+    fn next(&mut self) -> Option<Self::Item>;
+
+    // Provided methods
+    // --snip--
+}
+ */
+
+/*
 常见方法:
 next
 sum / max / min
