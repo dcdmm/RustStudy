@@ -1,5 +1,9 @@
 // Box 
 
+// ======> 参考Z_std_trait/src/bin/ops_d_deref0_.rs
+// ======> 参考Z_std_trait/src/bin/ops_d_deref1_.rs
+// ======> 参考Z_std_trait/src/bin/ops_d_drop_.rs
+
 /*
 Boxes don’t have performance overhead, other than storing their data on the heap instead of on the stack. But they don’t have many extra capabilities either. You’ll use them most often in these situations:
 
