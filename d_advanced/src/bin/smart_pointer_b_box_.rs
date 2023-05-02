@@ -1,4 +1,4 @@
-// Box 
+// std::boxed::Box
 
 // ======> 参考Z_std_trait/src/bin/ops_d_deref0_.rs
 // ======> 参考Z_std_trait/src/bin/ops_d_deref1_.rs
