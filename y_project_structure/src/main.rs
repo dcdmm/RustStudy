@@ -1,6 +1,6 @@
 mod use_keyword0_;
 // mod use_keyword1_ {
-//     // use_keyword1_文件内容
+//     // use_keyword1_.rs文件内容
 // }
 // 与上等价
 mod use_keyword1_;
