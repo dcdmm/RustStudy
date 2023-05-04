@@ -6,12 +6,12 @@ clone / strong_count
 downgrade / weak_count
  */
 
-use std::rc::Rc;
-
 fn main() {}
 
 #[test]
 fn new_fn() {
+    use std::rc::Rc;
+
     /*
     pub fn new(value: T) -> Rc<T>
         Constructs a new Rc<T>.
@@ -21,6 +21,8 @@ fn new_fn() {
 
 #[test]
 fn clone_strong_count_fn() {
+    use std::rc::Rc;
+
     /*
      clone(&self) -> Rc<T>
         Makes a clone of the Rc pointer.
@@ -39,6 +41,8 @@ fn clone_strong_count_fn() {
 
 #[test]
 fn downgrade_weak_count_fn() {
+    use std::rc::Rc;
+
     /*
     pub fn downgrade(this: &Rc<T>) -> Weak<T>
         Creates a new Weak pointer to this allocation.

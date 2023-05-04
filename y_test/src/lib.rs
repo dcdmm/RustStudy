@@ -1,18 +1,19 @@
+pub fn add_two(a: i32) -> i32 {
+    a + 2
+}
+
 #[derive(Debug)]
+#[allow(dead_code)]
 struct Rectangle {
     width: u32,
     height: u32,
 }
 
-
+#[allow(dead_code)]
 impl Rectangle {
     fn can_hold(&self, other: &Rectangle) -> bool {
         self.width > other.width && self.height > other.height
     }
-}
-
-pub fn add_two(a: i32) -> i32 {
-    a + 2
 }
 
 #[cfg(test)]
@@ -23,9 +24,9 @@ mod tests {
     #[test]
     fn another() {
         /*
-         Tests fail when something in the test function panics. 
-         Each test is run in a new thread, and when the main thread sees that a test thread has died, the test is marked as failed.
-         */
+        Tests fail when something in the test function panics.
+        Each test is run in a new thread, and when the main thread sees that a test thread has died, the test is marked as failed.
+        */
         panic!("Make this test fail");
     }
 
@@ -39,7 +40,7 @@ mod tests {
             width: 5,
             height: 1,
         };
-        
+
         /*
         Asserts that a boolean expression is true at runtime.
 
@@ -51,11 +52,12 @@ mod tests {
     #[test]
     fn macro_std_assert1() {
         // assert with a custom message
-        let a = 3; let b = 27;
+        let a = 3;
+        let b = 27;
         /*
         Custom Messages
-        This macro has a second form, where a custom panic message can be provided with or without arguments for formatting. 
-        See std::fmt for syntax for this form. 
+        This macro has a second form, where a custom panic message can be provided with or without arguments for formatting.
+        See std::fmt for syntax for this form.
         Expressions used as format arguments will only be evaluated if the assertion fails.
          */
         assert!(a + b == 31, "a 等于: {}, b 等于: {}", a, b);
@@ -63,7 +65,7 @@ mod tests {
 
     #[test]
     fn macro_std_assert_eq0() {
-        /*    
+        /*
         Asserts that two expressions are equal to each other (using PartialEq).
 
         On panic, this macro will print the values of the expressions with their debug representations.
@@ -81,10 +83,9 @@ mod tests {
         assert_eq!(a, b, "we are testing addition with {} and {}", a, b);
     }
 
-
     #[test]
     fn macro_std_assert_ne() {
-        /*    
+        /*
         Asserts that two expressions are not equal to each other (using PartialEq).
 
         On panic, this macro will print the values of the expressions with their debug representations.

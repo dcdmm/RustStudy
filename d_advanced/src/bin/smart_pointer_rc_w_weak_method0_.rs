@@ -19,12 +19,12 @@ new
 upgrade
  */
 
-use std::rc::{Weak, Rc};
-
 fn main() {}
 
 #[test]
 fn new_fn() {
+    use std::rc::Weak;
+
     /*
     pub fn new() -> Weak<T>
         Constructs a new Weak<T>, without allocating any memory. Calling upgrade on the return value always gives None.
@@ -36,6 +36,8 @@ fn new_fn() {
 
 #[test]
 fn upgrade_fn() {
+    use std::rc::Rc;
+
     /*
     pub fn upgrade(&self) -> Option<Rc<T>>
         Attempts to upgrade the Weak pointer to an Rc, delaying dropping of the inner value if successful.
