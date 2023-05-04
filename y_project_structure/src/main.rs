@@ -9,9 +9,13 @@ mod use_keyword1_;
 //     // as_public.rs文件内容
 // }
 // 与上等价
-// 文件夹作为一个模块(注意:方式1、方式2不能混用):
-// 方式1. 该文件夹同级目录下创建一个与目录同名的rs文件(推荐)
-// 方式2. 该文件夹目录中创建一个mod.rs文件
+// For a module named `as_public` declared in the crate root, the compiler will look for the module’s code in:
+// 方式一: src/as_public.rs
+// 方式二: src/as_public/mod.rs
+// For a module named `as_public_sub` that is a submodule of `as_public`, the compiler will look for the module’s code in:
+// 方式一: src/as_public/as_public_sub.rs
+// 方式二: src/as_public/as_public_sub/mod.rs
+// 注意:方式一、方式二不能混用
 mod as_public;
 
 // module tree remains the same

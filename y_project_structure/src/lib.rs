@@ -11,6 +11,8 @@ crate
          └── take_payment
  */
 
+mod use_keyword0_;
+
 // Listing 1: A front_of_house module containing other modules that then contain functions
 #[allow(unused)]
 mod front_of_house {
