@@ -13,7 +13,11 @@ fn main() {
     println!("{}", v[3]); // 通过索引访问Vec中的元素
 
     // panic:thread 'main' panicked at 'index out of bounds: the len is 4 but the index is 4'
-    println!("{}", v[4])
+    // println!("{}", v[4]);
+
+    // Create a Vec from a given element and size:
+    let v1 = vec![1; 3];
+    println!("{:?}", v1)
 }
 
 
