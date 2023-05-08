@@ -13,6 +13,7 @@ To avoid having `common` appear in the test output, instead of creating tests/co
 
 After we’ve created tests/common/mod.rs, we can use it from any of the integration test files as a module.
  */
+
 mod common;
 
 #[test]

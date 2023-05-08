@@ -1,8 +1,10 @@
 // std::option::Option
+
 /*
 常见方法:
 is_none / is_some
  */
+
 fn main() {}
 
 #[test]

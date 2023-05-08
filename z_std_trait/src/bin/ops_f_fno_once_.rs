@@ -1,4 +1,5 @@
 // Trait std::ops::FnOnce
+
 /*
 The version of the call operator that takes a by-value receiver.
 

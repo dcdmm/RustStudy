@@ -1,4 +1,5 @@
 // 泛型
+
 /*
 You might be wondering whether there is a runtime cost when using generic type parameters.
 The good news is that using generic types won't make your program run any slower than it would with concrete types.

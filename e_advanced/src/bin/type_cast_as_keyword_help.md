@@ -1,6 +1,6 @@
-as can be used to explicitly perform coercions, as well as the following additional casts. Any cast that does not fit
-either a coercion rule or an entry in the table is a compiler error. Here *T means either *const T or *mut T. m stands
-for optional mut in reference types and mut or const in pointer types.
+`as` can be used to explicitly perform coercions, as well as the following additional casts. Any cast that does not fit
+either a coercion rule or an entry in the table is a compiler error. Here *T means either `*const T` or `*mut T`. m stands
+for optional mut in reference types and `mut` or `const` in pointer types.
 
 | Type of `e`                                                                         | `U`                                                                                 | Cast performed by `e as U`             |
 |-------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|----------------------------------------|

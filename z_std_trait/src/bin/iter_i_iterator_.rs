@@ -1,4 +1,5 @@
 // Trait std::iter::Iterato
+
 /*
 A trait for dealing with iterators.
 
@@ -12,6 +13,7 @@ pub trait Iterator {
     // --snip--
 }
  */
+
 
 /*
 常见方法:

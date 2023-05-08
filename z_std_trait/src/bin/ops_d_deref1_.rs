@@ -1,4 +1,5 @@
 // Trait std::ops::Deref
+
 /*
 Deref coercion converts a reference to a type that implements the Deref trait into a reference to another type.
 For example, deref coercion can convert &String to &str because String implements the Deref trait such that it returns &str.
@@ -9,6 +10,7 @@ A sequence of calls to the deref method converts the type we provided into the t
 Deref coercion was added to Rust so that programmers writing function and method calls don’t need to add as many explicit references and dereferences with & and *.
 The deref coercion feature also lets us write more code that can work for either references or smart pointers.
  */
+
 
 /*
 Similar to how you use the Deref trait to override the * operator on immutable references, you can use the DerefMut trait to override the * operator on mutable references.
@@ -29,6 +31,7 @@ Converting one mutable reference to one immutable reference will never break the
 Converting an immutable reference to a mutable reference would require that the initial immutable reference is the only immutable reference to that data, but the borrowing rules don’t guarantee that.
 Therefore, Rust can’t make the assumption that converting an immutable reference to a mutable reference is possible.
  */
+
 fn hello(name: &str) {
     println!("Hello, {name}!");
 }

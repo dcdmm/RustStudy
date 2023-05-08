@@ -1,4 +1,5 @@
 // Using Trait Objects That Allow for Values of Different Types
+
 /*
 The code that results from monomorphization is doing static dispatch, which is when the compiler knows what method you’re calling at compile time.
 This is opposed to dynamic dispatch, which is when the compiler can’t tell at compile time which method you’re calling.

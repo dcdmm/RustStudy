@@ -15,6 +15,7 @@ The way a closure captures and handles values from the environment affects which
 2. FnMut applies to closures that don’t move captured values out of their body, but that might mutate the captured values. These closures can be called more than once.
 3. Fn applies to closures that don’t move captured values out of their body and that don’t mutate captured values, as well as closures that capture nothing from their environment. These closures can be called more than once without mutating their environment, which is important in cases such as calling a closure multiple times concurrently.
  */
+
 fn main() {
     // 报错:can't capture dynamic environment in a fn item:
     // fn equal_to_x(z: i32) -> bool {
