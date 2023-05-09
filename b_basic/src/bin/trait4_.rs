@@ -60,7 +60,7 @@ For example, this code that returns either a NewsArticle or a Tweet with the ret
 //     }
 // }
 
-// 解决方法:trait object(见:e_advanced/src/bin/trait_object_.rs)
+// 解决方法:trait object(见:e_advanced/src/bin/Advanced_traitstrait_object_)
 #[allow(dead_code)]
 fn returns_summarizable(switch: bool) -> Box<dyn Summary> {
     if switch {
