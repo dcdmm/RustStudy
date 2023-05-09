@@ -13,7 +13,7 @@ impl Counter {
 
 // 实现Iterator特征
 impl Iterator for Counter {
-    type Item = u32;
+    type Item = u32; // associated type
 
     // 自定义next方法
     fn next(&mut self) -> Option<Self::Item> {

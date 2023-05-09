@@ -60,6 +60,31 @@ For example, this code that returns either a NewsArticle or a Tweet with the ret
 //     }
 // }
 
-
+// 解决方法:trait object(见:e_advanced/src/bin/trait_object_.rs)
+#[allow(dead_code)]
+fn returns_summarizable(switch: bool) -> Box<dyn Summary> {
+    if switch {
+        Box::new(NewsArticle {
+            headline: String::from(
+                "Penguins win the Stanley Cup Championship!",
+            ),
+            location: String::from("Pittsburgh, PA, USA"),
+            author: String::from("Iceburgh"),
+            content: String::from(
+                "The Pittsburgh Penguins once again are the best \
+                 hockey team in the NHL.",
+            ),
+        })
+    } else {
+        Box::new(Tweet {
+            username: String::from("horse_ebooks"),
+            content: String::from(
+                "of course, as you probably already know, people",
+            ),
+            reply: false,
+            retweet: false,
+        })
+    }
+}
 
 fn main() {}
