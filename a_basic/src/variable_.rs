@@ -1,6 +1,7 @@
 // 变量
 
-fn main() {
+#[test]
+fn t0() {
     let x = 5; // 变量在默认情况下是不可变的
     println!("The value of x is: {}", x);
 

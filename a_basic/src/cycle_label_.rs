@@ -1,6 +1,7 @@
 // 循环标签
 
-fn main() {
+#[test]
+fn t0() {
     let mut count = 0;
     /*
     If you have loops within loops, break and continue apply to the innermost loop at that point.

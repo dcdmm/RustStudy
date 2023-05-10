@@ -1,6 +1,7 @@
 // while循环
 
-fn main() {
+#[test]
+fn t0() {
     let mut number = 3;
     while number != 0 {
         println!("{number}!");

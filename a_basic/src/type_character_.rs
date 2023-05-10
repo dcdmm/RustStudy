@@ -1,7 +1,9 @@
 // 字符(Primitive Type char)类型
 
 // The char type represents a single character.
-fn main() {
+
+#[test]
+fn test() {
     /*
     Note that we specify char literals with single quotes, as opposed to string literals, which use double quotes.
 

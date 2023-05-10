@@ -8,7 +8,8 @@ fn sum_i_and_j(i: i32, j: i32) -> i32 {
     i + j // 表达式
 }
 
-fn main() {
+#[test]
+fn t0() {
     let result = sum_i_and_j(3, 5);
     println!("result = {result}");
 }

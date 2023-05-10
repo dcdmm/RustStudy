@@ -1,6 +1,7 @@
 // break关键字
 
-fn main() {
+#[test]
+fn t0() {
     for i in 1..10 {
         if i == 5 {
             println!("i={}", i);

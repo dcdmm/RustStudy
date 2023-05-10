@@ -1,6 +1,7 @@
-// 条件选择结构:if/else语句
+// 条件选择结构:if/else表达式
 
-fn main() {
+#[test]
+fn t0() {
     let x = 5;
     if x > 4 {
         println!("x大于4")

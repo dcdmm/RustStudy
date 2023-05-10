@@ -48,7 +48,9 @@ false	false	false
 * a < b is the same as !(a >= b)
 * a <= b is the same as a == b | a < b
 */
-fn main() {
+
+#[test]
+fn t0() {
     let _x = true;
     let y = false;
     println!("{}", y)
