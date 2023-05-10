@@ -2,7 +2,7 @@
 
 enum IpAddr {
     // can put data directly into each enum variant.
-    // the name of each enum variant that we define also becomes a function that constructs an instance of the enum. 
+    // the name of each enum variant that we define also becomes a function that constructs an instance of the enum.
     V4(String),
     V6(String),
 }

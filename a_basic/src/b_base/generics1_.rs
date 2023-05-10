@@ -37,7 +37,7 @@ struct Point1<X1, Y1> {
     y: Y1,
 }
 
-// Generic type parameters in a struct definition aren’t always the same as those you use in that same struct’s method signatures. 
+// Generic type parameters in a struct definition aren’t always the same as those you use in that same struct’s method signatures.
 #[allow(dead_code)]
 impl <X1, Y1> Point1<X1, Y1>{
     fn mixup<X2, Y2>(self, other: Point1<X2, Y2>) -> Point1<X1, Y2> {

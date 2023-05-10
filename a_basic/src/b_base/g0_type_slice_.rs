@@ -18,7 +18,7 @@ fn main() {
     let _ = &s[..]; // 与上等价
 
     let a = [1, 2, 3, 4, 5];
-    // This slice has the type &[i32]. It works the same way as string slices do, by storing a reference to the first element and a length. 
+    // This slice has the type &[i32]. It works the same way as string slices do, by storing a reference to the first element and a length.
     let slice: &[i32] = &a[1..3];
     let is_equal = slice == &[2, 3];
     println!("{}", is_equal);
