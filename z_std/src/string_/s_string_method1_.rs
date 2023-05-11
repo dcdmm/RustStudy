@@ -5,8 +5,6 @@
 as_str / as_mut_str
  */
 
-fn main() {}
-
 #[test]
 fn as_str_as_mut_str_fn() {
     let s = String::from("foo");

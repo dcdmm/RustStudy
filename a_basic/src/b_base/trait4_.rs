@@ -86,5 +86,3 @@ fn returns_summarizable(switch: bool) -> Box<dyn Summary> {
         })
     }
 }
-
-fn main() {}

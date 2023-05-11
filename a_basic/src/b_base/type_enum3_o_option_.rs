@@ -26,7 +26,9 @@ None: No value.
 
 Some(T): Some value of type T.
 */
-fn main() {
+
+#[test]
+fn t0() {
     /*
     The type of _some_number is Option<i32>. The type of _some_char is Option<char>, which is a different type.
     Rust can infer these types because we’ve specified a value inside the Some variant.

@@ -1,6 +1,7 @@
 // 切片(Primitive Type slice)
 
-fn main() {
+#[test]
+fn t0() {
     let s = String::from("hello world");
 
     // 报错:the size for values of type `str` cannot be known at compilation time

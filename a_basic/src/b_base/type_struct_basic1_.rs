@@ -7,7 +7,8 @@ struct User {
     sign_in_count: u64,
 }
 
-fn main() {
+#[test]
+fn t0() {
     let user1 = User {
         email: String::from("someone@example.com"),
         username: String::from("someusername123"),
@@ -37,8 +38,7 @@ fn main() {
 
     println!("{}", user1.active); // true
     println!("{}", user1.sign_in_count); // 1
-    println!("{}", user1.email); // someone@example.com(正常访问)
-
+    println!("{}", user1.email); // someone@example.com
 
     // 报错:borrow of moved value: `user1.username`
     // Note that the struct update syntax uses = like an assignment; this is because it moves the data

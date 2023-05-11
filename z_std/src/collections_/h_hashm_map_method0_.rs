@@ -9,9 +9,6 @@ entry
 remove
  */
 
-fn main() {}
-
-
 #[test]
 fn len_is_empty_fn() {
     use std::collections::HashMap;

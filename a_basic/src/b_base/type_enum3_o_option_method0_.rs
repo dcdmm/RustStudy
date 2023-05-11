@@ -5,8 +5,6 @@
 is_none / is_some
  */
 
-fn main() {}
-
 #[test]
 fn is_none_is_some_fn() {
     /*

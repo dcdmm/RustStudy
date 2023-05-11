@@ -5,7 +5,6 @@ fn calculate_length(s: String) -> (String, usize) {
     (s, length)
 }
 
-
 fn main() {
     let s1 = String::from("hello");
 
@@ -78,6 +77,7 @@ error[E0596]: cannot borrow `*some_string` as mutable, as it is behind a `&` ref
 
 Just as variables are immutable by default, so are references. We’re not allowed to modify something we have a reference
 to.
+
 
 ### Mutable References
 
@@ -200,11 +200,10 @@ The scopes of the immutable references r1 and r2 end after the println! where th
 mutable reference r3 is created. These scopes don’t overlap, so this code is allowed: the compiler can tell that the
 reference is no longer being used at a point before the end of the scope.
 
+
 ### Dangling References
 
-悬垂引用(Dangling References)
-也叫做悬垂指针,意思为指针指向某个值后,这个值被释放掉了,而指针仍然存在,其指向的内存可能不存在任何值或已被其它变量重新使用.在Rust中编译器可以确保引用永远也不会变成悬垂状态:
-当你获取数据的引用后,编译器可以确保数据不会在引用结束前被释放,要想释放数据,必须先停止其引用的使用.
+In languages with pointers, it’s easy to erroneously create a dangling pointer—a pointer that references a location in memory that may have been given to someone else—by freeing some memory while preserving a pointer to that memory. In Rust, by contrast, the compiler guarantees that references will never be dangling references: if you have a reference to some data, the compiler will ensure that the data will not go out of scope before the reference to the data does.
 
 ```rust
 fn main() {
@@ -247,7 +246,6 @@ fn no_dangle() -> String {
 The solution here is to return the String directly:
 
 ```rust
-
 fn main() {
     let reference_to_nothing = no_dangle();
 }
@@ -263,7 +261,6 @@ This works without any problems. Ownership is moved out, and nothing is dealloca
 
 
 ### The Rules of References
-Let’s recap what we’ve discussed about references:
 
 At any given time, you can have either one mutable reference or any number of immutable references.
 References must always be valid.

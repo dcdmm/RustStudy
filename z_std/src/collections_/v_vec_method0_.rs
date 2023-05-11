@@ -9,9 +9,6 @@ push
 remove
  */
 
-fn main() {}
-
-
 #[test]
 fn len_is_empty_fn() {
     let a = vec![1, 2, 3];
@@ -51,11 +48,13 @@ fn push_fn() {
 
 #[test]
 fn remove_fn() {
-    // Removes and returns the element at position index within the vector, shifting all elements after it to the left.
+    /*
+    Removes and returns the element at position index within the vector, shifting all elements after it to the left.
+
+    # Panics
+    Panics if index is out of bounds.
+     */
     let mut v = vec![1, 2, 3];
     assert_eq!(v.remove(1), 2);
     assert_eq!(v, vec![1, 3]);
-
-    //# Panics
-    // Panics if index is out of bounds.
 }

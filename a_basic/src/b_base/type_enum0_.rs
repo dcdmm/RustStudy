@@ -8,7 +8,8 @@ enum IpAddrkind {
 
 fn route(_ip_kind: IpAddrkind) {}
 
-fn main() {
+#[test]
+fn t0() {
     // 通过`::`操作符来访问IpAddkind下的具体成员
     let _four = IpAddrkind::V4;
     let _six = IpAddrkind::V6;

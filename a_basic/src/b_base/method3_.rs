@@ -14,7 +14,8 @@ impl Message {
     }
 }
 
-fn main() {
+#[test]
+fn t0() {
     let m = Message::Write(String::from("hello"));
     m.call();
 }

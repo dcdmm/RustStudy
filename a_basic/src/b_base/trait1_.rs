@@ -32,7 +32,8 @@ struct Tweet {
 
 impl Summary for Tweet {}
 
-fn main() {
+#[test]
+fn t0() {
     let article = NewsArticle {
         headline: String::from("Penguins win the Stanley Cup Championship!"),
         location: String::from("Pittsburgh, PA, USA"),

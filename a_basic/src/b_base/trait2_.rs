@@ -56,5 +56,3 @@ fn some_function_where<T, U>(_t: &T, _u: &U) -> i32
 {
     3
 }
-
-fn main() {}

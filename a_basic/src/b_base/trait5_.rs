@@ -8,7 +8,6 @@ struct Pair<T> {
     y: T,
 }
 
-// 关联函数
 #[allow(dead_code)]
 impl<T> Pair<T> {
     fn new(x: T, y: T) -> Self {
@@ -28,7 +27,6 @@ impl<T: Display + PartialOrd> Pair<T> {
     }
 }
 
-
 trait ToString {}
 /*
 We can also conditionally implement a trait for any type that implements another trait.
@@ -40,11 +38,12 @@ impl<T: Display> ToString for T {
     // --snip--
 }
 
-fn main() {
+#[test]
+fn t0() {
     /*
     Because the standard library has this blanket implementation, we can call the to_string method defined by the ToString trait on any type that implements the Display trait.
     For example, we can turn integers into their corresponding String values like this because integers implement Display:
      */
     let s = 3.to_string();
-    println!("{}", {s});
+    println!("{}", { s });
 }

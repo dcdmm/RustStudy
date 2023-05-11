@@ -8,7 +8,8 @@ Vectors have O(1) indexing, amortized O(1) push (to the end) and O(1) pop (from 
 Vectors ensure they never allocate more than isize::MAX bytes.
  */
 
-fn main() {
+#[test]
+fn t0() {
     let v = vec![1, 2, 3, 4];
     println!("{}", v[3]); // 通过索引访问Vec中的元素
 
@@ -19,7 +20,6 @@ fn main() {
     let v1 = vec![1; 3];
     println!("{:?}", v1)
 }
-
 
 #[test]
 fn create() {
@@ -36,7 +36,6 @@ fn create() {
     assert_eq!(vec1.len(), 2);
     assert_eq!(vec1[0], 1);
 }
-
 
 #[test]
 fn iterating() {

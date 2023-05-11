@@ -13,10 +13,9 @@ The type of a block is the type of the final operand, or () if the final operand
 
 fn fn_call() {}
 
+// Blocks are always value expressions and evaluate the last operand in value expression context.
 #[test]
 fn t0() {
-    // Blocks are always value expressions and evaluate the last operand in value expression context.
-
     let _: () = {
         fn_call();
     };

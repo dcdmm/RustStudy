@@ -4,6 +4,7 @@ Ownership Rules
 * There can only be one owner at a time.
 * When the owner goes out of scope, the value will be dropped.
 
+
 ### Variable Scope
 
 The variable is valid from the point at which it’s declared until the end of the current scope. 

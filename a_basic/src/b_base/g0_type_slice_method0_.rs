@@ -8,8 +8,6 @@ split
 join
  */
 
-fn main() {}
-
 #[test]
 fn len_is_empyt() {
     let a = [1, 2, 3];

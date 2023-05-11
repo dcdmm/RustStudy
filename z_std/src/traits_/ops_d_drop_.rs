@@ -30,12 +30,15 @@ impl Drop for HasTwoDrops {
     }
 }
 
-fn main() {
+#[test]
+fn t0() {
     let _x = HasTwoDrops { _one: HasDrop, _two: HasDrop };
     println!("Running!");
 
     /*
-    Even if we remove the implementation of Drop for HasTwoDrop, the destructors of its fields are still called. This would result in
+    Even if we remove the implementation of Drop for HasTwoDrop, the destructors of its fields are still called.
+    This would result in
+
     Running!
     Dropping HasDrop!
     Dropping HasDrop!
@@ -43,7 +46,7 @@ fn main() {
 }
 
 #[test]
-fn drop_fn() {
+fn t1() {
     struct CustomSmartPointer {
         data: String,
     }
@@ -58,6 +61,7 @@ fn drop_fn() {
         data: String::from("some data"),
     };
     println!("CustomSmartPointer created.");
+
     // 报错:error[E0040]: explicit use of destructor method
     // c.drop();
     /*

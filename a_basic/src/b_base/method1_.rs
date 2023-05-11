@@ -24,7 +24,8 @@ impl Rectangle {
     }
 }
 
-fn main() {
+#[test]
+fn t0() {
     // To call this associated function, we use the :: syntax with the struct name
     let sq = Rectangle::square(3);
     println!("The area of the square is {} square pixels.", sq.area());

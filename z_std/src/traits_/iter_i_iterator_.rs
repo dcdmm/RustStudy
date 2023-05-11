@@ -14,7 +14,6 @@ pub trait Iterator {
 }
  */
 
-
 /*
 常见方法:
 next
@@ -26,9 +25,6 @@ skip
 collect
  */
 
-fn main() {}
-
-// Required Methods
 #[test]
 fn next_fn() {
     let a = [1, 2, 3];
@@ -185,5 +181,4 @@ fn collect_fn() {
         .collect();
 
     assert_eq!("hello", hello);
-
 }

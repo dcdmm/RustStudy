@@ -37,7 +37,8 @@ impl<T> Deref for MyBox<T> {
     }
 }
 
-fn main() {
+#[test]
+fn t0() {
     let x = 5;
     let y = &x;
     assert_eq!(5, x);
@@ -46,7 +47,6 @@ fn main() {
     // 报错:error[E0277]: can't compare `{integer}` with `&{integer}`
     // assert_eq!(5, y);
 
-
     let x0 = 5;
     let y0 = Box::new(x);
     assert_eq!(5, x0);
@@ -54,7 +54,6 @@ fn main() {
     assert_eq!(5, *y0);
     // 报错:error[E0277]: can't compare `{integer}` with `Box<{integer}>`
     // assert_eq!(5, y0);
-
 
     let x1 = 5;
     let y1 = MyBox::new(x);

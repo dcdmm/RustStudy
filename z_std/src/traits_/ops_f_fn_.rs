@@ -1,13 +1,13 @@
 // Trait std::ops::Fn
 
 /*
-
 The version of the call operator that takes an immutable receiver.
 
 Instances of Fn can be called repeatedly without mutating state.
  */
 
-fn main() {
+#[test]
+fn t0() {
     // Calling a closure
     let print_vec = |x| x;
     let pv = print_vec(vec![1, 2, 3]);

@@ -6,7 +6,8 @@ A UTF-8–encoded, growable string.
 The String type is the most common string type that has ownership over the contents of the string. It has a close relationship with its borrowed counterpart, the primitive str.
  */
 
-fn main() {
+#[test]
+fn t0() {
     let s = String::from("hello world");
     // 报错:the type `String` cannot be indexed by `{integer}`
     // let _c = s[0];

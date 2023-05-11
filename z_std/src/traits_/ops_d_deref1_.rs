@@ -11,7 +11,6 @@ Deref coercion was added to Rust so that programmers writing function and method
 The deref coercion feature also lets us write more code that can work for either references or smart pointers.
  */
 
-
 /*
 Similar to how you use the Deref trait to override the * operator on immutable references, you can use the DerefMut trait to override the * operator on mutable references.
 
@@ -36,7 +35,8 @@ fn hello(name: &str) {
     println!("Hello, {name}!");
 }
 
-fn main() {
+#[test]
+fn t0() {
     let m = Box::new(String::from("Rust"));
     hello("Rust");
 
@@ -46,6 +46,7 @@ fn main() {
     Rust calls deref again to turn the &String into &str, which matches the hello function’s definition.
      */
     hello(&m);
+
     /*
     The (*m) dereferences the Box<String> into a String.
     Then the & and [..] take a string slice of the String that is equal to the whole string to match the signature of hello.

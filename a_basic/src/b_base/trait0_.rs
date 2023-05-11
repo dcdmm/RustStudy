@@ -2,7 +2,7 @@
 
 #[allow(dead_code)]
 trait Summary {
-    fn summarize(&self) -> String;  // 抽象方法(没有实现)
+    fn summarize(&self) -> String; // 抽象方法(没有实现)
 }
 
 #[allow(dead_code)]
@@ -24,7 +24,8 @@ impl Summary for Tweet {
     }
 }
 
-fn main() {
+#[test]
+fn t0() {
     let tweet = Tweet {
         username: String::from("horse_ebooks"),
         content: String::from(

@@ -21,7 +21,8 @@ fn build_user_sample(email: String, username: String) -> User {
     }
 }
 
-fn main() {
+#[test]
+fn t0() {
     // Creating an instance of the User struct
     /*
     每个字段都需要进行初始化

@@ -1,11 +1,15 @@
 // std::collections::HashMap
 
-// Just like vectors, hash maps store their data on the heap.
-// Like vectors, hash maps are homogeneous: all of the keys must have the same type as each other, and all of the values must have the same type.
+/*
+Just like vectors, hash maps store their data on the heap.
+
+Like vectors, hash maps are homogeneous: all of the keys must have the same type as each other, and all of the values must have the same type.
+ */
 
 use std::collections::HashMap;
 
-fn main() {
+#[test]
+fn t0() {
     let field_name = String::from("Favorite color");
     let field_value = String::from("Blue");
 

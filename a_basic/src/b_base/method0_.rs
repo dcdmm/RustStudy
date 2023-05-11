@@ -17,8 +17,8 @@ impl Rectangle {
     * `&mut self`: 可变借用
      */
 
-    // self: &Rectangel <==等价于==> self: &Self <==等价于==> &self
-    fn area(self: &Rectangle) -> u32 {
+    // &self ==等价于==> self: &self ==即==> self: &Rectangel
+    fn area(&self) -> u32 {
         self.width * self.height
     }
 
@@ -28,7 +28,8 @@ impl Rectangle {
     }
 }
 
-fn main() {
+#[test]
+fn t0() {
     let rect1 = Rectangle {
         width: 30,
         height: 50,

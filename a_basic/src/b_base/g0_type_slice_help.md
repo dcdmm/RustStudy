@@ -8,6 +8,7 @@ Slice types are generally used through pointer types. For example:
 * &mut [T]: a 'mutable slice'. It mutably borrows the data it points to.
 * Box<[T]>: a 'boxed slice'
 
+
 ### String Slices
 
 A string slice is a reference to part of a String, and it looks like this:
