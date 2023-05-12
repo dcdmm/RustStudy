@@ -24,3 +24,5 @@ mod trait_example0_;
 mod method0_;
 mod method1_;
 mod method3_;
+mod generics0_;
+mod generics1_;

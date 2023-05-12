@@ -79,6 +79,7 @@ fn multiple_types() {
     If Rust allowed a vector to hold any type, there would be a chance that one or more of the types would cause errors with the operations performed on the elements of the vector.
     Using an enum plus a match expression means that Rust will ensure at compile time that every possible case is handled
 
-    If you don’t know the exhaustive set of types a program will get at runtime to store in a vector, the enum technique won’t work. Instead, you can use a trait objec
+    If you don’t know the exhaustive set of types a program will get at runtime to store in a vector, the enum technique won’t work.
+    Instead, you can use a trait object
      */
 }

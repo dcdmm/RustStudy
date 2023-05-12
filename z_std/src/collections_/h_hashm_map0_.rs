@@ -9,16 +9,6 @@ Like vectors, hash maps are homogeneous: all of the keys must have the same type
 use std::collections::HashMap;
 
 #[test]
-fn t0() {
-    let field_name = String::from("Favorite color");
-    let field_value = String::from("Blue");
-
-    let mut map = HashMap::new();
-    map.insert(field_name, field_value);
-    print!("");
-}
-
-#[test]
 fn create() {
     /*
     Creates an empty HashMap.

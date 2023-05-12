@@ -51,7 +51,8 @@ enum Result<T, E> { // Enums can use multiple generic types as well
     Err(E),
 }
 
-fn main() {
+#[test]
+fn t0() {
     println!("add i8: {}", add(2i8, 3i8));
     println!("add i32: {}", add(20, 30));
     println!("add f32:{}", add(1.23, 1.3));

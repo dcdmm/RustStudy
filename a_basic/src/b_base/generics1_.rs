@@ -45,7 +45,8 @@ impl <X1, Y1> Point1<X1, Y1>{
     }
 }
 
-fn main() {
+#[test]
+fn t0() {
     let p = Point { x: 5.4, y: 10.5 };
     println!("p.x = {}", p.return_xy().x);
     println!("p.y = {}", p.return_xy().y);
