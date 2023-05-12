@@ -68,13 +68,20 @@ fn last_char_of_first_line(text: &str) -> Option<char> {
     text.lines().next()?.chars().last()
 }
 
-// fn main() {
+// #[test]
+// fn t00() {
 //     // 报错:the `?` operator can only be used in a function that returns `Result` or `Option` (or another type that implements `FromResidual`)
 //     let greeting_file = File::open("hello.txt")?;
 // }
 
 #[allow(unused)]
-fn main() -> Result<(), Box<dyn Error>> {
-    let greeting_file = File::open("hello.txt")?;
-    Ok(())
+#[test]
+fn t0() {
+    fn t0_inner() -> Result<(), Box<dyn Error>> {
+        let greeting_file = File::open("hello.txt")?;
+        Ok(())
+    }
+
+    let result = t0_inner();
+    println!("{:?}", result);
 }
