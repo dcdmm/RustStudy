@@ -1,6 +1,7 @@
 // 模式匹配(Extra Conditionals with Match Guards)
 
-fn main() {
+#[test]
+fn t0() {
     let num = Some(5);
 
     match num {

@@ -20,7 +20,8 @@ enum Message {
     ChangeColor(Color),
 }
 
-fn main() {
+#[test]
+fn t0() {
     let msg = Message::ChangeColor(Color::Hsv(0, 160, 255));
 
     // 解构嵌套枚举

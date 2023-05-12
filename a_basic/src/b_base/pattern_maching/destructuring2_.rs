@@ -1,6 +1,7 @@
 // 模式匹配(解构元组与数组)
 
-fn main() {
+#[test]
+fn t0() {
     let (tup1_ele, tup2_ele) = ('a', 2);
     println!("tup1:{}", tup1_ele);
     println!("tup2:{}", tup2_ele);

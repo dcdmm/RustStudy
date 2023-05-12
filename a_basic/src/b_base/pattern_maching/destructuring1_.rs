@@ -5,7 +5,8 @@ struct Point {
     y: i32,
 }
 
-fn main() {
+#[test]
+fn t0() {
     let p = Point { x: 0, y: 7 };
     
     let Point { x: a, y: b } = p;

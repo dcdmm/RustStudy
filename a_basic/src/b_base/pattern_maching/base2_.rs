@@ -1,6 +1,7 @@
 // 模式匹配(Matching Named Variables)
 
-fn main()
+#[test]
+fn t0()
 {
     let x = Some(5);
     let y = 10;

@@ -1,13 +1,13 @@
 // 模式匹配(@ Bindings)
 
-
 #[derive(Debug)]
 struct Point {
     x: i32,
     y: i32,
 }
 
-fn main() {
+#[test]
+fn t0() {
     enum Message {
         Hello { id: i32 },
     }

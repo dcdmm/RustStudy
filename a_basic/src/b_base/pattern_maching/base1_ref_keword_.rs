@@ -15,7 +15,8 @@ enum Coin {
     Quarter(UsState),
 }
 
-fn main() {
+#[test]
+fn t0() {
     let config_max = Some(3u8);
 
     match config_max {

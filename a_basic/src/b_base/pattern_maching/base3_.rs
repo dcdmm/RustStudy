@@ -1,6 +1,7 @@
 // 模式匹配(while let Conditional Loops;for Loops;let Statements;Function Parameters)
 
-fn main() {
+#[test]
+fn t0() {
     let mut stack = Vec::new();
     stack.push(1);
     stack.push(2);

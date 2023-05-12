@@ -26,3 +26,4 @@ mod method1_;
 mod method3_;
 mod generics0_;
 mod generics1_;
+mod pattern_maching;

@@ -53,7 +53,8 @@ fn value_other() -> u8 {
     }
 }
 
-fn main() {
+#[test]
+fn t0() {
     let coin = Coin::Nickel;
     let result = match coin {
         // If you want to run multiple lines of code in a match arm, you must use curly brackets, and the comma following the arm is then optional.
