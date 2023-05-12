@@ -1,7 +1,8 @@
 mod ordinary;
 
 /*
-The three sections of output include the unit tests, the integration test, and the doc tests. Note that if any test in a section fails, the following sections will not be run. 
+The three sections of output include the unit tests, the integration test, and the doc tests.
+Note that if any test in a section fails, the following sections will not be run.
 For example, if a unit test fails, there won’t be any output for integration and doc tests because those tests will only be run if all unit tests are passing.
  */
 
@@ -34,9 +35,13 @@ This saves compile time when you only want to build the library and saves space 
  */
 #[cfg(test)]
 mod tests {
-    // // use crate::*;
+    // use crate::*;
     use super::*; // 与上等价
 
+    /*
+    Note the #[test] annotation: this attribute indicates this is a test function, so the test runner knows to treat this function as a test.
+    We might also have non-test functions in the tests module to help set up common scenarios or perform common operations, so we always need to indicate which functions are tests.
+     */
     #[test]
     fn test_function_panics() {
         /*
