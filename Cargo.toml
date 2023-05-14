@@ -2,7 +2,7 @@
 # members — Packages to include in the workspace.
 members = [
     "a_basic",
-    "d_advanced", "e_advanced",
+    "b_advanced",
     "y_project_structure", "y_test",
     "z_std",
 ]

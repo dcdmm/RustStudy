@@ -1,11 +1,17 @@
+// Bringing Paths into Scope with the use Keyword
+
 #[allow(unused)]
 mod front_of_house {
     pub mod hosting {
         pub fn add_to_waitlist() {}
+
+        fn seat_at_table() {}
     }
 }
 
 // Paths brought into scope with use also check privacy, like any other paths.
+// 报错:error[E0603]: function `seat_at_table` is private
+// use front_of_house::hosting::seat_at_table;
 #[allow(unused)]
 // use crate::use_keyword0_::front_of_house::hosting; // 绝对路径
 use front_of_house::hosting; // 相对路径;与上等价
@@ -26,6 +32,6 @@ pub mod customer {
     use super::front_of_house::hosting; // 相对路径;与上等价
 
     pub fn eat_at_restaurant() {
-        hosting::add_to_waitlist();
+        hosting::add_to_waitlist(); // 从第32行`use super::front_of_house::hosting;`调用,而不是从17行`use front_of_house::hosting;`调用
     }
 }
