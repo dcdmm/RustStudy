@@ -27,7 +27,7 @@ impl Iterator for Counter {
 }
 
 #[test]
-fn test_my_obj() {
+fn test_iterator_obj() {
     let mut counter = Counter::new();
 
     assert_eq!(counter.next(), Some(1));
@@ -37,5 +37,3 @@ fn test_my_obj() {
     assert_eq!(counter.next(), Some(5));
     assert_eq!(counter.next(), None);
 }
-
-fn main() {}

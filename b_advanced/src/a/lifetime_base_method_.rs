@@ -22,5 +22,3 @@ impl<'a> ImportantExcerpt<'a> {
         self.part
     }
 }
-
-fn main() {}

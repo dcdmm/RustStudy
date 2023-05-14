@@ -1,6 +1,7 @@
 // Specifying Placeholder Types in Trait Definitions with Associated Types
 
-fn main() {
+#[test]
+fn t0() {
     struct ArrayLender<'a, T>(&'a mut [T; 16]);
 
     trait Lend {

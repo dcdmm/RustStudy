@@ -14,7 +14,8 @@ fn longest_with_an_announcement<'a, T>(x: &'a str, y: &'a str, ann: T) -> &'a st
     }
 }
 
-fn main() {
+#[test]
+fn t0() {
     let string1 = String::from("abcd");
     let string2 = "xyz";
 

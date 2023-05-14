@@ -20,11 +20,11 @@ for optional mut in reference types and `mut` or `const` in pointer types.
 | [Function pointer](https://doc.rust-lang.org/reference/types/function-pointer.html) | Integer                                                                             | Function pointer to address cast       |
 | Closure ***                                                                         | Function pointer                                                                    | Closure to function pointer cast       |
 
-\* or T and V are compatible unsized types, e.g., both slices, both the same trait object.
+`*` or T and V are compatible unsized types, e.g., both slices, both the same trait object.
 
-** only when m₁ is mut or m₂ is const. Casting mut reference to const pointer is allowed.
+`**` only when m₁ is mut or m₂ is const. Casting mut reference to const pointer is allowed.
 
-*** only for closures that do not capture (close over) any local variables
+`***` only for closures that do not capture (close over) any local variables
 
 ### Numeric cast
 
@@ -51,13 +51,13 @@ for optional mut in reference types and `mut` or `const` in pointer types.
     * if necessary, rounding is according to roundTiesToEven mode ***
     * on overflow, infinity (of the same sign as the input) is produced
 
-\* if integer-to-float casts with this rounding mode and overflow behavior are not supported natively by the hardware,
+`*` if integer-to-float casts with this rounding mode and overflow behavior are not supported natively by the hardware,
 these casts will likely be slower than expected.
 
-** if f64-to-f32 casts with this rounding mode and overflow behavior are not supported natively by the hardware, these
+`**` if f64-to-f32 casts with this rounding mode and overflow behavior are not supported natively by the hardware, these
 casts will likely be slower than expected.
 
-*** as defined in IEEE 754-2008 §4.3.1: pick the nearest floating point number, preferring the one with an even least
+`***` as defined in IEEE 754-2008 §4.3.1: pick the nearest floating point number, preferring the one with an even least
 significant digit if exactly halfway between two floating point numbers.
 
 ### Enum cast

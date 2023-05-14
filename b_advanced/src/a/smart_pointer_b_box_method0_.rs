@@ -5,9 +5,6 @@
 new
  */
 
-fn main() {
-}
-
 #[test]
 fn new_fn() {
     /*

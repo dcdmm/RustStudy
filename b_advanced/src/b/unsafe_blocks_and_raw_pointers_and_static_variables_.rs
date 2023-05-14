@@ -13,7 +13,6 @@ Here are the abilities Unsafe Rust has in addition to Safe Rust:
 5. Access fields of unions
  */
 
-
 /*
 Unsafe Rust has two new types called raw pointers that are similar to references.
 As with references, raw pointers can be immutable or mutable and are written as *const T and *mut T, respectively.
@@ -25,7 +24,6 @@ Different from references and smart pointers, raw pointers:
 * Are allowed to be null
 * Don’t implement any automatic cleanup
  */
-
 
 /*
 In Rust, global variables are called static variables.
@@ -45,8 +43,6 @@ All access to a static is safe, but there are a number of restrictions on static
 * The type must have the Sync trait bound to allow thread-safe access.
 * Constants cannot refer to statics.
  */
-
-fn main() {}
 
 // Dereferencing a Raw Pointer
 #[test]
@@ -170,5 +166,5 @@ fn five_() {
     Accessing union fields is unsafe because Rust can’t guarantee the type of the data currently being stored in the union instance.
      */
 
-    // 参考:https://doc.rust-lang.org/reference/items/unions.html
+    // ====> 参考见:https://doc.rust-lang.org/reference/items/unions.html
 }

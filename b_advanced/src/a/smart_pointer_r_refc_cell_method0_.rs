@@ -8,8 +8,6 @@ borrow / borrow_mut
 
 use std::cell::RefCell;
 
-fn main() {}
-
 #[test]
 fn new_fn() {
     /*

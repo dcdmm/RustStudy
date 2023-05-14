@@ -1,8 +1,8 @@
 // 闭包(FnOnce/FnMut/Fn)
 
-// ======> 参考Z_std_trait/src/bin/ops_f_fn_.rs
-// ======> 参考Z_std_trait/src/bin/ops_f_fn_m_mut_.rs
-// ======> 参考Z_std_trait/src/bin/ops_f_fno_once_.rs
+// ======> 参考见:Z_std_trait/src/bin/ops_f_fn_.rs
+// ======> 参考见:Z_std_trait/src/bin/ops_f_fn_m_mut_.rs
+// ======> 参考见:Z_std_trait/src/bin/ops_f_fno_once_.rs
 
 /*
 Once a closure has captured a reference or captured ownership of a value from the environment where the closure is defined (thus affecting what, if anything, is moved into the closure), the code in the body of the closure defines what happens to the references or values when the closure is evaluated later (thus affecting what, if anything, is moved out of the closure).
@@ -16,8 +16,10 @@ The way a closure captures and handles values from the environment affects which
 3. Fn applies to closures that don’t move captured values out of their body and that don’t mutate captured values, as well as closures that capture nothing from their environment. These closures can be called more than once without mutating their environment, which is important in cases such as calling a closure multiple times concurrently.
  */
 
-fn main() {
+#[test]
+fn t0() {
     // 报错:can't capture dynamic environment in a fn item:
+    // let x = 4;
     // fn equal_to_x(z: i32) -> bool {
     //     z == x
     // }

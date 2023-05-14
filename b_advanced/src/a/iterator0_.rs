@@ -2,7 +2,8 @@
 
 // ======> 参考Z_std_trait/src/bin/iter_i_iterator_.rs
 
-fn main() {
+#[test]
+fn t0() {
     let v = vec!["a".to_string(), "b".to_string()];
     println!("{:?}", v);
     // Creates a consuming iterator, that is, one that moves each value out of the vector (from start to end). The vector cannot be used after calling this.

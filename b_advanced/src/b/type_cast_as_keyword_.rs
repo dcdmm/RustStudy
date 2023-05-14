@@ -1,6 +1,7 @@
 // Keyword as
 
-fn main() {
+#[test]
+fn t0() {
     let a = 3.1 as i8;
     let b = 100_i8 as f32 + 10.5;
     let c = 'a' as u8;

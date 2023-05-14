@@ -15,6 +15,3 @@ trait OutlinePrint: fmt::Display {
         println!("{}", "*".repeat(len + 4));
     }
 }
-
-fn main() {}
-

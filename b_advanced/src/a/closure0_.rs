@@ -14,7 +14,8 @@ As with variables, we can add type annotations if we want to increase explicitne
 */
 
 #[allow(dead_code)]
-fn main() {
+#[test]
+fn t0() {
     fn add_one_v1(x: u32) -> u32 { x + 1 } //  function definition
 
     let add_one_v2 = |x: u32| -> u32 { x }; //  fully annotated closure definition
@@ -29,5 +30,5 @@ fn main() {
 
     // 报错:type annotations needed
     // we remove the brackets, which are optional because the closure body has only one expression.
-    // let add_one_v4 = |x| x + 1; // 必须手动添加类型标注,或者编译器可以自动推断
+    // let add_one_v4 = |x| x + 1; // 必须手动添加Type annotations,或编译器可以自动推断
 }

@@ -19,8 +19,6 @@ new
 upgrade
  */
 
-fn main() {}
-
 #[test]
 fn new_fn() {
     use std::rc::Weak;

@@ -13,11 +13,12 @@ enum List {
     Nil,
 }
 
-use crate::List::{Cons, Nil};
+use crate::a::smart_pointer_r_refc_cell_::List::{Cons, Nil};
 use std::cell::RefCell;
 use std::rc::Rc;
 
-fn main() {
+#[test]
+fn t0() {
     let value = Rc::new(RefCell::new(5));
 
     let a = Rc::new(Cons(Rc::clone(&value), Rc::new(Nil)));

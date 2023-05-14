@@ -14,11 +14,13 @@ fn do_twice(f: fn(i32) -> i32, arg: i32) -> i32 {
     f(arg) + f(arg)
 }
 
-fn main() {
+#[test]
+fn t0() {
     let answer = do_twice(add_one, 5);
 
     println!("The answer is: {}", answer);
 
+    #[allow(dead_code)]
     enum Status {
         Value(u32),
         Stop,

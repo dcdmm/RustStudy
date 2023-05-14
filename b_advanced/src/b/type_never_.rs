@@ -7,13 +7,15 @@ The ! type, also called “never”.
 
 break, continue and return expressions also have type !.
  */
-fn main() {
+
+#[test]
+fn t0() {
     let i = 2;
 
     // 报错:`match` arms have incompatible types
     // let _v = match i {
     //     0..=3 => i,
-    //     _ => println!("不合规定的值:{}", i)
+    //     _ => println!("其他值:{}", i)
     // };
 
     let _v: u32 = match i {

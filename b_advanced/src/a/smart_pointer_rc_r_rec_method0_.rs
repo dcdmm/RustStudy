@@ -7,8 +7,6 @@ clone / strong_count
 downgrade / weak_count
  */
 
-fn main() {}
-
 #[test]
 fn new_fn() {
     use std::rc::Rc;

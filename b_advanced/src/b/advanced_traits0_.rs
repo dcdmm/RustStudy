@@ -19,7 +19,6 @@ impl Pilot for Human {
 impl Wizard for Human {
     fn fly(&self) {
         println!("fly ===> Wizard");
-
     }
 }
 
@@ -48,8 +47,8 @@ impl Animal for Dog {
     }
 }
 
-
-fn main() {
+#[test]
+fn t0() {
     let person = Human;
     person.fly(); // fly ===> Human
     Pilot::fly(&person); // fly ===> Pilot

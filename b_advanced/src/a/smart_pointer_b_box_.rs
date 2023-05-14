@@ -12,8 +12,8 @@ Boxes don’t have performance overhead, other than storing their data on the he
 * When you want to own a value and you care only that it’s a type that implements a particular trait rather than being of a specific type
  */
 
-
-fn main() {
+#[test]
+fn t0() {
     /*
     We define the variable b to have the value of a Box that points to the value 5, which is allocated on the heap.
     This program will print b = 5; in this case, we can access the data in the box similar to how we would if this data were on the stack.

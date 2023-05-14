@@ -91,7 +91,8 @@ This concept—of being concerned only with the messages a value responds to rat
 The advantage of using trait objects and Rust’s type system to write code similar to code using duck typing is that we never have to check whether a value implements a particular method at runtime or worry about getting errors if a value doesn’t implement a method but we call it anyway.
 Rust won’t compile our code if the values don’t implement the traits that the trait objects need.
  */
-fn main() {
+#[test]
+fn t0() {
     let screen = Screen {
         components: vec![
             Box::new(SelectBox {
