@@ -3,6 +3,7 @@
 members = [
     "a_basic",
     "b_advanced",
+    "c_concurrency",
     "y_project_structure", "y_test",
     "z_std",
 ]
