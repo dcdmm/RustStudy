@@ -13,7 +13,7 @@ enum List {
     Nil,
 }
 
-use crate::a::smart_pointer_r_refc_cell_::List::{Cons, Nil};
+use crate::a::smart_pointer_1_r_refc_cell_::List::{Cons, Nil};
 use std::cell::RefCell;
 use std::rc::Rc;
 

@@ -7,7 +7,7 @@ enum List {
     Nil,
 }
 
-use crate::a::smart_pointer_rc_r_rec_::List::{Cons, Nil};
+use crate::a::smart_pointer_1_rc_r_rec_::List::{Cons, Nil};
 
 #[test]
 fn main() {
