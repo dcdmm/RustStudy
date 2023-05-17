@@ -15,3 +15,22 @@ trait OutlinePrint: fmt::Display {
         println!("{}", "*".repeat(len + 4));
     }
 }
+
+struct Point {
+    x: i32,
+    y: i32,
+}
+
+// 报错:error[E0277]: `Point` doesn't implement `std::fmt::Display`
+// impl OutlinePrint for Point {}
+
+// To fix this, we implement Display on Point and satisfy the constraint that OutlinePrint requires, like so:
+// *****************************************************************
+impl fmt::Display for Point {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "({}, {})", self.x, self.y)
+    }
+}
+
+impl OutlinePrint for Point {}
+// *****************************************************************

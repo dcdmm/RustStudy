@@ -20,7 +20,7 @@ pub trait Draw {
 dyn is a prefix of a trait object’s type.
 
 The dyn keyword is used to highlight that calls to methods on the associated Trait are dynamically dispatched.
-To use the trait this way, it must be ‘object safe’(trait所有方法必须满足:1. 方法的返回值类型不能是Self; 2.方法没有任何泛型参数).
+To use the trait this way, it must be ‘object safe’(trait所有方法必须满足:1.方法的返回值类型不能是Self; 2.方法没有任何泛型参数).
  */
 pub struct Screen {
     pub components: Vec<Box<dyn Draw>>,

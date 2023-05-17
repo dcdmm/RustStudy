@@ -15,7 +15,7 @@ impl<T> Pair<T> {
     }
 }
 
-// 只有T同时实现了Display + PartialOrd trait结构体Pair才拥有cmp_display方法
+// Pair<T> only implements the cmp_display method if its inner type T implements the PartialOrd trait that enables comparison and the Display trait that enables printing.
 #[allow(dead_code)]
 impl<T: Display + PartialOrd> Pair<T> {
     fn cmp_display(&self) {
