@@ -23,7 +23,8 @@ struct Point {
 
 // 报错:error[E0277]: `Point` doesn't implement `std::fmt::Display`
 // impl OutlinePrint for Point {}
-
+//
+// 解决方式如下:
 // To fix this, we implement Display on Point and satisfy the constraint that OutlinePrint requires, like so:
 // *****************************************************************
 impl fmt::Display for Point {
