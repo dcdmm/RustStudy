@@ -6,6 +6,13 @@ use std::thread;
 use std::time::Duration;
 
 fn main() {
+    /*
+    // Spawns a new thread, returning a JoinHandle for it.
+    pub fn spawn<F, T>(f: F) -> JoinHandle<T>
+    where
+        F: FnOnce() -> T + Send + 'static,
+        T: Send + 'static,
+     */
     thread::spawn(|| {
         for i in 1..10 {
             println!("hi number {} from the spawned thread!", i);
