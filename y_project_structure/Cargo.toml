@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 # Using External Packages
 rand = "0.8.5"
+# a_basic = { version = "0.1.0", path = "../a_basic" }

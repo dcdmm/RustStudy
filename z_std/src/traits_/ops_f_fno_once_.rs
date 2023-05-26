@@ -5,6 +5,8 @@ The version of the call operator that takes a by-value receiver.
 
 Instances of FnOnce can be called, but might not be callable multiple times.
 Because of this, if the only thing known about a type is that it implements FnOnce, it can only be called once.
+
+签名:pub trait FnOnce<Args: Tuple> {
  */
 
 #[test]
@@ -15,9 +17,8 @@ fn t0() {
         // `func` consumes its captured variables, so it cannot be run more than once.
         println!("Consumed: {}", func());
 
-        println!("Delicious!");
-
-        // Attempting to invoke `func()` again will throw a `use of moved value` error for `func`.
+        // 报错:error[E0382]: use of moved value: `func`
+        // println!("Consumed: {}", func());
     }
 
     let x = String::from("xXx");

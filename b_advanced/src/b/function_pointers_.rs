@@ -1,4 +1,4 @@
-// Function Pointers
+// Function Pointers(Primitive Type fn)
 
 fn add_one(x: i32) -> i32 {
     x + 1

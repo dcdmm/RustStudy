@@ -4,6 +4,8 @@
 The version of the call operator that takes a mutable receiver.
 
 Instances of FnMut can be called repeatedly and may mutate state.
+
+签名:pub trait FnMut<Args: Tuple>: FnOnce<Args> {
  */
 
 #[test]
