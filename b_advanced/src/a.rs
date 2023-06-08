@@ -12,3 +12,4 @@ mod smart_pointer_1_r_refc_cell_method0_;
 mod smart_pointer_1_rc_r_rec_;
 mod smart_pointer_1_rc_r_rec_method0_;
 mod smart_pointer_1_rc_w_weak_;
+mod smart_pointer_example0;

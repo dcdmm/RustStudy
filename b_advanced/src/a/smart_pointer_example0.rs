@@ -12,7 +12,8 @@ struct Node {
     children: RefCell<Vec<Rc<Node>>>,
 }
 
-fn main() {
+#[test]
+fn t0() {
     let leaf = Rc::new(Node {
         value: 3,
         parent: RefCell::new(Weak::new()),
