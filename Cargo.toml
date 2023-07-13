@@ -1,7 +1,8 @@
 [workspace]
 # members — Packages to include in the workspace.
 members = [
-    "a_basic",
+    "a_basic", "b_basic",
+    "c_error_handing",
     "b_advanced",
     "c_concurrency",
     "y_project_structure", "y_test",

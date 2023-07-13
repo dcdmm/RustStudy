@@ -1,7 +1,7 @@
 // loop循环
 
 #[test]
-fn t0() {
+fn main() {
     /*
     A loop expression repeats execution of its body continuously: loop { println!("I live."); }.
 

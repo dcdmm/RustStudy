@@ -6,8 +6,7 @@ If the iterator yields a value, that value is matched against the irrefutable pa
 If the iterator is empty, the for expression completes.
  */
 
-#[test]
-fn t0() {
+fn main() {
     for i in 1..5 {
         println!("{i}")
     }

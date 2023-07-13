@@ -1,7 +1,6 @@
 // 变量遮蔽(shadowing)
 
-#[test]
-fn t0() {
+fn main() {
     // binds x to a value of 5
     let x = 5;
     // it creates a new variable x by repeating let x =, taking the original value and adding 1 so the value of x is then 6.

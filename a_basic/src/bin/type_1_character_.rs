@@ -10,8 +10,7 @@ Rust’s char type is four bytes in size and represents a Unicode Scalar Value, 
 A [char] is effectively a UCS-4 / UTF-32 string of length 1.
 */
 
-#[test]
-fn test() {
+fn main() {
     let c = 'z';
     let z = 'ℤ';
     let g = '国';
