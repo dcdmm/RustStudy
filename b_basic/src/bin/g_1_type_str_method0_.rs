@@ -196,3 +196,4 @@ fn trim_stars_with_ends_with_to_lowercase_to_uppercase_fn() {
     assert_eq!("HELLO", s.to_uppercase());
 }
 
+fn main() {}

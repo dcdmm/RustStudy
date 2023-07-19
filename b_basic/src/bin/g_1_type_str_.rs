@@ -7,8 +7,7 @@ It is usually seen in its borrowed form, &str. It is also the type of string lit
 A &str is made up of two components: a pointer to some bytes, and a length.
  */
 
-#[test]
-fn t0() {
+fn main() {
     let _hello_world = "hello world!";
 
     let s: String = String::from("hello world");
