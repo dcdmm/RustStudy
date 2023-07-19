@@ -8,8 +8,7 @@ There are two syntactic forms for creating an array:
 * A repeat expression [x; N], which produces an array with N copies of x. The type of x must be Copy.
  */
 
-#[test]
-fn t0() {
+fn main() {
     let a: [i32; 5] = [1, 2, 3, 4, 5];
     // ★★★★★Arrays coerce to slices ([T]), so a slice method may be called on an array. Indeed, this provides most of the API for working with arrays.
     println!("{}", a.len());  // Returns the number of elements in the slice.
