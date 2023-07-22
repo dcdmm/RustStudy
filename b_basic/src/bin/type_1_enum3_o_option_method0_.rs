@@ -5,8 +5,7 @@
 is_none / is_some
  */
 
-#[test]
-fn is_none_is_some_fn() {
+fn main() {
     /*
     pub const fn is_none(&self) -> bool
         Returns true if the option is a None value.
@@ -15,9 +14,9 @@ fn is_none_is_some_fn() {
         Returns true if the option is a Some value.
      */
     let x: Option<u32> = Some(2);
-    assert_eq!(x.is_none(), false);
+    println!("{}", x.is_none()); // false
 
     let x: Option<u32> = None;
-    assert_eq!(x.is_none(), true);
+    println!("{}", x.is_none()); // true
 }
 

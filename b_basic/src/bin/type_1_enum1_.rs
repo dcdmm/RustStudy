@@ -13,8 +13,7 @@ enum IpAddr1 {
     V6(String),
 }
 
-#[test]
-fn t0() {
+fn main() {
     let _four_funciton = IpAddr::V4; // 类型为:V4(String) -> IpAddr
     let _four_obj = _four_funciton(String::from("192.168.2.12")); // 类型为:IpAddr
     // IpAddr::V4() is a function call that takes a String argument and returns an instance of the IpAddr type.

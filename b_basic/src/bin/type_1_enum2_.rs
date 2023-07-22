@@ -24,8 +24,7 @@ struct WriteMessage(String); // tuple struct
 struct ChangeColorMessage(i32, i32, i32); // tuple struct
 
 // But if we used the different structs, which each have their own type, we couldn’t as easily define a function to take any of these kinds of messages as we could with the Message enum defined in Listing 1, which is a single type.
-#[test]
-fn t0() {
+fn main() {
     let _m1 = Message::Quit;
     let _m2 = Message::Move { x: 2, y: 3 };
     let _m3 = Message::Write(String::from(""));
