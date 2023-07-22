@@ -19,8 +19,7 @@ fn returns_unit() {
     1i64;
 }
 
-#[test]
-fn t0() {
+fn main() {
     let _is_i64 = returns_i64();
     let _is_unit: () = returns_unit();
     let _is_unit_inference = returns_unit();

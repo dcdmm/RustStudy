@@ -7,8 +7,7 @@ struct User {
     sign_in_count: u64,
 }
 
-#[test]
-fn t0() {
+fn main() {
     let user1 = User {
         email: String::from("someone@example.com"),
         username: String::from("someusername123"),
