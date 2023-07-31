@@ -59,6 +59,7 @@ fn main() {
 
     let mut x = 5;
     /*
+    赋值运算符:
     +=: fn add_assign(&mut self, rhs: Rhs)
     -=: fn sub_assign(&mut self, rhs: Rhs)
     *=: fn mul_assign(&mut self, rhs: Rhs)
