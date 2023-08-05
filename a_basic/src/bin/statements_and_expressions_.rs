@@ -8,9 +8,8 @@ Expressions evaluate to a resultant value.
 
 // Rust has two kinds of statement: declaration statements and expression statements.
 
-fn main() {
-    //### declaration statements
-
+#[test]
+fn declaration_statements() {
     let _y = 6; // 语句
 
     // Function definitions are also statements;
@@ -18,8 +17,10 @@ fn main() {
     fn inner() { /* outer_var is not in scope here */ }
 
     println!("{}", "*".repeat(100));
-    //### expression statement
+}
 
+#[test]
+fn expression_statement() {
     // 报错:error: expected expression, found statement (`let`)
     // Statements do not return values. Therefore, you can’t assign a let statement to another variable, as the following code tries to do; you’ll get an error:
     // let x = (let y = 6);
@@ -34,4 +35,8 @@ fn main() {
         x + 1 // 表达式(不以分号结尾)
     };
     println!("{}", z);
+}
+
+fn main() {
+    
 }
