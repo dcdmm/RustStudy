@@ -38,7 +38,7 @@ usize and isize are at least 16-bits wide.
 Note: Many pieces of Rust code may assume that pointers, usize, and isize are either 32-bit or 64-bit. As a consequence, 16-bit pointer support is limited and may require explicit care and acknowledgment from a library to support.
  */
 
-fn main() {
+ fn main() {
     let _x = 5; // 整型默认使用`i32`类型
     let _f0 = 5.34; // 浮点型默认使用`f64`类型
     let _f1: f32 = 5.34;
