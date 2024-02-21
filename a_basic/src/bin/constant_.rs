@@ -11,6 +11,6 @@ fn main() {
 
     #[allow(warnings)]
     let i: i32 = 60 * 60 * 3;
-    let i: i32 = 410;
+    let i: i32 = 410; // 变量遮蔽
     println!("{}", i);
 }
