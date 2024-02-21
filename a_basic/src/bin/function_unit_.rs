@@ -1,4 +1,10 @@
-// 函数
+// 函数/()(Primitive Type unit)
+
+/*
+The () type, also called “unit”.
+
+The () type has exactly one value (), and is used when there is no other meaningful value that could be returned. 
+*/
 
 // In function signatures, you must declare the type of each parameter.
 fn sum_i_and_j(i: i32, j: i32) -> i32 {
@@ -8,7 +14,14 @@ fn sum_i_and_j(i: i32, j: i32) -> i32 {
     i + j // 表达式
 }
 
+// fn another_function() -> () { 
+fn another_function() { // 与上等价,可以省略`-> ()`
+    println!("Another function.");
+}
+
 fn main() {
     let result = sum_i_and_j(3, 5);
     println!("result = {result}");
+
+    another_function();
 }
