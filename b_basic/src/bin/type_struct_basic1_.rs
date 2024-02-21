@@ -21,14 +21,12 @@ fn main() {
     //     sign_in_count: user1.sign_in_count,
     // };
 
-    // 与上等价
-    // 代码更加简洁
+    // 与上等价;代码更加简洁
     let user2 = User {
         email: String::from("another@example.com"),
-
-        // ..user1必须在结构体的尾部使用
-        // ..user1不以分号(;)结尾
-        ..user1
+        
+        // 必须在结构体的尾部使用且不以分号(;)结尾
+        ..user1 // 其他未显式设置值的字段从user1对应字段中移动或复制
     };
     println!("{}", user2.active); // true
     println!("{}", user2.sign_in_count); // 1
@@ -38,8 +36,7 @@ fn main() {
     println!("{}", user1.active); // true
     println!("{}", user1.sign_in_count); // 1
     println!("{}", user1.email); // someone@example.com
-
-    // 报错:borrow of moved value: `user1.username`
-    // Note that the struct update syntax uses = like an assignment; this is because it moves the data
+    // error[E0382]: borrow of moved value: `user1.username`
+    // note: move occurs because `user1.username` has type `String`, which does not implement the `Copy` trait
     // println!("{}", user1.username);
 }
