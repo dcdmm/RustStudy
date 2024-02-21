@@ -1,8 +1,8 @@
 // 元组(Primitive Type tuple)
+// 类似c++ std::tuple
 
 /*
-A tuple is a general way of grouping together a number of values with a variety of types into one compound type.
-Tuples have a fixed length: once declared, they cannot grow or shrink in size.
+A tuple is a general way of grouping together a number of values with a variety of types into one compound type. Tuples have a fixed length: once declared, they cannot grow or shrink in size.
 */
 
 fn main() {
@@ -15,4 +15,8 @@ fn main() {
     println!("{}", tup.0);
     println!("{}", tup.1);
     println!("{}", tup.2);
+
+    let mut tup1 = (1, 2, 3.0);
+    tup1.0 = -1;
+    println!("{}", tup1.0)
 }
