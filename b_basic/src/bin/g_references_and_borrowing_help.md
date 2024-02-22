@@ -70,9 +70,12 @@ to.
 
 ```rust
 fn main() {
+    // error[E0596]: cannot borrow `s` as mutable, as it is not declared as mutable
+    // let s = String::from("hello");
+
     let mut s = String::from("hello");
 
-    change(&mut s);
+    change(&mut s); // &mut s是对s(也必须是可变的)的可变引用
 }
 
 fn change(some_string: &mut String) {
@@ -182,6 +185,24 @@ fn no_dangle() -> String {
 
 This works without any problems. Ownership is moved out, and nothing is deallocated.
 
+### 对引用进行引用
+
+```rust
+fn main() {
+    struct Point {
+        x: i32,
+        y: i32,
+    }
+    let point = Point { x: 1000, y: 729 };
+    let r: &Point = &point;
+    let rr: &&Point = &r;
+    let rrr: &&&Point = &rr;
+}
+```
+
+在内存中,引用r、rr、rrr的排列方式如下图所示. 
+
+<img src="img/references_two.jpg"  style="zoom:50%">
 
 ### The Rules of References
 
