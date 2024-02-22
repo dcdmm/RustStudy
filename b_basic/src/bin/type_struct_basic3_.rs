@@ -1,8 +1,9 @@
 // unit-like structs
 
-// You can also define structs that don’t have any fields! These are called unit-like structs because they behave similarly to ()
-struct AlwayEqual; // ★★★★★分号结尾
+// Unit-like structs can be useful when you need to implement a trait on some type but don’t have any data that you want to store in the type itself. 
+struct AlwayEqual; // 没有任意字段,且以分号结尾
 
 fn main() {
-    let _obj = AlwayEqual;
+    let _obj = AlwayEqual{};
+    let _obj1 = AlwayEqual; // 与上等价且代码更加简洁
 }

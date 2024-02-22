@@ -13,7 +13,7 @@ struct User {
 fn build_user_sample(email: String, username: String) -> User {
     User {
         // username: username,
-        username,  // 与上等价(参数名称与结构体字段名称同名时)
+        username,  // 与上等价且代码更加简洁(参数名称与结构体字段名称同名时)
         email,
 
         active: true,
