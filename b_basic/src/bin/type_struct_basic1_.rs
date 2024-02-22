@@ -26,7 +26,7 @@ fn main() {
         email: String::from("another@example.com"),
         
         // 必须在结构体的尾部使用且不以分号(;)结尾
-        ..user1 // 其他未显式设置值的字段从user1对应字段中移动或复制
+        ..user1 // 其余字段值从user1(必须与user2具有相同的结构体类型)对应字段移动或复制
     };
     println!("{}", user2.active); // true
     println!("{}", user2.sign_in_count); // 1

@@ -34,6 +34,7 @@ fn main() {
         active: true,
         sign_in_count: 1,
     };
+    
     // To get a specific value from a struct, we use dot notation.
     println!("{}", user1.username);
     // If the instance is mutable, we can change a value by using the dot notation and assigning into a particular field
