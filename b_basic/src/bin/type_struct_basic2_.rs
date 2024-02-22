@@ -9,12 +9,9 @@ fn main() {
     let _origin = Point(0, 0.0, 0.0);
 
     // tuple struct instances are similar to tuples in that you can destructure them into their individual pieces, and you can use a . followed by the index to access an individual value.
-    let x = black.0; // 通过索引访问结构体的值
-    let y = black.1;
-    let z = black.2;
-    println!("{}", x);
-    println!("{}", y);
-    println!("{}", z);
+    println!("{}", black.0); // 通过索引访问结构体的值
+    println!("{}", black.1);
+    println!("{}", black.2);
     #[allow(warnings)]
     let Color(a, b, c) = black;
 }
