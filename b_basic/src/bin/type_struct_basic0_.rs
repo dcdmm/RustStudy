@@ -23,7 +23,7 @@ fn build_user_sample(email: String, username: String) -> User {
 
 fn main() {
     /*
-    实例化结构体
+    创建结构体实例
 
     每个字段都需要进行初始化
     初始化时的字段顺序不需要和结构体定义时顺序一致    
