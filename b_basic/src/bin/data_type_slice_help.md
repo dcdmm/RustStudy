@@ -1,13 +1,6 @@
+A dynamically-sized view into a contiguous sequence, [T]. Contiguous here means that elements are laid out so that every element is the same distance from its neighbors.
+
 Slices let you reference a contiguous sequence of elements in a collection rather than the whole collection. A slice is a kind of reference, so it does not have ownership.
-
-A slice is a [dynamically sized type](https://doc.rust-lang.org/reference/dynamically-sized-types.html) representing a 'view' into a sequence of elements of type T. The slice type is written as [T].
-
-Slice types are generally used through pointer types. For example:
-
-* &[T]: a 'shared slice', often just called a 'slice'. It doesn't own the data it points to; it borrows it.
-* &mut [T]: a 'mutable slice'. It mutably borrows the data it points to.
-* Box<[T]>: a 'boxed slice'
-
 
 ### String Slices
 
