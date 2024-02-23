@@ -9,8 +9,8 @@ join
  */
 
 #[test]
-fn len_is_empyt() {
-    let a = [1, 2, 3];
+fn len_is_empyt_test() {
+    let a: &[i32] = &[1, 2, 3];
     assert_eq!(a.len(), 3);
 
     let a = [1, 2, 3];
@@ -18,7 +18,7 @@ fn len_is_empyt() {
 }
 
 #[test]
-fn get_fn() {
+fn get_test() {
     let v = [10, 40, 30];
     /*
     Returns a reference to an element or subslice depending on the type of index.
@@ -33,11 +33,10 @@ fn get_fn() {
 }
 
 #[test]
-fn split() {
+fn split_test() {
     let slice = [10, 40, 33, 20];
     // Returns an iterator over subslices separated by elements that match pred. The matched element is not contained in the subslices.
     let mut iter = slice.split(|num| num % 3 == 0);
-
     assert_eq!(iter.next().unwrap(), &[10, 40]);
     assert_eq!(iter.next().unwrap(), &[20]);
     assert!(iter.next().is_none());
@@ -45,7 +44,6 @@ fn split() {
     // If the first element is matched, an empty slice will be the first item returned by the iterator. Similarly, if the last element in the slice is matched, an empty slice will be the last item returned by the iterator:
     let slice = [10, 40, 33];
     let mut iter = slice.split(|num| num % 3 == 0);
-
     assert_eq!(iter.next().unwrap(), &[10, 40]);
     assert_eq!(iter.next().unwrap(), &[]);
     assert!(iter.next().is_none());
@@ -53,7 +51,6 @@ fn split() {
     // If two matched elements are directly adjacent, an empty slice will be present between them:
     let slice = [10, 6, 33, 20];
     let mut iter = slice.split(|num| num % 3 == 0);
-
     assert_eq!(iter.next().unwrap(), &[10]);
     assert_eq!(iter.next().unwrap(), &[]);
     assert_eq!(iter.next().unwrap(), &[20]);
@@ -61,7 +58,7 @@ fn split() {
 }
 
 #[test]
-fn join_fn() {
+fn join_test() {
     // Flattens a slice of T into a single value Self::Output, placing a given separator between each.
     assert_eq!(["hello", "world"].join(" "), "hello world");
     assert_eq!([[1, 2], [3, 4]].join(&0), [1, 2, 0, 3, 4]);
