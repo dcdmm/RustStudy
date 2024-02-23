@@ -19,13 +19,14 @@ fn len_is_empyt_test() {
 
 #[test]
 fn get_test() {
-    let v = [10, 40, 30];
     /*
     Returns a reference to an element or subslice depending on the type of index.
-
+    
     * If given a position, returns a reference to the element at that position or None if out of bounds.
     * If given a range, returns the subslice corresponding to that range, or None if out of bounds.
-     */
+    */
+    
+    let v = [10, 40, 30];
     assert_eq!(Some(&40), v.get(1));
     assert_eq!(Some(&[10, 40][..]), v.get(0..2));
     assert_eq!(None, v.get(3));

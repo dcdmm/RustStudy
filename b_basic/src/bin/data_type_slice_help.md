@@ -4,6 +4,10 @@ Slices let you reference a contiguous sequence of elements in a collection rathe
 
 ### String Slices
 
+The str type, also called a ‘string slice’, is the most primitive string type. It is usually seen in its borrowed form, &str. It is also the type of string literals, &'static str.
+
+A &str is made up of two components: a pointer to some bytes, and a length.
+
 A string slice is a reference to part of a String, and it looks like this:
 
 ```rust
