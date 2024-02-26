@@ -11,13 +11,12 @@ impl Rectangle {
     }
 
     /*
-    All functions defined within an impl block are called associated functions because they’re associated with the type named after the impl.
-    We can define associated functions that don’t have self as their first parameter (and thus are not methods) because they don’t need an instance of the type to work with.
+    All functions defined within an impl block are called associated functions because they’re associated with the type named after the impl. We can define associated functions that don’t have self as their first parameter (and thus are not methods) because they don’t need an instance of the type to work with.
 
     The Self keywords in the return type and in the body of the function are aliases for the type that appears after the impl keyword, which in this case is Rectangle.
      */
-    fn square(size: u32) -> Self { // <==等价于==> fn square(size: u32) -> Rectangle {
-        Self { // <==等价于==> Rectangle {
+    fn square(size: u32) -> Self { // ===本例中即===> fn square(size: u32) -> Rectangle {
+        Self { // ===本例中即===> Rectangle {
             width: size,
             height: size,
         }

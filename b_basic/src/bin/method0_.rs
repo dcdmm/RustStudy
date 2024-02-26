@@ -11,7 +11,7 @@ impl Rectangle {
 
     We chose &self here for the same reason we used &Rectangle in the function version: we don’t want to take ownership, and we just want to read the data in the struct, not write to it. If we wanted to change the instance that we’ve called the method on as part of what the method does, we’d use &mut self as the first parameter. Having a method that takes ownership of the instance by using just self as the first parameter is rare; this technique is usually used when the method transforms self into something else and you want to prevent the caller from using the original instance after the transformation.
      */
-    // &self <===等价于===>self: &Self ===即===>self: &Rectangle
+    // &self <===等价于===>self: &Self ===本例中即===>self: &Rectangle
     // self:拥有所有权(很少见)/&self:不可变借用/&mut self:可变借用
     fn area(self: &Self) -> u32 {
         self.width * self.height
