@@ -15,8 +15,10 @@ impl Rectangle {
 
     The Self keywords in the return type and in the body of the function are aliases for the type that appears after the impl keyword, which in this case is Rectangle.
      */
-    fn square(size: u32) -> Self { // ===本例中即===> fn square(size: u32) -> Rectangle {
-        Self { // ===本例中即===> Rectangle {
+    fn square(size: u32) -> Self {
+        // ===本例中即===> fn square(size: u32) -> Rectangle {
+        Self {
+            // ===本例中即==> Rectangle {
             width: size,
             height: size,
         }
@@ -24,7 +26,9 @@ impl Rectangle {
 }
 
 fn main() {
-    // To call this associated function, we use the :: syntax with the struct name
-    let sq = Rectangle::square(3);
+    // square是函数而不是方法,所以不能用.(即方法调用)的方式来调用,需要通过结构体名+Path expressions(::)来调用
+    let sq: fn(u32) -> Rectangle = Rectangle::square; // 函数对象
+    let sq = sq(3);
+
     println!("The area of the square is {} square pixels.", sq.area());
 }
