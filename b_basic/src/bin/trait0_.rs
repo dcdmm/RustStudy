@@ -1,11 +1,11 @@
 // trait
 
-#[allow(dead_code)]
+#[allow(warnings)]
 trait Summary {
     fn summarize(&self) -> String; // 抽象方法(没有实现)
 }
 
-#[allow(dead_code)]
+#[allow(warnings)]
 struct Tweet {
     username: String,
     content: String,
@@ -24,8 +24,7 @@ impl Summary for Tweet {
     }
 }
 
-#[test]
-fn t0() {
+fn main() {
     let tweet = Tweet {
         username: String::from("horse_ebooks"),
         content: String::from("of course, as you probably already know, people"),
@@ -35,5 +34,3 @@ fn t0() {
 
     println!("1 new tweet: {}", tweet.summarize());
 }
-
-fn main() {}

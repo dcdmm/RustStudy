@@ -7,7 +7,7 @@ trait Summary {
     }
 }
 
-#[allow(dead_code)]
+#[allow(warnings)]
 struct NewsArticle {
     headline: String,
     location: String,
@@ -22,7 +22,7 @@ impl Summary for NewsArticle {
     }
 }
 
-#[allow(dead_code)]
+#[allow(warnings)]
 struct Tweet {
     username: String,
     content: String,
@@ -32,8 +32,7 @@ struct Tweet {
 
 impl Summary for Tweet {}
 
-#[test]
-fn t0() {
+fn main() {
     let article = NewsArticle {
         headline: String::from("Penguins win the Stanley Cup Championship!"),
         location: String::from("Pittsburgh, PA, USA"),
