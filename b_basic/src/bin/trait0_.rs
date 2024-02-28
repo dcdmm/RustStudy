@@ -14,11 +14,10 @@ struct Tweet {
 }
 
 /*
-Implementing a trait on a type is similar to implementing regular methods.
-The difference is that after impl, we put the trait name we want to implement, then use the for keyword, and then specify the name of the type we want to implement the trait for.
+Implementing a trait on a type is similar to implementing regular methods. The difference is that after impl, we put the trait name we want to implement, then use the for keyword, and then specify the name of the type we want to implement the trait for.
  */
 impl Summary for Tweet {
-    // 必须实现trait中的抽象方法
+    // 必须实现trait中的所有的抽象方法
     fn summarize(&self) -> String {
         format!("{}: {}", self.username, self.content)
     }
