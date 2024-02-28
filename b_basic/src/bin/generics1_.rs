@@ -89,7 +89,7 @@ struct Point1 {
 };
 
 int main() {
-    auto p1 = Point1<int, double>{5, 10.4};
+    auto p1 = Point1<int, double>{5, 10.4}; // 聚合初始化
     auto p2 = Point1<std::string, char>{"hello", 'c'};
     auto p3 = p1.mixup(p2);
     std::cout << "p3.x = " << p3.x << ", p3.y = " << p3.y << std::endl;
