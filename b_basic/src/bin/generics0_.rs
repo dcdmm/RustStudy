@@ -13,11 +13,30 @@ let float = Some(5.0);
 When Rust compiles this code, it performs monomorphization. During that process, the compiler reads the values that have been used in Option<T> instances and identifies two kinds of Option<T>: one is i32 and the other is f64. As such, it expands the generic definition of Option<T> into two definitions specialized to i32 and f64, thereby replacing the generic definition with the specific ones.
  */
 
+/*
+c++中实现:
+```c++
+template<typename T>
+T add(T a, T b) {
+    return a + b;
+}
+```
+*/
 // In Function Definitions
 fn add<T: std::ops::Add<Output = T>>(a: T, b: T) -> T {
     a + b
 }
 
+/*
+c++中实现:
+```c++
+template<typename T>
+struct Point {
+    T x;
+    T y;
+};
+```
+*/
 // In Struct Definitions
 #[allow(warnings)]
 struct Point<T> {
