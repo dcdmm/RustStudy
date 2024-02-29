@@ -17,7 +17,7 @@ struct Tweet {
 /*
 Implementing a trait on a type is similar to implementing regular methods. The difference is that after impl, we put the trait name we want to implement, then use the for keyword, and then specify the name of the type we want to implement the trait for.
  */
-// 必须实现trait中的所有未实现的方法/关联函数
+// 必须实现trait中的所有的未实现项
 impl Summary for Tweet {
     fn new() -> Self {
         Self {
