@@ -1,4 +1,4 @@
-// trait(Traits as Parameters)
+// trait(Traits as Parameters/Returning Types that Implement Traits)
 
 use std::fmt::Debug;
 use std::fmt::Display;
@@ -46,17 +46,43 @@ fn some_function<T: Display + Clone, U: Clone + Debug>(_t: &T, _u: &U) -> i32 {
 }
 
 // 与上等价
-#[allow(warnings)]
 // 函数签名更加简洁
+#[allow(warnings)]
 fn some_function_where<T, U>(_t: &T, _u: &U) -> i32
 // Clearer Trait Bounds with where Clauses
-    where
-        T: Display + Clone,
-        U: Clone + Debug,
+where
+    T: Display + Clone,
+    U: Clone + Debug,
 {
     3
 }
 
-fn main() {
-    
+
+#[allow(warnings)]
+struct Tweet {
+    username: String,
+    content: String,
+    reply: bool,
+    retweet: bool,
 }
+
+impl Summary for Tweet {
+    fn summarize(&self) -> String {
+        format!("{}: {}", self.username, self.content)
+    }
+}
+
+// By using impl Summary for the return type, we specify that the returns_summarizable function returns some type that implements the Summary trait without naming the concrete type.
+#[allow(warnings)]
+fn returns_summarizable() -> impl Summary {
+    Tweet {
+        username: String::from("horse_ebooks"),
+        content: String::from(
+            "of course, as you probably already know, people",
+        ),
+        reply: false,
+        retweet: false,
+    }
+}
+
+fn main() {}
