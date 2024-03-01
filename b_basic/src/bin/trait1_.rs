@@ -41,6 +41,7 @@ fn main() {
             "The Pittsburgh Penguins once again are the best hockey team in the NHL.",
         ),
     };
+    // Note that it isn’t possible to call the default implementation from an overriding implementation of that same method.
     // 调用覆盖后的默认实现
     println!("New article available! {}", article.summarize());
 
@@ -50,7 +51,6 @@ fn main() {
         reply: false,
         retweet: false,
     };
-    // Note that it isn’t possible to call the default implementation from an overriding implementation of that same method.
     // 调用默认实现
     println!("1 new tweet: {}", tweet.summarize());
 }
