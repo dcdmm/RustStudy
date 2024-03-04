@@ -1,4 +1,4 @@
-// 模式匹配(match)
+// 模式匹配(match/Matching Named Variables)
 
 #[allow(warnings)]
 enum Coin {
@@ -9,63 +9,67 @@ enum Coin {
 }
 
 #[allow(warnings)]
-fn value_in_cents(coin: &Coin) -> f64 {
+fn vic(coin: &Coin) -> f64 {
     let result = match coin {
         // 按顺序依次进行匹配
         // 必须穷尽所有可能
         // 与每个分支相关联的代码是一个表达式(如果有多行代码,则需要用{}包裹)
         // 所有分支(match本身也是一个表达式)的返回类型必须一致
-        Coin::Penny => 34.1,
-        Coin::Nickel => 5.0,
+        Coin::Penny => 1.0,
+        Coin::Nickel => 2.0,
         Coin::Dime => {
-            println!("Lucky penny!");
-            10.0
+            println!("Lucky Dime!");
+            3.0
         }
-        Coin::Quarter => 25.0,
+        Coin::Quarter => 4.0,
     };
     result
-}
-
-#[allow(warnings)]
-fn value_other() -> u8 {
-    fn add_fancy_hat(number: u8) -> u8 {
-        number
-    }
-    fn remove_fancy_hat(number: u8) -> u8 {
-        number
-    }
-    fn move_player(number: u8) -> u8 {
-        number
-    }
-
-    let dice_roll = 9;
-    match dice_roll {
-        3 => add_fancy_hat(3),
-        7 => remove_fancy_hat(7),
-        // This code compiles, even though we haven’t listed all the possible values a u8 can have, because the last pattern will match all values not specifically listed.
-        other => move_player(other), // The code that runs for the other arm uses the variable by passing it to the move_player function.
-    }
-}
-
-#[allow(warnings)]
-fn value_in_cents_placeholder(coin: &Coin) -> u8 {
-    match coin {
-        Coin::Penny => 1,
-        Coin::Nickel => 5,
-        // _ is a special pattern that matches any value and does not bind to that value.
-        _ => 99,
-    }
 }
 
 #[test]
 fn t0() {
     let coin = Coin::Dime;
-    let c0 = value_in_cents(&coin);
+    let c0 = vic(&coin);
     println!("{}", c0);
+}
 
-    let u0 = value_other();
+#[test]
+fn matching_named_variables() {
+    let x = Some(5);
+    let y = 10;
+
+    match x {
+        Some(50) => println!("Got 50"),
+        /*
+        The pattern in the second match arm introduces a new variable named y that will match any value inside a Some value. Because we’re in a new scope inside the match expression, this is a new y variable, not the y we declared at the beginning with the value 10. This new y binding will match any value inside a Some, which is what we have in x.
+        Therefore, this new y binds to the inner value of the Some in x. That value is 5, so the expression for that arm executes and prints Matched, y = 5.
+         */
+        Some(y) => println!("Matched, y = {y}"), // print->Matched, y = 5
+
+        // If x had been a None value instead of Some(5), the patterns in the first two arms wouldn’t have matched, so the value would have matched to the underscore.
+        _ => println!("Default case, x = {:?}", x),
+    }
+
+    // When the match expression is done, its scope ends, and so does the scope of the inner y.
+    println!("at the end: x = {:?}, y = {y}", x); // print->at the end: x = Some(5), y = 10
+}
+
+#[test]
+fn catch_all() {
+    let x = 9;
+    let u0 = match x {
+        3 => 3,
+        7 => 7,
+        // This code compiles, even though we haven’t listed all the possible values a u8 can have, because the last pattern will match all values not specifically listed.
+        other => other + 1, // 匹配的值绑定到变量other上
+    };
     println!("{}", u0);
 
-    let c1 = value_in_cents_placeholder(&coin);
-    println!("{}", c1);
+    let u1 = match x {
+        3 => 3,
+        7 => 7,
+        // _ is a special pattern that matches any value and does not bind to that value.
+        _ => -1,
+    };
+    println!("{}", u1);
 }

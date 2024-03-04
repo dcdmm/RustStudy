@@ -3,7 +3,6 @@ mod base0_if_let_;
 
 
 mod base1_ref_keword_;
-mod base2_;
 mod base3_;
 mod destructuring0_;
 mod destructuring1_;
