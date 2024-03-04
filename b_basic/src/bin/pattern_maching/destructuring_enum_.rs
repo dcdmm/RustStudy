@@ -32,8 +32,8 @@ fn value_in_cents(coin: Coin) -> u8 {
 #[test]
 fn t0() {
     let c = Coin::Quarter(UsState::Alabama);
-    println!("{}", value_in_cents(c));
+    println!("{}", value_in_cents(c)); // print->15 
 
     let d = Coin::Quarter(UsState::Alaska);
-    println!("{}", value_in_cents(d))
+    println!("{}", value_in_cents(d)) // print->25
 }
