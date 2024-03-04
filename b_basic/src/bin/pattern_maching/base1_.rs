@@ -4,15 +4,12 @@
 fn t0() {
     // while let Conditional Loops
 
-    let mut stack = Vec::new();
-    stack.push(1);
-    stack.push(2);
-    stack.push(3);
+    let mut stack = vec![Some(10), Some(20), None, Some(30), Some(40)];
 
     // Similar in construction to if let, the while let conditional loop allows a while loop to run for as long as a pattern continues to match. 
-    while let Some(top) = stack.pop() {
-        println!("{}", top);
-    }
+    while let Some(Some(v)) = stack.pop() {
+        println!("{}", v); // 遇到None变体时,循环自动结束
+    } 
 
     // *****************************************************
     // for Loops

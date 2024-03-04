@@ -26,9 +26,13 @@ fn main() {
         println!("{}", "6!"); // 语句
         6 // 表达式
     }; // 类似python/c++/Java三元表达式
-    println!("{}", number)
+    println!("{}", number);
 
     // This won’t work because variables must have a single type, and Rust needs to know at compile time what type the number variable is, definitively.
     // error[E0308]: `if` and `else` have incompatible types
-    // let number = if condition { 5 } else { "sex" };
+    // let number_1 = if condition { 5 } else { "sex" };
+
+    // error[E0317]: `if` may be missing an `else` clause
+    // if` expressions without `else` evaluate to `()`
+    // let number_2 = if condition {5};
 }
