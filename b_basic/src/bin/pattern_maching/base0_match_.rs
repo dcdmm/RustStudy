@@ -1,4 +1,4 @@
-// 模式匹配(match/Matching Named Variables)
+// match/Matching Named Variables
 
 #[allow(warnings)]
 enum Coin {

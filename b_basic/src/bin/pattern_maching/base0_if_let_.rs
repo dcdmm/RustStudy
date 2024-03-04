@@ -1,4 +1,4 @@
-// 模式匹配(if let)
+// if let
 
 #[allow(warnings)]
 enum Coin {

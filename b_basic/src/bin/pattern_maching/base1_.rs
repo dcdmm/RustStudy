@@ -1,4 +1,4 @@
-// 模式匹配(while let Conditional Loops;for Loops;let Statements;Function Parameters)
+// while let Conditional Loops;for Loops;let Statements;Function Parameters
 
 #[test]
 fn t0() {

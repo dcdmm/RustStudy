@@ -1,13 +1,13 @@
-// 模式匹配(解构枚举)
+// 解构枚举
 
 #[derive(Debug)]
-#[allow(dead_code)]
+#[allow(warnings)]
 enum UsState {
     Alabama,
     Alaska,
 }
 
-#[allow(dead_code)]
+#[allow(warnings)]
 enum Coin {
     Penny,
     Nickel,
@@ -15,15 +15,15 @@ enum Coin {
     Quarter(UsState),
 }
 
+#[allow(warnings)]
 fn value_in_cents(coin: Coin) -> u8 {
     match coin {
         Coin::Penny => 1,
         Coin::Nickel => 5,
         Coin::Dime => 10,
         Coin::Quarter(UsState::Alabama) => 15,
-        // Another useful feature of match arms is that they can bind to the parts of the values that match the pattern.
-        Coin::Quarter(state) => {
-            println!("State quarter from {:?}!", state);
+        Coin::Quarter(x) => {
+            println!("State quarter from {:?}!", x);
             25
         }
     }
