@@ -1,4 +1,6 @@
 [workspace]
+resolver = "2"
+
 # members — Packages to include in the workspace.
 members = [
     "a_basic", "b_basic",

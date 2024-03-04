@@ -4,9 +4,12 @@ mod base1_;
 
 mod destructuring_enum_;
 mod destructuring_enum_o_option_;
+mod destructuring_struct;
+
+
+
 
 mod base1_ref_keword_;
-mod destructuring1_;
 mod destructuring2_;
 mod destructuring3_;
 mod grammar0_;
