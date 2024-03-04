@@ -11,10 +11,10 @@ enum Coin {
 #[allow(warnings)]
 fn vic(coin: &Coin) -> f64 {
     let result = match coin {
+        // 分支语法:模式 => 表达式(如果有多行代码,则需要用{}包裹)
         // 按顺序依次进行匹配
         // 必须穷尽所有可能
-        // 与每个分支相关联的代码是一个表达式(如果有多行代码,则需要用{}包裹)
-        // 所有分支(match本身也是一个表达式)的返回类型必须一致
+        // 所有分支表达式(match本身也是一个表达式)的返回类型必须一致
         Coin::Penny => 1.0,
         Coin::Nickel => 2.0,
         Coin::Dime => {
