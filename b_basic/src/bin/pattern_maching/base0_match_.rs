@@ -44,8 +44,8 @@ fn matching_named_variables() {
         The pattern in the second match arm introduces a new variable named y that will match any value inside a Some value. Because we’re in a new scope inside the match expression, this is a new y variable, not the y we declared at the beginning with the value 10. This new y binding will match any value inside a Some, which is what we have in x.
         Therefore, this new y binds to the inner value of the Some in x. That value is 5, so the expression for that arm executes and prints Matched, y = 5.
          */
-        Some(y) => println!("Matched, y = {y}"), // print->Matched, y = 5
-
+        Some(y) => println!("Matched, y = {y}"), // 匹配任意Option<i32>的Some变体并将Some中包含的值绑定到变量y上
+        
         // If x had been a None value instead of Some(5), the patterns in the first two arms wouldn’t have matched, so the value would have matched to the underscore.
         _ => println!("Default case, x = {:?}", x),
     }
@@ -61,7 +61,7 @@ fn catch_all() {
         3 => 3,
         7 => 7,
         // This code compiles, even though we haven’t listed all the possible values a u8 can have, because the last pattern will match all values not specifically listed.
-        other => other + 1, // 匹配的值绑定到变量other上
+        other => other + 1, // 匹配任意值(i32类型)并绑定到变量other上
     };
     println!("{}", u0);
 

@@ -30,7 +30,7 @@ enum Message {
 }
 
 fn main() {
-    // 通过`::`操作符来访问IpAddkind下的具体成员
+    // 通过`::`操作符来访问IpAddkind下的具体变体(枚举值)
     let _four = IpAddrkind::V4;
     let _six = IpAddrkind::V6;
 
