@@ -1,4 +1,4 @@
-// match/if let模式匹配语法(Multiple Patterns;Matching Ranges of Values)
+// 模式匹配语法(仅match/if let)(Multiple Patterns;Matching Ranges of Values)
 
 #[test]
 fn t0() {
