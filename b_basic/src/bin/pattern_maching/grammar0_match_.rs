@@ -1,4 +1,4 @@
-// match模式匹配语法(Multiple Patterns;Matching Ranges of Values)
+// match/if let模式匹配语法(Multiple Patterns;Matching Ranges of Values)
 
 #[test]
 fn t0() {
@@ -12,6 +12,7 @@ fn t0() {
         _ => println!("anything"),
     }
 
+    // 与上等价
     if let 1 | 2 = z {
         println!("one or two")
     } else if let 3 = z {
@@ -36,6 +37,7 @@ fn t0() {
         _ => println!("something else"),
     }
 
+    // 与上等价
     if let ..=0 = s {
         println!("in [MIN, 0]")
     } else if let 1..=5 = s {
