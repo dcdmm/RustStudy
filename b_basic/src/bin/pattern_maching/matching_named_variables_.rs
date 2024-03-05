@@ -18,7 +18,7 @@ fn t0() {
 }
 
 #[test]
-fn t1() {
+fn move_or_copy() {
     let e_string = Some(String::from("hello rust"));
     match e_string {
         Some(s) => println!("{}", s), // 移动e_string(String没有实现Copy trait)
@@ -42,26 +42,25 @@ fn t1() {
 }
 
 #[test]
-fn t2() {
-    let e_string = Some(String::from("hello rust"));
+fn keyword_ref() {
+    let mut e_string = Some(String::from("hello rust"));
     /*
     Bind by reference during pattern matching.
 
     ref annotates pattern bindings to make them borrow rather than move. It is not a part of the pattern as far as matching is concerned: it does not affect whether a value is matched, only how it is matched.
-    Using the ref keyword, the value is only borrowed, not moved, making it available for use after the match statement:
 
     & vs ref
     * & denotes that your pattern expects a reference to an object. Hence & is a part of said pattern: &Foo matches different objects than Foo does.
     * ref indicates that you want a reference to an unpacked value. It is not matched against: Foo(ref foo) matches the same objects as Foo(foo).
      */
     match e_string {
-        Some(ref s) => println!("{}", s),
+        Some(ref mut s) => println!("{}", s), // 借用e_string而不是移动(局部变量s前添加关键字ref)
         None => println!("None"),
     }
     println!("{:?}:", e_string);
 
     let tuple = (1, String::from("hello"));
     #[allow(warnings)]
-    let (num, ref msg) = tuple;
-    println!("{:?}", tuple)
+    let (num, ref msg) = tuple; // i32实现了Copy trait,故num前可以不加关键字ref
+    println!("{:?}", tuple);
 }

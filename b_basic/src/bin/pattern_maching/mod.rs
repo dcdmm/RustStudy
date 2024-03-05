@@ -8,7 +8,8 @@ mod destructuring_struct;
 mod destructuring_tuple_array_;
 mod destructuring_z_nested_;
 
-mod grammar0_;
+mod matching_named_variables_;
+
 mod grammar0_match_;
 mod grammar1_ignoring_;
 mod grammar2_;
