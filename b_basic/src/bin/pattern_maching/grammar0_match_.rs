@@ -14,7 +14,11 @@ fn t0() {
 
     if let 1 | 2 = z {
         println!("one or two")
-    } 
+    } else if let 3 = z {
+        println!("three")
+    } else {
+        println!("anything")
+    }
 
     // *******************************************************
     // Matching Ranges of Values with ..=
@@ -34,6 +38,12 @@ fn t0() {
 
     if let ..=0 = s {
         println!("in [MIN, 0]")
+    } else if let 1..=5 = s {
+        println!("in [1, 5]")
+    } else if let 10.. = s {
+        println!("in [10, MAX]")
+    } else {
+        println!("something else")
     }
 
     let n = 'c';

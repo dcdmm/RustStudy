@@ -40,7 +40,7 @@ fn catch_all() {
         3 => 3,
         7 => 7,
         // This code compiles, even though we haven’t listed all the possible values a u8 can have, because the last pattern will match all values not specifically listed.
-        other => other + 1, // Matching Named Variables;匹配任意值(i32类型)并绑定到变量other上
+        other => other + 1, // 匹配任意值(i32类型)并绑定到变量other上
     };
     println!("{}", u0);
 

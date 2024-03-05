@@ -73,23 +73,4 @@ fn t0() {
     let ref s3_0 = s2;
     println!("s3:{}", s3);
     println!("s3_0:{}", s3_0);
-    // **************************************************************
-    let favorite_color: Option<&str> = None;
-    let is_tuesday = false;
-    let age: Result<u8, _> = "34".parse();
-
-    // it’s also possible to mix and match if let, else if, and else if let expressions
-    if let Some(color) = favorite_color {
-        println!("Using your favorite color, {color}, as the background");
-    } else if is_tuesday {
-        println!("Tuesday is green day!");
-    } else if let Ok(age) = age {
-        if age > 30 {
-            println!("Using purple as the background color");
-        } else {
-            println!("Using orange as the background color");
-        }
-    } else {
-        println!("Using blue as the background color");
-    }
 }
