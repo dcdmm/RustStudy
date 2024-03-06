@@ -21,7 +21,7 @@ fn t0() {
 fn move_or_copy() {
     let e_string = Some(String::from("hello rust"));
     match e_string {
-        Some(s) => println!("{}", s), // 移动e_string(String没有实现Copy trait)
+        Some(s) => println!("{}", s), // 移动(String没有实现Copy trait)匹配结果到局部变量s上
         None => println!("None"),
     }
     // error[E0382]: borrow of partially moved value: `e_string`
@@ -35,7 +35,7 @@ fn move_or_copy() {
     }
     let e_struct = Some(Point { x: 10, y: 20 });
     match e_struct {
-        Some(s) => println!("{:?}", s), // 复制e_struct(Point实现了Copy trait)
+        Some(s) => println!("{:?}", s), // 复制(Point实现了Copy trait)匹配结果到局部变量s上
         None => println!("None"),
     }
     println!("{:?}", e_struct);
@@ -54,13 +54,45 @@ fn keyword_ref() {
     * ref indicates that you want a reference to an unpacked value. It is not matched against: Foo(ref foo) matches the same objects as Foo(foo).
      */
     match e_string {
-        Some(ref mut s) => println!("{}", s), // 借用e_string而不是移动(局部变量s前添加关键字ref)
+        Some(ref mut s) => println!("{}", s), // 借用而不是移动匹配结果到局部变量s上(s前添加关键字ref)
         None => println!("None"),
     }
     println!("{:?}:", e_string);
 
     let tuple = (1, String::from("hello"));
     #[allow(warnings)]
-    let (num, ref msg) = tuple; // i32实现了Copy trait,故num前可以不加关键字ref
+    let (num, ref msg) = tuple; // i32实现了Copy trait,故局部变量num前可以不加关键字ref
     println!("{:?}", tuple);
+}
+
+#[test]
+fn reference_() {
+    let e_string = &Some(String::from("hello rust"));
+
+    // error[E0507]: cannot move out of `e_string` as enum variant `Some` which is behind a shared reference
+    // match e_string {
+    //     // e_string是不可变引用(&Option<String>) ===> 匹配结果(e_string中的String)被移动到局部变量s上
+    //     &Some(s) => {
+    //         println!("{}", s)
+    //     }
+    //     None => println!("None"),
+    // }
+
+    // match e_string {
+    //     // e_string是不可变引用(&Option<String>) ===> 匹配结果(e_string中的String的引用)被复制到局部变量s上
+    //     Some(s) => {
+    //         println!("{}", s)
+    //     }
+    //     None => println!("None"),
+    // }
+
+    match e_string {
+        // e_string是不可变引用(&Option<String>) ===> 匹配结果(e_string中的String)被借用而不是移动到局部变量s上(s前添加关键字ref)
+        &Some(ref s) => {
+            println!("{}", s) // s类型为String
+        }
+        None => println!("None"),
+    }
+
+    println!("{:?}", e_string);
 }

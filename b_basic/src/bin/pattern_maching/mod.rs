@@ -7,6 +7,7 @@ mod destructuring_enum_o_option_;
 mod destructuring_struct;
 mod destructuring_tuple_array_;
 mod destructuring_z_nested_;
+mod destructuring_reference_;
 
 mod grammar0_;
 mod grammar1_;
