@@ -8,22 +8,21 @@ fn t0() {
 
     let msg = Message::Hello { id: 5 };
 
-    // 解构嵌套的枚举和结构体
     match msg {
         // The at operator @ lets us create a variable that holds a value at the same time as we’re testing that value for a pattern match.
         Message::Hello {
-            // 结构体字段id是否位于[3, 7]范围内,并将值绑定到(局部)变量id_variable上
+            // 匹配结构体字段id的值是否位于[3, 7]范围内并将值绑定到局部变量id_variable上
             id: id_variable @ 3..=7,
         } => println!("Found an id in range: {}", id_variable),
         Message::Hello {
-            // 结构体字段id是否位于[10, 12]范围内
+            // 结构体字段id的值是否位于[10, 12]范围内
             id: 10..=12,
         } => {
             println!("Found an id in another range")
         }
         Message::Hello {
-            // 结构体字段id为任意范围
-            // id为(局部)变量,Message::Hello{id}为Message::Hello{id:id}的简写
+            // 结构体字段id的值为任意范围
+            // Message::Hello{id}为Message::Hello{id:id}的简写(见destructuring_struct.rs)
             id,
         } => println!("Found some other id: {}", id),
     }
