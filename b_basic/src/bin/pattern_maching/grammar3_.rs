@@ -59,7 +59,7 @@ fn t1() {
         println!("Processing a point: {:?}", ps);
     }
 }
-
+ 
 #[test]
 fn t2() {
     #[derive(Debug)]
@@ -67,14 +67,29 @@ fn t2() {
         Hello { id: i32 },
     }
 
+    // let mut messages_e = vec![
+    //     Message::Hello { id: 3 },
+    //     Message::Hello { id: 12 },
+    //     Message::Hello { id: 10 },
+    //     Message::Hello { id: 7 },
+    // ];
+    // // error[E0382]: use of moved value
+    // while let m_e @ Some(Message::Hello { // m_e:value moved here
+    //     id: id_var @ 3..=10, // id_var:value used here after move
+    // }) = messages_e.pop()
+    // {
+    //     println!("{:?}", m_e);
+    //     println!("{}", id_var);
+    // }
+
     let mut messages = vec![
         Message::Hello { id: 3 },
         Message::Hello { id: 12 },
         Message::Hello { id: 10 },
         Message::Hello { id: 7 },
     ];
-    // 绑定新变量m,同时解构Option<Message>,故变量m前需要添加关键字ref
-    while let ref m @ Some(Message::Hello {
+    // 绑定新变量m,同时解构Option<Message>,故变量m前需要添加关键字ref(借用而不是移动)
+    while let ref  m @ Some(Message::Hello {
         id: id_var @ 3..=10,
     }) = messages.pop()
     {
@@ -88,7 +103,7 @@ fn t2() {
         Message::Hello { id: 10 },
         Message::Hello { id: 7 },
     ];
-    // 绑定新变量n,同时解构Option<Message>,故变量n和变量s前需要添加关键字ref
+    // 绑定新变量n,同时解构Option<Message>,故变量n和变量s前需要添加关键字ref(借用而不是移动)
     while let ref n @ Some(ref s) = messages1.pop()
     {
         println!("{:?}", n);
