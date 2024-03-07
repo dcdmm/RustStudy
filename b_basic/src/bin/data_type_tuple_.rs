@@ -18,5 +18,21 @@ fn main() {
 
     let mut tup1 = (1, 2, 3.0);
     tup1.0 = -1;
-    println!("{}", tup1.0)
+    println!("{}", tup1.0);
+
+    #[allow(warnings)]
+    #[derive(Debug)]
+    struct Point {
+        x: String,
+        y: i32,
+    }
+    let p = Point {
+        x: String::from("hello"),
+        y: 3,
+    };
+    let t = (p, 1);
+    let tr = &t;
+    println!("{}", tr.0.x); // 自动解引用(.运算符)
+    let trr = &tr;
+    println!("{:?}", trr.0);
 }

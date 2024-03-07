@@ -44,7 +44,7 @@ fn main() {
     // The method syntax goes after an instance: we add a dot followed by the method name, parentheses, and any arguments.
     println!("Can rect1 hold rect2? {}", rect1.can_hold(&rect2));
     /*
-    当使用object.something()调用方法时,Rust会自动为object添加&、&mut或*以便使object与方法签名匹配,也就是说,这些代码是等价的
+    当使用object.somemethod()调用方法时,Rust会自动为object添加&、&mut或*以便使object与方法签名匹配,也就是说,这些代码是等价的
     p1.distance(&p2);
     (&p1).distance(&p2); // 方法第一个参数是&self
 
