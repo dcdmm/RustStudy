@@ -1,4 +1,4 @@
-// 解构引用
+// 解构引用(参考matching_named_variables_.rs)
 
 #[allow(warnings)]
 #[test]
