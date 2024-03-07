@@ -1,5 +1,33 @@
 // while let Conditional Loops;for Loops;let Statements;Function Parameters
 
+/*
+Patterns come in two forms: refutable and irrefutable. Patterns that will match for any possible value passed are irrefutable. 
+
+Function parameters, let statements, and for loops can only accept irrefutable patterns, because the program cannot do anything meaningful when values don’t match. The if let and while let expressions accept refutable and irrefutable patterns, but the compiler warns against irrefutable patterns because by definition they’re intended to handle possible failure: the functionality of a conditional is in its ability to perform differently depending on success or failure.
+*/
+
+#[allow(warnings)]
+#[test]
+fn refutable_irrefutable() {
+    let s_ir = Some(34);
+    // error[E0005]: refutable pattern in local binding
+    // let Some(x) = s_ir; // Some(x):pattern `None` not covered
+
+    let s_ = Some(34);
+    // Using if let and a block with refutable patterns instead of le
+    if let Some(x) = s_ {
+        println!("{}", x)
+    }
+
+    // warning: irrefutable `if let` pattern
+    // this pattern will always match, so the `if let` is useless
+    if let t_ = 5 {
+        println!("{}", t_)
+    }
+    
+    let t_ir = 5;
+}
+
 #[test]
 fn t0() {
     // while let Conditional Loops
