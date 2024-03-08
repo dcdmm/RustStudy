@@ -5,8 +5,8 @@ resolver = "2"
 members = [
     "a_basic", "b_basic",
     "c_error_handing",
-    "b_advanced",
-    "c_concurrency",
+    "w_advanced",
+    "s_concurrency",
     "y_project_structure", "y_test",
     "z_std",
 ]

@@ -2,8 +2,7 @@
 
 use std::fs::File;
 
-#[test]
-fn t0() {
+fn main() {
     // panic:thread 'main' panicked at 'called `Result::unwrap()` on an `Err` value: Os { code: 2, kind: NotFound, message: "系统找不到指定的文件。" }'
     /*
     Returns the contained Ok value, consuming the self value.

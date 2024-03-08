@@ -15,9 +15,8 @@ enum Result<T, E> {
 use std::fs::File;
 use std::io::ErrorKind;
 
-#[allow(unused)]
-#[test]
-fn t0() {
+#[allow(warnings)]
+fn main() {
     // let greeting_file_result: Result<T, E> = File::open("hello.txt");
     //
     // // panic:thread 'main' panicked at 'Problem opening the file: Os { code: 2, kind: NotFound, message: "系统找不到指定的文件。" }'

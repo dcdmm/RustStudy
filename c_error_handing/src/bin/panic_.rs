@@ -1,7 +1,6 @@
 // Unrecoverable Errors with panic!
 
-#[test]
-fn t0() {
+fn main() {
     // panic:thread 'c_error_handing::panic_::t0' panicked at 'crash and burn'
     // panic!("crash and burn"); // Panics the current thread.(类似python raise关键字的作用)
 
