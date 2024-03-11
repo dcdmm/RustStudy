@@ -2,34 +2,48 @@
 
 use std::fs::File;
 
+#[allow(warnings)]
 #[test]
-fn t0() {
-    let greeting_file = File::open("hello.txt").unwrap();
-}
-
-fn main() {
-    // panic:thread 'main' panicked at 'called `Result::unwrap()` on an `Err` value: Os { code: 2, kind: NotFound, message: "系统找不到指定的文件。" }'
+fn unwarp_test0() {
     /*
     Returns the contained Ok value, consuming the self value.
-
-    Because this function may panic, its use is generally discouraged.
-    Instead, prefer to use pattern matching and handle the Err case explicitly, or call unwrap_or, unwrap_or_else, or unwrap_or_default.
 
     # Panics
     Panics if the value is an Err, with a panic message provided by the Err’s value.
      */
-    // let greeting_file = File::open("hello.txt").unwrap();
+    let x: Result<u32, &str> = Ok(2);
+    println!("{}", x.unwrap()); // print->2
+}
 
-    // panic:thread 'main' panicked at 'hello.txt should be included in this project: Os { code: 2, kind: NotFound, message: "系统找不到指定的文件。" }'
+#[allow(warnings)]
+#[test]
+fn unwarp_test1() {
+    let y: Result<u32, &str> = Err("emergency failure");
+    // panicked:called `Result::unwrap()` on an `Err` value: "emergency failure"
+    println!("{}", y.unwrap());
+}
+
+#[allow(warnings)]
+#[test]
+fn unwarp_test2() {
+    // panicked:called `Result::unwrap()` on an `Err` value: Os { code: 2, kind: NotFound, message: "系统找不到指定的文件。" }
+    let greeting_file = File::open("hello_unwrap.txt").unwrap();
+}
+
+#[allow(warnings)]
+#[test]
+fn expect_test0() {
     /*
     Returns the contained Ok value, consuming the self value.
-
-    Because this function may panic, its use is generally discouraged.
-    Instead, prefer to use pattern matching and handle the Err case explicitly, or call unwrap_or, unwrap_or_else, or unwrap_or_default.
 
     # Panics
     Panics if the value is an Err, with a panic message including the passed message, and the content of the Err.
      */
-    let greeting_file =
-        File::open("hello.txt").expect("hello.txt should be included in this project");
+    let x: Result<u32, &str> = Err("emergency failure");
+    // panicked:Testing expect: "emergency failure"
+    x.expect("Testing expect"); 
+}
+
+#[allow(warnings)]
+fn main() {
 }
