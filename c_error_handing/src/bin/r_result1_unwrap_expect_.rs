@@ -1,5 +1,6 @@
 // Shortcuts for Panic on Error: unwrap and expect
 
+#[allow(warnings)]
 use std::fs::File;
 
 #[allow(warnings)]

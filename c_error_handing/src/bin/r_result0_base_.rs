@@ -9,7 +9,9 @@ enum Result<T, E> {
 }
 ```
  */
+#[allow(warnings)]
 use std::fs::File;
+#[allow(warnings)]
 use std::io::ErrorKind;
 
 #[allow(warnings)]
@@ -25,7 +27,8 @@ fn t0() {
 }
 
 #[allow(warnings)]
-fn main() {
+#[test]
+fn t1() {
     let greeting_file_result = File::open("hello_base1.txt");
 
     // Handling different kinds of errors in different ways
@@ -42,3 +45,5 @@ fn main() {
         },
     };
 }
+
+fn main() {}
