@@ -2,6 +2,11 @@
 
 use std::fs::File;
 
+#[test]
+fn t0() {
+    let greeting_file = File::open("hello.txt").unwrap();
+}
+
 fn main() {
     // panic:thread 'main' panicked at 'called `Result::unwrap()` on an `Err` value: Os { code: 2, kind: NotFound, message: "系统找不到指定的文件。" }'
     /*
@@ -25,6 +30,6 @@ fn main() {
     # Panics
     Panics if the value is an Err, with a panic message including the passed message, and the content of the Err.
      */
-    #[allow(unused)]
-        let greeting_file = File::open("hello.txt").expect("hello.txt should be included in this project");
+    let greeting_file =
+        File::open("hello.txt").expect("hello.txt should be included in this project");
 }

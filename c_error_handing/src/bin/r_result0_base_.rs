@@ -15,7 +15,7 @@ use std::io::ErrorKind;
 #[allow(warnings)]
 #[test]
 fn t0() {
-    let greeting_file_result = File::open("hello.txt");
+    let greeting_file_result = File::open("hello_base0.txt");
     let greeting_file = match greeting_file_result {
         // When the result is Ok, this code will return the inner file value out of the Ok variant, and we then assign that file handle value to the variable greeting_file. After the match, we can use the file handle for reading or writing.
         Ok(file) => file,
@@ -25,15 +25,14 @@ fn t0() {
 }
 
 #[allow(warnings)]
-// #[test]
 fn main() {
-    let greeting_file_result = File::open("hello.txt");
+    let greeting_file_result = File::open("hello_base1.txt");
 
     // Handling different kinds of errors in different ways
     let greeting_file = match greeting_file_result {
         Ok(file) => file,
         Err(error) => match error.kind() {
-            ErrorKind::NotFound => match File::create("hello.txt") {
+            ErrorKind::NotFound => match File::create("hello_base1.txt") {
                 Ok(fc) => fc,
                 Err(e) => panic!("Problem creating the file: {:?}", e),
             },
