@@ -96,3 +96,5 @@ fn reference_() {
 
     println!("{:?}", e_string);
 }
+
+fn main() {}

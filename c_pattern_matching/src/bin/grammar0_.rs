@@ -1,7 +1,6 @@
 // 模式匹配语法(仅match/if let)(Multiple Patterns;Matching Ranges of Values)
 
-#[test]
-fn t0() {
+fn main() {
     // Multiple Patterns
 
     let z = 1;

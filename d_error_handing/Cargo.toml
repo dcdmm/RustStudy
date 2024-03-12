@@ -1,5 +1,5 @@
 [package]
-name = "c_error_handing"
+name = "d_error_handing"
 version = "0.1.0"
 edition = "2021"
 

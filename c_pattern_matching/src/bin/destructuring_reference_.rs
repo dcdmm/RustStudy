@@ -1,8 +1,7 @@
 // 解构引用(参考matching_named_variables_.rs)
 
 #[allow(warnings)]
-#[test]
-fn t0() {
+fn main() {
     struct Point {
         x: i32,
         y: i32,

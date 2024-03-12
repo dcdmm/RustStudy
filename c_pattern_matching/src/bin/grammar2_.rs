@@ -1,7 +1,6 @@
 // 模式匹配(仅match)(Extra Conditionals with Match Guards)
 
-#[test]
-fn t0() {
+fn main() {
     let num = Some(4);
     match num {
         Some(x) if x % 2 == 0 => println!("The number {} is even", x),

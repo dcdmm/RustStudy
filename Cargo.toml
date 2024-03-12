@@ -4,9 +4,10 @@ resolver = "2"
 # members — Packages to include in the workspace.
 members = [
     "a_basic", "b_basic",
-    "c_error_handing",
+    "c_pattern_matching",
+    "d_error_handing",
     "w_advanced",
     "s_concurrency",
     "y_project_structure", "y_test",
-    "z_std",
+    "z_std", "c_pattern_matching",
 ]

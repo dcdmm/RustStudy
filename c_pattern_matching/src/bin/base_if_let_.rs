@@ -8,8 +8,7 @@ enum Coin {
     Quarter,
 }
 
-#[test]
-fn t0() {
+fn main() {
     let coin = Coin::Penny;
 
     // you can think of if let as syntax sugar for a match that runs code when the value matches one pattern and then ignores all other values.

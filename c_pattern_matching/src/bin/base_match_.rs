@@ -52,3 +52,5 @@ fn catch_all() {
     };
     println!("{}", u1);
 }
+
+fn main() {}

@@ -56,3 +56,5 @@ fn t1() {
     println!("Point x: {}", x); // print->Point x: -3
     println!("Point y: {}", y); // print->Point y: -10
 }
+
+fn main() {}

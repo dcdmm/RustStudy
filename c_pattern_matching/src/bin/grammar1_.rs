@@ -84,11 +84,14 @@ fn f3() {
 
     let numbers = (2, 4, 8, 16, 32);
     match numbers {
-        (first, second,  .., last) => { // 仅匹配第一个 、第二个和最后一个值
+        (first, second, .., last) => {
+            // 仅匹配第一个 、第二个和最后一个值
             println!("{first}, {second}, {last}");
         }
     }
     match numbers {
-        (.., last) => println!("{last}") // 仅匹配最后一个值
+        (.., last) => println!("{last}"), // 仅匹配最后一个值
     }
 }
+
+fn main() {}

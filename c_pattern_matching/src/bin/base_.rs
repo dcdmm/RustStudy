@@ -1,7 +1,7 @@
 // while let Conditional Loops;for Loops;let Statements;Function Parameters
 
 /*
-Patterns come in two forms: refutable and irrefutable. Patterns that will match for any possible value passed are irrefutable. 
+Patterns come in two forms: refutable and irrefutable. Patterns that will match for any possible value passed are irrefutable.
 
 Function parameters, let statements, and for loops can only accept irrefutable patterns, because the program cannot do anything meaningful when values don’t match. The if let and while let expressions accept refutable and irrefutable patterns, but the compiler warns against irrefutable patterns because by definition they’re intended to handle possible failure: the functionality of a conditional is in its ability to perform differently depending on success or failure.
 */
@@ -24,7 +24,7 @@ fn refutable_irrefutable() {
     if let t_ = 5 {
         println!("{}", t_)
     }
-    
+
     let t_ir = 5;
 }
 
@@ -34,10 +34,10 @@ fn t0() {
 
     let mut stack = vec![Some(10), Some(20), None, Some(30), Some(40)];
 
-    // Similar in construction to if let, the while let conditional loop allows a while loop to run for as long as a pattern continues to match. 
+    // Similar in construction to if let, the while let conditional loop allows a while loop to run for as long as a pattern continues to match.
     while let Some(Some(v)) = stack.pop() {
         println!("{}", v); // 遇到None变体时,循环自动结束
-    } 
+    }
 
     // *****************************************************
     // for Loops
@@ -53,7 +53,7 @@ fn t0() {
     // *****************************************************
     // let Statements
 
-    // x is a pattern that means “bind what matches here to the variable x.” 
+    // x is a pattern that means “bind what matches here to the variable x.”
     #[allow(warnings)]
     let x = 5;
 
@@ -73,3 +73,5 @@ fn t0() {
     let point = (3, 5);
     print_coordinates(&point); // print->Current location: (3, 5)
 }
+
+fn main() {}

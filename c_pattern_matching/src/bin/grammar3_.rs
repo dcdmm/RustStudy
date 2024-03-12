@@ -59,7 +59,7 @@ fn t1() {
         println!("Processing a point: {:?}", ps);
     }
 }
- 
+
 #[test]
 fn t2() {
     #[derive(Debug)]
@@ -89,7 +89,7 @@ fn t2() {
         Message::Hello { id: 7 },
     ];
     // 绑定新变量m,同时解构Option<Message>,故变量m前需要添加关键字ref(借用而不是移动)
-    while let ref  m @ Some(Message::Hello {
+    while let ref m @ Some(Message::Hello {
         id: id_var @ 3..=10,
     }) = messages.pop()
     {
@@ -104,9 +104,10 @@ fn t2() {
         Message::Hello { id: 7 },
     ];
     // 绑定新变量n,同时解构Option<Message>,故变量n和变量s前需要添加关键字ref(借用而不是移动)
-    while let ref n @ Some(ref s) = messages1.pop()
-    {
+    while let ref n @ Some(ref s) = messages1.pop() {
         println!("{:?}", n);
         println!("{:?}", s);
     }
 }
+
+fn main() {}
