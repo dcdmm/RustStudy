@@ -26,12 +26,12 @@ fn t0() {
     };
 }
 
+// Handling different kinds of errors in different ways
 #[allow(warnings)]
 #[test]
 fn t1() {
     let greeting_file_result = File::open("hello_base1.txt");
 
-    // Handling different kinds of errors in different ways
     let greeting_file = match greeting_file_result {
         Ok(file) => file,
         Err(error) => match error.kind() {

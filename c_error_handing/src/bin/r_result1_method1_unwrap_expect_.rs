@@ -5,7 +5,7 @@ use std::fs::File;
 
 #[allow(warnings)]
 #[test]
-fn unwarp_test0() {
+fn unwrap_test0() {
     /*
     Returns the contained Ok value, consuming the self value.
 
@@ -18,7 +18,7 @@ fn unwarp_test0() {
 
 #[allow(warnings)]
 #[test]
-fn unwarp_test1() {
+fn unwrap_test1() {
     let y: Result<u32, &str> = Err("emergency failure");
     // panicked:called `Result::unwrap()` on an `Err` value: "emergency failure"
     println!("{}", y.unwrap());
@@ -26,7 +26,7 @@ fn unwarp_test1() {
 
 #[allow(warnings)]
 #[test]
-fn unwarp_test2() {
+fn unwrap_test2() {
     // panicked:called `Result::unwrap()` on an `Err` value: Os { code: 2, kind: NotFound, message: "系统找不到指定的文件。" }
     let greeting_file = File::open("hello_unwrap.txt").unwrap();
 }
