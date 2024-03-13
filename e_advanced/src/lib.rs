@@ -1,2 +1,0 @@
-mod a;
-mod b;
