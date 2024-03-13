@@ -1,5 +1,4 @@
-mod a;
-mod b;
+mod lifetime;
 
 fn main() {
     println!("Hello, world!");

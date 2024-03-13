@@ -27,5 +27,4 @@ fn main() {
     let crr = &cr;
     println!("{}", crr.0); // 自动解引用
     println!("{:?}", crr.1); // 自动解引用
-
 }
