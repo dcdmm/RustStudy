@@ -19,16 +19,16 @@ fn t0() {
 #[test]
 fn t1() {
     let mut x = 41;
-    let y = &mut x;  // &mut x:`x` is borrowed here
+    let y = &mut x;  // `&mut x``:`x` is borrowed here
     // error[E0506]: cannot assign to `x` because it is borrowed
-    // x = 100; // `x` is assigned to here but it was already borrowed
-    println!("{y}"); // {y}:borrow later used here
+    // x = 100; // `x = 100`: `x` is assigned to here but it was already borrowed
+    println!("{y}"); // `{y}`:borrow later used here
 
     let mut a = 34;
-    let b = &a; // &a:`a` is borrowed here
+    let b = &a; // `&a`:`a` is borrowed here
     // error[E0506]: cannot assign to `a` because it is borrowed
-    // a = 100; // `a` is assigned to here but it was already borrowed
-    println!("{b}"); // {b}:borrow later used here
+    // a = 100; // `a=100`:`a` is assigned to here but it was already borrowed
+    println!("{b}"); // `{b}`:borrow later used here
 }
 
 #[allow(warnings)]

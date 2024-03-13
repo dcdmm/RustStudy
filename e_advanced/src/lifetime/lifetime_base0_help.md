@@ -1,7 +1,6 @@
 ```rust
 /*
-At compile time, Rust compares the size of the two lifetimes and sees that r has a lifetime of 'a but that it refers to memory with a lifetime of 'b. 
-The program is rejected because 'b is shorter than 'a: the subject of the reference doesn’t live as long as the reference.
+At compile time, Rust compares the size of the two lifetimes and sees that r has a lifetime of 'a but that it refers to memory with a lifetime of 'b. The program is rejected because 'b is shorter than 'a: the subject of the reference doesn’t live as long as the reference.
  */
 fn main() {
     let r;                // ---------+-- 'a
@@ -13,20 +12,6 @@ fn main() {
                           //          |
     println!("r: {}", r); //          |
 }
-
-/*
-程序运行结果(报错):
-error[E0597]: `x` does not live long enough
- --> d_advanced\src\main.rs:6:13
-  |
-6 |         r = &x;            //  |       |
-  |             ^^ borrowed value does not live long enough
-7 |     }                      // -+       |
-  |     - `x` dropped here while still borrowed
-8 |                            //          |
-9 |     println!("r: {}", r);  //          |
-  |                       - borrow later used here
- */
 ```
 
 ```rust

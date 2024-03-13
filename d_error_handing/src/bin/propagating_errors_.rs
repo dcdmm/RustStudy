@@ -63,7 +63,7 @@ fn last_char_of_first_line(text: &str) -> Option<char> {
 //     // error[E0277]: the `?` operator can only be used in a function that returns `Result` or `Option` (or another type that implements `FromResidual`)
 //     let greeting_file = File::open("hello_propagating_errors0.txt")?;
 // }
-// 修正如下所示
+// 修正如下所示:
 #[allow(warnings)]
 fn test0_right() -> Result<(), Box<dyn Error>> {
     let greeting_file = File::open("hello_propagating_errors0.txt")?;
@@ -75,7 +75,7 @@ fn test0_right() -> Result<(), Box<dyn Error>> {
 //     // note: `?` operator cannot convert from `&i32` to `Option<&i32>`
 //     arr.get(0)?
 // }
-// 修正如下所示
+// 修正如下所示:
 #[allow(warnings)]
 fn test_right1(arr: &[i32]) -> Option<&i32> {
     Some(arr.get(0)?)

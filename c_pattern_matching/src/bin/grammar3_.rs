@@ -74,8 +74,8 @@ fn t2() {
     //     Message::Hello { id: 7 },
     // ];
     // // error[E0382]: use of moved value
-    // while let m_e @ Some(Message::Hello { // m_e:value moved here
-    //     id: id_var @ 3..=10, // id_var:value used here after move
+    // while let m_e @ Some(Message::Hello { // `m_e`:value moved here
+    //     id: id_var @ 3..=10, // `id_var`:value used here after move
     // }) = messages_e.pop()
     // {
     //     println!("{:?}", m_e);

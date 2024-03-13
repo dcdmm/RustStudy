@@ -23,6 +23,6 @@ fn main() {
         Some(c) => println!("{}", c),
         None => println!("None")
     }
-    // panic:byte index 14 is not a char boundary; it is inside '中' (bytes 12..15) of `hello world 中国`
+    // panicked:byte index 14 is not a char boundary; it is inside '中' (bytes 12..15) of `hello world 中国`
     let _china_str = &s[14..15];
 }

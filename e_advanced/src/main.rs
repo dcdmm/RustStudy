@@ -1,5 +1,12 @@
 mod lifetime;
 
 fn main() {
-    println!("Hello, world!");
+    let r;          // ---------+-- 'a
+                          //          |
+    {                     //          |
+        let x = 5;   // -+-- 'b  |
+        r = &x;           //  |       |
+    }                     // -+       |
+                          //          |
+    println!("r: {}", r); //          |
 }
