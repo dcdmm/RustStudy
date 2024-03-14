@@ -1,3 +1,5 @@
+// 不同生命周期参数
+
 #[allow(warnings)]
 #[test]
 fn t0() {
