@@ -2,7 +2,7 @@
 
 fn main() {
     let x = 5; // 变量在默认情况下是不可变的
-    let _x1 = 5; // 自动类型推导
+    let _x1 = 5; // 自动类型推断
     let _x2: i8 = 5; // 显式指定类型
     println!("The value of x is: {}", x);
 
