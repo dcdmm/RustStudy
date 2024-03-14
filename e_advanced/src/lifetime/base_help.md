@@ -235,7 +235,6 @@ struct ImportantExcerpt<'a> {
     part: &'a str,
 }
 
-#[allow(dead_code)]
 impl<'a> ImportantExcerpt<'a> { // 类似方法定义中泛型的定义
     fn level(&self) -> i32 {
         3

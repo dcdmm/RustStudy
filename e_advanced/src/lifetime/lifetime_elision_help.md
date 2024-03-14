@@ -6,70 +6,50 @@ the compiler uses three rules to figure out the lifetimes of the references when
 
 3. The third rule is that, if there are multiple input lifetime parameters, but one of them is &self or &mut self because this is a method, the lifetime of self is assigned to all output lifetime parameters. This third rule makes methods much nicer to read and write because fewer symbols are necessary.
 
+* example 1:
 ```rust
-// example 1:
-
 fn first_word(s: &str) -> &str {  // 没有生命周期标注的代码
 
-// ======>applies the first rule
-fn first_word(s: &'a str) -> &str {
+fn first_word(s: &'a str) -> &str { // 应用第一条规则,为每个参数标注一个生命周期
 
-// The second rule applies because there is exactly one input lifetime.
-// ======>applies the second rule 
-fn first_word<'a>(s: &'a str) -> &'a str { 
+fn first_word<'a>(s: &'a str) -> &'a str { // 应用第二条规则,因为只有一个输入生命周期
 ```
 
+* example 2:
 ```rust
-// example 2:
-
 fn longest(x: &str, y: &str) -> &str { // 没有生命周期标注的代码
 
-// ======>applies the first rule
-fn longest(x: &'a str, y: &'b str) -> &str { 
+fn longest(x: &'a str, y: &'b str) -> &str { // 应用第一条规则,为每个参数标注一个生命周期 
 
-/*
-the second rule doesn’t apply because there is more than one input lifetime. 
-The third rule doesn’t apply either, because longest is a function rather than a method
-
-After working through all three rules, we still haven’t figured out what the return type’s lifetime is. 
-This is why we got an error trying to compile the code in exaple2: the compiler worked through the lifetime elision rules but still couldn’t figure out all the lifetimes of the references in the signature.
- */
+// 不能应用第二条规则,因为输入生命周期有两个
+// 不能应用第三条规则,因为longest是一个函数而不是方法
 ```
 
-The placeholder lifetime, '_ , can also be used to have a lifetime inferred in the same way. For lifetimes in paths, using '_ is preferred.
-
+* example 3:
 ```rust
-fn print1(s: &str);                                   // elided
-fn print2(s: &'_ str);                                // also elided
-fn print3<'a>(s: &'a str);                            // expanded
+struct ImportantExcerpt<'a> {
+    part: &'a str,
+}
 
-fn debug1(lvl: usize, s: &str);                       // elided
-fn debug2<'a>(lvl: usize, s: &'a str);                // expanded
+impl<'a> ImportantExcerpt<'a> {
+    fn announce_and_return_part(&self, announcement: &str) -> &str { // 没有生命周期标注的代码
+        println!("Attention please: {}", announcement);
+        self.part
+    }
+}
 
-fn substr1(s: &str, until: usize) -> &str;            // elided
-fn substr2<'a>(s: &'a str, until: usize) -> &'a str;  // expanded
+impl<'a> ImportantExcerpt<'a> {
+    fn announce_and_return_part<'b>(&'a self, announcement: &'b str) -> &str { // 应用第一条规则,为每个参数标注一个生命周期 
+        println!("Attention please: {}", announcement);
+        self.part
+    }
+}
 
-fn get_mut1(&mut self) -> &mut dyn T;                 // elided
-fn get_mut2<'a>(&'a mut self) -> &'a mut dyn T;       // expanded
 
-fn args1<T: ToCStr>(&mut self, args: &[T]) -> &mut Command;                  // elided
-fn args2<'a, 'b, T: ToCStr>(&'a mut self, args: &'b [T]) -> &'a mut Command; // expanded
-
-fn new1(buf: &mut [u8]) -> Thing<'_>;                 // elided - preferred
-fn new2(buf: &mut [u8]) -> Thing;                     // elided
-fn new3<'a>(buf: &'a mut [u8]) -> Thing<'a>;          // expanded
-
-type FunPtr1 = fn(&str) -> &str;                      // elided
-type FunPtr2 = for<'a> fn(&'a str) -> &'a str;        // expanded
-
-type FunTrait1 = dyn Fn(&str) -> &str;                // elided
-type FunTrait2 = dyn for<'a> Fn(&'a str) -> &'a str;  // expanded
-
-// The following examples show situations where it is not allowed to elide the lifetime parameter.
-
-// Cannot infer, because there are no parameters to infer from.
-fn get_str() -> &str;                                 // ILLEGAL
-
-// Cannot infer, ambiguous if it is borrowed from the first or second parameter.
-fn frob(s: &str, t: &str) -> &str;                    // ILLEGAL
+impl<'a> ImportantExcerpt<'a> {
+    fn announce_and_return_part<'b>(&'a self, announcement: &'b str) -> &'a str { // 应用第三条规则
+        println!("Attention please: {}", announcement);
+        self.part
+    }
+}
 ```
