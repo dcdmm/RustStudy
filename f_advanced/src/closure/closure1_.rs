@@ -6,16 +6,16 @@ Closures can capture values from their environment in three ways, which directly
 
 #[test]
 fn t0() {
-    let x = 4;
-
-    // fn equal_to_x(z: i32) -> bool {
+    // let x0 = 4;
+    // fn equal_to_x0(z: i32) -> bool {
     //     // error[E0434]: can't capture dynamic environment in a fn item
-    //     z == x
+    //     z == x0
     // }
-    // let _is_equal_func = equal_to_x(4);
-
-    let equal_to_x = |z| z == x;
-    let _is_equal_closure = equal_to_x(4);
+    // let _is_equal_func = equal_to_x0(4);
+    
+    let x1 = 4;
+    let equal_to_x1 = |z| z == x;
+    let _is_equal_closure = equal_to_x1(4);
 }
 
 #[test]

@@ -9,8 +9,8 @@ Function parameters, let statements, and for loops can only accept irrefutable p
 #[allow(warnings)]
 #[test]
 fn refutable_irrefutable() {
-    let s_ir = Some(34);
-    // error[E0005]: refutable pattern in local binding
+    // let s_ir = Some(34);
+    // // error[E0005]: refutable pattern in local binding
     // let Some(x) = s_ir; // Some(x):pattern `None` not covered
 
     let s_ = Some(34);

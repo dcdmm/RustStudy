@@ -67,34 +67,34 @@ fn keyword_ref() {
 
 #[test]
 fn reference_() {
-    let e_string = &Some(String::from("hello rust"));
-
-    // error[E0507]: cannot move out of `e_string` as enum variant `Some` which is behind a shared reference
-    // match e_string {
-    //     // e_string是不可变引用(&Option<String>) ===> 匹配结果(e_string中的String)被移动到局部变量s上
+    // let e_string0 = &Some(String::from("hello rust"));
+    // error[E0507]: cannot move out of `e_string0` as enum variant `Some` which is behind a shared reference
+    // match e_string0 {
+    //     // e_string0是不可变引用(&Option<String>) ===> 匹配结果(e_string0中的String)被移动到局部变量s上
     //     &Some(s) => {
     //         println!("{}", s)
     //     }
     //     None => println!("None"),
     // }
 
-    // match e_string {
-    //     // e_string是不可变引用(&Option<String>) ===> 匹配结果(e_string中的String的引用)被复制到局部变量s上
+    // let e_string1 = &Some(String::from("hello rust"));
+    // match e_string1 {
+    //     // e_string1是不可变引用(&Option<String>) ===> 匹配结果(e_string1中的String的引用)被复制到局部变量s上
     //     Some(s) => {
     //         println!("{}", s)
     //     }
     //     None => println!("None"),
     // }
-
-    match e_string {
-        // e_string是不可变引用(&Option<String>) ===> 匹配结果(e_string中的String)被借用而不是移动到局部变量s上(s前添加关键字ref)
+    
+    let e_string2 = &Some(String::from("hello rust"));
+    match e_string2 {
+        // e_string2是不可变引用(&Option<String>) ===> 匹配结果(e_string2中的String)被借用而不是移动到局部变量s上(s前添加关键字ref)
         &Some(ref s) => {
             println!("{}", s) // s类型为String
         }
         None => println!("None"),
     }
-
-    println!("{:?}", e_string);
+    println!("{:?}", e_string2);
 }
 
 fn main() {}

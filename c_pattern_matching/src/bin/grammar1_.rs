@@ -39,14 +39,16 @@ fn t1() {
     }
     xxx(1, 2);
 
+    #[allow(warnings)]
     // warning: unused variable: `y`
-    // let y = 10;
+    let y = 10;
 
+    #[allow(warnings)]
     // warning: unused variable: `a`
-    // fn yyy(a: i32, b: i32) {
-    //     println!("This code only uses the b parameter: {}", b);
-    // }
-    // yyy(1, 2);
+    fn yyy(a: i32, b: i32) {
+        println!("This code only uses the b parameter: {}", b);
+    }
+    yyy(1, 2);
 }
 
 #[test]
@@ -54,12 +56,12 @@ fn t2() {
     /*
     Note that there is a subtle difference between using only _ and using a name that starts with an underscore. The syntax _x still binds the value to the variable, whereas _ doesn’t bind at all.
      */
-    let s0 = Some(String::from("Hello!"));
-    if let Some(_s0) = s0 {
-        // s value will still be moved into _s, which prevents us from using s again.
-        println!("found a string");
-    }
-    // error[E0382]: borrow of partially moved value: `s0`
+    // let s0 = Some(String::from("Hello!"));
+    // if let Some(_s0) = s0 {
+    //     // s value will still be moved into _s, which prevents us from using s again.
+    //     println!("found a string");
+    // }
+    // // error[E0382]: borrow of partially moved value: `s0`
     // println!("{:?}", s0);
 
     let s1 = Some(String::from("Hello!"));

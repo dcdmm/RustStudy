@@ -41,13 +41,12 @@ fn main() {
     user1.email = String::from("anotheremail@example.com"); // user1必须为可变变量(Rust不支持仅将某个字段标记为可变)
     println!("{}", user1.email);
 
-    #[allow(warnings)]
-    let user2 = User {
-        email: String::from("someone@example.com"),
-        username: String::from("someusername123"),
-        active: true,
-        sign_in_count: 1,
-    };
-    // error[E0594]: cannot assign to `user2.email`, as `user2` is not declared as mutable
+    // let user2 = User {
+    //     email: String::from("someone@example.com"),
+    //     username: String::from("someusername123"),
+    //     active: true,
+    //     sign_in_count: 1,
+    // };
+    // // error[E0594]: cannot assign to `user2.email`, as `user2` is not declared as mutable
     // user2.email = String::from("anotheremail@example.com");
 }
