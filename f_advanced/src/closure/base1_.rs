@@ -1,22 +1,8 @@
-// 闭包
+// Capturing References or Moving Ownership
 
 /*
 Closures can capture values from their environment in three ways, which directly map to the three ways a function can take a parameter: borrowing immutably, borrowing mutably, and taking ownership. The closure will decide which of these to use based on what the body of the function does with the captured values.
 */
-
-#[test]
-fn t0() {
-    // let x0 = 4;
-    // fn equal_to_x0(z: i32) -> bool {
-    //     // error[E0434]: can't capture dynamic environment in a fn item
-    //     z == x0
-    // }
-    // let _is_equal_func = equal_to_x0(4);
-    
-    let x1 = 4;
-    let equal_to_x1 = |z| z == x;
-    let _is_equal_closure = equal_to_x1(4);
-}
 
 #[test]
 fn only_borrows_() {
