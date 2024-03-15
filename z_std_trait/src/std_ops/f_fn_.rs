@@ -4,8 +4,6 @@
 The version of the call operator that takes an immutable receiver.
 
 Instances of Fn can be called repeatedly without mutating state.
-
-签名: pub trait Fn<Args: Tuple>: FnMut<Args> {
  */
 
 #[test]
