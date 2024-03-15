@@ -26,6 +26,7 @@ fn main() {
     let s = -1;
     match s {
         // The ..= syntax allows us to match to an inclusive range of values.
+        // In a match expression, only numbers and characters can be matched against a range.
 
         /*
         If x is 1, 2, 3, 4, or 5, the first arm will match. This syntax is more convenient for multiple match values than using the | operator to express the same idea; if we were to use | we would have to specify 1 | 2 | 3 | 4 | 5.

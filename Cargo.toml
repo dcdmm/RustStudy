@@ -10,6 +10,6 @@ members = [
     "f_advanced",
     "s_concurrency",
     "y_project_structure", "y_test", 
-    "z_std_function_method",
+    "z_std_function_method", "z_std_struct_enum",
     "z_std_trait"
 ]
