@@ -5,6 +5,14 @@ A for expression is a syntactic construct for looping over elements provided by 
  */
 
 fn main() {
+    let x = std::ops::Range {
+        start: 'a',
+        end: 'z',
+    };
+    for ss in x {
+        println!("{}", ss)
+    }
+
     for i in 1..5 {
         println!("{i}")
     }
@@ -14,7 +22,6 @@ fn main() {
     }
 
     let v = &["apples", "cake", "coffee"];
-
     for text in v {
         println!("I like {}.", text);
     }

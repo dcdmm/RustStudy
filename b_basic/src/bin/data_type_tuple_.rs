@@ -31,8 +31,8 @@ fn main() {
         y: 3,
     };
     let t = (p, 1);
-    let tr = &t; // tr类型为:&(Point, i32)
+    let tr: &(Point, i32) = &t;
     println!("{}", tr.0.x); // 自动解引用(.运算符)
-    let trr = &tr; // trr类型为:&&(Point, i32)
+    let trr: &&(Point, i32) = &tr;
     println!("{:?}", trr.0); // 自动解引用(.运算符)
 }

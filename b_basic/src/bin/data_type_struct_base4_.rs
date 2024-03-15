@@ -15,16 +15,8 @@ fn main() {
         x: String::from("hello"),
         y: 3,
     };
-    let pr = &p; // pr类型为:&Point
+    let pr = &p;
     println!("{}", pr.x); // 自动解引用(.运算符)
-    let prr = &pr; // prr类型为:&&Point
+    let prr: &&Point = &pr;
     println!("{}", prr.x); // 自动解引用(.运算符)
-
-    let c = (84, p);
-    let cr = &c;
-    println!("{}", cr.0); // 自动解引用(.运算符)
-    println!("{:?}", cr.1); // 自动解引用(.运算符)
-    let crr = &cr;
-    println!("{}", crr.0); // 自动解引用(.运算符)
-    println!("{:?}", crr.1); // 自动解引用(.运算符)
 }
