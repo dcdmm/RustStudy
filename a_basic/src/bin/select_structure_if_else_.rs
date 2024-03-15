@@ -33,6 +33,6 @@ fn main() {
     // let number_1 = if condition { 5 } else { "sex" };
 
     // error[E0317]: `if` may be missing an `else` clause
-    // if` expressions without `else` evaluate to `()`
+    // note: `if` expressions without `else` evaluate to `()`
     // let number_2 = if condition {5};
 }

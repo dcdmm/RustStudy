@@ -15,7 +15,7 @@ fn sum_i_and_j(i: i32, j: i32) -> i32 {
 }
 
 // fn another_function() -> () { 
-fn another_function() { // 与上等价,可以省略`-> ()`
+fn another_function() { // 与上等价,返回值为()时可以省略`-> ()`
     println!("Another function.");
 }
 

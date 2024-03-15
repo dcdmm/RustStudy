@@ -42,7 +42,7 @@ fn t2() {
     // let mut p = Point{x:String::from("hello"), y:3};
     // let pr = &mut p;
     // // error[E0507]: cannot move out of `pr.x` which is behind a mutable reference
-    // let x1 = pr.x; // pr.x:move occurs because `pr.x` has type `String`, which does not implement the `Copy` trait
+    // let x1 = pr.x; // `pr.x`:move occurs because `pr.x` has type `String`, which does not implement the `Copy` trait
 
     // let mut q = Point{x:String::from("hello"), y:3};
     // let qr = &q;

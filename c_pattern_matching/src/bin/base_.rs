@@ -6,7 +6,6 @@ Patterns come in two forms: refutable and irrefutable. Patterns that will match 
 Function parameters, let statements, and for loops can only accept irrefutable patterns, because the program cannot do anything meaningful when values don’t match. The if let and while let expressions accept refutable and irrefutable patterns, but the compiler warns against irrefutable patterns because by definition they’re intended to handle possible failure: the functionality of a conditional is in its ability to perform differently depending on success or failure.
 */
 
-#[allow(warnings)]
 #[test]
 fn refutable_irrefutable() {
     // let s_ir = Some(34);
@@ -21,11 +20,12 @@ fn refutable_irrefutable() {
 
     // warning: irrefutable `if let` pattern
     // this pattern will always match, so the `if let` is useless
+    #[allow(warnings)]
     if let t_ = 5 {
         println!("{}", t_)
     }
 
-    let t_ir = 5;
+    // let t_ir = 5;
 }
 
 #[test]

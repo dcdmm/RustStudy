@@ -16,8 +16,8 @@ fn main() {
         println!("{}", "Penny")
     }
 
-    // `if` may be missing an `else` clause
-    // `if` expressions without `else` evaluate to `()`
+    // error[E0317]: `if` may be missing an `else` clause
+    // note: `if` expressions without `else` evaluate to `()`
     // let w = if let Coin::Penny = coin{ "Penny"};
 
     let x = match coin {
