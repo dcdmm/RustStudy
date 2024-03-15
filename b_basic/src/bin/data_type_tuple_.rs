@@ -32,7 +32,7 @@ fn main() {
     };
     let t = (p, 1);
     let tr: &(Point, i32) = &t;
-    println!("{}", tr.0.x); // 自动解引用(.运算符)
+    println!("{}", tr.0.x); // 隐式解引用(dot(.)运算符按需对左操作数隐式解引用)
     let trr: &&(Point, i32) = &tr;
-    println!("{:?}", trr.0); // 自动解引用(.运算符)
+    println!("{:?}", trr.0); // 隐式解引用(dot(.)运算符按需对左操作数隐式解引用)
 }

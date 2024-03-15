@@ -16,7 +16,7 @@ fn main() {
         y: 3,
     };
     let pr = &p;
-    println!("{}", pr.x); // 自动解引用(.运算符)
+    println!("{}", pr.x); // 隐式解引用(dot(.)运算符按需对左操作数隐式引用和解引用)
     let prr: &&Point = &pr;
-    println!("{}", prr.x); // 自动解引用(.运算符)
+    println!("{}", prr.x); // 隐式解引用(dot(.)运算符按需对左操作数隐式引用和解引用)
 }
