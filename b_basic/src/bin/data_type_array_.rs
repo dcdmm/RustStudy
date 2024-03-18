@@ -5,7 +5,9 @@
 /*
 There are two syntactic forms for creating an array:
 * A list with each element, i.e., [x, y, z].
-* A repeat expression [x; N], which produces an array with N copies of x. The type of x must be Copy.
+* repeat expression [expr; N] where N is how many times to repeat expr in the array. expr must either be:
+*   * A value of a type implementing the Copy trait
+*   * A const value
  */
 
 fn main() {
@@ -15,8 +17,11 @@ fn main() {
     println!("{}", a.len());
     println!("{}", a.is_empty());
 
-    let first = a[0]; // 通过索引访问数组中的元素
+    let first = a[2]; // 索引操作(usize类型)
     println!("{first}");
+    
+    let fs = &a[0..2]; // 切片操作(usize类型)
+    println!("{:?}", fs);
 
     // let _b = [3, 3, 3, 3, 3, 3]
     let _b = [3, 6]; // 与上等价,但更加简洁
@@ -29,7 +34,6 @@ fn main() {
             println!("{j}");
         }
     }
-
     for n in 0..two_d_array.len() {
         for m in 0..two_d_array[n].len() {
             println!("{}", two_d_array[n][m]);

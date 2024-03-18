@@ -1,6 +1,6 @@
 A dynamically-sized view into a contiguous sequence, [T]. Contiguous here means that elements are laid out so that every element is the same distance from its neighbors.
 
-Slices let you reference a contiguous sequence of elements in a collection rather than the whole collection. A slice is a kind of reference, so it does not have ownership.
+It is often seen in its borrowed forms, either mutable or shared. The shared slice type is &[T], while the mutable slice type is &mut [T], where T represents the element type.
 
 ### String Slices
 
