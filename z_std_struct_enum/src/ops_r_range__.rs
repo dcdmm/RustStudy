@@ -5,12 +5,15 @@
 // Struct std::ops::RangeTo
 // Struct std::ops::RangeToInclusive
 
+#[allow(warnings)]
 #[test]
 fn r_range_test() {
     // start <= x < end
+    let range35 = 3..5;
     println!("{}", (3..5) == std::ops::Range { start: 3, end: 5 }); // print->true
 
     // x >= start
+    let rangefrom3 = 2..;
     println!("{}", (2..) == std::ops::RangeFrom { start: 2 }); // print->true
 
     // x >= start and x <= end

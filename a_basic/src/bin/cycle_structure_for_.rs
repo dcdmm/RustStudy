@@ -9,11 +9,11 @@ fn main() {
         start: 'a',
         end: 'z',
     };
-    for ss in x {
+    for ss in x { // 支持遍历整数和字符类型的Range和RangeInclusive
         println!("{}", ss)
     }
 
-    for i in 1..5 {
+    for i in 1..=5 {
         println!("{i}")
     }
 
