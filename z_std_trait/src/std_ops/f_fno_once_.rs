@@ -15,6 +15,7 @@ Use FnOnce as a bound when you want to accept a parameter of function-like type 
 #[test]
 fn t0() {
     fn consume_with_relish<F>(func: F)
+    // `func`: move occurs because `func` has type `F`, which does not implement the `Copy` trait
     where
         F: FnOnce() -> String,
     {
@@ -41,7 +42,7 @@ fn t1() {
     }
 
     let x = String::from("xXx");
-    let consume_and_return_x = || x;
+    let consume_and_return_x = || x; // 获取作用域中值的所有权
     consume_with_relish(consume_and_return_x);
     // error[E0382]: borrow of moved value: `x`
     // println!("{}", x);
@@ -49,12 +50,9 @@ fn t1() {
 
 #[test]
 fn t2() {
-    fn consume_with_relish<F>(func: F)
-    where
-        F: FnOnce() -> String + Copy,
-    {
+    fn consume_with_relish<F: FnOnce() -> String + Copy>(func: F) {
         println!("Consumed: {}", func());
-        println!("Consumed: {}", func());
+        println!("Consumed: {}", func()); // F实现了Copy trait,调用时使用的是func的拷贝
     }
 
     let x = String::from("xXx");
