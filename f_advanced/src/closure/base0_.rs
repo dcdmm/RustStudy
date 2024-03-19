@@ -30,7 +30,7 @@ fn t1() {
 #[test]
 fn t2() {
     // error[E0284]: type annotations needed
-    // let no_determine = |x| -> &str {"hello rust!"};  // 闭包存在未明确的类型(参数/返回值)时,必须声明Type annotations(如测试t0 闭包add_v2)或编译器可以进行推断(见测试t1 闭包add_v3)
+    // let no_determine = |x| -> &str {"hello rust!"};  // 闭包存在未明确的类型(参数/返回值)时,必须声明Type annotations(如测试函数t0 闭包add_v2)或编译器可以进行推断(如测试函数t1 闭包add_v3)
 }
 
 #[test]
@@ -43,6 +43,6 @@ fn t3() {
     // let _is_equal_func = equal_to_x0(4);
 
     let x1 = 4;
-    let equal_to_x1 = |z| z == x1; // 捕获作用域中的值
+    let equal_to_x1 = |z| z == x1; // 闭包捕获作用域中的值
     let _is_equal_closure = equal_to_x1(4);
 }

@@ -35,5 +35,5 @@ fn take_owership_() {
     let take_owership = move || list; // `move ||`: value moved into closure here
     take_owership();
     // error[E0382]: borrow of moved value: `list`
-    // println!("{:?}", list);
+    // println!("{:?}", list); // `list`: value borrowed here after move
 }
