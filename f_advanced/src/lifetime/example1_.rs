@@ -19,13 +19,14 @@ fn t0() {
     //         r = s.x;
     //     }
     // } // `}`: dropped here while still borrowed
-    // // 生命周期不能满足比y短但比r长
+    // // 没有生命周期可以满足满足比y短但比r长
     // println!("{}", r); // `r`: borrow later used here
 }
 
 #[allow(warnings)]
 #[test]
 fn t1() {
+    // 结构体S的两个字段具有独立的生命周期(对字段x所做的操作不会影响字段y中的内容)
     struct S<'a, 'b> {
         x: &'a i32,
         y: &'b i32,

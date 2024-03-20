@@ -26,7 +26,7 @@ fn borrows_mutably_() {
     let mut list = vec![1, 2, 3];
     println!("Before defining closure: {:?}", list);
 
-    let mut borrows_mutably = || list.push(7); // 捕获作用域中值的可变借用(实现FnMut trait)
+    let mut borrows_mutably = || list.push(7); // 捕获作用域中值的可变借用(该闭包必须声明为可变类型)(实现FnMut trait)
 
     // error[E0502]: cannot borrow `list` as immutable because it is also borrowed as mutable
     // println!("Before calling closure: {:?}", list);
