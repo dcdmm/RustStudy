@@ -43,6 +43,6 @@ fn t3() {
     // let _is_equal_func = equal_to_x0(4);
 
     let x1 = 4;
-    let equal_to_x1 = |z| z == x1; // 闭包捕获作用域中的值
+    let equal_to_x1 = |z| z == x1; // 闭包可以捕获作用域中的变量
     let _is_equal_closure = equal_to_x1(4);
 }
