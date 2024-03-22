@@ -2,7 +2,6 @@
 
 mod std_ops;
 
-#[allow(warnings)]
 mod iter_Iterator_;
 mod iter_IntoIterator_;
 

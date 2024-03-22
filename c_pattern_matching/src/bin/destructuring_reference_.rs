@@ -6,9 +6,10 @@ fn main() {
         x: i32,
         y: i32,
     }
-    let p = Point { x: 0, y: 7 };
-    let Point { x, y } = &p; // x类型为&i32
+    let mut p = Point { x: 0, y: 7 };
+
     // 解构一个指向复合类型的引用时,解构的内容会保持引用的性质(包括可变性)
+    let Point { x, y } = &mut p; // x类型为&mut i32
     let &Point { x: x_, y: y_ } = &p; // x_类型为i32
 
     let s = &mut Some(String::from("hello rust"));
