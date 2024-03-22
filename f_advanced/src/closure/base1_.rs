@@ -7,6 +7,6 @@ fn t0() {
         Box::new(move |y| x + y)
     }
 
-    let add_five = make_adder(5);
+    let add_five: Box<dyn Fn(i32) -> i32> = make_adder(5);
     println!("5 + 3 = {}", add_five(3));
 }
