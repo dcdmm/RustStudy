@@ -24,25 +24,11 @@ fn t1() {
     let v3_s0 = add_v3(4); // 推断闭包add_v3 x的类型为i32,返回值的类型为i32
 
     // error[E0308]: mismatched types
-    // let v3_s1 = add_v3(4.1); // 确定(声明/推断)类型(参数/返回值)后,使用闭包时类型必须匹配
+    // let v3_s1 = add_v3(4.1); // 确定(声明 | 推断)类型(参数 and 返回值)后,使用闭包时类型必须匹配
 }
 
 #[test]
 fn t2() {
     // error[E0284]: type annotations needed
-    // let no_determine = |x| -> &str {"hello rust!"};  // 闭包存在未明确的类型(参数/返回值)时,必须声明Type annotations(如测试函数t0 闭包add_v2)或编译器可以进行推断(如测试函数t1 闭包add_v3)
-}
-
-#[test]
-fn t3() {
-    // let x0 = 4;
-    // fn equal_to_x0(z: i32) -> bool {
-    //     // error[E0434]: can't capture dynamic environment in a fn item
-    //     z == x0
-    // }
-    // let _is_equal_func = equal_to_x0(4);
-
-    let x1 = 4;
-    let equal_to_x1 = |z| z == x1; // 闭包可以捕获作用域中的变量
-    let _is_equal_closure = equal_to_x1(4);
+    // let no_determine = |x| -> &str {"hello rust!"};  // 闭包存在未明确的类型(参数 and 返回值)时,必须声明Type annotations(如测试函数t0 闭包add_v2) | 编译器可以进行推断(如测试函数t1 闭包add_v3)
 }

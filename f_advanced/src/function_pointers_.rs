@@ -18,15 +18,14 @@ fn subtract_one(x: i32) -> i32 {
 }
 
 #[allow(warnings)]
-fn do_twice_fn(f: fn(i32) -> i32, arg: i32) -> i32 {
-    // 参数为函数指针
+fn do_twice_fn(f: fn(i32) -> i32, arg: i32) -> i32 { // 参数为函数指针
     f(arg) + f(arg)
 }
 
 #[allow(warnings)]
 fn do_twice_f_fn<F>(f: F, arg: i32) -> i32
 where
-    F: Fn(i32) -> i32,  // 参数实现特定的triat(即Fn(i32) -> i32)
+    F: Fn(i32) -> i32,  // 参数实现了特定的triat(即Fn(i32) -> i32)
 {
     f(arg) + f(arg)
 }

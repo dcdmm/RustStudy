@@ -10,6 +10,20 @@ The way a closure captures and handles values from the environment affects which
 */
 
 #[test]
+fn t0() {
+    // let x0 = 4;
+    // fn equal_to_x0(z: i32) -> bool {
+    //     // error[E0434]: can't capture dynamic environment in a fn item
+    //     z == x0
+    // }
+    // let _is_equal_func = equal_to_x0(4);
+
+    let x1 = 4;
+    let equal_to_x1 = |z| z == x1; // 闭包可以捕获作用域中的变量(函数不可以)
+    let _is_equal_closure = equal_to_x1(4);
+}
+
+#[test]
 fn only_borrows_() {
     let list = vec![1, 2, 3];
     println!("Before defining closure: {:?}", list);
@@ -39,8 +53,8 @@ fn borrows_mutably_() {
 #[test]
 fn take_owership_() {
     let list = vec![1, 2, 3]; // `list`: move occurs because `list` has type `Vec<i32>`, which does not implement the `Copy` trait
-    // 参考:z_std_trait/std_ops/f_fn_o_once_.rs
-    // move converts any variables captured by reference or mutable reference to variables captured by value.
+                              // 参考:z_std_trait/std_ops/f_fn_o_once_.rs
+                              // move converts any variables captured by reference or mutable reference to variables captured by value.
     let take_owership = move || list; // 获取作用域中值的所有权(自动实现FnOnce trait);`move ||`: value moved into closure here
     take_owership();
     // error[E0382]: borrow of moved value: `list`
