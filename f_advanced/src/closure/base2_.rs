@@ -39,8 +39,9 @@ fn borrows_mutably_() {
 #[test]
 fn take_owership_() {
     let list = vec![1, 2, 3]; // `list`: move occurs because `list` has type `Vec<i32>`, which does not implement the `Copy` trait
-                              // 参考:z_std_trait/std_ops/f_fn_o_once_.rs
-                              // move converts any variables captured by reference or mutable reference to variables captured by value.
+
+    // 参考:z_std_trait/std_ops/f_fn_o_once_.rs
+    // move converts any variables captured by reference or mutable reference to variables captured by value.
     let take_owership = move || list; // 获取作用域中值的所有权(自动实现FnOnce trait);`move ||`: value moved into closure here
     take_owership();
     // error[E0382]: borrow of moved value: `list`
