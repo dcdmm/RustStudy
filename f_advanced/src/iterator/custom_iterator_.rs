@@ -1,10 +1,10 @@
-// 迭代器(自定义)
+// 自定义迭代器
 
 struct Counter {
     count: u32,
 }
 
-#[allow(dead_code)]
+#[allow(warnings)]
 impl Counter {
     fn new() -> Counter {
         Counter { count: 0 }
@@ -13,9 +13,10 @@ impl Counter {
 
 // 实现Iterator特征
 impl Iterator for Counter {
-    type Item = u32; // associated type
+    // associated type
+    type Item = u32; // The type of the elements being iterated over.
 
-    // 自定义next方法
+    // 自定义next方法(必须实现,没有默认实现)
     fn next(&mut self) -> Option<Self::Item> {
         if self.count < 5 {
             self.count += 1;
@@ -27,7 +28,7 @@ impl Iterator for Counter {
 }
 
 #[test]
-fn test_iterator_obj() {
+fn next_method_test() {
     let mut counter = Counter::new();
 
     assert_eq!(counter.next(), Some(1));
@@ -36,4 +37,15 @@ fn test_iterator_obj() {
     assert_eq!(counter.next(), Some(4));
     assert_eq!(counter.next(), Some(5));
     assert_eq!(counter.next(), None);
+}
+
+#[test]
+fn other_method_test() {
+    let sum: u32 = Counter::new()
+        // 其他包含默认实现的方法
+        .zip(Counter::new().skip(1))
+        .map(|(a, b)| a * b)
+        .filter(|x| x % 3 == 0)
+        .sum();
+    println!("{}", sum);
 }

@@ -6,6 +6,7 @@ len / is_empty
 get
 split
 join
+iter / iter_mut
  */
 
 #[test]
@@ -64,6 +65,22 @@ fn join_test() {
     assert_eq!(["hello", "world"].join(" "), "hello world");
     assert_eq!([[1, 2], [3, 4]].join(&0), [1, 2, 0, 3, 4]);
     assert_eq!([[1, 2], [3, 4]].join(&[0, 0][..]), [1, 2, 0, 0, 3, 4]);
+}
+
+#[test]
+fn iter_iter_mut_test() {
+    let x = &[1, 2, 3, 4];
+    
+    // Returns an iterator over the slice.
+    let mut _iterator = x.iter();
+
+    let mut y = vec![1, 2, 3, 4];
+
+    // Returns an iterator that allows modifying each value.
+    for elem in y.iter_mut() {
+        *elem += 2
+    }
+    println!("{:?}", y)
 }
 
 fn main() {}

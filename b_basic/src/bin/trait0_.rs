@@ -2,9 +2,9 @@
 
 #[allow(warnings)]
 trait Summary {
-    fn new() -> Self; // 未实现
+    fn new() -> Self; // (关联函数)未实现
 
-    fn summarize(&self) -> String; // 未实现
+    fn summarize(&self) -> String; // (方法)未实现
 }
 
 #[allow(warnings)]
