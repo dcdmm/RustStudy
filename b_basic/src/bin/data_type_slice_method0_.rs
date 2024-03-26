@@ -7,6 +7,7 @@ get
 split
 join
 iter / iter_mut
+into_iter
  */
 
 #[test]
@@ -22,11 +23,11 @@ fn len_is_empyt_test() {
 fn get_test() {
     /*
     Returns a reference to an element or subslice depending on the type of index.
-    
+
     * If given a position, returns a reference to the element at that position or None if out of bounds.
     * If given a range, returns the subslice corresponding to that range, or None if out of bounds.
     */
-    
+
     let v = [10, 40, 30];
     assert_eq!(Some(&40), v.get(1));
     assert_eq!(Some(&[10, 40][..]), v.get(0..2));
@@ -70,17 +71,28 @@ fn join_test() {
 #[test]
 fn iter_iter_mut_test() {
     let x = &[1, 2, 3, 4];
-    
     // Returns an iterator over the slice.
-    let mut _iterator = x.iter();
+    let x_iter = x.iter(); 
+    for i in x_iter { // 迭代&i32
+        println!("{}", i)
+    }
 
     let mut y = vec![1, 2, 3, 4];
-
     // Returns an iterator that allows modifying each value.
-    for elem in y.iter_mut() {
+    let y_iter_mut: std::slice::IterMut<'_, i32> = y.iter_mut();
+    for elem in y_iter_mut { // 迭代&mut i32
         *elem += 2
     }
-    println!("{:?}", y)
+    println!("{:?}", y);
+}
+
+#[test]
+fn into_iter_test() {
+    let x = &[1, 2, 3, 4][..];
+    let _xii = x.into_iter(); // 等价于:x.iter()
+
+    let y = &mut [1, 2, 3, 4][..];
+    let _yii = y.into_iter(); // 等价于:y.iter_mut()
 }
 
 fn main() {}
