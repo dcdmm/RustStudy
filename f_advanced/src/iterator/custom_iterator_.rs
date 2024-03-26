@@ -37,12 +37,17 @@ fn next_method_test() {
     assert_eq!(counter.next(), Some(4));
     assert_eq!(counter.next(), Some(5));
     assert_eq!(counter.next(), None);
+
+    let counter1 = Counter::new();
+    for i in counter1 {
+        println!("{}", i);
+    }
 }
 
 #[test]
 fn other_method_test() {
     let sum: u32 = Counter::new()
-        // 其他包含默认实现的方法
+        // 其他包含默认实现的方法示例
         .zip(Counter::new().skip(1))
         .map(|(a, b)| a * b)
         .filter(|x| x % 3 == 0)

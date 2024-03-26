@@ -73,14 +73,14 @@ fn iter_iter_mut_test() {
     let x = &[1, 2, 3, 4];
     // Returns an iterator over the slice.
     let x_iter = x.iter(); 
-    for i in x_iter { // 迭代&i32
+    for i in x_iter { // 迭代类型为&i32
         println!("{}", i)
     }
 
     let mut y = vec![1, 2, 3, 4];
     // Returns an iterator that allows modifying each value.
     let y_iter_mut: std::slice::IterMut<'_, i32> = y.iter_mut();
-    for elem in y_iter_mut { // 迭代&mut i32
+    for elem in y_iter_mut { // 迭代类型为&mut i32
         *elem += 2
     }
     println!("{:?}", y);
@@ -89,10 +89,10 @@ fn iter_iter_mut_test() {
 #[test]
 fn into_iter_test() {
     let x = &[1, 2, 3, 4][..];
-    let _xii = x.into_iter(); // 等价于:x.iter()
+    let _xii = x.into_iter(); // 迭代类型为&i32;等价于:x.iter()
 
     let y = &mut [1, 2, 3, 4][..];
-    let _yii = y.into_iter(); // 等价于:y.iter_mut()
+    let _yii = y.into_iter(); // 迭代类型为&mut i32;等价于:y.iter_mut()
 }
 
 fn main() {}
