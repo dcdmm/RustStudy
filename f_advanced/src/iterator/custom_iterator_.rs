@@ -11,7 +11,7 @@ impl Counter {
     }
 }
 
-// 实现Iterator特征
+// 实现Iterator特质
 impl Iterator for Counter {
     // associated type
     type Item = u32; // The type of the elements being iterated over.

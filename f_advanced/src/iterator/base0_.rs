@@ -6,7 +6,7 @@ There are three common methods which can create iterators from a collection:
 * iter_mut(), which iterates over &mut T.
 * into_iter(), which iterates over T.
 
-大多数集合对IntoIterator提供了3种(即&T、&mut T、T)不同实现
+大多数集合对IntoIterator提供了3种(即&T、&mut T、T)不同实现(即IntoIterator特质的into_iter()方法)
 如:
     impl<'a, T> IntoIterator for &'a [T] // 切片
     impl<'a, T> IntoIterator for &'a mut [T]
