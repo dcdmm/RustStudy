@@ -40,25 +40,3 @@ fn main() {
         }
     }
 }
-
-#[test]
-fn into_iter_test() {
-    let a0 = [1, 2, 3, 4];
-    /*
-    impl<T, const N: usize> IntoIterator for [T; N]
-        fn into_iter(self) -> <[T; N] as IntoIterator>::IntoIter
-    
-    Creates a consuming iterator, that is, one that moves each value out of the array (from start to end). The array cannot be used after calling this unless T implements Copy, so the whole array is copied.
-     */
-    let a0ii = a0.into_iter();
-    for i in a0ii { // 迭代类型为i32
-        println!("{}", i)
-    }
-    println!("{:?}", a0);
-
-    let z0 = &mut [1, 2, 3, 4];
-    let _z0ii: std::slice::IterMut<'_, i32> = z0.into_iter(); // 迭代类型为&mut i32;等价于:z0.iter_mut()
-
-    let z1 = &[1, 2, 3, 4];
-    let _z0ii: std::slice::Iter<'_, i32> = z1.into_iter(); // 迭代类型为&i32;等价于:z1.iter()
-}

@@ -21,8 +21,14 @@ fn main() {
         println!("hello rust!")
     }
 
-    let v = &["apples", "cake", "coffee"];
-    for text in v {
+    let mut v = ["apples", "cake", "coffee"];
+    for text in v { // 迭代类型为&str;相等于执行于for text in v.into_iter() {
+        println!("I like {}.", text);
+    }
+    for text in &v { // 迭代类型为&&str;相当于执行for text in &v.into_iter() {
+        println!("I like {}.", text);
+    }
+    for text in &mut v { // 迭代类型为&mut &str;相当于执行for text in (&mut v).into_iter() {
         println!("I like {}.", text);
     }
 }

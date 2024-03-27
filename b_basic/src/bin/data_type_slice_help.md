@@ -1,6 +1,8 @@
 A dynamically-sized view into a contiguous sequence, [T]. Contiguous here means that elements are laid out so that every element is the same distance from its neighbors.
 
-It is often seen in its borrowed forms, either mutable or shared. The shared slice type is &[T], while the mutable slice type is &mut [T], where T represents the element type.
+Slices are a view into a block of memory represented as a pointer and a length.
+
+Slices are either mutable or shared. The shared slice type is &[T], while the mutable slice type is &mut [T], where T represents the element type. 
 
 ### String Slices
 
