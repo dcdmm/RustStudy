@@ -31,7 +31,7 @@ impl Iterator for Counter {
 fn next_method_test() {
     let mut counter = Counter::new();
 
-    assert_eq!(counter.next(), Some(1));
+    assert_eq!(counter.next(), Some(1)); // 更改迭代器内部状态(即当前位置),故迭代器变量必须是可变的
     assert_eq!(counter.next(), Some(2));
     assert_eq!(counter.next(), Some(3));
     assert_eq!(counter.next(), Some(4));
