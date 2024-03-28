@@ -1,7 +1,7 @@
 // std::boxed::Box
 
 /*
-Boxes allow you to store data on the heap rather than the stack. What remains on the stack is the pointer to the heap data. 
+Boxes allow you to store data on the heap rather than the stack. What remains on the stack is the pointer to the heap data.
 
 Boxes don’t have performance overhead, other than storing their data on the heap instead of on the stack. But they don’t have many extra capabilities either. You’ll use them most often in these situations:
 * When you have a type whose size can’t be known at compile time and you want to use a value of that type in a context that requires an exact size
@@ -38,17 +38,16 @@ fn t1() {
     //     Nil,
     // }
     // let list = List::Cons(1, List::Cons(2, List::Cons(3, List::Nil)));
-    
-    /*
-    List大小计算分析:
-    size(List)  = size(Cons) + size(Nil)
-                = size(i32) + size(usize) + size(Nil)
-     */
-    enum List{
-        Cons(i32, Box<List>),
-        Nil,
-    }
-    use List::{Cons, Nil};
-    let list = Cons(1, Box::new(Cons(2, Box::new(Cons(3, Box::new(Nil))))));
-}
 
+    /*
+    List1大小计算分析:
+    size(List1)  = size(Cons1) + size(Nil1)
+                = size(i32) + size(usize) + size(Nil1)
+     */
+    enum List1 {
+        Cons1(i32, Box<List1>),
+        Nil1,
+    }
+    use List1::{Cons1, Nil1};
+    let list = Cons1(1, Box::new(Cons1(2, Box::new(Cons1(3, Box::new(Nil1))))));
+}

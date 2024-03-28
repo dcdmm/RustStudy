@@ -51,10 +51,10 @@ fn slice_test() {
     }
     println!("{:?}", y);
 
-    let n = &[1, 2, 3, 4][..];
+    let n = &[1, 2, 3, 4][..]; // &[T]
     let _nii = n.into_iter(); // 迭代类型为&i32;实际调用了n.iter()
 
-    let m = &mut [1, 2, 3, 4][..];
+    let m = &mut [1, 2, 3, 4][..]; // &mut [T]
     let _mii = m.into_iter(); // 迭代类型为&mut i32;实际调用了m.iter_mut()
 }
 
@@ -74,10 +74,10 @@ fn array_test() {
     }
     println!("{:?}", a0);
 
-    let z0 = &mut [1, 2, 3, 4];
+    let z0 = &mut [1, 2, 3, 4]; // &mut [T, N]
     let _z0ii: std::slice::IterMut<'_, i32> = z0.into_iter(); // 迭代类型为&mut i32;实际调用了z0.iter_mut()
 
-    let z1 = &[1, 2, 3, 4];
+    let z1 = &[1, 2, 3, 4]; // &[T, N]
     let _z0ii: std::slice::Iter<'_, i32> = z1.into_iter(); // 迭代类型为&i32;实际调用了z1.iter()
 }
 
@@ -90,16 +90,14 @@ fn vec_test() {
         // 迭代类型为i32
         println!("{:?}", i);
     }
-    let v_r = &vec![1, 2, 3]; // 集合的不可变(共享)引用
-    let v_rii = v_r.into_iter();
-    for i in v_rii {
-        // 迭代类型为&i32;实际调用了v_r.iter()
+    let v_r = &vec![1, 2, 3]; // &Vec<T>
+    let v_rii = v_r.into_iter(); 
+    for i in v_rii { // 迭代类型为&i32;实际调用了v_r.iter()
         println!("{:?}", i);
     }
-    let v_r_mut = &mut vec![1, 2, 3]; // 集合的可变引用
+    let v_r_mut = &mut vec![1, 2, 3]; // &mut Vec<T>
     let v_rmutii = v_r_mut.into_iter();
-    for i in v_rmutii {
-        // 迭代类型为&mut i32;实际调用了v_r.iter_mut()
+    for i in v_rmutii { // 迭代类型为&mut i32;实际调用了v_r.iter_mut()
         println!("{:?}", i);
     }
 }
@@ -135,10 +133,10 @@ fn vec_deque_test() {
     // Consumes the deque into a front-to-back iterator yielding elements by value.
     let _vd_ii: std::collections::vec_deque::IntoIter<i32> = vd.into_iter();
 
-    let vd_r = &VecDeque::from(vec![1, 2, 3]);
+    let vd_r = &VecDeque::from(vec![1, 2, 3]); // &VecDeque<T>
     let _vd_rii = &vd_r.into_iter(); // 实际调用vd_r.iter()
 
-    let vd_r_mut = &mut VecDeque::from(vec![1, 2, 3]);
+    let vd_r_mut = &mut VecDeque::from(vec![1, 2, 3]); // &mut VecDeque<T>
     let _vd_rmutii = &vd_r_mut.into_iter(); // 实际调用vd_r.iter()
 }
 
@@ -159,10 +157,10 @@ fn hash_map_test() {
     // Creates a consuming iterator, that is, one that moves each key-value pair out of the map in arbitrary order. The map cannot be used after calling this.
     let _map_ii = map.into_iter();
 
-    let map_r = &HashMap::from([("a", 1), ("b", 2), ("c", 3)]);
+    let map_r = &HashMap::from([("a", 1), ("b", 2), ("c", 3)]); // &HashMap<K, V, S>
     let _map_r_ii = map_r.into_iter(); // 实际调用map_r.iter()
 
-    let map_r_mut = &mut HashMap::from([("a", 1), ("b", 2), ("c", 3)]);
+    let map_r_mut = &mut HashMap::from([("a", 1), ("b", 2), ("c", 3)]); // &mut HashMap<K, V, S>
     let _map_rmut_ii = map_r_mut.into_iter(); // 实际调用map_r.iter_mut()
 }
 
@@ -176,6 +174,6 @@ fn hash_set_test() {
     // Creates a consuming iterator, that is, one that moves each value out of the set in arbitrary order. The set cannot be used after calling this.
     let _set_ii = set.into_iter();
 
-    let set_r = &HashSet::from([1, 2, 3]);
+    let set_r = &HashSet::from([1, 2, 3]); // &mut HashSet<T, S> 
     let _set_rii = set_r.into_iter(); // 实际调用set_r.iter()
 }
