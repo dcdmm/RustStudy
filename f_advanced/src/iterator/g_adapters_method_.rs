@@ -1,4 +1,4 @@
-// 迭代器适配器
+// 迭代器适配器方法
 
 // Functions which take an Iterator and return another Iterator are often called ‘iterator adapters’, as they’re a form of the ‘adapter pattern’.
 
