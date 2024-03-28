@@ -1,3 +1,5 @@
+#![allow(non_snake_case)]
+
 // 解构Option
 
 #[allow(warnings)]

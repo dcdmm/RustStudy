@@ -1,3 +1,5 @@
+#![allow(non_snake_case)]
+
 // Shortcuts for Panic on Error: unwrap and expect
 
 #[allow(warnings)]
