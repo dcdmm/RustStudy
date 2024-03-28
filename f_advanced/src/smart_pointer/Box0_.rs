@@ -1,12 +1,9 @@
 // std::boxed::Box
 
-// ======> 参考Z_std_trait/src/bin/ops_d_deref0_.rs
-// ======> 参考Z_std_trait/src/bin/ops_d_deref1_.rs
-// ======> 参考Z_std_trait/src/bin/ops_d_drop_.rs
-
 /*
-Boxes don’t have performance overhead, other than storing their data on the heap instead of on the stack. But they don’t have many extra capabilities either. You’ll use them most often in these situations:
+Boxes allow you to store data on the heap rather than the stack. What remains on the stack is the pointer to the heap data. 
 
+Boxes don’t have performance overhead, other than storing their data on the heap instead of on the stack. But they don’t have many extra capabilities either. You’ll use them most often in these situations:
 * When you have a type whose size can’t be known at compile time and you want to use a value of that type in a context that requires an exact size
 * When you have a large amount of data and you want to transfer ownership but ensure the data won’t be copied when you do so
 * When you want to own a value and you care only that it’s a type that implements a particular trait rather than being of a specific type
@@ -16,11 +13,42 @@ Boxes don’t have performance overhead, other than storing their data on the he
 fn t0() {
     /*
     We define the variable b to have the value of a Box that points to the value 5, which is allocated on the heap.
-    This program will print b = 5; in this case, we can access the data in the box similar to how we would if this data were on the stack.
-    Just like any owned value, when a box goes out of scope, as b does at the end of main, it will be deallocated.
-    The deallocation happens both for the box (stored on the stack) and the data it points to (stored on the heap).
+    This program will print b = 5; in this case, we can access the data in the box similar to how we would if this data were on the stack. Just like any owned value, when a box goes out of scope, as b does at the end of main, it will be deallocated. The deallocation happens both for the box (stored on the stack) and the data it points to (stored on the heap).
      */
     let b = Box::new(5);
     println!("b = {}", b);
+}
+
+#[allow(warnings)]
+#[test]
+fn t1() {
+    // // error[E0072]: recursive type `List` has infinite size
+    // /*
+    // List大小分析:
+    // size(List)  = size(Cons) + size(Nil)
+    //             = size(i32) + size(Cons) + + size(Nil)
+    //             = size(i32) + size(i32) + size(Cons) + size(Nil)
+    //             = size(i32) + size(i32) + size(i32) + size(Cons) + size(Nil)
+    //             = size(i32) + size(i32) + size(i32) + size(i32) + size(Cons) + size(Nil)
+    //             = size(i32) + size(i32) + size(i32) + size(i32) + size(i32) + size(Cons) + size(Nil)
+    //             ......
+    //  */
+    // enum List {
+    //     Cons(i32, List),
+    //     Nil,
+    // }
+    // let list = List::Cons(1, List::Cons(2, List::Cons(3, List::Nil)));
+    
+    /*
+    List大小计算分析:
+    size(List)  = size(Cons) + size(Nil)
+                = size(i32) + size(usize) + size(Nil)
+     */
+    enum List{
+        Cons(i32, Box<List>),
+        Nil,
+    }
+    use List::{Cons, Nil};
+    let list = Cons(1, Box::new(Cons(2, Box::new(Cons(3, Box::new(Nil))))));
 }
 
