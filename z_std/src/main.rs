@@ -1,6 +1,7 @@
 #![allow(non_snake_case)]
-
-mod std_ops;
+mod traits;
+mod functions;
+mod structs_enums;
 
 fn main() {
     println!("Hello, world!");

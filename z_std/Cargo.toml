@@ -1,5 +1,5 @@
 [package]
-name = "z_std_struct_enum"
+name = "z_std"
 version = "0.1.0"
 edition = "2021"
 
