@@ -31,25 +31,34 @@ Converting an immutable reference to a mutable reference would require that the 
 Therefore, Rust can’t make the assumption that converting an immutable reference to a mutable reference is possible.
  */
 
-fn hello(name: &str) {
-    println!("Hello, {name}!");
-}
-
 #[test]
 fn t0() {
-    let m = Box::new(String::from("Rust"));
-    hello("Rust");
+    fn hello(name: &str) {
+        println!("Hello, {name}!");
+    }
 
-    /*
-    Rust can turn &Box<String> into &String by calling deref.
-    The standard library provides an implementation of Deref on String that returns a string slice, and this is in the API documentation for Deref.
-    Rust calls deref again to turn the &String into &str, which matches the hello function’s definition.
-     */
-    hello(&m);
+    let s = String::from("hello world");
+    hello(&s);
 
-    /*
-    The (*m) dereferences the Box<String> into a String.
-    Then the & and [..] take a string slice of the String that is equal to the whole string to match the signature of hello.
-     */
-    hello(&(*m)[..]); // 与上等价
+    let s_box = Box::new(String::from("Rust"));
+    hello(&s_box);
+
+    hello(&(*s_box)[..]);
 }
+
+// #[test]
+// fn t034() {
+
+//     /*
+//     Rust can turn &Box<String> into &String by calling deref.
+//     The standard library provides an implementation of Deref on String that returns a string slice, and this is in the API documentation for Deref.
+//     Rust calls deref again to turn the &String into &str, which matches the hello function’s definition.
+//      */
+//     hello(&m);
+
+//     /*
+//     The (*m) dereferences the Box<String> into a String.
+//     Then the & and [..] take a string slice of the String that is equal to the whole string to match the signature of hello.
+//      */
+//     hello(&(*m)[..]); // 与上等价
+// }
