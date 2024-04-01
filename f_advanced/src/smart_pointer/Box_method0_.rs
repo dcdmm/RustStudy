@@ -28,13 +28,13 @@ fn leak_test() {
 
     Consumes and leaks the Box, returning a mutable reference, &'a mut T. Note that the type T must outlive the chosen lifetime 'a. If the type has only static references, or none at all, then this may be chosen to be 'static.
      */
-    let static_ref = Box::leak(x); // `x`: value moved here
+    let static_ref: &mut i32 = Box::leak(x); // `x`: value moved here
     *static_ref += 1;
     println!("{}", static_ref);
     // error[E0382]: borrow of moved value: `x`
     // println!("{}", x);
 
-    let y = vec![1, 2, 3].into_boxed_slice();
-    let static_ref_y = Box::leak(y);
+    let y: Box<[i32]> = vec![1, 2, 3].into_boxed_slice();
+    let static_ref_y: &mut [i32] = Box::leak(y);
     println!("{:?}", static_ref_y)
 }

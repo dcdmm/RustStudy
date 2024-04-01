@@ -25,12 +25,12 @@ fn t1() {
     // // error[E0072]: recursive type `List` has infinite size
     // /*
     // List大小分析:
-    // size(List)  = size(Cons) + size(Nil)
-    //             = size(i32) + size(Cons) + + size(Nil)
-    //             = size(i32) + size(i32) + size(Cons) + size(Nil)
-    //             = size(i32) + size(i32) + size(i32) + size(Cons) + size(Nil)
-    //             = size(i32) + size(i32) + size(i32) + size(i32) + size(Cons) + size(Nil)
-    //             = size(i32) + size(i32) + size(i32) + size(i32) + size(i32) + size(Cons) + size(Nil)
+    // size(List) = size(Cons) + size(Nil)
+    //            = size(i32) + size(Cons) + size(Nil)
+    //            = size(i32) + size(i32) + size(Cons) + size(Nil)
+    //            = size(i32) + size(i32) + size(i32) + size(Cons) + size(Nil)
+    //            = size(i32) + size(i32) + size(i32) + size(i32) + size(Cons) + size(Nil)
+    //            = size(i32) + size(i32) + size(i32) + size(i32) + size(i32) + size(Cons) + size(Nil)
     //             ......
     //  */
     // enum List {
@@ -41,7 +41,7 @@ fn t1() {
 
     /*
     List1大小计算分析:
-    size(List1)  = size(Cons1) + size(Nil1)
+    size(List1) = size(Cons1) + size(Nil1)
                 = size(i32) + size(usize) + size(Nil1)
      */
     enum List1 {
