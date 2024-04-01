@@ -5,12 +5,48 @@ Used for immutable dereferencing operations, like *v.
 
 In addition to being used for explicit dereferencing operations with the (unary) * operator in immutable contexts, Deref is also used implicitly by the compiler in many circumstances. This mechanism is called ‘Deref coercion’. In mutable contexts, DerefMut is used.
 
-Warning: Deref coercion is a powerful language feature which has far-reaching implications for every type that implements Deref. The compiler will silently insert calls to Deref::deref. For this reason, one should be careful about implementing Deref and only do so when deref coercion is desirable. See below for advice on when this is typically desirable or undesirable.
+# Deref coercion
+T implements Deref<Target = U>, and v is a value of type T, then:
+    * In immutable contexts, *v (where T is neither a reference nor a raw pointer) is equivalent to *Deref::deref(&v).
+    * Values of type &T are coerced to values of type &U
+    * T implicitly implements all the methods of the type U which take the &self receiver
+*/
 
-Types that implement Deref or DerefMut are often called “smart pointers” and the mechanism of deref coercion has been specifically designed to facilitate the pointer-like behaviour that name suggests.
+// # Implementors
+/*
+impl<T: ?Sized> Deref for &T {
+    type Target = T;
+
+    #[rustc_diagnostic_item = "noop_method_deref"]
+    fn deref(&self) -> &T {
+        *self
+    }
+} 
+
+impl<T: ?Sized> Deref for &mut T {
+    type Target = T;
+
+    fn deref(&self) -> &T {
+        *self
+    }
+}
+
+impl<T, A: Allocator> ops::Deref for Vec<T, A> {
+    type Target = [T];
+
+impl ops::Deref for String {
+    type Target = str;
 
 
- */
+impl<T: ?Sized, A: Allocator> Deref for Box<T, A> {
+    type Target = T;
+
+impl<T: ?Sized, A: Allocator> Deref for Rc<T, A> {
+    type Target = T;
+
+impl<T: ?Sized> Deref for Ref<'_, T> {
+    type Target = T;
+*/
 
 #[allow(warnings)]
 use std::ops::Deref;
@@ -27,18 +63,9 @@ fn t0() {
     // assert_eq!(5, y);
 }
 
-#[test]
-fn t1() {
-    let x = 5;
-    let y = Box::new(x); // Box实现了Iterator特质
-
-    assert_eq!(5, x);
-    assert_eq!(5, *y); 
-}
-
 #[allow(warnings)]
 #[test]
-fn t2_0() {
+fn t1_0() {
     struct MyBox<T>(T); // tuple structs
 
     impl<T> MyBox<T> {
@@ -56,7 +83,7 @@ fn t2_0() {
 }
 
 #[test]
-fn t2_1() {
+fn t1_1() {
     struct MyBox<T>(T); // tuple structs
 
     impl<T> MyBox<T> {
@@ -84,5 +111,21 @@ fn t2_1() {
     let y = MyBox::new(x);
 
     // Rust substitutes the * operator with a call to the deref method and then a plain dereference so we don’t have to think about whether or not we need to call the deref method. This Rust feature lets us write code that functions identically whether we have a regular reference or a type that implements Deref.
-    assert_eq!(5, *y); // 实际执行为*(y.deref())
+    assert_eq!(5, *y); // 实际执行为: *Deref::deref(&y) 或 *(y.deref()) 
+}
+
+#[test]
+fn t2() {
+    let x = 5;
+    let y = Box::new(x);
+    assert_eq!(5, x);
+    /*
+    Deref coercion解析与验证:
+    1. *y ---> *(y.deref()) 
+    2. *(y.deref()) ---> *((&y).deref())
+    3. *((&y).deref()) ---> *(&**(&y))
+    4. *(&**(&y)) ---> *y 
+    5. *y --->智能指针y(Box<i32>)存储在堆上的数据
+     */
+    assert_eq!(5, *y);
 }

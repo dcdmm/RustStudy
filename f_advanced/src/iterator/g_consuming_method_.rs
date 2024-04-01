@@ -93,9 +93,7 @@ fn last_test() {
 #[test]
 fn find_test() {
     let a = [1, 2, 3];
-    /*
-    Searches for an element of an iterator that satisfies a predicate.
-     */
+    // Searches for an element of an iterator that satisfies a predicate.
     println!("{:?}", a.iter().find(|&&x| x == 2)); // print->Some(2)
     println!("{:?}", a.iter().find(|&&x| x == 5)); // print->None
 

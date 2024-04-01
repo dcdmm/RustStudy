@@ -36,7 +36,22 @@ use std::collections::VecDeque;
 fn slice_test() {
     let x = &[1, 2, 3, 4];
     // Returns an iterator over the slice.
-    let x_iter: std::slice::Iter<'_, i32> = x.iter(); // 变量为&[T]、&mut [T]、[T; N]、mut [T; N]、&[T; N]、&mut [T; N]、Vec[T, A]、mut Vec[T, A]、&Vec[T, A]、&mut Vec[T, A]时调用该方法
+    /*
+    变量为&[T]、&mut [T]、[T; N]、mut [T; N]、&[T; N]、&mut [T; N]、Vec[T, A](Deref Coercions)、mut Vec[T, A](Mutable deref coercion)、&Vec[T, A](Deref Coercions)、&mut Vec[T, A](Mutable deref coercion)时调用该方法
+
+    Vec<T, A>的Deref特质实现如下:
+    ```rust
+    impl<T, A: Allocator> ops::Deref for Vec<T, A> {
+        type Target = [T];
+
+        #[inline]
+        fn deref(&self) -> &[T] {
+            unsafe { slice::from_raw_parts(self.as_ptr(), self.len) }
+        }
+    }
+    ```
+     */
+    let x_iter: std::slice::Iter<'_, i32> = x.iter();  
     for i in x_iter {
         // 迭代类型为&i32
         println!("{}", i)
