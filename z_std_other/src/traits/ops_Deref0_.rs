@@ -37,14 +37,10 @@ impl<T, A: Allocator> ops::Deref for Vec<T, A> {
 impl ops::Deref for String {
     type Target = str;
 
-
 impl<T: ?Sized, A: Allocator> Deref for Box<T, A> {
     type Target = T;
 
 impl<T: ?Sized, A: Allocator> Deref for Rc<T, A> {
-    type Target = T;
-
-impl<T: ?Sized> Deref for Ref<'_, T> {
     type Target = T;
 */
 
