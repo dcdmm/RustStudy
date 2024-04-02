@@ -7,6 +7,7 @@ A common way to use RefCell<T> is in combination with Rc<T>.
 Recall that Rc<T> lets you have multiple owners of some data, but it only gives immutable access to that data.
 If you have an Rc<T> that holds a RefCell<T>, you can get a value that can have multiple owners and that you can mutate!
  */
+#[allow(warnings)]
 #[derive(Debug)]
 enum List {
     Cons(Rc<RefCell<i32>>, Rc<List>),

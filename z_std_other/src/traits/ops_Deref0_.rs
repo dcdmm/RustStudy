@@ -5,6 +5,8 @@ Used for immutable dereferencing operations, like *v.
 
 In addition to being used for explicit dereferencing operations with the (unary) * operator in immutable contexts, Deref is also used implicitly by the compiler in many circumstances. This mechanism is called ‘Deref coercion’. In mutable contexts, DerefMut is used.
 
+Types that implement Deref or DerefMut are often called “smart pointers” and the mechanism of deref coercion has been specifically designed to facilitate the pointer-like behaviour that name suggests. 
+
 # Deref coercion
 T implements Deref<Target = U>, and v is a value of type T, then:
     * In immutable contexts, *v (where T is neither a reference nor a raw pointer) is equivalent to *Deref::deref(&v).
