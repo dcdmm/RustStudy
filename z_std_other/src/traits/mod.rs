@@ -4,3 +4,5 @@ mod ops_FnOnce_;
 mod ops_Deref0_;
 mod ops_Deref1_;
 mod ops_Drop_;
+mod clone_Clone_;
+mod marker_Copy_;
