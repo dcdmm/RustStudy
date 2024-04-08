@@ -40,8 +40,9 @@ fn t1() {
     // let list = List::Cons(1, List::Cons(2, List::Cons(3, List::Nil)));
 
     /*
-    List1大小计算分析:
+    List1大小分析:
     size(List1) = size(Cons1) + size(Nil1)
+                = size(i32) + size(Box<List1>) + size(Nil1)
                 = size(i32) + size(usize) + size(Nil1)
      */
     enum List1 {

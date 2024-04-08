@@ -24,27 +24,15 @@ use crate::List::{Cons, Nil};
 
 fn main() {
     let a = Cons(5, Box::new(Cons(10, Box::new(Nil))));
-    let b = Cons(3, Box::new(a));
+    let b = Cons(3, Box::new(a)); // `a`: - value moved here
+    // error[E0382]: use of moved value: `a`   
     let c = Cons(4, Box::new(a));
 }
-
-/*
-程序运行结果(报错):
-error[E0382]: use of moved value: `a`
-  --> d_advanced\src\bin\smart_pointer_r_rec0_.rs:30:30
-   |
-28 |     let a = Cons(5, Box::new(Cons(10, Box::new(Nil))));
-   |         - move occurs because `a` has type `List`, which does not implement the `Copy` trait
-29 |     let b = Cons(3, Box::new(a));
-   |                              - value moved here
-30 |     let c = Cons(4, Box::new(a));
-   |                              ^ value used here after move
- */
 ```
 
 The Cons variants own the data they hold, so when we create the b list, a is moved into b and b owns a. Then, when we try to use a again when creating c, we’re not allowed to because a has been moved.
 
-We could change the definition of Cons to hold references instead, but then we would have to specify lifetime parameters. By specifying lifetime parameters, we would be specifying that every element in the list will live at least as long as the entire list.
+We could change the definition of Cons to hold references instead, but then we would have to specify lifetime parameters. By specifying lifetime parameters, we would be specifying that every element in the list will live at least as long as the entire list. This is the case for the elements and lists in Listing 1, but not in every scenario.
 
 Instead, we’ll change our definition of List to use Rc<T> in place of Box<T>, as shown in Listing 2. Each Cons variant will now hold a value and an Rc<T> pointing to a List. When we create b, instead of taking ownership of a, we’ll clone the Rc<List> that a is holding, thereby increasing the number of references from one to two and letting a and b share ownership of the data in that Rc<List>. We’ll also clone a when creating c, increasing the number of references from two to three. Every time we call Rc::clone, the reference count to the data within the Rc<List> will increase, and the data won’t be cleaned up unless there are zero references to it.
 

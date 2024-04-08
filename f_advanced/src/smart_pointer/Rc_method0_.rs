@@ -8,7 +8,7 @@ downgrade / weak_count
  */
 
 #[test]
-fn new_fn() {
+fn new_test() {
     use std::rc::Rc;
 
     /*
@@ -19,11 +19,11 @@ fn new_fn() {
 }
 
 #[test]
-fn clone_strong_count_fn() {
+fn clone_strong_count_test() {
     use std::rc::Rc;
 
     /*
-     clone(&self) -> Rc<T>
+    clone(&self) -> Rc<T>
         Makes a clone of the Rc pointer.
 
         This creates another pointer to the same allocation, increasing the strong reference count.
@@ -39,7 +39,7 @@ fn clone_strong_count_fn() {
 }
 
 #[test]
-fn downgrade_weak_count_fn() {
+fn downgrade_weak_count_test() {
     use std::rc::Rc;
 
     /*
