@@ -8,6 +8,8 @@ Note that Rc<T> is only for use in single-threaded scenarios.
 
 <center>Figure 1: Two lists, b and c, sharing ownership of a third list, a</center>
 
+<br>
+
 We’ll create list a that contains 5 and then 10. Then we’ll make two more lists: b that starts with 3 and c that starts with 4. Both b and c lists will then continue on to the first a list containing 5 and 10. In other words, both lists will share the first list containing 5 and 10.
 
 Trying to implement this scenario using our definition of List with Box<T> won’t work, as shown in Listing 1:

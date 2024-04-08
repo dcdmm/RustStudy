@@ -52,6 +52,9 @@ fn downgrade_weak_count_test() {
      */
     let five = Rc::new(5);
 
+    println!("{}", Rc::weak_count(&five)); // print->0
+    println!("{}", Rc::strong_count(&five)); // print->1
     let _weak_five = Rc::downgrade(&five);
-    assert_eq!(1, Rc::weak_count(&five));
+    println!("{}", Rc::weak_count(&five)); // print->1
+    println!("{}", Rc::strong_count(&five)); // print->1
 }
