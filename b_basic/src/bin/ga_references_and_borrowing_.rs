@@ -64,4 +64,18 @@ fn t3() {
     // let p_ref_def = *p_ref; // `*p_ref`: move occurs because `*p_ref` has type `People`, which does not implement the `Copy` trait
 }
 
+#[allow(warnings)]
+#[test]
+fn t4() {
+    #[derive(Debug)]
+    struct People {
+        age: i32,
+    }
+    let p = People{age: 10};
+    let pr= &p;
+    // error[E0507]: cannot move out of `*pr` which is behind a shared reference
+    // let prd = *pr; // `*pr`: move occurs because `*pr` has type `t4::People`, which does not implement the `Copy` trait
+    println!("{:?}", p);
+}
+
 fn main() {}

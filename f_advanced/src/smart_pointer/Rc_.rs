@@ -56,5 +56,5 @@ fn t2() {
 
     let x = Box::new(p); 
     // let zz = *x;
-    // let ww = *Deref::deref(&x);
+    let ww = Deref::deref(&x);
 }
