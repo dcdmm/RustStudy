@@ -1,5 +1,9 @@
-mod Box_;
+mod Box0_;
+mod Box1_;
 mod Box_method0_;
 mod Rc_;
 mod Rc_method0_;
 mod rc_Weak_;
+mod RefCell0_;
+mod RefCell1_;
+mod RefCell_method0_;

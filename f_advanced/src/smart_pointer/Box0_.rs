@@ -21,7 +21,7 @@ fn t0() {
 
 #[allow(warnings)]
 #[test]
-fn t1() {
+fn t2() {
     // // error[E0072]: recursive type `List` has infinite size
     // /*
     // List大小分析:

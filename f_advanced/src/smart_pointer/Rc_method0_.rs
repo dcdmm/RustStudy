@@ -5,6 +5,7 @@
 new
 clone / strong_count
 downgrade / weak_count
+get_mut
  */
 
 #[test]
@@ -57,4 +58,29 @@ fn downgrade_weak_count_test() {
     let _weak_five = Rc::downgrade(&five);
     println!("{}", Rc::weak_count(&five)); // print->1
     println!("{}", Rc::strong_count(&five)); // print->1
+}
+
+#[allow(warnings)]
+#[test]
+fn get_mut_test() {
+    use std::rc::Rc;
+
+    let mut x = Rc::new(3);
+    println!("{}", Rc::strong_count(&x)); // print->1
+
+    /*
+    Returns a mutable reference into the given Rc, if there are no other Rc or Weak pointers to the same allocation.
+
+    Returns None otherwise, because it is not safe to mutate a shared value.
+     */
+    let x_mut0 = Rc::get_mut(&mut x);
+    println!("{:?}", x_mut0); // print->Some(3)
+    let x_mut0 = x_mut0.unwrap();
+    *x_mut0 = 100;
+    println!("{}", x); // print->100
+
+    let y = Rc::clone(&x);
+    println!("{}", Rc::strong_count(&x)); // print->2
+    let x_mut1 = Rc::get_mut(&mut x);
+    println!("{:?}", x_mut1); // print->None
 }

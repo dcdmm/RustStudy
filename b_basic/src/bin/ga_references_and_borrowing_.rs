@@ -1,4 +1,4 @@
-// 引用与借用错误解析 
+// 引用与借用常见错误解析 
 
 #[allow(warnings)]
 #[test]
@@ -22,13 +22,13 @@ fn t1() {
     // let y = &mut x;  // `&mut x``:`x` is borrowed here
     // // error[E0506]: cannot assign to `x` because it is borrowed
     // x = 100; // `x = 100`: `x` is assigned to here but it was already borrowed
-    // println!("{y}"); // `{y}`:borrow later used here
+    // println!("{y}"); // `{y}`: borrow later used here
 
     // let mut a = 34;
     // let b = &a; // `&a`:`a` is borrowed here
     // // error[E0506]: cannot assign to `a` because it is borrowed
     // a = 100; // `a=100`:`a` is assigned to here but it was already borrowed
-    // println!("{b}"); // `{b}`:borrow later used here
+    // println!("{b}"); // `{b}`: borrow later used here
 }
 
 #[allow(warnings)]
@@ -42,12 +42,26 @@ fn t2() {
     // let mut p = Point{x:String::from("hello"), y:3};
     // let pr = &mut p;
     // // error[E0507]: cannot move out of `pr.x` which is behind a mutable reference
-    // let x1 = pr.x; // `pr.x`:move occurs because `pr.x` has type `String`, which does not implement the `Copy` trait
+    // let x1 = pr.x; // `pr.x`: move occurs because `pr.x` has type `String`, which does not implement the `Copy` trait
 
     // let mut q = Point{x:String::from("hello"), y:3};
     // let qr = &q;
     // // error[E0507]: cannot move out of `qr.x` which is behind a shared reference
     // let x1 = qr.x;
+}
+
+#[allow(warnings)]
+#[test]
+fn t3() {
+    #[derive(Debug)]
+    struct People {
+        age: i32,
+    }
+
+    let p = People { age: 10 };
+    let p_ref = &p;
+    // error[E0507]: cannot move out of `*p_ref` which is behind a shared reference 
+    // let p_ref_def = *p_ref; // `*p_ref`: move occurs because `*p_ref` has type `People`, which does not implement the `Copy` trait
 }
 
 fn main() {}
