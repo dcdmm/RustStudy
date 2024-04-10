@@ -12,10 +12,10 @@ enum List {
     Nil,
 }
 
-#[allow(warnings)]
-use List::{Cons, Nil};
 use std::cell::RefCell;
 use std::rc::Rc;
+#[allow(warnings)]
+use List::{Cons, Nil};
 
 #[test]
 fn t0() {
@@ -25,10 +25,37 @@ fn t0() {
 
     let b = Cons(Rc::new(RefCell::new(3)), Rc::clone(&a));
     let c = Cons(Rc::new(RefCell::new(4)), Rc::clone(&a));
-    
+
     *value.borrow_mut() += 10;
 
     println!("{:?}", a); // print->Cons(RefCell { value: 15 }, Nil)
     println!("{:?}", b); // print->Cons(RefCell { value: 3 }, Cons(RefCell { value: 15 }, Nil))
     println!("{:?}", c); // print->Cons(RefCell { value: 4 }, Cons(RefCell { value: 15 }, Nil))
+}
+
+#[allow(warnings)]
+#[test]
+fn t1() {
+    use std::cell::RefCell;
+
+    #[allow(warnings)]
+    #[derive(Debug)]
+    struct People {
+        age: i32,
+    }
+
+    let x = People{age: 10};
+    let c = RefCell::new(x);
+    // error[E0382]: borrow of moved value: `x`
+    // println!("{:?}", x);
+}
+
+#[allow(warnings)]
+#[test]
+fn t2() {
+    use std::cell::RefCell;
+
+    let c = RefCell::new(5);
+    // error[E0614]: type `RefCell<{integer}>` cannot be dereferenced
+    // let zz = *c;
 }

@@ -1,6 +1,13 @@
 #![allow(non_snake_case)]
 
-// Shortcuts for Panic on Error: unwrap and expect
+// Shortcuts for Panic on Error
+
+/*
+常见方法:
+unwarp
+unwarp_err
+expect
+ */
 
 #[allow(warnings)]
 use std::fs::File;
@@ -31,6 +38,22 @@ fn unwrap_test1() {
 fn unwrap_test2() {
     // panicked:called `Result::unwrap()` on an `Err` value: Os { code: 2, kind: NotFound, message: "系统找不到指定的文件。" }
     let greeting_file = File::open("hello_unwrap.txt").unwrap();
+}
+
+#[test]
+fn unwrap_err_test() {
+    let x: Result<u32, &str> = Err("emergency failure");
+    /*
+    Returns the contained Err value, consuming the self value.
+
+    # Panics
+    Panics if the value is an Ok, with a custom panic message provided by the Ok’s value.
+     */
+    assert_eq!(x.unwrap_err(), "emergency failure");
+
+    let x: Result<u32, &str> = Ok(2);
+    // panicked:called `Result::unwrap_err()` on an `Ok` value: 2
+    x.unwrap_err(); 
 }
 
 #[allow(warnings)]

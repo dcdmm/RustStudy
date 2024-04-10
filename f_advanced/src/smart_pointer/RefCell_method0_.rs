@@ -4,6 +4,7 @@
 常见方法:
 new
 borrow / borrow_mut
+get_mut
  */
 
 #[allow(warnings)]
@@ -59,4 +60,19 @@ fn borrow_borrow_mut_test1() {
     let _m = c.borrow_mut();
     // panicked: already mutably borrowed: BorrowError
     let _b = c.borrow();
+}
+
+#[test]
+fn get_mut_test() {
+    use std::cell::RefCell;
+
+    let mut c = RefCell::new(5);
+    /*
+    Returns a mutable reference to the underlying data.
+    
+    In most situations where RefCell is used, it can’t be borrowed mutably. Use borrow_mut to get mutable access to the underlying data then.
+     */
+    let c_mut = c.get_mut();
+    *c_mut += 1;
+    println!("{:?}", c);
 }
