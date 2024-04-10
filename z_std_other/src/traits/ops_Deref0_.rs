@@ -11,6 +11,8 @@ Rust does deref coercion when it finds types and trait implementations in three 
     * From &mut T to &mut U when T: DerefMut<Target=U>
     * From &mut T to &U when T: Deref<Target=U>
 
+    
+# The dereference operator
 The * (dereference) operator is also a unary prefix operator. When applied to a pointer(References (& and &mut)、Raw pointers (*const and *mut)、Smart Pointers) it denotes the pointed-to location.
 
 On non-pointer types *x is equivalent to *std::ops::Deref::deref(&x) in an immutable place expression context and *std::ops::DerefMut::deref_mut(&mut x) in a mutable place expression context.
@@ -53,18 +55,6 @@ use std::ops::Deref;
 
 #[test]
 fn t0() {
-    let x = 5;
-    let y = &x;
-
-    assert_eq!(5, x);
-    assert_eq!(5, *y);
-
-    // error[E0277]: can't compare `{integer}` with `&{integer}`
-    // assert_eq!(5, y);
-}
-
-#[test]
-fn t1() {
     use std::rc::Rc;
 
     let x = 5;
@@ -73,6 +63,9 @@ fn t1() {
     let x_box = Box::new(x);
     let x_rc = Rc::new(x);
 
+    assert_eq!(5, x);
+    // error[E0277]: can't compare `{integer}` with `&{integer}`  
+    // assert_eq!(5, x_ref);
     assert_eq!(5, *x_ref);
     unsafe {
         assert_eq!(5, *x_mut_ptr);
@@ -83,7 +76,7 @@ fn t1() {
 
 #[allow(warnings)]
 #[test]
-fn t2_0() {
+fn t1_0() {
     struct MyBox<T>(T); // tuple structs
 
     impl<T> MyBox<T> {
@@ -101,7 +94,7 @@ fn t2_0() {
 }
 
 #[test]
-fn t2_1() {
+fn t1_1() {
     struct MyBox<T>(T); // tuple structs
 
     impl<T> MyBox<T> {
