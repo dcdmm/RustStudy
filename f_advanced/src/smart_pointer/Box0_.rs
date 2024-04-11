@@ -1,6 +1,8 @@
 // std::boxed::Box
 
 /*
+A pointer type that uniquely owns a heap allocation of type T.
+
 Boxes allow you to store data on the heap rather than the stack. What remains on the stack is the pointer to the heap data.
 
 Boxes don’t have performance overhead, other than storing their data on the heap instead of on the stack. But they don’t have many extra capabilities either. You’ll use them most often in these situations:

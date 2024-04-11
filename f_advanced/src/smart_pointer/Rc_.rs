@@ -1,6 +1,8 @@
 // std::rc::Rc
 
 /*
+A single-threaded reference-counting pointer.
+
 The type Rc<T> provides shared ownership of a value of type T, allocated in the heap. Invoking clone on Rc produces a new pointer to the same allocation in the heap. When the last Rc pointer to a given allocation is destroyed, the value stored in that allocation (often referred to as “inner value”) is also dropped.
 
 Shared references in Rust disallow mutation by default, and Rc is no exception: you cannot generally obtain a mutable reference to something inside an Rc. If you need mutability, put a Cell or RefCell inside the Rc; 
@@ -54,7 +56,7 @@ fn t1() {
 fn t3() {
     let p =  People{age: 10};
 
-    let x = Rc::new(p); 
+    let x = Rc::new(p); // Rc<T> enables multiple owners of the same data
     // error[E0507]: cannot move out of an `Rc`
     // let x_deref = *x;
 

@@ -49,7 +49,7 @@ fn borrow_borrow_mut_test0() {
 
     *c1.borrow_mut() = "bonjour".to_owned();
 
-    println!("{:?}", &*c1.borrow());
+    println!("{:?}", &*c1.borrow()); // print->"bonjour"
 }
 
 // An example of panic:

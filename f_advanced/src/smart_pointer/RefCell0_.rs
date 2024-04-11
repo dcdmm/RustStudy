@@ -129,7 +129,9 @@ fn t1() {
 
     impl Messenger for MockMessenger {
         fn send(&self, message: &str) {
-            // 内部可变性:对不可变值的可变借用
+            // A consequence of the borrowing rules is that when you have an immutable value, you can’t borrow it mutably. 
+
+            // Interior Mutability: A Mutable Borrow to an Immutable Value
             self.sent_messages.borrow_mut().push(String::from(message));
         }
     }
