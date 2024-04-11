@@ -4,6 +4,7 @@ mod lifetime;
 mod closure;
 mod iterator;
 mod smart_pointer;
+mod advanced_trait;
 
 mod function_pointers_;
 
