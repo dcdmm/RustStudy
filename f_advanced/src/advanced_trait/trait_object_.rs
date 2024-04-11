@@ -12,6 +12,11 @@ pub trait Draw {
 
 #[allow(warnings)]
 pub struct Screen {
+    /*
+    dyn is a prefix of a trait object’s type.
+    
+    The dyn keyword is used to highlight that calls to methods on the associated Trait are dynamically dispatched. To use the trait this way, it must be ‘object safe’.
+     */
     pub components: Vec<Box<dyn Draw>>,
 }
 

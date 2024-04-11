@@ -19,9 +19,13 @@ impl Summary for Tweet {
     }
 }
 
-// By using impl Summary for the return type, we specify that the returns_summarizable function returns some type that implements the Summary trait without naming the concrete type.
+/*
+By using impl Summary for the return type, we specify that the returns_summarizable function returns some type that implements the Summary trait without naming the concrete type.
+
+However, you can only use impl Trait if you’re returning a single type.
+*/
 #[allow(warnings)]
-fn returns_summarizable() -> impl Summary { // However, you can only use impl Trait if you’re returning a single type. 
+fn returns_summarizable() -> impl Summary {  
     Tweet {
         username: String::from("horse_ebooks"),
         content: String::from("of course, as you probably already know, people"),
