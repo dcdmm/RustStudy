@@ -21,12 +21,11 @@ struct Point {
     y: i32,
 }
 
-// 报错:error[E0277]: `Point` doesn't implement `std::fmt::Display`
+// error[E0277]: `Point` doesn't implement `std::fmt::Display`
 // impl OutlinePrint for Point {}
-//
-// 解决方式如下:
-// To fix this, we implement Display on Point and satisfy the constraint that OutlinePrint requires, like so:
+
 // *****************************************************************
+// To fix this, we implement Display on Point and satisfy the constraint that OutlinePrint requires, like so:
 impl fmt::Display for Point {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "({}, {})", self.x, self.y)
@@ -35,3 +34,9 @@ impl fmt::Display for Point {
 
 impl OutlinePrint for Point {}
 // *****************************************************************
+
+#[test]
+fn t0() {
+    let p = Point { x: 1, y: 2 };
+    p.outline_print();
+}
