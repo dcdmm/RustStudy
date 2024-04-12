@@ -15,7 +15,7 @@ impl Rectangle {
      */
     // &self <===等价于===>self: &Self ===本例中即===>self: &Rectangle
     // self:拥有所有权(很少见)/&self:不可变借用/&mut self:可变借用
-    fn area(self: &Self) -> u32 {
+    fn area(&self) -> u32 {
         self.width * self.height
     }
 

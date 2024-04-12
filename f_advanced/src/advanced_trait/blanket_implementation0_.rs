@@ -36,7 +36,8 @@ impl<T: Display> ToString for T {
     // --snip--
 }
 
-fn main() {
+#[test]
+fn t0() {
     let ps = Pair{x:1, y:2};
     ps.cmp_display(); // i32实现了Display + PartialOrd特质
 

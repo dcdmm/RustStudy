@@ -41,7 +41,8 @@ impl<T: Display> Printable for T {
     }
 }
 
-fn main() {
+#[test]
+fn t1() {
     let book = Book {
         title: String::from("Rust"),
     };

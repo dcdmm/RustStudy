@@ -21,7 +21,6 @@ fn t0() {
             OtherStruct
         }
     }
-
     // Usage of the associated type to refer to OtherStruct as <Struct as AssociatedType>::Assoc
     let _other_struct: OtherStruct = <Struct as AssociatedType>::Assoc::new();
 }
@@ -45,8 +44,8 @@ fn t1() {
     }
 
     let mut o = Once(Some(1));
-    println!("{:?}", o.next()); // Some(1)
-    println!("{:?}", o.next()); // None
+    println!("{:?}", o.next()); // print->Some(1)
+    println!("{:?}", o.next()); // print->None
 }
 
 // An example of associated types with generics and where clauses:
