@@ -1,18 +1,17 @@
+#![allow(warnings)]
+
 // 解构嵌套项
 
-#[allow(warnings)]
 struct Point {
     x: i32,
     y: i32,
 }
 
-#[allow(warnings)]
 enum Color {
     Rgb(i32, i32, i32),
     Hsv(i32, i32, i32),
 }
 
-#[allow(warnings)]
 enum Message {
     Quit,
     Move { x: i32, y: i32 },

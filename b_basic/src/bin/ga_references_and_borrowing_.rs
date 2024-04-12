@@ -1,6 +1,7 @@
+#![allow(warnings)]
+
 // 引用与借用常见错误解析 
 
-#[allow(warnings)]
 #[test]
 fn t0() {
     let a = 34;
@@ -15,7 +16,6 @@ fn t0() {
     // println!("{y}"); // {y}:value borrowed here after move
 }
 
-#[allow(warnings)]
 #[test]
 fn t1() {
     // let mut x = 41;
@@ -31,7 +31,6 @@ fn t1() {
     // println!("{b}"); // `{b}`: borrow later used here
 }
 
-#[allow(warnings)]
 #[test]
 fn t2() {
     struct Point{
@@ -50,7 +49,6 @@ fn t2() {
     // let x1 = qr.x;
 }
 
-#[allow(warnings)]
 #[test]
 fn t3() {
     #[derive(Debug)]
@@ -64,7 +62,6 @@ fn t3() {
     // let p_ref_def = *p_ref; // `*p_ref`: move occurs because `*p_ref` has type `People`, which does not implement the `Copy` trait
 }
 
-#[allow(warnings)]
 #[test]
 fn t4() {
     #[derive(Debug)]

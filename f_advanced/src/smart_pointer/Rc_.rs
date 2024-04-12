@@ -8,16 +8,13 @@ The type Rc<T> provides shared ownership of a value of type T, allocated in the 
 Shared references in Rust disallow mutation by default, and Rc is no exception: you cannot generally obtain a mutable reference to something inside an Rc. If you need mutability, put a Cell or RefCell inside the Rc; 
 */
 
-#[allow(warnings)]
 use std::{ops::Deref, rc::Rc};
 
-#[allow(warnings)]
 enum List {
     Cons(i32, Rc<List>),
     Nil,
 }
 
-#[allow(warnings)]
 use List::{Cons, Nil};
 
 #[test]
@@ -36,13 +33,11 @@ fn t0() {
     println!("count after c goes out of scope = {}", Rc::strong_count(&a)); // print->count after c goes out of scope = 2
 }
 
-#[allow(warnings)]
 #[derive(Debug)]
 struct People {
     age: i32,
 }
 
-#[allow(warnings)]
 #[test]
 fn t1() {
     let p = People{age: 10}; // `p`:  move occurs because `p` has type `Rc_::People`, which does not implement the `Copy` trai
@@ -51,7 +46,6 @@ fn t1() {
     // println!("{:?}", p);
 }
 
-#[allow(warnings)]
 #[test]
 fn t3() {
     let p =  People{age: 10};

@@ -1,18 +1,45 @@
 #![allow(non_snake_case)]
+#![allow(warnings)]
 
 // Shortcuts for Panic on Error
 
 /*
 常见方法:
-unwarp
-unwarp_err
+ok / err
+unwarp / unwarp_err
 expect
  */
 
-#[allow(warnings)]
 use std::fs::File;
 
-#[allow(warnings)]
+#[test]
+fn ok_err_test() {
+    let x: Result<u32, &str> = Ok(2);
+    
+    let x_mctch = match x {
+        Ok(z) => Some(z),
+        Err(_) => None,
+    };
+    println!("{:?}", x_mctch); // print->Some(2)
+    /*
+    Converts from Result<T, E> to Option<T>.
+
+    Converts self into an Option<T>, consuming self, and discarding the error, if any.
+     */
+    println!("{:?}", x.ok()); // 与上等价;print->Some(2)
+
+    /*
+    Converts from Result<T, E> to Option<E>.
+
+    Converts self into an Option<E>, consuming self, and discarding the success value, if any.
+     */
+    println!("{:?}", x.err()); // print->None
+
+    let y: Result<u32, &str> = Err("Nothing here");
+    println!("{:?}", y.ok()); // print->None
+    println!("{:?}", y.err()); // print->Some("Nothing here")
+}
+
 #[test]
 fn unwrap_test0() {
     /*
@@ -25,7 +52,6 @@ fn unwrap_test0() {
     println!("{}", x.unwrap()); // print->2
 }
 
-#[allow(warnings)]
 #[test]
 fn unwrap_test1() {
     let y: Result<u32, &str> = Err("emergency failure");
@@ -33,7 +59,6 @@ fn unwrap_test1() {
     println!("{}", y.unwrap());
 }
 
-#[allow(warnings)]
 #[test]
 fn unwrap_test2() {
     // panicked:called `Result::unwrap()` on an `Err` value: Os { code: 2, kind: NotFound, message: "系统找不到指定的文件。" }
@@ -56,7 +81,6 @@ fn unwrap_err_test() {
     x.unwrap_err(); 
 }
 
-#[allow(warnings)]
 #[test]
 fn expect_test0() {
     /*
@@ -70,6 +94,5 @@ fn expect_test0() {
     x.expect("Testing expect"); 
 }
 
-#[allow(warnings)]
 fn main() {
 }

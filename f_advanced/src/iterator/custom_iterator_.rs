@@ -4,7 +4,6 @@ struct Counter {
     count: u32,
 }
 
-#[allow(warnings)]
 impl Counter {
     fn new() -> Counter {
         Counter { count: 0 }

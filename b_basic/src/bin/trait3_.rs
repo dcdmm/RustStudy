@@ -1,11 +1,11 @@
+#![allow(warnings)]
+
 // trait(Returning Types that Implement Traits)
 
-#[allow(warnings)]
 trait Summary {
     fn summarize(&self) -> String;
 }
 
-#[allow(warnings)]
 struct Tweet {
     username: String,
     content: String,
@@ -24,7 +24,6 @@ By using impl Summary for the return type, we specify that the returns_summariza
 
 However, you can only use impl Trait if you’re returning a single type.
 */
-#[allow(warnings)]
 fn returns_summarizable() -> impl Summary {  
     Tweet {
         username: String::from("horse_ebooks"),

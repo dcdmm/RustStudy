@@ -1,6 +1,5 @@
 // Trait std::ops::Deref/Implicit Deref Coercions with Functions and Methods
 
-#[allow(warnings)]
 use std::ops::Deref;
 
 #[test]

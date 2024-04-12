@@ -1,7 +1,8 @@
+#![allow(warnings)]
+
 // 结构体的定义与创建实例(类似元组)
 
 // 结构体的定义
-#[allow(warnings)]
 struct User {
     active: bool,
     username: String,
@@ -9,7 +10,6 @@ struct User {
     sign_in_count: u64,
 }
 
-#[allow(warnings)]
 fn build_user_sample(email: String, username: String) -> User {
     User {
         // username: username,

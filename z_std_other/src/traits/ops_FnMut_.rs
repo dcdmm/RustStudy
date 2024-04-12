@@ -72,7 +72,6 @@ fn t12() {
 
 #[test]
 fn t13() {
-    #[allow(warnings)]
     fn update_string_fn(pstr: &str) -> &str {
         pstr
     }

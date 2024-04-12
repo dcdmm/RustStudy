@@ -21,7 +21,6 @@ fn t0() {
     println!("b = {}", b);
 }
 
-#[allow(warnings)]
 #[test]
 fn t2() {
     // // error[E0072]: recursive type `List` has infinite size

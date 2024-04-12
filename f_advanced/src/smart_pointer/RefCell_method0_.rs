@@ -7,7 +7,6 @@ borrow / borrow_mut
 get_mut
  */
 
-#[allow(warnings)]
 use std::cell::RefCell;
 
 #[test]

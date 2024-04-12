@@ -25,11 +25,8 @@ There are three common methods which can create iterators from a collection:
     impl<T, A> IntoIterator for VecDeque<T, A>
 */
 
-#[allow(warnings)]
 use std::collections::HashMap;
-#[allow(warnings)]
 use std::collections::HashSet;
-#[allow(warnings)]
 use std::collections::VecDeque;
 
 // Slices are either mutable(&mut [T]) or shared(&[T]),故没有IntoIterator的[T]实现

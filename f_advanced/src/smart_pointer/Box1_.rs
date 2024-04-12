@@ -1,12 +1,10 @@
 // Box常见错误解析 
 
-#[allow(warnings)]
 #[derive(Debug)]
 struct People {
     age: i32,
 }
 
-#[allow(warnings)]
 #[test]
 fn t1() {
     let p0 = People { age: 10 };
@@ -16,7 +14,6 @@ fn t1() {
     // println!("{:?}", p0);
 }
 
-#[allow(warnings)]
 #[test]
 fn t2() {
     let p0 = People { age: 10 };
@@ -28,7 +25,6 @@ fn t2() {
     // println!("{:?}", p0_box);
 }
 
-#[allow(warnings)]
 #[test]
 fn t3() {
     let p0 = People { age: 10 };

@@ -7,22 +7,18 @@ Function pointers implement all three of the closure traits (Fn, FnMut, and FnOn
 It’s best to write functions using a generic type and one of the closure traits so your functions can accept either functions or closures.
  */
 
-#[allow(warnings)]
 fn add_one(x: i32) -> i32 {
     x + 1
 }
 
-#[allow(warnings)]
 fn subtract_one(x: i32) -> i32 {
     x - 1
 }
 
-#[allow(warnings)]
 fn do_twice_fn(f: fn(i32) -> i32, arg: i32) -> i32 { // 参数为函数指针
     f(arg) + f(arg)
 }
 
-#[allow(warnings)]
 fn do_twice_f_fn<F>(f: F, arg: i32) -> i32
 where
     F: Fn(i32) -> i32,  // 实现了闭包类型(即Fn(i32) -> i32)的参数
@@ -30,7 +26,6 @@ where
     f(arg) + f(arg)
 }
 
-#[allow(warnings)]
 fn select_function(add: bool) -> fn(i32) -> i32 { // 返回值为函数指针
     if add {
         add_one
@@ -58,7 +53,6 @@ fn t1() {
 
 #[test]
 fn t2() {
-    #[allow(warnings)]
     enum Status {
         Value(u32),
         Stop,

@@ -24,8 +24,10 @@ fn refutable_irrefutable() {
     if let t_ = 5 {
         println!("{}", t_)
     }
-
-    // let t_ir = 5;
+    // 修正如下所示:
+    // *****************************************************************
+    let _t_ir = 5;
+    // *****************************************************************
 }
 
 #[test]
@@ -53,9 +55,8 @@ fn t0() {
     // *****************************************************
     // let Statements
 
-    // x is a pattern that means “bind what matches here to the variable x.”
-    #[allow(warnings)]
-    let x = 5;
+    // _x is a pattern that means “bind what matches here to the variable _x.”
+    let _x = 5;
 
     /*
     Rust compares the value (1, 2, 3) to the pattern (_x, _y, _z) and sees that the value matches the pattern, so Rust binds 1 to _x, 2 to _y, and 3 to _z. You can think of this tuple pattern as nesting three individual variable patterns inside it.

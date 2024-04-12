@@ -50,7 +50,6 @@ impl<T: ?Sized, A: Allocator> Deref for Rc<T, A> {
     type Target = T;
 */
 
-#[allow(warnings)]
 use std::ops::Deref;
 
 #[test]
@@ -74,7 +73,6 @@ fn t0() {
     assert_eq!(5, *x_rc);
 }
 
-#[allow(warnings)]
 #[test]
 fn t1_0() {
     struct MyBox<T>(T); // tuple structs

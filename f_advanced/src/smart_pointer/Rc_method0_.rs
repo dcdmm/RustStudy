@@ -61,7 +61,6 @@ fn downgrade_weak_count_test() {
     println!("{}", Rc::strong_count(&five)); // print->1
 }
 
-#[allow(warnings)]
 #[test]
 fn get_mut_test() {
     use std::rc::Rc;

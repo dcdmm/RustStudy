@@ -1,13 +1,13 @@
+#![allow(warnings)]
+
 // 解构枚举
 
 #[derive(Debug)]
-#[allow(warnings)]
 enum UsState {
     Alabama,
     Alaska,
 }
 
-#[allow(warnings)]
 enum Coin {
     Penny,
     Nickel,
@@ -15,7 +15,6 @@ enum Coin {
     Quarter(UsState),
 }
 
-#[allow(warnings)]
 fn value_in_cents(coin: Coin) -> u8 {
     match coin {
         Coin::Penny => 1,

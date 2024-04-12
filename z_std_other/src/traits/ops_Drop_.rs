@@ -21,7 +21,6 @@ unsafe impl<#[may_dangle] T: ?Sized, A: Allocator> Drop for Rc<T, A>
 unsafe impl<#[may_dangle] T: ?Sized, A: Allocator> Drop for Weak<T, A>
 */
 
-#[allow(warnings)]
 #[test]
 fn t0() {
     struct HasDrop {

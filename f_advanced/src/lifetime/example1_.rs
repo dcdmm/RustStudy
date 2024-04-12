@@ -23,7 +23,6 @@ fn t0() {
     // println!("{}", r); // `r`: borrow later used here
 }
 
-#[allow(warnings)]
 #[test]
 fn t1() {
     // 结构体S的两个字段具有独立的生命周期(对字段x所做的操作不会影响字段y中的内容)
