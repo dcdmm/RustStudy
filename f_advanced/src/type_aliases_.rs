@@ -28,7 +28,11 @@ fn t1() {
 
     type PBox<T> = Box<Point<T>>;
 
-    let point1 = Box::new(Point { x: 1, y: 2 });
+    let point_box: PBox<i32> = Box::new(Point { x: 10, y: 20 });
+
+    fn create_point<T>(x: T, y: T) -> PBox<T> {
+        Box::new(Point { x, y })
+    }
 }
 
 // In traits, type is used to declare an associated type:
