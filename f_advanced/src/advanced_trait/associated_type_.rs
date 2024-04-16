@@ -4,8 +4,6 @@
 Associated types connect a type placeholder with a trait such that the trait method definitions can use these placeholder types in their signatures. The implementor of a trait will specify the concrete type to be used instead of the placeholder type for the particular implementation. That way, we can define a trait that uses some types without needing to know exactly what those types are until the trait is implemented.
 */
 
-use std::thread::AccessError;
-
 #[test]
 fn t0() {
     trait AssociatedType {
@@ -29,7 +27,7 @@ fn t0() {
     }
 
     // Usage of the associated type to refer to OtherStruct as <Struct as AssociatedType>::Assoc
-    let _other_struct = <Struct as AssociatedType>::Assoc::new();    
+    let _other_struct = <Struct as AssociatedType>::Assoc::new();
 }
 
 #[test]
