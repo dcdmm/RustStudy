@@ -23,12 +23,28 @@ impl<T> Point<T> {
     }
 }
 
+// c++对比(当有多个模板可供选择,编译器将使用具体化程度最高的模板):CPPStudy\f_template\a_base\specialization0.cpp
+// // error[E0592]: duplicate definitions with name `return_x`
+// impl<T> Point<T> { // `fn return_x(&self) -> &T`: duplicate definitions for `return_x`
+//     fn return_x(&self) -> &T {
+//         &self.x
+//     }
+// }
+
 /*
 We can also specify constraints on generic types when defining methods on the type. We could, for example, implement methods only on Point<f32> instances rather than on Point<T> instances with any generic type. Here we use the concrete type f32, meaning we don’t declare any types after impl.
  */
 impl Point<f32> {
-    fn distance_from_origin(&self) -> f32 {
-        self.x + self.y
+    fn return_x(&self) -> &f32 {
+        // `fn return_x(&self) -> &f32`: other definition for `return_x`
+        &self.x
+    }
+}
+
+#[allow(warnings)]
+impl Point<String> {
+    fn return_x(&self) -> &String {
+        &self.x
     }
 }
 
@@ -53,7 +69,7 @@ fn main() {
     let p = Point { x: 1.0, y: 2.0 };
     println!("p.x = {}", p.return_xy().x);
     println!("p.y = {}", p.return_xy().y);
-    println!("{}", p.distance_from_origin()); // 要求p的类型必须为Point<f32>
+    println!("{}", p.return_x()); // 要求p的类型必须为Point<f32>
 
     let p1 = Point1 { x: 5, y: 10.4 };
     let p2 = Point1 { x: "hello", y: 'c' };
@@ -70,7 +86,11 @@ struct Point {
 
     Point(T x_, T y_) : x(x_), y(y_) {}
 
-    float distance_from_origin() { return x + y; }
+    Point<T&> return_xy() {
+        return Point<T&>(x, y);
+    }
+
+    float return_x() { return x; }
 };
 
 

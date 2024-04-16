@@ -2,6 +2,17 @@
 
 // trait(Traits as Parameters/Trait Bound Syntax)
 
+/*
+// Trait Bound Syntax
+函数定义:fn func_<T: tbs>(x: T)
+结构体定义:struct Struct_<T: tbs>
+枚举定义:enum Enum_<T: tbs>
+方法定义:impl<T: tbs> Type_<T>
+特质定义:trait Trait_<T: tbs>
+实现特质(为具体的泛型类型Type_<T>(其泛型参数T满足tbs约束)实现特质Trait_):impl<T: tbs> Trait_ for Type_<T>
+实现特质(为满足tbs约束的泛型类型T实现特质Trait_):impl<T: tbs> Trait_ for T
+*/
+
 use std::fmt::Debug;
 use std::fmt::Display;
 
@@ -16,13 +27,6 @@ fn notify_sample(item: &impl Summary) {
 }
 
 // 与上等价
-// Trait Bound Syntax
-// 函数定义:fn func_<T: tbs>(x: T)
-// 结构体定义:struct Struct_<T: tbs>
-// 枚举定义:enum Enum_<T: tbs>
-// 方法定义:impl<T: tbs> Type_<T>
-// 实现特质(为具体的泛型类型Type_<T>(其泛型参数T满足tbs约束)实现特质Trait_):impl<T: tbs> Trait_ for Type_<T>
-// 实现特质(为满足tbs约束的泛型类型T实现特质Trait_):impl<T: tbs> Trait_ for T
 fn notify_bound<T: Summary>(item: &T) {
     println!("Breaking news! {}", item.summarize());
 }
