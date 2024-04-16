@@ -8,8 +8,8 @@ mod smart_pointer;
 mod advanced_trait;
 
 mod function_pointers_;
-mod type_aliases_;
-mod type_cast_;
+mod type_aliase_;
+mod type_cast_keyword_as_;
 
 fn main() {
     println!("Hello, world!");
