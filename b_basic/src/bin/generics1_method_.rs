@@ -69,7 +69,7 @@ fn main() {
     let p = Point { x: 1.0, y: 2.0 };
     println!("p.x = {}", p.return_xy().x);
     println!("p.y = {}", p.return_xy().y);
-    println!("{}", p.return_x()); // 要求p的类型必须为Point<f32>
+    println!("{}", p.return_x()); // 调用的方法为(p的类型为Point<f32>):fn return_x(&self) -> &f32
 
     let p1 = Point1 { x: 5, y: 10.4 };
     let p2 = Point1 { x: "hello", y: 'c' };
@@ -80,17 +80,52 @@ fn main() {
 /*
 上述功能c++实现:
 template<typename T>
-struct Point {
+class Point {
+public:
     T x;
     T y;
 
     Point(T x_, T y_) : x(x_), y(y_) {}
 
-    Point<T&> return_xy() {
-        return Point<T&>(x, y);
+    Point<T &> return_xy() {
+        return Point<T &>(x, y);
+    }
+};
+
+// 显式具体化
+template<>
+class Point<float> {
+public:
+    float x;
+    float y;
+
+    Point(float x_, float y_) : x(x_), y(y_) {}
+
+    const float &return_x() const {
+        return x;
     }
 
-    float return_x() { return x; }
+    Point<float &> return_xy() {
+        return Point<float &>(x, y);
+    }
+};
+
+// 显式具体化
+template<>
+class Point<std::string> {
+public:
+    std::string x;
+    std::string y;
+
+    Point(std::string x_, std::string y_) : x(x_), y(y_) {}
+
+    const std::string &return_x() const {
+        return x;
+    }
+
+    Point<std::string &> return_xy() {
+        return Point<std::string &>(x, y);
+    }
 };
 
 
