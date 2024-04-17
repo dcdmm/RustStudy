@@ -53,7 +53,7 @@ impl Animal for Dog {
 fn t0() {
     let person = Human;
     person.fly(); // print->fly ===> Human
-    // 指定调用的特征的方法
+    // 指定调用的特质的方法
     Pilot::fly(&person); // print->fly ===> Pilot
     Wizard::fly(&person); // print->fly ===> Wizard
 
