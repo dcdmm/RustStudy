@@ -8,6 +8,7 @@ Cloning is an explicit action, x.clone(). The implementation of Clone can provid
 Clone is a supertrait of Copy, so everything which is Copy must also implement Clone. If a type is Copy then its Clone implementation only needs to return *self (see the example above).
 */
 
+// # 常见实现
 /*
 Copy/Clone: bool/char/f32/f64/i8/i16/i32/i64/i128/u8/u16/u32/u64/u128/()/isize/usize/Error
 Copy/Clone:

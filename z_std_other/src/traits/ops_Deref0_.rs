@@ -18,7 +18,7 @@ The * (dereference) operator is also a unary prefix operator. When applied to a 
 On non-pointer types *x is equivalent to *std::ops::Deref::deref(&x) in an immutable place expression context and *std::ops::DerefMut::deref_mut(&mut x) in a mutable place expression context.
 */
 
-// # Implementors
+// # 常见实现
 /*
 impl<T: ?Sized> Deref for &T {
     type Target = T;
