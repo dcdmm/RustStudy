@@ -6,3 +6,8 @@ mod ops_Deref1_;
 mod ops_Drop_;
 mod clone_Clone_marker_Copy_;
 mod convert_From_Into_;
+mod borrow_Borrow_;
+mod cmp_PartialEq_;
+mod ops_Neg_;
+mod ops_Add_;
+mod ops_AddAssign_;
