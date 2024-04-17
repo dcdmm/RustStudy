@@ -69,7 +69,9 @@ impl<T: Clone> Clone for Point<T> {
     }
 }
 
-#[derive(Clone, Copy, Debug)] // 所有字段都实现Clone、Copy特质时
+// A type can implement Copy if all of its components implement Copy.
+// This trait can be used with #[derive] if all fields are Clone. The derived implementation of Clone calls clone on each field.
+#[derive(Clone, Copy, Debug)]
 struct Point1<T: Clone + Copy> {
     x: T,
     y: T,
@@ -84,4 +86,22 @@ fn t0() {
     let p1 = Point1 { x: 1, y: 2 };
     let p1_c = p1.clone();
     println!("{:?}", p1_c);
+}
+
+#[test]
+fn t1() {
+    #[derive(Debug)]
+    struct Joo;
+    let a = Joo; // `a`: move occurs because `a` has type `Joo`, which does not implement the `Copy` trait
+    // `a` has moved into `b`, and so cannot be used
+    let b = a;
+    // error[E0382]: borrow of moved value: `a`
+    // println!("{a:?}");
+
+    #[derive(Debug, Copy, Clone)]
+    struct Foo;
+    let x = Foo;
+    // `y` is a copy of `x`
+    let y = x;
+    println!("{x:?}"); // print->Foo
 }
