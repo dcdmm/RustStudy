@@ -4,3 +4,4 @@ mod conditionally_implement_;
 mod conditionally_implement_blanket_implementation_;
 mod suptertrait_;
 mod associated_type_;
+mod associated_type_trait_bound_;
