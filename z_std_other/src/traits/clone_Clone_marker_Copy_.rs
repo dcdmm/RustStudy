@@ -6,6 +6,16 @@ Copies happen implicitly, for example as part of an assignment y = x. The behavi
 Cloning is an explicit action, x.clone(). The implementation of Clone can provide any type-specific behavior necessary to duplicate values safely. For example, the implementation of Clone for String needs to copy the pointed-to string buffer in the heap. A simple bitwise copy of String values would merely copy the pointer, leading to a double free down the line. For this reason, String is Clone but not Copy.
 
 Clone is a supertrait of Copy, so everything which is Copy must also implement Clone. If a type is Copy then its Clone implementation only needs to return *self (see the example above).
+
+A type can implement Copy if all of its components implement Copy.
+
+This trait can be used with #[derive] if all fields are Clone. The derived implementation of Clone calls clone on each field.
+*/
+
+// # Required Methods
+/*
+fn clone(&self) -> Self
+    Returns a copy of the value.
 */
 
 // # 常见实现
@@ -58,8 +68,10 @@ struct Point<T> {
     y: T,
 }
 
+// 手动实现
 impl<T: Copy> Copy for Point<T> {}
 
+// 手动实现
 impl<T: Clone> Clone for Point<T> {
     fn clone(&self) -> Self {
         Point {
@@ -69,8 +81,7 @@ impl<T: Clone> Clone for Point<T> {
     }
 }
 
-// A type can implement Copy if all of its components implement Copy.
-// This trait can be used with #[derive] if all fields are Clone. The derived implementation of Clone calls clone on each field.
+// derive属性自动实现
 #[derive(Clone, Copy, Debug)]
 struct Point1<T: Clone + Copy> {
     x: T,
@@ -93,7 +104,7 @@ fn t1() {
     #[derive(Debug)]
     struct Joo;
     let a = Joo; // `a`: move occurs because `a` has type `Joo`, which does not implement the `Copy` trait
-    // `a` has moved into `b`, and so cannot be used
+                 // `a` has moved into `b`, and so cannot be used
     let b = a;
     // error[E0382]: borrow of moved value: `a`
     // println!("{a:?}");

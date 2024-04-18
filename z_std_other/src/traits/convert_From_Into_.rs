@@ -31,6 +31,12 @@ where
     * Into is reflexive, which means that Into<T> for T is implemented
 */
 
+// # Required Methods
+/*
+fn from(value: T) -> Self
+    Converts to this type from the input type.
+*/
+
 // # 常见实现
 /*
 impl From<&str> for String

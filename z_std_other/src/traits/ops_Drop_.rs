@@ -8,6 +8,14 @@ When a value is no longer needed, Rust will run a “destructor” on that value
 You cannot implement both Copy and Drop on the same type. Types that are Copy get implicitly duplicated by the compiler, making it very hard to predict when, and how often destructors will be executed. As such, these types cannot have destructors.
  */
 
+// # Required Methods
+/*
+fn drop(&mut self)
+    Executes the destructor for this type.
+
+    This method is called implicitly when the value goes out of scope, and cannot be called explicitly.
+*/
+
 // # 常见实现
 /*
 unsafe impl<#[may_dangle] T, A: Allocator> Drop for Vec<T, A> 

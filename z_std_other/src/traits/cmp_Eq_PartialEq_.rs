@@ -25,6 +25,12 @@ This property cannot be checked by the compiler, and therefore Eq implies Partia
 This trait can be used with #[derive]. When derived, because Eq has no extra methods, it is only informing the compiler that this is an equivalence relation rather than a partial equivalence relation. Note that the derive strategy requires all fields are Eq, which isn’t always desired.
 */
 
+// Required Methods
+/*
+fn eq(&self, other: &Rhs) -> bool
+    This method tests for self and other values to be equal, and is used by ==.
+*/
+
 #[test]
 fn t0() {
     enum BookFormat {
@@ -38,11 +44,15 @@ fn t0() {
         format: BookFormat,
     }
 
+    // 手动实现
     impl PartialEq for Book {
         fn eq(&self, other: &Self) -> bool {
             self.isbn == other.isbn
         }
     }
+
+    // 手动实现
+    impl Eq for Book {}
 
     let b1 = Book {
         isbn: 3,
@@ -65,6 +75,7 @@ fn t0() {
 
 #[test]
 fn t1() {
+    // derive属性自动实现
     #[derive(PartialEq, Eq)]
     enum BookFormat {
         Paperback,
@@ -112,6 +123,6 @@ fn t1() {
     println!("{}", BookFormat::Ebook != b1); // print->true
     println!("{}", b1 == b2); // print->false
     println!("{}", BookFormat::Paperback == b1.format); // print->true
-    // error[E0277]: can't compare `cmp_Eq_PartialEq_::t1::BookFormat` with `BookFormat1`
-    // println!("{}", BookFormat::Paperback == BookFormat1::Paperback); // `==`: no implementation for `cmp_Eq_PartialEq_::t1::BookFormat == BookFormat1`
+                                                        // error[E0277]: can't compare `cmp_Eq_PartialEq_::t1::BookFormat` with `BookFormat1`
+                                                        // println!("{}", BookFormat::Paperback == BookFormat1::Paperback); // `==`: no implementation for `cmp_Eq_PartialEq_::t1::BookFormat == BookFormat1`
 }

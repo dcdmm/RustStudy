@@ -4,18 +4,27 @@
 Used for immutable dereferencing operations, like *v.
 
 In addition to being used for explicit dereferencing operations with the (unary) * operator in immutable contexts, Deref is also used implicitly by the compiler in many circumstances. This mechanism is called ‘Deref coercion’. In mutable contexts, DerefMut is used.
+*/
 
-# Deref coercion
+// # Deref coercion
+/*
 Rust does deref coercion when it finds types and trait implementations in three cases:
     * From &T to &U when T: Deref<Target=U>
     * From &mut T to &mut U when T: DerefMut<Target=U>
     * From &mut T to &U when T: Deref<Target=U>
+*/
 
-    
-# The dereference operator
+// # The dereference operator
+/*
 The * (dereference) operator is also a unary prefix operator. When applied to a pointer(References (& and &mut)、Raw pointers (*const and *mut)、Smart Pointers) it denotes the pointed-to location.
 
 On non-pointer types *x is equivalent to *std::ops::Deref::deref(&x) in an immutable place expression context and *std::ops::DerefMut::deref_mut(&mut x) in a mutable place expression context.
+*/
+
+// # equired Methods
+/*
+fn deref(&self) -> &Self::Target
+    Dereferences the value.
 */
 
 // # 常见实现
@@ -63,7 +72,7 @@ fn t0() {
     let x_rc = Rc::new(x);
 
     assert_eq!(5, x);
-    // error[E0277]: can't compare `{integer}` with `&{integer}`  
+    // error[E0277]: can't compare `{integer}` with `&{integer}`
     // assert_eq!(5, x_ref);
     assert_eq!(5, *x_ref);
     unsafe {
