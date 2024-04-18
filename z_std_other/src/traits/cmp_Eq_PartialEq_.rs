@@ -123,6 +123,7 @@ fn t1() {
     println!("{}", BookFormat::Ebook != b1); // print->true
     println!("{}", b1 == b2); // print->false
     println!("{}", BookFormat::Paperback == b1.format); // print->true
-                                                        // error[E0277]: can't compare `cmp_Eq_PartialEq_::t1::BookFormat` with `BookFormat1`
-                                                        // println!("{}", BookFormat::Paperback == BookFormat1::Paperback); // `==`: no implementation for `cmp_Eq_PartialEq_::t1::BookFormat == BookFormat1`
+
+    // error[E0277]: can't compare `cmp_Eq_PartialEq_::t1::BookFormat` with `BookFormat1`
+    // println!("{}", BookFormat::Paperback == BookFormat1::Paperback); // `==`: no implementation for `cmp_Eq_PartialEq_::t1::BookFormat == BookFormat1`
 }
