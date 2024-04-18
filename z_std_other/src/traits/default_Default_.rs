@@ -2,7 +2,7 @@
 
 // A trait for giving a type a useful default value.
 
-// # quired Methods
+// # Required Methods
 /*
 fn default() -> Self
     Returns the “default value” for a type.
