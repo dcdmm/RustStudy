@@ -4,13 +4,17 @@
 常见方法:
 Methods from Deref<Target = [T]>: get / split / join
 
-len
-is_empty
+len ===> C++:size/Python:__len__
+is_empty ====> C++:empty
 
-push
-pop
-remove
-insert
+push ===> C++:push_back/Python:append
+insert ===> C++:insert/Python:insert
+pop ===> C++:pop_back/Python:pop
+remove ===> C++:erase/Python:pop(n)
+    * 删除所有出现的value===>C++:std::remove+erase
+    * 删除第一次出现的value===>Python:remove
+reverse ===> C++:std::reverse/Python:reverse
+sort ===> C++:std::sort/Python:sort
  */
 
 #[test]
@@ -19,6 +23,15 @@ fn len_is_empty_test() {
     assert_eq!(a.len(), 3);
     // Returns true if the vector contains no elements.
     assert!(!a.is_empty());
+}
+
+#[test]
+fn clear_test() {
+    let mut v = vec![1, 2, 3];
+
+    v.clear();
+
+    assert!(v.is_empty());
 }
 
 #[test]
@@ -35,6 +48,22 @@ fn push_test() {
     vec_str.push(s); // `s`: value moved here
                      // error[E0382]: borrow of moved value: `s`
                      // println!("{}", s);
+}
+
+#[test]
+fn insert_test() {
+    let mut vec = vec![1, 2, 3];
+
+    /*
+    Inserts an element at position index within the vector, shifting all elements after it to the right.
+
+    # Panics
+    Panics if index > len.
+     */
+    vec.insert(1, 4);
+    assert_eq!(vec, [1, 4, 2, 3]);
+    vec.insert(4, 5);
+    assert_eq!(vec, [1, 4, 2, 3, 5]);
 }
 
 #[test]
@@ -58,17 +87,11 @@ fn remove_test() {
 }
 
 #[test]
-fn insert_test() {
-    let mut vec = vec![1, 2, 3];
+fn reverse_test() {
+    let mut vec = vec![1, 2, 3, 4, 5];
+    println!("Original vector: {:?}", vec);
 
-    /*
-    Inserts an element at position index within the vector, shifting all elements after it to the right.
-
-    # Panics
-    Panics if index > len.
-     */
-    vec.insert(1, 4);
-    assert_eq!(vec, [1, 4, 2, 3]);
-    vec.insert(4, 5);
-    assert_eq!(vec, [1, 4, 2, 3, 5]);
+    // Reverses the order of elements in the slice, in place.
+    vec.reverse();
+    println!("Reversed vector: {:?}", vec);
 }
