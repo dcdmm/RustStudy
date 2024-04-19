@@ -1,4 +1,4 @@
-// std::collections::HashMap
+// std::collections::HashMap(参考C++ unordered_map;参考 Java HashMap;参考Python dict)
 
 /*
 Just like vectors, hash maps store their data on the heap.
@@ -10,21 +10,16 @@ use std::collections::HashMap;
 
 #[test]
 fn create() {
-    /*
-    Creates an empty HashMap.
-    The hash map is initially created with a capacity of 0, so it will not allocate until it is first inserted into.
-     */
-    let _mut_scores: HashMap<String, String> = HashMap::new();
-}
+    let hm: HashMap<String, String> = HashMap::new();
 
-#[test]
-fn iterating() {
-    let mut scores = HashMap::new();
+    let mut hm = HashMap::new();
+    hm.insert("Adventures of Huckleberry Finn", "My favorite book."); // 推断hm的类型为HashMap<&str, &str>
 
-    scores.insert(String::from("Blue"), 10);
-    scores.insert(String::from("Yellow"), 50);
-
-    for (key, value) in &scores {
-        println!("{key}: {value}");
-    }
+    let solar_distance = HashMap::from([
+        ("Mercury", 0.4),
+        ("Venus", 0.7),
+        ("Earth", 1.0),
+        ("Mars", 1.5),
+    ]);
+    println!("{:?}", solar_distance)
 }

@@ -47,8 +47,9 @@ fn push_test() {
     let mut vec_str = Vec::new();
     let s = String::from("hello");
     vec_str.push(s); // `s`: value moved here
-                     // error[E0382]: borrow of moved value: `s`
-                     // println!("{}", s);
+    
+    // error[E0382]: borrow of moved value: `s`
+    // println!("{}", s);
 }
 
 #[test]
