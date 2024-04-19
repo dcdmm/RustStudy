@@ -6,8 +6,6 @@ A contiguous growable array type with heap-allocated contents, written Vec<T>.
 Vectors have O(1) indexing, amortized O(1) push (to the end) and O(1) pop (from the end).
  */
 
-use std::thread::ScopedJoinHandle;
-
 #[test]
 fn t0() {
     let v0 = vec![1, 2, 3, 4];
@@ -21,8 +19,8 @@ fn t0() {
 
     let mut v31 = Vec::new();
     v31.push(3); // 推断v31的类型为Vec<i32>
+    println!("{:?}", v31);
 
-    println!("{:?}", v3);
     let v4 = Vec::from([1, 2, 3, 4, 5]);
     println!("{:?}", v4); // print->[1, 2, 3, 4, 5]
 }
@@ -34,20 +32,6 @@ fn t1() {
 
     // panicked: index out of bounds: the len is 4 but the index is 5
     println!("{}", v[5]);
-}
-
-#[test]
-fn t2() {
-    let v = vec![100, 32, 57];
-    for i in &v {
-        println!("{i}")
-    }
-
-    let mut v1 = vec![1, 2, 3, 4];
-    for j in &mut v1 {
-        *j *= -1;
-    }
-    println!("{:?}", v1)
 }
 
 // Using an Enum to Store Multiple Types

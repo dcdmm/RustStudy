@@ -23,6 +23,13 @@ There are three common methods which can create iterators from a collection:
     impl<'a, T, A> IntoIterator for &'a VecDeque<T, A>
     impl<'a, T, A> IntoIterator for &'a mut VecDeque<T, A>
     impl<T, A> IntoIterator for VecDeque<T, A>
+
+    impl<K, V, S> IntoIterator for HashMap<K, V, S>
+    impl<'a, K, V, S> IntoIterator for &'a HashMap<K, V, S>
+    impl<'a, K, V, S> IntoIterator for &'a mut HashMap<K, V, S>
+
+    impl<T, S> IntoIterator for HashSet<T, S>
+    impl<'a, T, S> IntoIterator for &'a HashSet<T, S>
 */
 
 use std::collections::HashMap;
