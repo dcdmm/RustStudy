@@ -1,6 +1,7 @@
 mod HashMap_;
 mod HashMap_method0_;
 mod HashSet_;
+mod HashMap_Entry_;
 mod HashSet_method0_;
 mod VecDeque_;
 mod VecDeque_method0_;

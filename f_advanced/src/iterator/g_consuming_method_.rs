@@ -7,6 +7,7 @@ fold
 nth
 last
 find
+collect
  */
 
 #[test]

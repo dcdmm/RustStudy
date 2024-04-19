@@ -9,7 +9,7 @@ Like vectors, hash maps are homogeneous: all of the keys must have the same type
 use std::collections::HashMap;
 
 #[test]
-fn create() {
+fn t0() {
     let hm: HashMap<String, String> = HashMap::new();
 
     let mut hm = HashMap::new();
@@ -22,4 +22,13 @@ fn create() {
         ("Mars", 1.5),
     ]);
     println!("{:?}", solar_distance)
+}
+
+#[test]
+fn t1() {
+    let map = HashMap::from([("a", 1), ("b", 2), ("c", 3)]);
+    println!("{}", map["a"]); // print->1
+    // no entry found for key
+    println!("{}", map["d"]);
+    
 }
