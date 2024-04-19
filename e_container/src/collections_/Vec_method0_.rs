@@ -7,6 +7,8 @@ Methods from Deref<Target = [T]>: get / split / join / sort
 len ===> C++:size/Python:__len__
 is_empty ====> C++:empty
 
+clear ===> C++:clear/Python:clear
+
 push ===> C++:push_back/Python:append
 insert ===> C++:insert/Python:insert
 pop ===> C++:pop_back/Python:pop
@@ -93,9 +95,4 @@ fn reverse_test() {
     // Reverses the order of elements in the slice, in place.
     vec.reverse();
     println!("Reversed vector: {:?}", vec);
-}
-
-#[test]
-fn sort_test() {
-
 }
