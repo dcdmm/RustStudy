@@ -2,7 +2,7 @@
 
 /*
 常见方法:
-Methods from Deref<Target = [T]>: get / split / join
+Methods from Deref<Target = [T]>: get / split / join / sort
 
 len ===> C++:size/Python:__len__
 is_empty ====> C++:empty
@@ -14,7 +14,6 @@ remove ===> C++:erase/Python:pop(n)
     * 删除所有出现的value===>C++:std::remove+erase
     * 删除第一次出现的value===>Python:remove
 reverse ===> C++:std::reverse/Python:reverse
-sort ===> C++:std::sort/Python:sort
  */
 
 #[test]
@@ -94,4 +93,9 @@ fn reverse_test() {
     // Reverses the order of elements in the slice, in place.
     vec.reverse();
     println!("Reversed vector: {:?}", vec);
+}
+
+#[test]
+fn sort_test() {
+
 }

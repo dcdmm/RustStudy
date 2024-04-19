@@ -6,6 +6,7 @@ len / is_empty
 get
 split
 join
+sort
  */
 
 #[test]
@@ -64,6 +65,15 @@ fn join_test() {
     assert_eq!(["hello", "world"].join(" "), "hello world");
     assert_eq!([[1, 2], [3, 4]].join(&0), [1, 2, 0, 3, 4]);
     assert_eq!([[1, 2], [3, 4]].join(&[0, 0][..]), [1, 2, 0, 0, 3, 4]);
+}
+
+#[test]
+fn sort_test() {
+    let mut v = [-5, 4, 1, -3, 2];
+
+    // Sorts the slice.
+    v.sort();
+    assert!(v == [-5, -3, 1, 2, 4]);
 }
 
 fn main() {}
