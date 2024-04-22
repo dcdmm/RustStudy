@@ -1,1 +1,0 @@
-// Macro std::format
