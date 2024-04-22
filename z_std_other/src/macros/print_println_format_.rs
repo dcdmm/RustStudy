@@ -77,12 +77,13 @@ fn debug_test() {
     // error[E0277]: `({integer}, {integer})` doesn't implement `std::fmt::Display`
     // println!("{}", (3, 4));
     println!("{:?}", (3, 4)); // print->(3, 4)
-                              /*
-                              print->
-                              (
-                                  3,
-                                  4,
-                              )
-                               */
+    
+    /*
+    print->
+    (
+        3,
+        4,
+    )
+    */
     println!("{:#?}", (3, 4));
 }
