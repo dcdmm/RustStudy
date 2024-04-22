@@ -1,9 +1,12 @@
 // std::collections::HashMap(参考C++ unordered_map;参考 Java HashMap;参考Python dict)
 
 /*
-Just like vectors, hash maps store their data on the heap.
+A hash map implemented with quadratic probing and SIMD lookup.
 
-Like vectors, hash maps are homogeneous: all of the keys must have the same type as each other, and all of the values must have the same type.
+It is required that the keys implement the Eq and Hash traits, although this can frequently be achieved by using #[derive(PartialEq, Eq, Hash)]. If you implement these yourself, it is important that the following property holds:
+`k1 == k2 -> hash(k1) == hash(k2)`
+
+In other words, if two keys are equal, their hashes must be equal. Violating this property is a logic error.
  */
 
 use std::collections::HashMap;
@@ -28,7 +31,6 @@ fn t0() {
 fn t1() {
     let map = HashMap::from([("a", 1), ("b", 2), ("c", 3)]);
     println!("{}", map["a"]); // print->1
-    // no entry found for key
+                              // no entry found for key
     println!("{}", map["d"]);
-    
 }
