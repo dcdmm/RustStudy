@@ -35,6 +35,7 @@ fn t1() {
         y: i32,
     }
 
+    // 手动实现
     impl fmt::Debug for Point {
         fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
             f.debug_struct("Point")
