@@ -1,9 +1,10 @@
-// Macro std::print
-// Macro std::println
 // Macro std::format
+// Macro std::println
+// Macro std::print
 
 #[test]
 fn base_test() {
+    // Creates a String using interpolation of runtime expressions.
     let sf = format!("{a} {c} {b}", a = 1, b = 'b', c = 3);
     println!("{}", sf);
     // Prints to the standard output, with a newline.This macro uses the same syntax as format!, but writes to the standard output instead.
@@ -76,12 +77,12 @@ fn debug_test() {
     // error[E0277]: `({integer}, {integer})` doesn't implement `std::fmt::Display`
     // println!("{}", (3, 4));
     println!("{:?}", (3, 4)); // print->(3, 4)
-    /*
-    print->
-    (
-        3,
-        4,
-    )
-     */
-    println!("{:#?}", (3, 4)); 
+                              /*
+                              print->
+                              (
+                                  3,
+                                  4,
+                              )
+                               */
+    println!("{:#?}", (3, 4));
 }
