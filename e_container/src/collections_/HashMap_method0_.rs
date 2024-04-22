@@ -85,30 +85,35 @@ fn entry_test() {
     let mut letters = HashMap::new();
     let c = letters.entry('c');
     // Gets the given key’s corresponding entry in the map for in-place manipulation.
-    for ch in "a short treatise on fungi".chars() {
+    for ch in "dcdmm".chars() {
         letters
             .entry(ch)
             .and_modify(|counter| *counter += 1)
             .or_insert(1);
     }
 
-    assert_eq!(letters[&'s'], 2);
-    assert_eq!(letters[&'t'], 3);
-    assert_eq!(letters[&'u'], 1);
-    assert_eq!(letters.get(&'y'), None);
+    /*
+    letters结果解析:
+    ch='d' ===> 执行or_insert(1) ===> {'d': 1}
+    ch='c' ===> 执行or_insert(1) ===> {'d': 1, 'c': 1}
+    ch='d' ===> 执行and_modify(|counter| *counter += 1) ===> {'d': 2, 'c': 1}
+    ch='m' ===> 执行or_insert(1) ===> {'d': 2, 'c': 1, 'm': 1}
+    ch='m' ===> 执行and_modify(|counter| *counter += 1) ===> {'d': 2, 'c': 1, 'm': 2}
+     */
+    println!("{:?}", letters);
 }
 
-// #[test]
-// fn remove_test() {
-//     use std::collections::HashMap;
+#[test]
+fn remove_test() {
+    let mut map = HashMap::from([(1, "a"), (2, "b")]);
 
-//     let mut map = HashMap::new();
-//     map.insert(1, "a");
-//     /*
-//     Removes a key from the map, returning the value at the key if the key was previously in the map.
+    /*
+    Removes a key from the map, returning the value at the key if the key was previously in the map.
 
-//     The key may be any borrowed form of the map’s key type, but Hash and Eq on the borrowed form must match those for the key type.
-//      */
-//     assert_eq!(map.remove(&1), Some("a"));
-//     assert_eq!(map.remove(&1), None);
-// }
+    The key may be any borrowed form of the map’s key type, but Hash and Eq on the borrowed form must match those for the key type.
+     */
+    assert_eq!(map.remove(&1), Some("a"));
+    println!("{:?}", map); // print->{2: "b"}
+    assert_eq!(map.remove(&1), None);
+    println!("{:?}", map); // print->{2: "b"}
+}

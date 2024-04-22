@@ -10,6 +10,8 @@ find
 collect
  */
 
+use std::collections::{HashMap, HashSet};
+
 #[test]
 fn count_sum_product_min_max_() {
     let a = [1, 2, 3];
@@ -106,4 +108,39 @@ fn find_test() {
     println!("{:?}", b_iter.next()); // 元素5已经被消耗;print->Some(5)
     println!("{:?}", b_iter.next()); // 元素6已经被消耗;print->Some(6)
     println!("{:?}", b_iter.next()); // print->None
+}
+
+// impl FromIterator<String> for String
+// impl<'a> FromIterator<&'a char> for String
+// impl<'a> FromIterator<&'a str> for String
+// impl<T> FromIterator<T> for Vec<T>
+// impl<T> FromIterator<T> for VecDeque<T>
+// impl<K, V, S> FromIterator<(K, V)> for HashMap<K, V, S> where K: Eq + Hash, S: BuildHasher + Default,
+// impl<T, S> FromIterator<T> for HashSet<T, S> where K: Eq + Hash, S: BuildHasher + Default,
+#[test]
+fn collect_test() {
+    use std::collections::{VecDeque, HashMap, HashSet};
+
+    let a = [1, 2, 3];
+
+    /*
+    Transforms an iterator into a collection.
+    
+    collect实现如下:
+    fn collect<B: FromIterator<Self::Item>>(self) -> B
+    where
+        Self: Sized,
+    {
+        FromIterator::from_iter(self)
+    }
+     */
+    let a_vec: Vec<&i32> = a.iter().collect();
+    let a_deq: VecDeque<i32> = a.iter().map(|&x| x * 2).collect();
+    let a_set: HashSet<&i32> = a.iter().collect();
+    let a_dict: HashMap<i32, &str> = a.iter().map(|&x| (x, "good")).collect();
+    println!("{:?}", a_dict); // print->{1: "good", 2: "good", 3: "good"}
+
+    let chars = ['d', 'c', 'd', 'm', 'm'];
+    let s: String = chars.iter().map(|&x| x).collect();
+    println!("{}", s); // print->dcdmm
 }
