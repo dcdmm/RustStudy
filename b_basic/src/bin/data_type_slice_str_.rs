@@ -17,6 +17,9 @@ fn main() {
     println!("{hello}");
     println!("{:?}", hello_get);
 
+    let mut ms = String::from("hello rust");
+    let _msl = ms.as_mut_str();
+
     // error[E0277]: the type `str` cannot be indexed by `{integer}`
     // let hello0 = &s_str_all0[0]; // 字符串切片不支持索引操作
 

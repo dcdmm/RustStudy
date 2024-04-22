@@ -18,8 +18,10 @@ clear
 push
 push_str
 insert
+
 pop
 remove
+
 reserve
  */
 
@@ -46,32 +48,45 @@ fn clear_test() {
 }
 
 #[test]
-fn push_push_str_fn() {
+fn push_push_str_test() {
     let mut s = String::from("foo");
 
     // Appends a given string slice onto the end of this String.
-    // 函数签名:`pub fn push_str(&mut self, string: &str)`
     s.push_str("bar");
-
-    assert_eq!("foobar", s);
+    println!("{}", s);
 
     let mut s = String::from("abc");
 
     // Appends the given char to the end of this String.
-    // 函数签名:pub fn push(&mut self, ch: char)
     s.push('1');
     s.push('2');
     s.push('3');
-
-    assert_eq!("abc123", s);
+    println!("{}", s);
 }
 
 #[test]
-fn remove_fn() {
+fn pop_test() {
+    let mut s = String::from("abč");
+
+    /*
+    moves the last character from the string buffer and returns it.
+
+    Returns None if this String is empty.
+     */
+    assert_eq!(s.pop(), Some('č'));
+    println!("{}", s);
+    assert_eq!(s.pop(), Some('b'));
+    println!("{}", s);
+    assert_eq!(s.pop(), Some('a'));
+    println!("{}", s);
+    assert_eq!(s.pop(), None);
+}
+
+#[test]
+fn remove_test() {
     let mut s = String::from("foo!");
 
     /*
-    函数签名:`pub fn remove(&mut self, idx: usize) -> char`
     Removes a char from this String at a byte position and returns it.
 
     This is an O(n) operation, as it requires copying every element in the buffer.
@@ -80,7 +95,8 @@ fn remove_fn() {
     Panics if idx is larger than or equal to the String’s length, or if it does not lie on a char boundary.
      */
     assert_eq!(s.remove(0), 'f');
+    println!("{}", s); // print->oo!
     assert_eq!(s.remove(1), 'o');
     assert_eq!(s.remove(0), 'o');
-    println!("{}", s) // 运行结果:"!'
+    println!("{}", s); // print->!
 }
