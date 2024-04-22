@@ -11,10 +11,12 @@ clear ===> C++:clear/Python:clear
 
 push ===> C++:push_back/Python:append
 insert ===> C++:insert/Python:insert
+
 pop ===> C++:pop_back/Python:pop
 remove ===> C++:erase/Python:pop(n)
     * 删除所有出现的value===>C++:std::remove+erase
     * 删除第一次出现的value===>Python:remove
+    
 reverse ===> C++:std::reverse/Python:reverse
  */
 

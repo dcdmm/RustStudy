@@ -10,9 +10,10 @@ keys / values
 clear
 
 get
+entry
 
 insert
-entry
+
 remove
  */
 

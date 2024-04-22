@@ -40,8 +40,8 @@ fn from(value: T) -> Self
 // # 常见实现
 /*
 impl From<&str> for String
-impl From<&String> for String
 impl From<&mut str> for String
+impl From<&String> for String
 impl From<char> for String
 impl From<Box<str>> for String
 

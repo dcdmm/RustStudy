@@ -2,22 +2,29 @@
 
 /*
 常见方法:
-len / is_empty
-push_str / push
-remove
-
 Mathods from Deref<Target=str>:
-len / is_empty
 bytes / chars
 contains
 find
 get
 split
 trim / stars_with / ends_with / to_lowercase / to_uppercase
+
+
+len / is_empty
+
+clear
+
+push
+push_str
+insert
+pop
+remove
+reserve
  */
 
 #[test]
-fn len_is_empty_fn() {
+fn len_is_empty_test() {
     let a = String::from("foo");
     // This length is in bytes, not chars or graphemes. In other words, it might not be what a human considers the length of the string.
     assert_eq!(a.len(), 3);
@@ -27,6 +34,15 @@ fn len_is_empty_fn() {
     assert!(v.is_empty());
     v.push('a');
     assert!(!v.is_empty());
+}
+
+#[test]
+fn clear_test() {
+    let mut s = String::from("foo");
+
+    s.clear();
+    assert!(s.is_empty());
+    assert_eq!(0, s.len())
 }
 
 #[test]
@@ -68,4 +84,3 @@ fn remove_fn() {
     assert_eq!(s.remove(0), 'o');
     println!("{}", s) // 运行结果:"!'
 }
-

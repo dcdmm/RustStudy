@@ -8,6 +8,26 @@ The String type is the most common string type that has ownership over the conte
 
 #[test]
 fn t0() {
+    let mut s0 = String::new();
+    s0.push('1');
+    println!("{}", s0);
+
+    let mut s1 = String::from("hello jave");
+    let msl = s1.as_mut_str();
+    let ms = String::from(msl);
+    let s2 = String::from('s');
+    let s3 = String::from(&s1);
+    let bs = "Hello, world!".to_owned().into_boxed_str();
+    let s4 = String::from(bs);
+}
+
+#[test]
+fn t1() {
+    
+}
+
+#[test]
+fn t20() {
     let s = String::from("hello world");
     // 报错:the type `String` cannot be indexed by `{integer}`
     // let _c = s[0];
@@ -16,9 +36,8 @@ fn t0() {
     let ss = &s[0..4]; // 切片;每个英文字母占用1个字节(UTF-8编码中)
     println!("{}", ss);
     println!("{}", &String::from("你好世界")[0..3]); // 通常情况下,每个中文字占用3个字节(UTF-8编码中)
-    // thread 'main' panicked at 'byte index 4 is not a char boundary; it is inside '好' (bytes 3..6) of `你好世界`'
-    // println!("{}", &String::from("你好世界")[0..4]);
-
+                                                     // thread 'main' panicked at 'byte index 4 is not a char boundary; it is inside '好' (bytes 3..6) of `你好世界`'
+                                                     // println!("{}", &String::from("你好世界")[0..4]);
 
     let s1 = String::from("Hello, ");
     let s2 = String::from("world!");
@@ -48,7 +67,6 @@ fn t0() {
     println!("{s_11}");
 }
 
-
 #[test]
 fn create() {
     // Creating a new, empty String
@@ -65,10 +83,12 @@ fn create() {
 #[test]
 fn iterating() {
     let s = String::from("hello, 我爱中国!");
-    for i in s.chars() { // Returns an iterator over the chars of a string slice.
+    for i in s.chars() {
+        // Returns an iterator over the chars of a string slice.
         println!("{i}")
     }
-    for j in s.bytes() { // An iterator over the bytes of a string slice.
+    for j in s.bytes() {
+        // An iterator over the bytes of a string slice.
         println!("{j}")
     }
 }
