@@ -1,9 +1,6 @@
-#[allow(unused)]
 mod back_of_house {
     /*
-    We can also use pub to designate structs and enums as public, but there are a few details extra to the usage of pub with structs and enums.
-    If we use pub before a struct definition, we make the struct public, but the struct’s fields will still be private.
-    We can make each field public or not on a case-by-case basis.
+    If we use pub before a struct definition, we make the struct public, but the struct’s fields will still be private. We can make each field public or not on a case-by-case basis.
      */
     pub struct Breakfast {
         pub toast: String,
@@ -20,15 +17,11 @@ mod back_of_house {
     }
 }
 
-#[allow(unused)]
 pub fn eat_at_restaurant() {
-    // Order a breakfast in the summer with Rye toast
     let mut meal = back_of_house::Breakfast::summer("Rye");
-    // Change our mind about what bread we'd like
     meal.toast = String::from("Wheat");
-    println!("I'd like {} toast please", meal.toast);
+    println!("{}", meal.toast);
 
-    // The next line won't compile if we uncomment it; we're not allowed
-    // to see or modify the seasonal fruit that comes with the meal
+    // error[E0616]: field `seasonal_fruit` of struct `Breakfast` is private
     // meal.seasonal_fruit = String::from("blueberries");
 }

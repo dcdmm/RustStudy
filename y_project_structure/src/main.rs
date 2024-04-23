@@ -1,3 +1,5 @@
+#![allow(warnings)]
+
 // For a module named `as_public` declared in the crate root, the compiler will look for the module’s code in:
 // 方式一: src/as_public.rs
 // 方式二: src/as_public/mod.rs
