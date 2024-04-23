@@ -1,8 +1,8 @@
 #![allow(warnings)]
 
 // For a module named `file_path` declared in the crate root, the compiler will look for the module’s code in:
-// 方式一(见:src/style1): src/file_path.rs
-// 方式二(见:src/style2): src/file_path/mod.rs
+// 方式一(见:style1): src/file_path.rs
+// 方式二(见:style2): src/file_path/mod.rs
 //
 // For a module named `file_path_sub` that is a submodule of `file_path`, the compiler will look for the module’s code in:
 // 方式一: src/file_path/file_path_sub.rs
@@ -10,17 +10,19 @@
 //
 // 注意:方式一、方式二不能混用
 
+mod base;
+
+mod public_structs_enum_;
+
+mod style1;
+mod style2;
+
 // mod use_keyword0_ {
 //     // use_keyword0_.rs代码
 // }
 mod use_keyword0_; // 与上等价
 mod use_keyword1_;
 mod use_keyword2_;
-
-mod public_structs_enum_;
-
-mod style1;
-mod style2;
 
 #[test]
 fn t0() {
@@ -36,7 +38,7 @@ fn t0() {
 }
 
 fn main() {
-    use public_structs_enum_::eat_at_restaurant_enum as eat_at_restaurant_;
+    use base::eat_at_restaurant as eat_at_restaurant_;
     use use_keyword0_::customer::eat_at_restaurant;
 
     eat_at_restaurant_();
