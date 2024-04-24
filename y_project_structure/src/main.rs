@@ -1,8 +1,8 @@
 #![allow(warnings)]
 
 // For a module named `file_path` declared in the crate root, the compiler will look for the module’s code in:
-// 方式一(见:style1): src/file_path.rs
-// 方式二(见:style2): src/file_path/mod.rs
+// 方式一(如:style1): src/file_path.rs
+// 方式二(如:style2): src/file_path/mod.rs
 //
 // For a module named `file_path_sub` that is a submodule of `file_path`, the compiler will look for the module’s code in:
 // 方式一: src/file_path/file_path_sub.rs
