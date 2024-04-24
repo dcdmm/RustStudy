@@ -10,7 +10,8 @@
 //
 // 注意:方式一、方式二不能混用
 
-mod base;
+mod base0;
+mod base1;
 
 mod public_structs_enum_;
 
@@ -38,11 +39,10 @@ fn t0() {
 }
 
 fn main() {
-    use base::eat_at_restaurant as eat_at_restaurant_;
+    use base0::eat_at_restaurant as eat_at_restaurant_;
     use use_keyword0_::customer::eat_at_restaurant;
 
     eat_at_restaurant_();
     eat_at_restaurant();
-
     use use_keyword2_::hosting;
 }

@@ -4,7 +4,7 @@
 │   ├── main.rs
 │   ├── util.rs
 │   └── util
-|   ├──config.rs
+│      ├──config.rs
 ```
 
 | Module Path         | Filesystem Path    | File Contents |
