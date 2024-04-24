@@ -44,5 +44,6 @@ fn main() {
 
     eat_at_restaurant_();
     eat_at_restaurant();
+
     use use_keyword2_::hosting;
 }

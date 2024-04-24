@@ -18,4 +18,4 @@ use std::io::{self, Write}; // 与上等价
 use std::collections::*;
 
 // Adding rand as a dependency in Cargo.toml tells Cargo to download the rand package and any dependencies from crates.io and make rand available to our project.
-use rand::Rng; // 第三方库
+use rand::Rng; // 使用第三方库
