@@ -11,7 +11,6 @@
 // 注意:方式一、方式二不能混用
 
 mod base0;
-mod base1;
 mod base2_public_structs_enum_;
 
 mod file_path_style1;

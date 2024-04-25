@@ -22,11 +22,11 @@ path = "src/main.rs"
 
 [[bin]]
 name = "custom_binary1"
-path = "cb1.rs"
+path = "cb0.rs"
 
 [[bin]]
 name = "custom_binary2"
-path = "cb2.rs"
+path = "cb1.rs"
 
 [dependencies]
 rand = "0.8.5" 
