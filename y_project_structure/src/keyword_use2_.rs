@@ -1,4 +1,4 @@
-// Bringing Paths into Scope with the use Keyword
+// use关键字
 
 pub mod front_of_house {
     pub mod hosting {
@@ -12,4 +12,4 @@ When we bring a name into scope with the use keyword, the name available in the 
 // pub mod hosting {
 //     pub fn add_to_waitlist() {}
 // }
-pub use crate::use_keyword2_::front_of_house::hosting; // 与上等价
+pub use crate::keyword_use2_::front_of_house::hosting; // 与上等价

@@ -1,4 +1,10 @@
-// Bringing Paths into Scope with the use Keyword
+// use关键字
+
+/*
+Import or rename items from other crates or modules.
+
+Usually a use keyword is used to shorten the path required to refer to a module item. The keyword may appear in modules, blocks and even functions, usually at the top.
+*/
 
 mod front_of_house {
     pub mod hosting {

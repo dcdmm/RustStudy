@@ -14,6 +14,4 @@ edition = "2021"
 rand = "0.8.5" 
 # Features of dependencies can be enabled within the dependency declaration. The features key indicates which features to enable:
 serde = { version = "1.0.142", features = ["derive"] }
-# The default features can be disabled using default-features = false: 
-tokenizers = { version = "0.19.1", default-features = false }
 a_basic = { version = "0.1.0", path = "../a_basic"}
