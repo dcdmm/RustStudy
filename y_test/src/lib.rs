@@ -1,5 +1,11 @@
 #![allow(warnings)]
 
+mod base0;
+mod base1_macro_assert_;
+
+
+
+
 mod ordinary;
 
 /*
@@ -28,10 +34,7 @@ impl Rectangle {
     }
 }
 
-/*
-The #[cfg(test)] annotation on the tests module tells Rust to compile and run the test code only when you run cargo test, not when you run cargo build. 
-This saves compile time when you only want to build the library and saves space in the resulting compiled artifact because the tests are not included.
- */
+
 #[cfg(test)]
 mod tests {
     // use crate::*;
