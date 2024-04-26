@@ -1,11 +1,6 @@
 [package]
-# The name of the package.
 name = "y_package_crate_module"
-# The version of the package.
 version = "0.1.0"
-# The authors of the package.
-authors = ["dc", "dmm"]
-# The Rust edition.
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
