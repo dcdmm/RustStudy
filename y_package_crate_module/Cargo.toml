@@ -1,6 +1,6 @@
 [package]
 # The name of the package.
-name = "y_project_structure"
+name = "y_package_crate_module"
 # The version of the package.
 version = "0.1.0"
 # The authors of the package.
@@ -12,24 +12,21 @@ edition = "2021"
 
 # The library target defines a “library” that can be used and linked by other libraries and executables. The filename defaults to src/lib.rs, and the name of the library defaults to the name of the package. 
 [lib]
-name = "y_project_structure"
+name = "y_package_crate_module"
 path = "src/lib.rs"
 
 # Binary targets are executable programs that can be run after being compiled. The default binary filename is src/main.rs, which defaults to the name of the package. Additional binaries are stored in the src/bin/ directory. 
 [[bin]]
-name = "y_project_structure"
+name = "y_package_crate_module"
 path = "src/main.rs"
 
 [[bin]]
-name = "custom_binary1"
+name = "additional_binary1"
 path = "cb0.rs"
 
 [[bin]]
-name = "custom_binary2"
+name = "additional_binary2"
 path = "cb1.rs"
 
 [dependencies]
 rand = "0.8.5" 
-# Features of dependencies can be enabled within the dependency declaration. The features key indicates which features to enable:
-serde = { version = "1.0.142", features = ["derive"] }
-a_basic = { version = "0.1.0", path = "../a_basic"}
