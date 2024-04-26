@@ -19,10 +19,11 @@ By default, if a test passes, Rust’s test library captures anything printed to
 
 As an example, Listing 1 has a silly function that prints the value of its parameter and returns 10, as well as a test that passes and a test that fails.
 
-Filename: src/lib.rs
-
 ```rust
+// Filename: src/lib.rs
 // Listing 1: Tests for a function that calls println!
+
+#![allow(warnings)]
 
 fn prints_and_returns_10(a: i32) -> i32 {
     println!("I got the value {}", a);
@@ -50,20 +51,6 @@ mod tests {
 When we run these tests with `cargo test`, we’ll see the following output:
 
 ```text
-$ cargo test
-   Compiling y_test v0.1.0 (C:\Users\dcdmm\Music\GitHubProjects\RustStudy\y_test)
-warning: function `prints_and_returns_10` is never used
- --> y_test\src\lib.rs:3:4
-  |
-3 | fn prints_and_returns_10(a: i32) -> i32 {
-  |    ^^^^^^^^^^^^^^^^^^^^^
-  |
-  = note: `#[warn(dead_code)]` on by default
-
-warning: `y_test` (lib) generated 1 warning
-    Finished test [unoptimized + debuginfo] target(s) in 0.51s
-     Running unittests src\lib.rs (C:\Users\dcdmm\Music\GitHubProjects\RustStudy\target\debug\deps\y_test-7c884fa28fc8240d.exe)
-
 running 2 tests
 test tests::this_test_will_pass ... ok
 test tests::this_test_will_fail ... FAILED
@@ -72,9 +59,10 @@ failures:
 
 ---- tests::this_test_will_fail stdout ----
 I got the value 8
-thread 'tests::this_test_will_fail' panicked at 'assertion failed: `(left == right)`
-  left: `5`,
- right: `10`', y_test\src\lib.rs:21:9
+thread 'tests::this_test_will_fail' panicked at f_advanced\src\lib.rs:24:9:
+assertion `left == right` failed
+  left: 5
+ right: 10
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 
 
@@ -97,19 +85,6 @@ cargo test -- --show-output
 When we run the tests in Listing 1 again with the --show-output flag, we see the following output:
 
 ```text
-$ cargo test -- --show-output
-warning: function `prints_and_returns_10` is never used
- --> y_test\src\lib.rs:3:4
-  |
-3 | fn prints_and_returns_10(a: i32) -> i32 {
-  |    ^^^^^^^^^^^^^^^^^^^^^
-  |
-  = note: `#[warn(dead_code)]` on by default
-
-warning: `y_test` (lib) generated 1 warning
-    Finished test [unoptimized + debuginfo] target(s) in 0.03s
-     Running unittests src\lib.rs (C:\Users\dcdmm\Music\GitHubProjects\RustStudy\target\debug\deps\y_test-7c884fa28fc8240d.exe)
-
 running 2 tests
 test tests::this_test_will_pass ... ok
 test tests::this_test_will_fail ... FAILED
@@ -127,9 +102,10 @@ failures:
 
 ---- tests::this_test_will_fail stdout ----
 I got the value 8
-thread 'tests::this_test_will_fail' panicked at 'assertion failed: `(left == right)`
-  left: `5`,
- right: `10`', y_test\src\lib.rs:21:9
+thread 'tests::this_test_will_fail' panicked at f_advanced\src\lib.rs:24:9:
+assertion `left == right` failed
+  left: 5
+ right: 10
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 
 
@@ -145,9 +121,9 @@ error: test failed, to rerun pass `--lib`
 
 Sometimes a few specific tests can be very time-consuming to execute, so you might want to exclude them during most runs of `cargo test`. Rather than listing as arguments all tests you do want to run, you can instead annotate the time-consuming tests using the ignore attribute to exclude them, as shown here:
 
-Filename: src/lib.rs
-
 ```rust
+// Filename: src/lib.rs
+
 #[test]
 fn it_works() {
     assert_eq!(2 + 2, 4);
