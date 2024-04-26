@@ -1,20 +1,11 @@
 #![allow(warnings)]
 
-// For a module named `file_path` declared in the crate root, the compiler will look for the module’s code in:
-// 方式一(如:file_path_style1): src/file_path.rs
-// 方式二(如:file_path_style2): src/file_path/mod.rs
-//
-// For a module named `file_path_sub` that is a submodule of `file_path`, the compiler will look for the module’s code in:
-// 方式一: src/file_path/file_path_sub.rs
-// 方式二: src/file_path/file_path_sub/mod.rs
-//
-// 注意:方式一、方式二不能混用
-
 mod base0;
 mod base2_public_structs_enum_;
 
 mod file_path_style1;
 mod file_path_style2;
+use file_path_style2::file_path_style2_sub::arithmetic3_::primary::pt;
 
 // mod use_keyword0_ {
 //     // use_keyword0_.rs代码

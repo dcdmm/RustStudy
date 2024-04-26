@@ -1,6 +1,6 @@
 #![allow(warnings)]
 
-mod arithmetic3_;
+mod ob2_xxx;
 
 extern crate y_project_structure;
 
@@ -9,7 +9,7 @@ use y_project_structure::base1::outer_mod::inner_mod::pub_mod_visible_fn; // pub
 // use y_project_structure::base1::outer_mod::inner_mod::crate_visible_fn; // pub(crate)修饰
 
 fn main() {
-    arithmetic3_::primary::pt(3, 4);
+    ob2_xxx::print::print_ln("hello rust!");
 
     pub_mod_visible_fn();
     println!("Hello, world!");
