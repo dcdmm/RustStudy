@@ -5,8 +5,13 @@
 #[test]
 fn arrert_test() {
     // Asserts that a boolean expression is true at runtime.
-    assert!(true, "x wasn't true!");
+    assert!(true);
 
+    /*
+    # Custom Messages
+
+    This macro has a second form, where a custom panic message can be provided with or without arguments for formatting. See std::fmt for syntax for this form. Expressions used as format arguments will only be evaluated if the assertion fails.
+     */
     // paniced: x wasn't true!
     assert!(false, "x wasn't true!");
 
@@ -16,12 +21,13 @@ fn arrert_test() {
 }
 
 #[test]
-fn arrert_eq_test() {
+fn assert_eq_test() {
     let a = 3;
     let b = 1 + 2;
     // Asserts that two expressions are equal to each other (using PartialEq).
     assert_eq!(a, b);
 
+    // Like assert!, this macro has a second form, where a custom panic message can be provided.
     assert_eq!(a, b, "we are testing addition with {} and {}", a, b);
 
     /*
@@ -34,14 +40,15 @@ fn arrert_eq_test() {
 }
 
 #[test]
-fn arrert_ne_test() {
+fn assert_ne_test() {
     let a = 3;
     let b = 2;
     // Asserts that two expressions are not equal to each other (using PartialEq).
     assert_ne!(a, b);
 
+    // Like assert!, this macro has a second form, where a custom panic message can be provided.
     assert_ne!(a, b, "we are testing that the values are not equal");
-    
+
     /*
     panicked:
     assertion `left != right` failed: we are testing that the values are not equal

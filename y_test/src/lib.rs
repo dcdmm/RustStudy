@@ -3,9 +3,6 @@
 mod base0;
 mod base1_macro_assert_;
 
-
-
-
 mod ordinary;
 
 /*
