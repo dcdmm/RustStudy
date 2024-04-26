@@ -17,7 +17,7 @@ mod front_of_house {
     Both absolute and relative paths are followed by one or more identifiers separated by double colons (::).
     */
     pub fn public_function() {
-        crate::base0::front_of_house::hosting::add_to_waitlist(); // 绝对路径
+        crate::base0_::front_of_house::hosting::add_to_waitlist(); // 绝对路径
         hosting::add_to_waitlist(); // 相对路径
 
         // error[E0603]: function `seat_at_table` is private
@@ -43,7 +43,7 @@ mod front_of_house {
 }
 
 pub fn eat_at_restaurant() {
-    crate::base0::front_of_house::hosting::add_to_waitlist();
+    crate::base0_::front_of_house::hosting::add_to_waitlist();
 
     front_of_house::hosting::add_to_waitlist();
 

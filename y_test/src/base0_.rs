@@ -15,4 +15,12 @@ mod tests {
         let result = add(2, 2);
         assert_eq!(result, 4);
     }
+
+    #[test]
+    fn panics_test() {
+        /*
+        Tests fail when something in the test function panics. Each test is run in a new thread, and when the main thread sees that a test thread has died, the test is marked as failed.
+        */
+        panic!("Make this test fail");
+    }
 }
