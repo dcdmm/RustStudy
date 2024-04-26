@@ -32,10 +32,10 @@
 * Source code goes in the src directory.
 * The default library file is src/lib.rs.
 * The default executable file is src/main.rs.
-  * Other executables can be placed in src/bin/.
+  * Other executables can be placed in src/bin/(见:src/bin/ob1.rs).
 * Benchmarks go in the benches directory.
 * Examples go in the examples directory.
 * Integration tests go in the tests directory.
 
 
-If a binary, example, bench, or integration test consists of multiple source files, place a main.rs file along with the extra modules within a subdirectory of the src/bin, examples, benches, or tests directory. The name of the executable will be the directory name.
+If a binary, example, bench, or integration test consists of multiple source files, place a main.rs file along with the extra modules within a subdirectory(见:src/bin/ob2) of the src/bin, examples, benches, or tests directory. The name of the executable will be the directory name.
