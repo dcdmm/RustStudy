@@ -8,7 +8,7 @@ When no target selection options are given, cargo test will build the following 
 * integration tests
 * doc tests for the lib target
 
-***
+### 测试示例
 
 * 测试src/lib.rs
 ```shell
@@ -45,18 +45,18 @@ cargo test --bin bin_test
 cargo test --bins
 ```
 
-<!-- * tests/integration_test0.rs
+* 测试tests/integration_test0.rs
 ```shell
 cargo test --test integration_test0
 ```
 
-* src/ordinary.rs
-  * mod ordinary;  ===>mainrs
-        ```shell
-        cargo test --bin y_test
-        ```
-   * mod ordinary; ===>lib.rs
-        ```shell
-        cargo test --lib
-        ``` -->
+* 测试src/normal_test.rs
+  * main.rs ===> mod normal_test;
+     ```shell
+     cargo test --bin y_test -- normal_test # y_test为包名
+     ```
+   * lib.rs ===> mod ordinary;
+     ```shell
+     cargo test --lib -- normal_test
+     ``` 
 
