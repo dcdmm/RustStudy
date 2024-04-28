@@ -10,19 +10,19 @@ When no target selection options are given, cargo test will build the following 
 
 ***
 
-* src/lib.rs
+* 测试src/lib.rs
 ```shell
 cargo test --lib
 ```
 
-* src/main.rs
+* 测试src/main.rs
 ```shell
-cargo test --bin y_test
+cargo test --bin y_test # y_test为包名
 ```
 
-* src/bin/example0.rs
+* src/bin/bin_test.rs
 ```shell
-cargo test --bin example0
+cargo test --bin bin_test
 ```
 
 * tests/integration_test0.rs

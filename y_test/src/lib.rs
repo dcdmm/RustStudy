@@ -4,7 +4,7 @@ mod base0_;
 mod base1_macro_assert_;
 mod base2_attribute_should_panic_;
 mod base3_result_Result_;
-mod ordinary;
+mod other_test;
 
 /*
 The three sections of output include the unit tests, the integration test, and the doc tests.

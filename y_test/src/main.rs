@@ -1,12 +1,14 @@
 #[cfg(test)]
 mod tests {
     #[test]
-    fn ordinary0_test0() {
+    fn main_t0() {
         assert!(true)
     }
 
     #[test]
-    fn ordinary0_test1() {
+    fn main_t1() {
         assert_eq!(3, 1 + 2)
     }
 }
+
+fn main() {}
