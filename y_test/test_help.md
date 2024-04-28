@@ -1,3 +1,11 @@
+There are two styles of tests within a Cargo project:
+
+* Unit tests which are functions marked with the #[test] attribute located within your library or binaries (or any target enabled with the test field). These tests have access to private APIs located within the target they are defined in.
+
+* Integration tests which is a separate executable binary, also containing `#[test]` functions, which is linked with the project’s library and has access to its public API.
+
+### Target Selection
+
 When no target selection options are given, cargo test will build the following targets of the selected packages:
 
 * lib — used to link with binaries, examples, integration tests, and doc tests
@@ -8,7 +16,7 @@ When no target selection options are given, cargo test will build the following 
 * integration tests
 * doc tests for the lib target
 
-### 测试示例
+#### 示例
 
 * 测试src/lib.rs
 ```shell

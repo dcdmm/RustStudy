@@ -1,21 +1,14 @@
-/*
-There are two styles of tests within a Cargo project:
-
-* Unit tests which are functions marked with the #[test] attribute located within your library or binaries (or any target enabled with the test field). These tests have access to private APIs located within the target they are defined in.
-
-* Integration tests* which is a separate executable binary, also containing `#[test]` functions, which is linked with the project’s library and has access to its *public* API.
- */
+// Integration Tests
 
 /*
-We create a tests directory at the top level of our project directory, next to src. Cargo knows to look for integration test files in this directory. We can then make as many test files as we want, and Cargo will compile each of the files as an individual crate.
+Integration Tests目录位置:项目顶层目录(即与src目录同级)
 
-Each file in the tests directory is a separate crate, so we need to bring our library into each test crate’s scope. For that reason we add use `y_test` at the top of the code, which we didn’t need in the unit tests.
+tests目录下每个文件都是一个单独的crate(即导入lib.rs内容时,不同文件需要单独导入)
 
-We don’t need to annotate any code in tests/integration_test.rs with #[cfg(test)]. Cargo treats the tests directory specially and compiles files in this directory only when we run cargo test.
+Integration Tests中不需要添加#[cfg(test)]注解(即只有运行Integration Tests时,对应文件才会被编译)
 
-The three sections of output include the unit tests, the integration test, and the doc tests. Note that if any test in a section fails, the following sections will not be run. For example, if a unit test fails, there won’t be any output for integration and doc tests because those tests will only be run if all unit tests are passing.
+Integration Tests的输出包含单元测试(unit tests)、集成测试(integration test)和文档测试(doc tests),如果某个部分存在测试失败情况,则剩余部分不会被运行(example:如果单元测试存在测试失败情况,则集成测试和文档测试不会有任何输出)
 */
-
 use y_test;
 
 #[test]
