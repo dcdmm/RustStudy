@@ -20,12 +20,32 @@ cargo test --lib
 cargo test --bin y_test # y_test为包名
 ```
 
-* src/bin/bin_test.rs
+* 测试src/main.rs tests_0模块
+```shell
+cargo test --bin y_test -- tests_0  # y_test为包名
+```
+
+* 测试src/main.rs tests_0模块下函数main_test0_t0
+```shell
+cargo test --bin y_test -- tests_0::main_test0_t0  # y_test为包名
+```
+
+* 测试src/main.rs tests_0函数t0
+```shell
+cargo test --bin y_test -- t0 --exact  # y_test为包名
+```
+
+* 测试src/bin/bin_test.rs
 ```shell
 cargo test --bin bin_test
 ```
 
-* tests/integration_test0.rs
+* Test all binary targets.
+```shell
+cargo test --bins
+```
+
+<!-- * tests/integration_test0.rs
 ```shell
 cargo test --test integration_test0
 ```
@@ -38,9 +58,5 @@ cargo test --test integration_test0
    * mod ordinary; ===>lib.rs
         ```shell
         cargo test --lib
-        ```
+        ``` -->
 
-* Test all binary targets.
-```shell
-cargo test --bins
-```

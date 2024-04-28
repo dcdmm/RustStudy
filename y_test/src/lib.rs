@@ -15,18 +15,3 @@ For example, if a unit test fails, there won’t be any output for integration a
 pub fn add_two(a: i32) -> i32 {
     a + 2
 }
-
-fn internal_adder(a: i32, b: i32) -> i32 {
-    a + b
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_private_functions() {
-        // Testing Private Functions
-        assert_eq!(4, internal_adder(2, 2));
-    }
-}
