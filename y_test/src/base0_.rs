@@ -7,11 +7,7 @@ pub fn add(left: usize, right: usize) -> usize {
 mod tests {
     use super::*;
 
-    /*
-    The test attribute
-
-    The test attribute marks a function to be executed as a test. These functions are only compiled when in test mode.
-     */
+    // The test attribute marks a function to be executed as a test. These functions are only compiled when in test mode.
     #[test]
     fn it_works() {
         let result = add(2, 2);

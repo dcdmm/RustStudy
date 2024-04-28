@@ -1,6 +1,4 @@
-// Macro std::assert
-// Macro std::assert_eq
-// Macro std::assert_ne
+// Macro std::assert/Macro std::assert_eq/Macro std::assert_ne
 
 #[test]
 fn arrert_test() {
