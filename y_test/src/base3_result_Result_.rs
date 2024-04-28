@@ -4,10 +4,8 @@ fn return_r_result() -> Result<(), String> {
     if 2 + 2 == 5 {
         Ok(())
     } else {
-        Err(String::from("two plus two does not equal four"))
+        Err(String::from("two plus two does not equal four")) // 测试失败
     }
-
-    // 测试失败
 }
 
 /*

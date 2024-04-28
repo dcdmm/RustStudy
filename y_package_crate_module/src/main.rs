@@ -2,6 +2,7 @@
 
 mod base0_;
 mod base2_public_structs_enum_;
+pub mod base1_;
 
 mod file_path_style1;
 mod file_path_style2;

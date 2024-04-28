@@ -4,7 +4,6 @@ mod base0_;
 mod base1_macro_assert_;
 mod base2_attribute_should_panic_;
 mod base3_result_Result_;
-
 mod ordinary;
 
 /*
