@@ -1,3 +1,11 @@
+#![allow(warnings)]
+
+mod base0_;
+mod base1_macro_assert_;
+mod base3_attribute_should_panic_;
+mod base2_result_Result_;
+mod other_test;
+
 #[cfg(test)]
 mod tests_0 {
     #[test]
