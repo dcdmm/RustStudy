@@ -14,7 +14,7 @@ mod tests_0 {
     }
 
     #[test]
-    fn main_test0_t1() {
+    fn main_test0_t01() {
         assert_eq!(3, 1 + 2)
     }
 }
