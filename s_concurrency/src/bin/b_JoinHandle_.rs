@@ -1,3 +1,5 @@
+#![allow(non_snake_case)]
+
 // Waiting for All Threads to Finish Using join Handles
 
 use std::thread;

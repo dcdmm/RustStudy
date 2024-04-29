@@ -9,10 +9,12 @@ fn main() {
     /*
     Spawns a new thread, returning a JoinHandle for it.
 
+    spawn实现如下:
     pub fn spawn<F, T>(f: F) -> JoinHandle<T>
     where
-        F: FnOnce() -> T + Send + 'static,
-        T: Send + 'static,
+        F: FnOnce() -> T,
+        F: Send + 'static,
+        T: Send + 'static
      */
     thread::spawn(|| {
         for i in 1..10 {
