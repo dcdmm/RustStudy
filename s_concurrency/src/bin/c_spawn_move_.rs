@@ -7,8 +7,8 @@ fn main() {
 
     // error[E0373]: closure may outlive the current function, but it borrows `v`, which is owned by the current function
     // let handle = thread::spawn(|| {
-    //     println!("Here's a vector: {:?}", v);
-    // });
+    //     println!("Here's a vector: {:?}", v); // 捕获作用域中值的不可变借用(自动实现Fn trait)
+    // }); // Rust can’t tell how long the spawned thread will run, so it doesn’t know if the reference to v will always be valid.
     // 修正如下:
     // *****************************************************************
     // Using the move keyword to force a closure to take ownership of the values it uses
@@ -16,6 +16,5 @@ fn main() {
         println!("Here's a vector: {:?}", v);
     });
     // *****************************************************************
-
     handle.join().unwrap();
 }
