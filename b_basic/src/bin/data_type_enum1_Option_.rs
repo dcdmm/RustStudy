@@ -32,12 +32,14 @@ fn main() {
     let _some_number: Option<i32> = Some(5);
     let _some_char = Some('C');
 
-    /*
-    For _absent_number, Rust requires us to annotate the overall Option type: the compiler can’t infer the type that the corresponding Some variant will hold by looking only at a None value. Here, we tell Rust that we mean for _absent_number to be of type Option<i32>.
-    */
+    // For _absent_number, Rust requires us to annotate the overall Option type: the compiler can’t infer the type that the corresponding Some variant will hold by looking only at a None value.
     // error[E0282]: type annotations needed for `Option<T>`
     // let _absent_number = None;
-    let _absent_number: Option<i32> = None;
+    // 修正如下所示:
+    // *****************************************************************
+    let _absent_number_infer: Option<i32> = None; // 推断Option中T的类型为i32
+    let _absent_number_tubofish = Option::<i32>::None; // 显式指定Option中T的类型为i32
+    // *****************************************************************
 
     let _x: i8 = 5;
     let _y: Option<i8> = Some(5);
