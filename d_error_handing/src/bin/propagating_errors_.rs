@@ -62,10 +62,12 @@ fn last_char_of_first_line(text: &str) -> Option<char> {
 //     let greeting_file = File::open("hello_propagating_errors0.txt")?;
 // }
 // 修正如下所示:
+// ****************************************************************
 fn test0_right() -> Result<(), Box<dyn Error>> {
     let greeting_file = File::open("hello_propagating_errors0.txt")?;
     Ok(())
 }
+// ****************************************************************
 
 // fn test_error1(arr: &[i32]) -> Option<&i32> {
 //     // error[E0308]: `?` operator has incompatible types

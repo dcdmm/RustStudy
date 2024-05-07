@@ -9,7 +9,7 @@ fn main() {
     // let handle = thread::spawn(|| {
     //     println!("Here's a vector: {:?}", v); // 捕获作用域中值的不可变借用(自动实现Fn trait)
     // }); // Rust can’t tell how long the spawned thread will run, so it doesn’t know if the reference to v will always be valid.
-    // 修正如下:
+    // 修正如下所示:
     // *****************************************************************
     // Using the move keyword to force a closure to take ownership of the values it uses
     let handle = thread::spawn(move || {
