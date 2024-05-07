@@ -26,8 +26,8 @@ fn borrow_borrow_mut_test0() {
 
         The borrow lasts until the returned Ref exits scope. Multiple immutable borrows can be taken out at the same time.
 
-    # Panics
-        Panics if the value is currently mutably borrowed. For a non-panicking variant, use try_borrow.
+        # Panics
+            Panics if the value is currently mutably borrowed. For a non-panicking variant, use try_borrow.
 
 
     pub fn borrow_mut(&self) -> RefMut<'_, T>
@@ -35,8 +35,8 @@ fn borrow_borrow_mut_test0() {
 
         The borrow lasts until the returned RefMut or all RefMuts derived from it exit scope. The value cannot be borrowed while this borrow is active.
 
-    # Panics
-        Panics if the value is currently borrowed. For a non-panicking variant, use try_borrow_mut.
+        # Panics
+            Panics if the value is currently borrowed. For a non-panicking variant, use try_borrow_mut.
      */
 
     let c = RefCell::new(5);

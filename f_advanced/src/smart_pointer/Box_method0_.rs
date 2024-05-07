@@ -26,7 +26,7 @@ fn leak_test() {
     where
         A: 'a,
 
-    Consumes and leaks the Box, returning a mutable reference, &'a mut T. Note that the type T must outlive the chosen lifetime 'a. If the type has only static references, or none at all, then this may be chosen to be 'static.
+        Consumes and leaks the Box, returning a mutable reference, &'a mut T. Note that the type T must outlive the chosen lifetime 'a. If the type has only static references, or none at all, then this may be chosen to be 'static.
      */
     let static_ref: &mut i32 = Box::leak(x); // `x`: value moved here
     *static_ref += 1;

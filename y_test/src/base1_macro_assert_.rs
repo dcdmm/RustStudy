@@ -5,9 +5,8 @@ fn arrert_test() {
     // Asserts that a boolean expression is true at runtime.
     assert!(true);
 
+    // # Custom Messages
     /*
-    # Custom Messages
-
     This macro has a second form, where a custom panic message can be provided with or without arguments for formatting. See std::fmt for syntax for this form. Expressions used as format arguments will only be evaluated if the assertion fails.
      */
     // paniced: x wasn't true!

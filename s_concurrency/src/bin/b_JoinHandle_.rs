@@ -24,8 +24,8 @@ fn main() {
         Waits for the associated thread to finish.
         If the associated thread panics, Err is returned with the parameter given to panic!.
 
-    # Panics
-        This function may panic on some platforms if a thread attempts to join itself or otherwise may create a deadlock with joining threads.
+        # Panics
+            This function may panic on some platforms if a thread attempts to join itself or otherwise may create a deadlock with joining threads.
      */
     handle.join().unwrap();
 }

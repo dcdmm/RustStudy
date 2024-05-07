@@ -13,26 +13,23 @@ Mutexes have a reputation for being difficult to use because you have to remembe
 use std::sync::Mutex;
 
 fn main() {
+    // Creates a new mutex in an unlocked state ready for use.
     let m = Mutex::new(5);
+
     {
         /*
-        To access the data inside the mutex, we use the lock method to acquire the lock.
-        This call will block the current thread so it can’t do any work until it’s our turn to have the lock.
+        pub fn lock(&self) -> LockResult<MutexGuard<'_, T>>
+            Acquires a mutex, blocking the current thread until it is able to do so.
 
-        The call to lock would fail if another thread holding the lock panicked.
-        In that case, no one would ever be able to get the lock, so we’ve chosen to unwrap and have this thread panic if we’re in that situation
+            # Errors
+            If another user of this mutex panicked while holding the mutex, then this call will return an error once the mutex is acquired.
+
+            # Panics
+            This function might panic when called if the lock is already held by the current thread.
          */
         let mut num = m.lock().unwrap();
-        /*
-        After we’ve acquired the lock, we can treat the return value, named num in this case, as a mutable reference to the data inside.
-        The type system ensures that we acquire a lock before using the value in m.
-        The type of m is Mutex<i32>, not i32, so we must call lock to be able to use the i32 value. We can’t forget; the type system won’t let us access the inner i32 otherwise.
-
-        The MutexGuard smart pointer implements Deref to point at our inner data;
-        the smart pointer also has a Drop implementation that releases the lock automatically when a MutexGuard goes out of scope, which happens at the end of the inner scope.
-        As a result, we don’t risk forgetting to release the lock and blocking the mutex from being used by other threads, because the lock release happens automatically.
-         */
-        *num = 6; //
+        *num = 6;
     }
-    println!("m = {:?}", m)
+
+    println!("{:?}", m)
 }

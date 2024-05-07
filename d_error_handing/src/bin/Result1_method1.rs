@@ -46,8 +46,8 @@ fn unwrap_test0() {
     /*
     Returns the contained Ok value, consuming the self value.
 
-    # Panics
-    Panics if the value is an Err, with a panic message provided by the Err’s value.
+        # Panics
+        Panics if the value is an Err, with a panic message provided by the Err’s value.
      */
     let x: Result<u32, &str> = Ok(2);
     println!("{}", x.unwrap()); // print->2
