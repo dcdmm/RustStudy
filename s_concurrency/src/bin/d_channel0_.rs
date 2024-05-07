@@ -8,6 +8,7 @@ To accomplish message-sending concurrency, Rust's standard library provides an i
 
 use std::sync::mpsc;
 use std::thread;
+use std::time::Duration;
 
 fn main() {
     /*
@@ -28,33 +29,14 @@ fn main() {
         */
         // error[E0382]: borrow of moved value: `val`
         // println!("val is {}", val);
+
+        thread::sleep(Duration::from_secs(2)); // block for two seconds
+        tx.send(String::from("Delayed for 2 seconds")).unwrap();
     });
 
     // Once a value is sent, recv will return it in a Result<T, E>. When the transmitter closes, recv will return an error to signal that no more values will be coming.
     let received = rx.recv().unwrap();
-    println!("Got:{}", received)
-}
-
-// Buffering behavior:
-#[test]
-fn t0() {
-    use std::sync::mpsc;
-    use std::sync::mpsc::RecvError;
-    use std::thread;
-
-    let (send, recv) = mpsc::channel();
-    let handle = thread::spawn(move || {
-        send.send(1u8).unwrap();
-        send.send(2).unwrap();
-        send.send(3).unwrap();
-        drop(send);
-    });
-
-    // wait for the thread to join so we ensure the sender is dropped
-    handle.join().unwrap();
-
-    assert_eq!(Ok(1), recv.recv());
-    assert_eq!(Ok(2), recv.recv());
-    assert_eq!(Ok(3), recv.recv());
-    assert_eq!(Err(RecvError), recv.recv());
+    println!("{}", received); // Received immediately
+    println!("Waiting...");
+    println!("{}", rx.recv().unwrap()); // Received after 2 seconds
 }
