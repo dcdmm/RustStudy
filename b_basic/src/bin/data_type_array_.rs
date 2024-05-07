@@ -4,10 +4,10 @@
 
 /*
 There are two syntactic forms for creating an array:
-* A list with each element, i.e., [x, y, z].
-* repeat expression [expr; N] where N is how many times to repeat expr in the array. expr must either be:
-*   * A value of a type implementing the Copy trait
-*   * A const value
+    * A list with each element, i.e., [x, y, z].
+    * repeat expression [expr; N] where N is how many times to repeat expr in the array. expr must either be:
+        * A value of a type implementing the Copy trait
+        * A const value
  */
 
 fn main() {

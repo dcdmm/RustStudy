@@ -1,3 +1,5 @@
+#![allow(non_snake_case)]
+
 // Sharing a Mutex<T> Between Multiple Threads
 
 // use std::rc::Rc;

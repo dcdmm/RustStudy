@@ -50,8 +50,8 @@ fn keyword_ref() {
     ref annotates pattern bindings to make them borrow rather than move. It is not a part of the pattern as far as matching is concerned: it does not affect whether a value is matched, only how it is matched.
 
     & vs ref
-    * & denotes that your pattern expects a reference to an object. Hence & is a part of said pattern: &Foo matches different objects than Foo does.
-    * ref indicates that you want a reference to an unpacked value. It is not matched against: Foo(ref foo) matches the same objects as Foo(foo).
+        * & denotes that your pattern expects a reference to an object. Hence & is a part of said pattern: &Foo matches different objects than Foo does.
+        * ref indicates that you want a reference to an unpacked value. It is not matched against: Foo(ref foo) matches the same objects as Foo(foo).
      */
     match e_string {
         Some(ref mut s) => println!("{}", s), // 借用而不是移动匹配结果到局部变量s上(s前添加关键字ref)
