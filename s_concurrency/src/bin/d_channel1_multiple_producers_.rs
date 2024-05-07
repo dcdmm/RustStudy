@@ -4,15 +4,11 @@ use std::sync::mpsc;
 use std::thread;
 use std::time::Duration;
 
-//  Sending multiple messages from multiple producers
 fn main() {
     let (tx, rx) = mpsc::channel();
 
     /*
-    This time, before we create the first spawned thread, we call clone on the transmitter.
-    This will give us a new transmitter we can pass to the first spawned thread.
-    We pass the original transmitter to a second spawned thread.
-    This gives us two threads, each sending different messages to the one receiver.
+    This time, before we create the first spawned thread, we call clone on the transmitter. This will give us a new transmitter we can pass to the first spawned thread. We pass the original transmitter to a second spawned thread. This gives us two threads, each sending different messages to the one receiver.
      */
     let tx1 = tx.clone();
     thread::spawn(move || {
