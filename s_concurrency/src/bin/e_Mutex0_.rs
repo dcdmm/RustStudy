@@ -27,8 +27,8 @@ fn main() {
             # Panics
             This function might panic when called if the lock is already held by the current thread.
          */
-        let mut num = m.lock().unwrap();
-        *num = 6;
+        let mut num = m.lock().unwrap(); 
+        *num = 6; // MutexGuard是一个智能指针(实现了Deref、DerefMut、Drop特质) 
     }
 
     println!("{:?}", m)
