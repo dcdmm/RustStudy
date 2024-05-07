@@ -34,9 +34,38 @@ fn main() {
         tx.send(String::from("Delayed for 2 seconds")).unwrap();
     });
 
-    // Once a value is sent, recv will return it in a Result<T, E>. When the transmitter closes, recv will return an error to signal that no more values will be coming.
+    /*
+    pub fn recv(&self) -> Result<T, RecvError>
+        Attempts to wait for a value on this receiver, returning an error if the corresponding channel has hung up.
+
+        This function will always block the current thread if there is no data available and it’s possible for more data to be sent (at least one sender still exists). Once a message is sent to the corresponding Sender (or SyncSender), this receiver will wake up and return that message.
+
+        If the corresponding Sender has disconnected, or it disconnects while this call is blocking, this call will wake up and return Err to indicate that no more messages can ever be received on this channel. However, since channels are buffered, messages sent before the disconnect will still be properly received.
+     */
     let received = rx.recv().unwrap();
     println!("{}", received); // Received immediately
     println!("Waiting...");
     println!("{}", rx.recv().unwrap()); // Received after 2 seconds
+    println!("{:?}", rx.recv()); // print->Err(RecvError)
+}
+
+#[test]
+fn iter_test() {
+    use std::sync::mpsc::channel;
+    use std::thread;
+
+    let (send, recv) = channel();
+
+    thread::spawn(move || {
+        send.send(1).unwrap();
+        send.send(2).unwrap();
+        send.send(3).unwrap();
+    });
+
+    // Returns an iterator that will block waiting for messages, but never panic!. It will return None when the channel has hung up.
+    let mut iter = recv.iter();
+    assert_eq!(iter.next(), Some(1));
+    assert_eq!(iter.next(), Some(2));
+    assert_eq!(iter.next(), Some(3));
+    assert_eq!(iter.next(), None);
 }
