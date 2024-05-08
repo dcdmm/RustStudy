@@ -4,6 +4,7 @@
 // Sharing a Mutex<T> Between Multiple Threads
 // C++参考: CPPStudy\i_concurrency\mutex_.cpp
 
+use std::ops::Deref;
 use std::rc::Rc;
 use std::sync::{Arc, Mutex};
 use std::thread;
@@ -64,7 +65,7 @@ fn right() {
 
     A cycle between Arc pointers will never be deallocated. For this reason, Weak is used to break cycles. For example, a tree could have strong Arc pointers from parent nodes to children, and Weak pointers from children back to their parents.
      */
-    let counter = Arc::new(Mutex::new(0));
+    let counter = Arc::new(Mutex::new(0)); // Arc是一个智能指针(实现了Deref、Drop特质) 
     let mut handles = vec![];
 
     for _ in 0..10 {
