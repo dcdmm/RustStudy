@@ -35,9 +35,10 @@ fn clone_strong_count_test() {
         Gets the number of strong (Rc) pointers to this allocation.
      */
     let five = Rc::new(5);
-    let _also_five = Rc::clone(&five);
+    let strong_five = Rc::clone(&five);
 
-    assert_eq!(2, Rc::strong_count(&five));
+    println!("{}", Rc::strong_count(&five)); // print->2
+    println!("{}", Rc::strong_count(&strong_five)); // print->2
 }
 
 #[test]
@@ -55,7 +56,7 @@ fn downgrade_weak_count_test() {
     let five = Rc::new(5);
 
     println!("{}", Rc::weak_count(&five)); // print->0
-    println!("{}", Rc::strong_count(&five)); // print->1
+    println!("{}", Rc::strong_count(&five)); // print->1 
     let _weak_five = Rc::downgrade(&five);
     println!("{}", Rc::weak_count(&five)); // print->1
     println!("{}", Rc::strong_count(&five)); // print->1

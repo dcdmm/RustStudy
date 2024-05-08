@@ -5,7 +5,7 @@ A single-threaded reference-counting pointer.
 
 The type Rc<T> provides shared ownership of a value of type T, allocated in the heap. Invoking clone on Rc produces a new pointer to the same allocation in the heap. When the last Rc pointer to a given allocation is destroyed, the value stored in that allocation (often referred to as “inner value”) is also dropped.
 
-Shared references in Rust disallow mutation by default, and Rc is no exception: you cannot generally obtain a mutable reference to something inside an Rc. If you need mutability, put a Cell or RefCell inside the Rc; 
+Shared references in Rust disallow mutation by default, and Rc is no exception: you cannot generally obtain a mutable reference to something inside an Rc. If you need mutability, put a Cell or RefCell inside the Rc;
 */
 
 use std::{ops::Deref, rc::Rc};
@@ -23,7 +23,7 @@ fn t0() {
     println!("count after creating a = {}", Rc::strong_count(&a)); // print->count after creating a = 1
 
     let _b = Cons(3, Rc::clone(&a));
-    println!("count after creating b = {}", Rc::strong_count(&  a)); // print->count after creating b = 2
+    println!("count after creating b = {}", Rc::strong_count(&a)); // print->count after creating b = 2
 
     {
         let _c = Cons(4, Rc::clone(&a));
@@ -40,17 +40,19 @@ struct People {
 
 #[test]
 fn t1() {
-    let p = People{age: 10}; // `p`:  move occurs because `p` has type `Rc_::People`, which does not implement the `Copy` trai
+    let p = People { age: 10 }; // `p`:  move occurs because `p` has type `Rc_::People`, which does not implement the `Copy` trai
     let x = Rc::new(p); // `p`: value moved here
+
     // error[E0382]: borrow of moved value: `p`
     // println!("{:?}", p);
 }
 
 #[test]
 fn t3() {
-    let p =  People{age: 10};
+    let p = People { age: 10 };
 
     let x = Rc::new(p); // Rc<T> enables multiple owners of the same data
+
     // error[E0507]: cannot move out of an `Rc`
     // let x_deref = *x;
 
