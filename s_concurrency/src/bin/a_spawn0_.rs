@@ -1,4 +1,5 @@
 // Creating a New Thread with spawn
+// C++参考: CPPStudy\i_concurrency\base\constructor_join0_.cpp
 
 // the Rust standard library uses a 1:1 model of thread implementation, whereby a program uses one operating system thread per one language thread.
 

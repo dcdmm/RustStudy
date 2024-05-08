@@ -2,6 +2,7 @@
 #![allow(warnings)]
 
 // Sharing a Mutex<T> Between Multiple Threads
+// C++参考: CPPStudy\i_concurrency\mutex_.cpp
 
 use std::rc::Rc;
 use std::sync::{Arc, Mutex};
@@ -82,4 +83,5 @@ fn right() {
     println!("Result: {}", *counter.lock().unwrap());
 }
 
-fn main() {}
+fn main() {
+}

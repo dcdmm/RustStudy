@@ -7,12 +7,12 @@
 #[test]
 fn t0() {
     trait Messenger {
-        fn send(&mut self, msg: &str); 
+        fn send(&mut self, msg: &str);
     }
 
     struct LimitTracker<'a, T: Messenger> {
         // 2. 要求messenger必须是可变的
-        messenger: &'a mut T, 
+        messenger: &'a mut T,
         value: usize,
         max: usize,
     }
@@ -129,8 +129,7 @@ fn t1() {
 
     impl Messenger for MockMessenger {
         fn send(&self, message: &str) {
-            // A consequence of the borrowing rules is that when you have an immutable value, you can’t borrow it mutably. 
-
+            // A consequence of the borrowing rules is that when you have an immutable value, you can’t borrow it mutably.
             // Interior Mutability: A Mutable Borrow to an Immutable Value
             self.sent_messages.borrow_mut().push(String::from(message));
         }
