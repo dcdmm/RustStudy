@@ -1,5 +1,5 @@
 [package]
-name = "s_concurrency"
+name = "g_concurrency"
 version = "0.1.0"
 edition = "2021"
 
