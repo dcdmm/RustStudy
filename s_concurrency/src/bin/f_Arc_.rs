@@ -70,6 +70,7 @@ fn right() {
 
     for _ in 0..10 {
         let counter = Arc::clone(&counter);
+        // 创建多个线程
         let handle = thread::spawn(move || {
             let mut num = counter.lock().unwrap();
             *num += 1;
@@ -81,7 +82,7 @@ fn right() {
         handle.join().unwrap();
     }
 
-    println!("Result: {}", *counter.lock().unwrap());
+    println!("Result: {:?}", counter); // print->Result: Mutex { data: 10, poisoned: false, .. }
 }
 
 fn main() {
