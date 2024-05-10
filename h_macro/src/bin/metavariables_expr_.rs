@@ -58,7 +58,7 @@ fn expr_test0() {
 #[test]
 fn expr_test1() {
     macro_rules! expressions {
-        // $expr后面可以跟`,`、`;`和`=>`
+        // $expr后面只可以跟`,`、`;`和`=>`
         ($e0:expr, $e1:expr) => {
             // 引用元变量
             $e0 + $e1
