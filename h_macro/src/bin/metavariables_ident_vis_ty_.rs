@@ -9,6 +9,7 @@ fn ident_test0() {
         };
     }
     let x = 666;
+    // x: 变量标识符
     meta_ident!(x); // print->666
     let y = "hello python";
     meta_ident!(y); // print->"hello python"
@@ -31,6 +32,7 @@ fn ident_test1() {
         age: u8,
     }
 
+    // Girl: 结构体标识符
     let mm = meta_ident!(Girl);
     // println!("{:?}", meta_ident!(Girl)); // print->Girl { name: "satori", age: 17 }
 }
@@ -46,7 +48,8 @@ fn complex_test0() {
         }
     };
 }
-
+    // fn: 关键字
+    // add: 函数标识符 
     create_function!(pub fn add, x: i32, y: i32, x + y);
     create_function!(fn subtract, x: i32, y: i32, x - y); // subtract为私有函数
     println!("3 + 4 = {}", add(3, 4));

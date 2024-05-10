@@ -2,7 +2,7 @@
 #[test]
 fn expr_test0() {
     macro_rules! expressions {
-        // expr: 表达式
+        // expr: an expression
         ($e:expr) => {};
     }
 
@@ -60,7 +60,6 @@ fn expr_test1() {
     macro_rules! expressions {
         // $expr后面只可以跟`,`、`;`和`=>`
         ($e0:expr, $e1:expr) => {
-            // 引用元变量
             $e0 + $e1
         };
         ($e0:expr; $e1:expr) => {
