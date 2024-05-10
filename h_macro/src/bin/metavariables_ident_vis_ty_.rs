@@ -41,7 +41,7 @@ fn ident_test1() {
 fn complex_test0() {
     macro_rules! create_function {
     // vis: a possibly empty Visibility qualifier
-    // ty: a Type
+    // ty: a Type(后面只可能跟, ; => = | : > >> [ { as where
     ($vis:vis $func_keyword:ident $func_name:ident, $param1:ident: $type1:ty, $param2:ident: $type2:ty, $body:expr) => {
         $vis fn $func_name($param1: $type1, $param2: $type2) -> i32 {
             $body
@@ -49,15 +49,52 @@ fn complex_test0() {
     };
 }
     // fn: 关键字
-    // add: 函数标识符 
+    // add: 函数标识符
     create_function!(pub fn add, x: i32, y: i32, x + y);
-    create_function!(fn subtract, x: i32, y: i32, x - y); // subtract为私有函数
-    println!("3 + 4 = {}", add(3, 4));
-    println!("3 - 4 = {}", subtract(3, 4));
+    // create_function!(fn subtract, x: i32> y: i32, x - y); // subtract为私有函数
+    // println!("3 + 4 = {}", add(3, 4));
+    // println!("3 - 4 = {}", subtract(3, 4));
 }
 
 #[test]
 fn complex_test1() {
+    macro_rules! mete_ty0 {
+        // ty后跟[
+        ($name:ident, $elem_type:ty[$size:expr]) => {
+            type $name = [$elem_type; $size];
+        };
+    };
+    mete_ty0!(MyArray, u32[12]);
+    let my_array: MyArray = [0; 12];
+    println!("{:?}", my_array);
+
+    macro_rules! mete_ty1 {
+        // ty后跟{
+        ($ty:ty{$name:ident}) => {
+            #[derive(Debug)]
+            struct $name {
+                data: $ty,
+            }
+        };
+    }
+    mete_ty1!(i32 { MyStruct });
+    let my_struct = MyStruct { data: 10 };
+    println!("{:?}", my_struct);
+
+    macro_rules! mete_ty2 {
+        // ty后跟as(where同理)
+        ($value:expr, $target_type:ty as $as_type:ty) => {{
+            let converted_value = $value as $as_type;
+            converted_value
+        }};
+    }
+    let my_f64 = 3.14;
+    let my_i32 = mete_ty2!(my_f64, u32 as i32);
+    println!("{}", my_i32);
+}
+
+#[test]
+fn complex_test2() {
     macro_rules! create_struct_and_methods {
         ($struct_name:ident, $field1_name:ident: $field1_type:ty, $field2_name:ident: $field2_type:ty) => {
             #[derive(Debug)]
