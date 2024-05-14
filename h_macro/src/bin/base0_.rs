@@ -70,12 +70,22 @@ fn t2() {
     // let xr = repeat0!(x += 1);
 
     macro_rules! repeat1 {
-        ($e:expr) => {{
-            $e;
-            "hello rust!"
-        }};
+        ($e:expr) => {
+            // 代码块
+            {
+                $e;
+                "hello rust!" // 表达式
+            }
+        };
     }
     let mut y = 0;
+    /*
+    展开宏调用,即:
+    let yr = {
+        y+=1;
+        "hello rust!"
+    };
+     */
     let yr = repeat1!(y += 1);
     println!("{}", yr); // print->hello rust!
     println!("{y}"); // print->1
