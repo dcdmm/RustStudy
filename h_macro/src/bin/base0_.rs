@@ -1,6 +1,9 @@
 #[test]
 fn t0() {
-    // 单个匹配规则
+    // 宏规则: MacroMatcher => MacroTranscriber
+    // Each rule has two parts: a matcher, describing the syntax that it matches, and a transcriber, describing the syntax that will replace a successfully matched invocation.
+
+    // 单个宏规则
     macro_rules! rule_single {
         () => {
             1 + 3
@@ -11,7 +14,7 @@ fn t0() {
     let _b = rule_single! {}; // 与上等价
     let _c = rule_single![]; // 与上等价
 
-    // 多个匹配规则
+    // 多个宏规则
     macro_rules! rule_many {
         () => {
             1 + 3
@@ -24,12 +27,58 @@ fn t0() {
         }; // 规则3
         () => {}; // 规则4
     }
-    let aa = rule_many!(); // 对应匹配规则1
+    let aa = rule_many!(); // 对应规则1
     println!("{aa}"); // print->4
-    let bb = rule_many!(5); // 对应匹配规则2
+    let bb = rule_many!(5); // 对应规则2
     println!("{bb}"); // print->5
-    let cc = rule_many!(1, 2, 3); // 对应匹配规则3
+    let cc = rule_many!(1, 2, 3); // 对应规则3
     println!("{cc}"); // print->5
+}
+
+#[test]
+fn t1() {
+    macro_rules! repeat {
+        ($e:expr) => {
+            $e;
+            $e;
+            $e;
+        };
+    }
+
+    repeat!(println!("Hello"));
+
+    let mut x = 0;
+    repeat!(x += 1);
+    println!("{x}"); // print->3
+
+    let mut vec = vec![];
+    repeat!(vec.push("a"));
+    println!("{:?}", vec); // print->["a", "a", "a"]
+}
+
+#[allow(warnings)]
+#[test]
+fn t2() {
+    macro_rules! repeat0 {
+        ($e:expr) => {
+            $e;
+            "hello rust!"
+        };
+    }
+    let mut x = 0;
+    // error: macro expansion ignores token `"hello rust!"` and any following
+    // let xr = repeat0!(x += 1);
+
+    macro_rules! repeat1 {
+        ($e:expr) => {{
+            $e;
+            "hello rust!"
+        }};
+    }
+    let mut y = 0;
+    let yr = repeat1!(y += 1);
+    println!("{}", yr); // print->hello rust!
+    println!("{y}"); // print->1
 }
 
 fn main() {}

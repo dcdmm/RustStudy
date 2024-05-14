@@ -51,9 +51,9 @@ fn complex_test0() {
     // fn: 关键字
     // add: 函数标识符
     create_function!(pub fn add, x: i32, y: i32, x + y);
-    // create_function!(fn subtract, x: i32> y: i32, x - y); // subtract为私有函数
-    // println!("3 + 4 = {}", add(3, 4));
-    // println!("3 - 4 = {}", subtract(3, 4));
+    create_function!(fn subtract, x: i32, y: i32, x - y); // subtract为私有函数
+    println!("3 + 4 = {}", add(3, 4));
+    println!("3 - 4 = {}", subtract(3, 4));
 }
 
 #[test]
