@@ -1,3 +1,11 @@
+use h_macro::export_;
+use h_macro::*; // 使用通配符引入所有宏
+
 fn main() {
-    println!("Hello, world!");
+    export_!();
+
+    let _ = use0_!(3, 5);
+    let _ = use1_!(3, 5);
+    let _ = use2_!(3, 5);
+    let _ = use3_!(3, 5);
 }
