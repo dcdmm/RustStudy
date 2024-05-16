@@ -14,7 +14,7 @@ fn t0() {
     let _b = rule_single! {}; // 与上等价
     let _c = rule_single![]; // 与上等价
 
-    // 多个宏规则
+    // 多个宏规则(从上到下的顺序依次匹配)
     macro_rules! rule_many {
         () => {
             1 + 3

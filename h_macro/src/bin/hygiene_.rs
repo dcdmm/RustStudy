@@ -1,3 +1,5 @@
+// By default, all identifiers referred to in a macro are expanded as-is, and are looked up at the macro's invocation site. This can lead to issues if a macro refers to an item or macro which isn't in scope at the invocation site.
+
 #[allow(warnings)]
 #[test]
 fn error() {
