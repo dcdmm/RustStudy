@@ -13,7 +13,7 @@ Don’t implement any automatic cleanup
 fn t0() {
     let mut num = 5;
 
-    let r1 = &num as *const i32;
+    let r1 = &num as *const i32; // 原始指针
     let r2 = &mut num as *mut i32;
 
     // error[E0133]: dereference of raw pointer is unsafe and requires unsafe function or block
