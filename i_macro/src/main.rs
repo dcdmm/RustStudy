@@ -1,5 +1,5 @@
-use h_macro::export_;
-use h_macro::*; // 使用通配符引入所有宏
+use i_macro::export_;
+use i_macro::*; // 使用通配符引入所有宏
 
 fn main() {
     export_!();
