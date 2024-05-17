@@ -8,12 +8,14 @@ enum IpAddrkind {
 
 fn route(_ip_kind: IpAddrkind) {}
 
+#[allow(warnings)]
 enum IpAddr {
     // can put data directly into each enum variant
     V4(String),
     V6(String),
 }
 
+#[allow(warnings)]
 enum IpAddr1 {
     // each variant can have different types and amounts of associated data.
     V4(u8, u16, u32, u64),
