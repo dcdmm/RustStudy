@@ -13,4 +13,4 @@
 * i_macro--->宏
 * y_package_crate_module--->package、crate、module
 * y_test--->测试
-* z_std_other--->标准库其他有用学习
+* z_std_other--->语言其他有用学习

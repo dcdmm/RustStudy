@@ -9,7 +9,6 @@ As an example, Listing 1 has a silly function that prints the value of its param
 // Listing 1: Tests for a function that calls println!
 
 #![allow(warnings)]
-
 fn prints_and_returns_10(a: i32) -> i32 {
     println!("I got the value {}", a);
     10
