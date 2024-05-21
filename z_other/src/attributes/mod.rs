@@ -1,3 +1,1 @@
-
-
-mod lint_;
+mod diagnostics_;
