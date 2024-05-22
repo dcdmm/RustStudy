@@ -1,4 +1,4 @@
-//
+// 类型推断与trubofish语法
 
 fn create_default<T: Default>() -> T {
     T::default()
