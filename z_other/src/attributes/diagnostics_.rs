@@ -1,12 +1,16 @@
 // 参考: https://doc.rust-lang.org/reference/attributes/diagnostics.html
 // 参考: https://doc.rust-lang.org/rustc/lints/index.html
 
-// The unstable_name_collisions lint detects that you have used a name that the standard library plans to add in the future.
-#![allow(unstable_name_collisions)] // 默认为warn
+// 影响整个create(即main.rs或lib.rs开头添加#![attribute])
+// 影响整个模块(即模块文件mod.rs或模块名.rs开头添加#![attribute])
+// 影响整个文件(当前文件开头添加#![attribute])
+#![allow(unstable_name_collisions)]
 #![warn(unstable_name_collisions)]
 #![deny(unstable_name_collisions)]
 #![forbid(unstable_name_collisions)]
 
+// 默认为warn
+// The unstable_name_collisions lint detects that you have used a name that the standard library plans to add in the future.
 #[test]
 fn lint_unstable_name_collisions_test() {
     trait MyIterator: Iterator {
@@ -23,7 +27,7 @@ fn lint_unstable_name_collisions_test() {
 
     let x = vec![1, 2, 3];
 
-    // 默认时警告信息===>warning: a method with this name may be added to the standard library in the future 
+    // 默认时警告信息===>warning: a method with this name may be added to the standard library in the future
 
     // error: a method with this name may be added to the standard library in the future
     // let _ = x.iter().is_sorted();
