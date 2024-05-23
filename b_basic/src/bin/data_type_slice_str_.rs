@@ -4,6 +4,21 @@ fn main() {
     // String literals are string slices:
     let _hello_world: &str = "hello world!";
 
+    let multi_line_str = "hello world!
+    hello python!
+    hello rust!
+hello c++!
+!";
+    /*
+    print->
+    hello world!
+        hello python!
+        hello rust!
+    hello c++!
+    !
+     */
+    println!("{}", multi_line_str);
+
     // String转&str
     let s: String = String::from("hello world 中国");
     let s_str_all0: &str = &s;
