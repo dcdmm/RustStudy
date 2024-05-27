@@ -14,7 +14,7 @@ members = [
     "i_macro", 
     "y_docs",
     "y_package_crate_module",
-    "y_test",
+    "y_tests",
     "z_other", 
     "z_z_tests"
 ]
