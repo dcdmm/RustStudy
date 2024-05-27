@@ -1,8 +1,18 @@
-//! # crate文档注释
+//! # 整个crate的文档注释
 //!
-//! 置于lib.rs文件顶部
+//! 置于lib.rs文件代码内容前
+/*
+cargo doc [options]: Build a package’s documentation
 
-// cargo-doc — Build a package’s documentation
+# ESCRIPTION
+Build the documentation for the local package and all dependencies. The output is placed in target/doc in rustdoc’s usual format.
+
+# OPTIONS
+--open
+    Open the docs in a browser after building them. This will use your default browser unless you define another one in the BROWSER environment variable or use the doc.browser configuration option.
+--document-private-items
+    Include non-public items in the documentation(默认仅为pub项生成文档). This will be enabled by default if documenting a binary target.
+*/
 
 /// x的值加1,并返回
 ///

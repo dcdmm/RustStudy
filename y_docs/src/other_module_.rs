@@ -1,12 +1,14 @@
-//! other_module_模块文档注释
+#![allow(warnings)]
+
+//! # 整个other_module_模块的文档注释
 //!
-//! 置于other_module_.rs文件顶部
+//! 置于other_module_.rs文件代码内容前
 
 /// public_struct模块
 pub mod public_struct {
     /// public_struct模块下Breakfast结构体
     ///
-    /// 这个结构体可以通过关联函数summary创建
+    /// 这个结构体必须通过关联函数sumer创建
     ///
     /// # Examples
     ///
@@ -17,7 +19,7 @@ pub mod public_struct {
     /// ```
     pub struct Breakfast {
         pub toast: String,
-        pub seasonal_fruit: String,
+        seasonal_fruit: String, // 结构体Breakfast文档Fields中不含seasonal_fruit字段(cargo build生成时)
     }
 
     impl Breakfast {

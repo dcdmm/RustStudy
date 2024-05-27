@@ -1,9 +1,9 @@
 // 参考: https://doc.rust-lang.org/reference/attributes/diagnostics.html
 // 参考: https://doc.rust-lang.org/rustc/lints/index.html
 
-// 影响整个create(即main.rs或lib.rs开头添加#![attribute])
-// 影响整个模块(即模块文件mod.rs或模块名.rs开头添加#![attribute])
-// 影响整个文件(当前文件开头添加#![attribute])
+// 影响整个create(即main.rs或lib.rs代码内容前添加#![attribute])
+// 影响整个模块(即模块文件mod.rs或模块名.rs代码内容前添加#![attribute])
+// 影响整个文件(当前文件代码内容前添加#![attribute])
 #![allow(unstable_name_collisions)]
 #![warn(unstable_name_collisions)]
 #![deny(unstable_name_collisions)]
