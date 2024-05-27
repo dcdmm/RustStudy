@@ -1,3 +1,7 @@
+//! other_module_模块文档注释
+//!
+//! 置于other_module_.rs文件顶部
+
 /// public_struct模块
 pub mod public_struct {
     /// public_struct模块下Breakfast结构体
@@ -26,9 +30,9 @@ pub mod public_struct {
     }
 
     /// 字段toast是否以rust开头
-    /// 
+    ///
     /// # Examples
-    /// 
+    ///
     /// ```rust
     /// use crate::other_module_::public_struct;
     /// let x = public_struct::Breakfast::summer("rust base");

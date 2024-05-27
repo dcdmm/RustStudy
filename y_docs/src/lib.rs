@@ -1,14 +1,15 @@
-//! # My Crate
+//! # crate文档注释
 //!
-//! `my_crate` is a collection of utilities to make performing certain
-//! calculations more convenient.
+//! 置于lib.rs文件顶部
+
+// cargo-doc — Build a package’s documentation
 
 /// x的值加1,并返回
-/// 
+///
 /// # Note
-/// 
-/// x的值必须为i32类型
-/// 
+///
+/// x的值必须为`i32`类型
+///
 /// # Examples
 ///
 /// ```
@@ -19,7 +20,13 @@
 ///
 /// assert_eq!(6, answer);
 /// ```
+/// # Panics
+///
+/// 如果x的值小于-1,将发生恐慌
 pub fn add_one(x: i32) -> i32 {
+    if x < -1 {
+        panic!("!");
+    }
     x + 1
 }
 
@@ -58,14 +65,4 @@ pub mod kinds {
     }
 }
 
-/// other_module_模块
 pub mod other_module_;
-
-#[test]
-fn xf() {
-    use crate::other_module_::public_struct;
-
-    let x = public_struct::Breakfast::summer("rust base");
-    let x_bool = x.startwiths_rust();
-    assert_eq!(x_bool, true);
-}
