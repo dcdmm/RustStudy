@@ -1,8 +1,6 @@
-#![allow(warnings)]
-
-//! # 整个other_module_模块的文档注释
+//! # 文档注释(描述整个other_module_模块)
 //!
-//! 置于other_module_.rs文件代码内容前
+//! 置于other_module_.rs文件顶部
 
 /// public_struct模块
 pub mod public_struct {

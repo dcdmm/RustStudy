@@ -1,6 +1,9 @@
-//! # 整个crate的文档注释
+//! # 文档注释(描述整个crate)
 //!
-//! 置于lib.rs文件代码内容前
+//! 置于lib.rs文件代码顶部
+
+#![allow(warnings)]
+
 /*
 cargo doc [options]: Build a package’s documentation
 
