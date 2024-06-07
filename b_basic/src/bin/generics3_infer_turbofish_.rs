@@ -10,8 +10,8 @@ pub enum Result1<T, E> {
 }
 
 fn main() {
-    let _x_infer = create_default::<i32>(); // 推断create_default中T的类型为i32
-    let _x_turbofish: i32 = create_default(); // turbofish语法;显式指定create_default中T的类型为i32
+    let _x_infer = create_default::<i32>(); // turbofish语法;显式指定create_default中T的类型为i32
+    let _x_turbofish: i32 = create_default(); // 推断create_default中T的类型为i32
 
     let _y_infer: Result1<i32, &str> = Result1::Ok(34); // 推断Result1中T的类型i32,E的类型为&str;
     let _y_turbofish = Result1::Ok::<u8, &str>(34); // 显式指定Result1中T的类型i32,E的类型为&str;
