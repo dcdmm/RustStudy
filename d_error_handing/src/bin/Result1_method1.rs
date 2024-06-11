@@ -8,6 +8,7 @@
 ok / err
 unwarp / unwarp_or / unwarp_or_else
 unwarp_err
+cloned
  */
 
 use std::fs::File;
@@ -104,6 +105,23 @@ fn unwrap_err_test() {
     let x: Result<u32, &str> = Ok(2);
     // panicked:called `Result::unwrap_err()` on an `Ok` value: 2
     x.unwrap_err();
+}
+
+#[test]
+fn cloned_test() {
+    let val = 12;
+    let x: Result<&i32, i32> = Ok(&val);
+    assert_eq!(x, Ok(&12));
+
+    // Maps a Result<&T, E> to a Result<T, E> by cloning the contents of the Ok part.
+    let x_cloned = x.cloned();
+    assert_eq!(x_cloned, Ok(12));
+
+    let mut val1 = 22;
+    let x1: Result<&mut i32, i32> = Ok(&mut val1);
+    assert_eq!(x1, Ok(&mut 22));
+    let x1_cloned = x1.cloned();
+    assert_eq!(x1_cloned, Ok(22));
 }
 
 fn main() {}

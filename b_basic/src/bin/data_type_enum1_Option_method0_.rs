@@ -6,6 +6,7 @@
 常见方法:
 is_none / is_some
 unwarp / unwarp_or / unwarp_or_else
+cloned
  */
 
 #[test]
@@ -50,6 +51,23 @@ fn unwarp_or_else_test() {
     // Returns the contained Some value or computes it from a closure.
     println!("{}", Some(4).unwrap_or_else(|| 2 * k)); // print->4
     println!("{}", None.unwrap_or_else(|| 2 * k)); // print->20
+}
+
+#[test]
+fn cloned_test() {
+    let x = 12;
+    let opt_x = Some(&x);
+    assert_eq!(opt_x, Some(&12));
+
+    // Maps an Option<&T> to an Option<T> by copying the contents of the option.
+    let copied = opt_x.copied();
+    assert_eq!(copied, Some(12));
+
+    let mut x1 = 22;
+    let opt_x1 = Some(&mut x1);
+    assert_eq!(opt_x1, Some(&mut 22));
+    let opt_x1_copied = opt_x1.copied();
+    assert_eq!(opt_x1_copied, Some(22));
 }
 
 fn main() {}
