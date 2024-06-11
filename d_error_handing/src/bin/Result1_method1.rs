@@ -6,9 +6,8 @@
 /*
 常见方法:
 ok / err
-unwarp 
+unwarp / unwarp_or / unwarp_or_else
 unwarp_err
-expect
  */
 
 use std::fs::File;
@@ -16,12 +15,13 @@ use std::fs::File;
 #[test]
 fn ok_err_test() {
     let x: Result<u32, &str> = Ok(2);
-    
+
     let x_mctch = match x {
         Ok(z) => Some(z),
         Err(_) => None,
     };
     println!("{:?}", x_mctch); // print->Some(2)
+
     /*
     Converts from Result<T, E> to Option<T>.
 
@@ -46,8 +46,8 @@ fn unwrap_test0() {
     /*
     Returns the contained Ok value, consuming the self value.
 
-        # Panics
-        Panics if the value is an Err, with a panic message provided by the Err’s value.
+    # Panics
+    Panics if the value is an Err, with a panic message provided by the Err’s value.
      */
     let x: Result<u32, &str> = Ok(2);
     println!("{}", x.unwrap()); // print->2
@@ -67,6 +67,30 @@ fn unwrap_test2() {
 }
 
 #[test]
+fn unwarp_or_test() {
+    let default = 2;
+
+    let x: Result<u32, &str> = Ok(9);
+    // Returns the contained Ok value or a provided default.
+    println!("{}", x.unwrap_or(default)); // print->9
+
+    let y: Result<u32, &str> = Err("error");
+    println!("{}", y.unwrap_or(default)); // print->2
+}
+
+#[test]
+fn unwarp_or_else_test() {
+    fn count(x: &str) -> usize {
+        x.len()
+    }
+
+    // Returns the contained Ok value or computes it from a closure.
+    println!("{}", Ok(2).unwrap_or_else(count)); // print->2
+
+    println!("{}", Err("foo").unwrap_or_else(count)); // print->3
+}
+
+#[test]
 fn unwrap_err_test() {
     let x: Result<u32, &str> = Err("emergency failure");
     /*
@@ -79,21 +103,7 @@ fn unwrap_err_test() {
 
     let x: Result<u32, &str> = Ok(2);
     // panicked:called `Result::unwrap_err()` on an `Ok` value: 2
-    x.unwrap_err(); 
+    x.unwrap_err();
 }
 
-#[test]
-fn expect_test0() {
-    /*
-    Returns the contained Ok value, consuming the self value.
-
-    # Panics
-    Panics if the value is an Err, with a panic message including the passed message, and the content of the Err.
-     */
-    let x: Result<u32, &str> = Err("emergency failure");
-    // panicked:Testing expect: "emergency failure"
-    x.expect("Testing expect"); 
-}
-
-fn main() {
-}
+fn main() {}
