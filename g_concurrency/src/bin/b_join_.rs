@@ -1,7 +1,7 @@
 #![allow(non_snake_case)]
 
 // Waiting for All Threads to Finish Using join Handles
-// C++参考: CPPStudy\i_concurrency\base\constructor_join1_.cpp
+// C++参考: CPPStudy\i_concurrency\base\constructor_join0_.cpp
 
 use std::thread;
 use std::time::Duration;
