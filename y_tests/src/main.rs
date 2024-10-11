@@ -2,7 +2,7 @@
 
 mod base0_;
 mod base1_macro_assert_;
-mod base2_result_Result_;
+mod base2_return_Result_;
 mod base3_attribute_should_panic_;
 mod normal_test;
 
