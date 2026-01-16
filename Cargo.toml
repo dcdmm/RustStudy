@@ -12,9 +12,12 @@ members = [
     "g_concurrency", 
     "h_file_operate",
     "i_macro", 
-    "y_docs",
-    "y_package_crate_module",
-    "y_tests",
-    "z_other", 
-    "z_z_tests"
+    "x_docs",
+    "x_package_crate_module",
+    "x_tests",
+    "x_z_other", 
+
+    "y_serde_serde_json",
+
+    "z_tests"
 ]

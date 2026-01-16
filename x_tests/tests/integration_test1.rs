@@ -1,4 +1,4 @@
-use y_tests;
+use x_tests;
 
 /*
 tests目录下添加公共模块(多个integration tests共享)
@@ -10,5 +10,5 @@ mod common;
 #[test]
 fn it_adds_two() {
     common::setup();
-    assert_eq!(4, y_tests::add_two(2));
+    assert_eq!(4, x_tests::add_two(2));
 }

@@ -1,5 +1,5 @@
 [package]
-name = "y_package_crate_module"
+name = "x_package_crate_module"
 version = "0.1.0"
 edition = "2021"
 
