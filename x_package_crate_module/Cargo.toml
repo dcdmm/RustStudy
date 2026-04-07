@@ -7,12 +7,12 @@ edition = "2021"
 
 # The library target defines a “library” that can be used and linked by other libraries and executables. The filename defaults to src/lib.rs, and the name of the library defaults to the name of the package. 
 [lib]
-name = "y_package_crate_module"
+name = "x_package_crate_module"
 path = "src/lib.rs"
 
 # Binary targets are executable programs that can be run after being compiled. The default binary filename is src/main.rs, which defaults to the name of the package. Additional binaries are stored in the src/bin/ directory. 
 [[bin]]
-name = "y_package_crate_module"
+name = "x_package_crate_module"
 path = "src/main.rs"
 
 [[bin]]
