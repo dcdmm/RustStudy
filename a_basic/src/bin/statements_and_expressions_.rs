@@ -12,7 +12,7 @@ fn statements() {
 
     // Function definitions are also statements;
     #[allow(dead_code)]
-    fn inner() { /* outer_var is not in scope here */
+    fn inner() {
     }
 }
 
