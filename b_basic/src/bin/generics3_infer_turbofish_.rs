@@ -1,4 +1,4 @@
-// 类型推断与trubofish语法
+// 类型推断与 turbofish 语法
 
 fn create_default<T: Default>() -> T {
     T::default()
@@ -10,11 +10,15 @@ pub enum Result1<T, E> {
 }
 
 fn main() {
-    let _x_infer = create_default::<i32>(); // turbofish语法;显式指定create_default中T的类型为i32
-    let _x_turbofish: i32 = create_default(); // 推断create_default中T的类型为i32
+    // 通过turbofish显式指定函数create_default泛型参数T为i32
+    let _x_turbofish = create_default::<i32>();
+    // 通过显式标注变量类型,推断函数create_default泛型参数T为i32
+    let _x_infer: i32 = create_default();
 
-    let _y_infer: Result1<i32, &str> = Result1::Ok(34); // 推断Result1中T的类型i32,E的类型为&str;
-    let _y_turbofish = Result1::Ok::<u8, &str>(34); // 显式指定Result1中T的类型i32,E的类型为&str;
+    // 通过显式标注变量类型,推断Result1的泛型参数T为i32、E为&str
+    let _y_infer: Result1<i32, &str> = Result1::Ok(34);
+    // 通过turbofish显式指定Result1的泛型参数T为 u8、E为&str
+    let _y_turbofish = Result1::Ok::<u8, &str>(34);
 }
 
 #[allow(warnings)]
@@ -27,20 +31,25 @@ fn t0() {
 
     let (s0, r0) = mpsc::channel();
     let handle = thread::spawn(move || {
-        s0.send(1).unwrap(); // 推断mpsc::channel中T的类型为i32
+        // 根据发送值的类型推断 mpsc::channel 的泛型参数 T；此处整数默认类型为 i32
+        s0.send(1).unwrap();
     });
     handle.join().unwrap();
     let received = r0.recv().unwrap();
 
-    let (s1, r1): (Sender<i32>, Receiver<i32>) = mpsc::channel(); // 推断mpsc::channel中T的类型为i32
+    //通过显式标注变量类型,推断mpsc::channel 的泛型参数T为i32
+    let (s1, r1): (Sender<i32>, Receiver<i32>) = mpsc::channel();
 
-    let (s2, r2) = mpsc::channel::<i32>(); // 显式指定mpsc::channel中T的类型为i32
+    // 通过turbofish显式指定mpsc::channel的泛型参数T为i32
+    let (s2, r2) = mpsc::channel::<i32>();
 }
 
 #[allow(warnings)]
 #[test]
 fn t2() {
     let a = [1, 2, 3];
-    let a_vec_infef: Vec<&i32> = a.iter().collect(); // 推断Trait std::iter::Iterator collect方法中B的类型为Vec<&i32>
-    let a_vec_turbofish = a.iter().collect::<Vec<&i32>>(); // 显示指定Trait std::iter::Iterator collect方法中B的类型为Vec<&i32>
+    // 通过显式标注变量类型,推断Iterator::collect的泛型参数B为Vec<&i32>
+    let a_vec_infer: Vec<&i32> = a.iter().collect();
+    // 通过turbofish显式指定Iterator::collect 的泛型参数B为Vec<&i32>
+    let a_vec_turbofish = a.iter().collect::<Vec<&i32>>();
 }

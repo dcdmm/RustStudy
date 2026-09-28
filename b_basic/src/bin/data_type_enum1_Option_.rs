@@ -37,8 +37,10 @@ fn main() {
     // let _absent_number = None;
     // 修正如下所示:
     // *****************************************************************
-    let _absent_number_infer: Option<i32> = None; // 显式标注变量类型为 Option<i32>
-    let _absent_number_turbofish = Option::<i32>::None; // 显式指定Option中T的类型为i32
+    // 通过显式标注变量类型,推断泛型参数T为i32
+    let _absent_number_infer: Option<i32> = None;
+    // 通过turbofish显式指定泛型参数T为i32
+    let _absent_number_turbofish = Option::<i32>::None;
     // *****************************************************************
 
     let _x: i8 = 5;

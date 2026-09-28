@@ -12,7 +12,7 @@ impl<T> Point<T> {
     fn return_xy(&self) -> Point<&T> {
         Point {
             x: &self.x,
-            y: &self.x,
+            y: &self.y,
         }
     }
 }
@@ -36,7 +36,6 @@ We can also specify constraints on generic types when defining methods on the ty
  */
 impl Point<f32> {
     fn return_x(&self) -> &f32 {
-        // `fn return_x(&self) -> &f32`: other definition for `return_x`
         &self.x
     }
 }
