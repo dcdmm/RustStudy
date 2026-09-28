@@ -29,7 +29,7 @@ fn main() {
     /*
     The type of _some_number is Option<i32>. The type of _some_char is Option<char>, which is a different type. Rust can infer these types because we’ve specified a value inside the Some variant.
     */
-    let _some_number: Option<i32> = Some(5);
+    let _some_number = Some(5);
     let _some_char = Some('C');
 
     // For _absent_number, Rust requires us to annotate the overall Option type: the compiler can’t infer the type that the corresponding Some variant will hold by looking only at a None value.
@@ -37,8 +37,8 @@ fn main() {
     // let _absent_number = None;
     // 修正如下所示:
     // *****************************************************************
-    let _absent_number_infer: Option<i32> = None; // 推断Option中T的类型为i32
-    let _absent_number_tubofish = Option::<i32>::None; // 显式指定Option中T的类型为i32
+    let _absent_number_infer: Option<i32> = None; // 显式标注变量类型为 Option<i32>
+    let _absent_number_turbofish = Option::<i32>::None; // 显式指定Option中T的类型为i32
     // *****************************************************************
 
     let _x: i8 = 5;
