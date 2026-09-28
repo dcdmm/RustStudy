@@ -16,7 +16,7 @@ impl Rectangle {
     The Self keywords in the return type and in the body of the function are aliases for the type that appears after the impl keyword, which in this case is Rectangle.
      */
     fn square(size: u32) -> Self { // ===本例中即===> fn square(size: u32) -> Rectangle {
-        Self { // ===本例中即==> Rectangle {
+        Self { // ===本例中即===> Rectangle {
             width: size,
             height: size,
         }
