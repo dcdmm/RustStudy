@@ -30,7 +30,7 @@ fn main() {
 // the signature of the function uses & to indicate that the type of the parameter s is a reference.
 fn calculate_length(s: &String) -> usize { // s is a reference to a String
     s.len()
-} // Here, s goes out of scope. But because it does not have ownership of what it refers to, it is not dropped.
+} // Here, s goes out of scope. But because s does not have ownership of what it refers to, the String is not droppe
 ```
 
 First, notice that all the tuple code in the variable declaration and the function return value is gone. Second, note
