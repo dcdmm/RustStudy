@@ -36,7 +36,7 @@ fn notify_sample_long(item1: &impl Summary, item2: &impl Summary) {
 }
 
 // 与上等价
-fn notify_bound_long<T: Summary>(item1: &T, item2: &T) {
+fn notify_bound_long<T: Summary, U: Summary>(item1: &T, item2: &U) {
     println!("Breaking news! {} {}", item1.summarize(), item2.summarize());
 }
 
