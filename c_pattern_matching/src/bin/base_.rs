@@ -13,7 +13,7 @@ fn refutable_irrefutable() {
     // let Some(x) = s_ir; // Some(x):pattern `None` not covered
 
     let s_ = Some(34);
-    // Using if let and a block with refutable patterns instead of le
+    // Using if let and a block with refutable patterns instead of let
     if let Some(x) = s_ {
         println!("{}", x)
     }
