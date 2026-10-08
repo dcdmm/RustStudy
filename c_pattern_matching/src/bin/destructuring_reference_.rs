@@ -14,6 +14,7 @@ fn main() {
 
     let s = &mut Some(String::from("hello rust"));
     if let &mut Some(ref sx_) = s {} // ref sx_类型为&String
+    // When a reference value is matched by a non-reference pattern, it will be automatically treated as a ref or ref mut binding
     if let Some(sx) = s {} // sx类型为&mut String
 
     let t = &mut (String::from("hello rust"), 1);
