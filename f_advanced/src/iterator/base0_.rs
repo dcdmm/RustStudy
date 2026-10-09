@@ -49,9 +49,8 @@ fn slice_test() {
     impl<T, A: Allocator> ops::Deref for Vec<T, A> {
         type Target = [T];
 
-        #[inline]
         fn deref(&self) -> &[T] {
-            unsafe { slice::from_raw_parts(self.as_ptr(), self.len) }
+            self.as_slice()
         }
     }
     ```
