@@ -8,7 +8,7 @@ Rust’s closures are anonymous functions you can save in a variable or pass as 
 fn t0() {
     fn add_v1(x: i32) -> i32 {
         x + 1
-    } // 函数定义
+    } // 普通函数
 
     let add_v2 = |x: i32| -> i32 { x + 1 }; // fully annotated closure definition
     let v2_s0 = add_v2(5);
@@ -18,7 +18,9 @@ fn t0() {
 
 #[test]
 fn t1() {
-    let add_v3 = |x| x + 1; // 省略参数和返回值类型;闭包体只有1行代码(语句或表达式)且未声明返回值类型时,可以省略花括号
+    // 参数和返回值类型可由编译器根据上下文推断
+    // 闭包体是单个表达式且未声明返回值类型时,可以省略花括号
+    let add_v3 = |x| x + 1; 
     let v3_s0 = add_v3(4); // 推断闭包add_v3 x的类型为i32,返回值的类型为i32
 
     // error[E0308]: mismatched types
