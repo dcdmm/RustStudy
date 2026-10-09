@@ -14,7 +14,7 @@ fn only_borrows_() {
     let list = vec![1, 2, 3];
     println!("Before defining closure: {:?}", list);
 
-    // 参考:z_std_trait/std_ops/f_fn_.rs
+    // 参考:x_z_other\src\std_traits\ops_Fn_.rs
     let only_borrows = || println!("From closure: {:?}", list); // 捕获作用域中值的不可变借用(自动实现Fn trait)
 
     println!("Before calling closure: {:?}", list);
@@ -27,7 +27,7 @@ fn borrows_mutably_() {
     let mut list = vec![1, 2, 3];
     println!("Before defining closure: {:?}", list);
 
-    // 参考:z_std_trait/std_ops/f_fn_m_mut_.rs
+    // 参考:x_z_other\src\std_traits\ops_FnMut_.rs
     let mut borrows_mutably = || list.push(7); // 捕获作用域中值的可变借用(该闭包必须声明为可变类型)(自动实现FnMut trait)
 
     // error[E0502]: cannot borrow `list` as immutable because it is also borrowed as mutable
@@ -40,7 +40,7 @@ fn borrows_mutably_() {
 fn take_owership_() {
     let list = vec![1, 2, 3]; // `list`: move occurs because `list` has type `Vec<i32>`, which does not implement the `Copy` trait
 
-    // 参考:z_std_trait/std_ops/f_fn_o_once_.rs
+    // 参考:x_z_other\src\std_traits\ops_FnOnce_.rs
     // move converts any variables captured by reference or mutable reference to variables captured by value.
     let take_owership = move || list; // 获取作用域中值的所有权(自动实现FnOnce trait);`move ||`: value moved into closure here
     take_owership();
