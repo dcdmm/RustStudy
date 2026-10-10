@@ -8,6 +8,7 @@ struct Pair<T> {
     y: T,
 }
 
+// 没有额外约束
 #[allow(warnings)]
 impl<T> Pair<T> {
     fn new(x: T, y: T) -> Self {
@@ -30,7 +31,7 @@ impl<T: Display + PartialOrd> Pair<T> {
 #[test]
 fn t0() {
     let ps = Pair { x: 1, y: 2 };
-    ps.cmp_display(); // i32实现了Display + PartialOrd特质
+    ps.cmp_display(); // i32实现了Display + PartialOrd trait
 
     let ps1 = Pair {
         x: vec![1, 2],
