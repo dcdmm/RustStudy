@@ -76,3 +76,49 @@ fn t0() {
     };
     screen.run();
 }
+
+
+#[test]
+fn t1() {
+    // trait CopyDrawBad {
+    //     fn duplicate(&self) -> Self;
+    // }
+    // // error[E0038]: the trait `CopyDrawBad` is not dyn compatible
+    // fn show_copy_bad(component: &dyn CopyDrawBad) {}
+
+    trait CopyDrawFixed {
+        fn draw(&self);
+        fn duplicate(&self) -> Self
+        where
+            Self: Sized;
+    }
+    fn show_copy_fiexed(component: &dyn CopyDrawFixed) {}
+}
+
+#[test]
+fn t2() {
+    // trait TextDrawBad {
+    //     fn draw<T>(&self, value: T);
+    // }
+    // // error[E0038]: the trait `TextDrawBad` is not dyn compatible
+    // fn show_text_bad(component: &dyn TextDrawBad) {}
+
+    trait TextDrawFixed {
+        fn draw(&self, value: &str);
+    }
+    fn show_text_fixed(component: &dyn TextDrawFixed) {}
+}
+
+#[test]
+fn t3() {
+    // trait CategoryDrawBad {
+    //     fn category() -> u8;
+    // }
+    // // error[E0038]: the trait `CategoryDrawBad` is not dyn compatible
+    // fn show_category_bad(component: &dyn CategoryDrawBad) {}
+
+    trait CategoryDrawFixed {
+        fn category(&self) -> u8;
+    }
+    fn show_category_fixed(component: &dyn CategoryDrawFixed) {}
+}
