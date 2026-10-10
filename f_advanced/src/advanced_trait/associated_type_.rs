@@ -28,6 +28,9 @@ fn t0() {
 
     // Usage of the associated type to refer to OtherStruct as <Struct as AssociatedType>::Assoc
     let _other_struct = <Struct as AssociatedType>::Assoc::new();
+
+    // 与上等价
+    let _other_struct1 = OtherStruct::new();
 }
 
 #[test]
