@@ -69,7 +69,9 @@ fn t0() {
     let mut mock_messenger = MockMessenger::new();
     let mut limit_tracker = LimitTracker::new(&mut mock_messenger, 100);
     limit_tracker.set_value(80);
-    println!("{:?}", mock_messenger.sent_messages);
+    println!("{:?}", limit_tracker.messenger.sent_messages);
+    limit_tracker.set_value(20);
+    println!("{:?}", limit_tracker.messenger.sent_messages);
 }
 
 #[test]
@@ -138,5 +140,7 @@ fn t1() {
     let mut mock_messenger = MockMessenger::new();
     let mut limit_tracker = LimitTracker::new(&mut mock_messenger, 100);
     limit_tracker.set_value(80);
-    println!("{:?}", mock_messenger.sent_messages);
+    println!("{:?}", limit_tracker.messenger.sent_messages);
+    limit_tracker.set_value(20);
+    println!("{:?}", limit_tracker.messenger.sent_messages);
 }
