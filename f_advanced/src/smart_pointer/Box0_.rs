@@ -22,18 +22,16 @@ fn t0() {
 }
 
 #[test]
-fn t2() {
+fn t1() {
+    /*
+    List大小分析：
+    size(List)  ≈ max(size(Cons), size(Nil))
+                ≈ max(size(i32) + size(List), size(Nil))
+                ≈ max(size(i32) + max(size(i32) + size(List), size(Nil)), size(Nil))
+                ≈ ...
+     */
+    // 
     // // error[E0072]: recursive type `List` has infinite size
-    // /*
-    // List大小分析:
-    // size(List) = size(Cons) + size(Nil)
-    //            = size(i32) + size(Cons) + size(Nil)
-    //            = size(i32) + size(i32) + size(Cons) + size(Nil)
-    //            = size(i32) + size(i32) + size(i32) + size(Cons) + size(Nil)
-    //            = size(i32) + size(i32) + size(i32) + size(i32) + size(Cons) + size(Nil)
-    //            = size(i32) + size(i32) + size(i32) + size(i32) + size(i32) + size(Cons) + size(Nil)
-    //             ......
-    //  */
     // enum List {
     //     Cons(i32, List),
     //     Nil,
@@ -41,10 +39,10 @@ fn t2() {
     // let list = List::Cons(1, List::Cons(2, List::Cons(3, List::Nil)));
 
     /*
-    List1大小分析:
-    size(List1) = size(Cons1) + size(Nil1)
-                = size(i32) + size(Box<List1>) + size(Nil1)
-                = size(i32) + size(usize) + size(Nil1)
+    List1大小分析：
+    size(List1) ≈ max(size(Cons1), size(Nil1))
+                ≈ max(size(i32) + size(Box<List1>), size(Nil1))
+                ≈ max(size(i32) + size(usize), size(Nil1))
      */
     enum List1 {
         Cons1(i32, Box<List1>),
