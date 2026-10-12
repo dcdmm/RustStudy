@@ -14,8 +14,8 @@ pub trait Draw {
 pub struct Screen {
     /*
     dyn is a prefix of a trait object’s type.
-    
-    The dyn keyword is used to highlight that calls to methods on the associated Trait are dynamically dispatched. To use the trait this way, it must be ‘object safe’.
+
+    The dyn keyword is used to highlight that calls to methods on the associated Trait are dynamically dispatched. To use the trait this way, it must be dyn compatible.
      */
     pub components: Vec<Box<dyn Draw>>,
 }
@@ -80,6 +80,7 @@ fn t0() {
 
 #[test]
 fn t1() {
+    // 错误原因: Be a method that does not use Self except in the type of the receiver
     // trait CopyDrawBad {
     //     fn duplicate(&self) -> Self;
     // }
@@ -92,11 +93,26 @@ fn t1() {
         where
             Self: Sized;
     }
-    fn show_copy_fiexed(component: &dyn CopyDrawFixed) {}
+    fn show_copy_fiexed(component: &dyn CopyDrawFixed) {
+        // 错误原因: Explicitly non-dispatchable functions require: Have a where Self: Sized bound (receiver type of Self (i.e. self) implies this).
+        // 
+        // error: the `duplicate` method cannot be invoked on a trait object
+        // let copied = component.duplicate();
+    }
+
+    trait CopyDrawBoxFixed {
+        fn draw(&self);
+        fn duplicate(&self) -> Box<dyn CopyDrawBoxFixed>;
+    }
+    fn show_copy_boxed(component: &dyn CopyDrawBoxFixed) {
+        let copied = component.duplicate();
+    }
 }
 
 #[test]
 fn t2() {
+    // 错误原因: Not have any type parameters (although lifetime parameters are allowed)
+    // 
     // trait TextDrawBad {
     //     fn draw<T>(&self, value: T);
     // }
@@ -111,6 +127,14 @@ fn t2() {
 
 #[test]
 fn t3() {
+    // 错误原因: Have a receiver with one of the following types:
+    // * &Self (i.e. &self)
+    // * &mut Self (i.e &mut self)
+    // * Box<Self>
+    // * Rc<Self>
+    // * Arc<Self>
+    // * Pin<P> where P is one of the types above
+    //
     // trait CategoryDrawBad {
     //     fn category() -> u8;
     // }
