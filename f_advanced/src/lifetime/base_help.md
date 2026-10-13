@@ -46,12 +46,8 @@ Here are some examples: a reference to an i32 without a lifetime parameter, a re
 
 ```rust
 // error[E0106]: missing lifetime specifier
-fn longest(x: &str, y: &str) -> &str { // 无法判断返回值是x(引用;具体生命周期未知)还是y(引用;具体生命周期未知),故不能确定返回值(引用)是否始终有效
-    if x.len() > y.len() {
-        x
-    } else {
-        y
-    }
+fn longest(x: &str, y: &str) -> &str { // 通过函数签名无法判断返回的引用是指向x还是y
+    x
 }
 
 fn main() {
@@ -69,11 +65,7 @@ To use lifetime annotations in function signatures, we need to declare the gener
 
 ```rust
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
-    if x.len() > y.len() {
-        x
-    } else {
-        y
-    }
+    x
 }
 
 fn main() {
@@ -167,7 +159,7 @@ We’ve specified a lifetime parameter 'a for the parameter x and the return typ
 When returning a reference from a function, the lifetime parameter for the return type needs to match the lifetime parameter for one of the parameters. If the reference returned does not refer to one of the parameters, it must refer to a value created within this function.
 
 ```rust
-fn longest<'a>(x: &str, y: &str) -> &'a str { // 
+fn longest<'a>(x: &str, y: &str) -> &'a str { 
     let result = String::from("really long string");
     // error[E0515]: cannot return value referencing local variable `result`
     result.as_str()
