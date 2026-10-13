@@ -158,6 +158,13 @@ We’ve specified a lifetime parameter 'a for the parameter x and the return typ
 
 When returning a reference from a function, the lifetime parameter for the return type needs to match the lifetime parameter for one of the parameters. If the reference returned does not refer to one of the parameters, it must refer to a value created within this function.
 
+> 补充:字符串字面量的数据在整个程序运行期间都有效(`&'static str`类型),因此函数可以安全地返回它的引用,而无需让返回值的生命周期关联任何输入参数
+> ```rust
+> fn text() -> &'static str {
+>     "hello"
+> }
+> ```
+
 ```rust
 fn longest<'a>(x: &str, y: &str) -> &'a str { 
     let result = String::from("really long string");
