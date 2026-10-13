@@ -39,7 +39,6 @@ fn main() {
     println!("b rc count after changing a = {}", Rc::strong_count(&b)); // print->b rc count after changing a = 2
     println!("a rc count after changing a = {}", Rc::strong_count(&a)); // print->a rc count after changing a = 2
 
-
     // Uncomment the next line to see that we have a cycle;
     println!("a next item = {:?}", a.tail()); // thread 'main' has overflowed its stack
 }
