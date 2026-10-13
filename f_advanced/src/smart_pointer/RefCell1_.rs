@@ -49,7 +49,7 @@ fn t1() {
 
 #[test]
 fn t2() {
-    use std::cell::RefCell;
+    use std::cell::RefCell; // 没有实现Deref trait
 
     let c = RefCell::new(5);
     // error[E0614]: type `RefCell<{integer}>` cannot be dereferenced
