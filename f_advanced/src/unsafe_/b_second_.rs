@@ -15,10 +15,11 @@ fn t0() {
     println!("{}", HELLO_WORLD);
 
     // error[E0133]: use of mutable static is unsafe and requires unsafe function or block
-    // println!("{}", COUNTER);
-    unsafe {
-        println!("{}", COUNTER);
-    }
+    // let x = COUNTER;
+
+    let y = unsafe {
+        COUNTER
+    };
 }
 
 static mut RESULT: u32 = 0;
