@@ -17,9 +17,7 @@ fn t0() {
     // error[E0133]: use of mutable static is unsafe and requires unsafe function or block
     // let x = COUNTER;
 
-    let y = unsafe {
-        COUNTER
-    };
+    let y = unsafe { COUNTER };
 }
 
 static mut RESULT: u32 = 0;
@@ -33,7 +31,6 @@ fn add_to_count(inc: u32) {
 #[test]
 fn t1() {
     add_to_count(3);
-    unsafe {
-        println!("RESULT: {}", RESULT); // print->RESULT: 3
-    }
+    let result = unsafe { RESULT };
+    println!("{}", result) // print->3
 }
