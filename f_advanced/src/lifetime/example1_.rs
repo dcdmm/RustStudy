@@ -15,7 +15,7 @@ fn t0() {
     //         // 要求'a不能长于y的生命周期
     //         // error[E0597]: `y` does not live long enough
     //         let s = S { x: &x, y: &y }; // `&y`:borrowed value does not live long enough
-    //         // 'a覆盖r的生命周期
+    //         // 'a必须延续到最后一次使用r
     //         r = s.x;
     //     }
     // } // `}`: dropped here while still borrowed

@@ -41,6 +41,12 @@ fn t0() {
     println!("{}", af(|x| x + 1, 5));
     println!("{}", do_twice_f_fn(add_one, 5));
     println!("{}", do_twice_f_fn(|x| x + 1, 5));
+
+    let n = 10;
+    let add_n = |x| x + n; // 捕获外部变量
+    println!("{}", do_twice_f_fn(add_n, 5)); 
+    // error[E0308]: mismatched types  
+    // println!("{}", do_twice_fn(add_n, 5));  // 不支持参数为函数指针
 }
 
 #[test]
