@@ -41,7 +41,7 @@ impl<'a> ImportantExcerpt<'a> {
 }
 
 impl<'a> ImportantExcerpt<'a> {
-    fn announce_and_return_part<'b>(&'a self, announcement: &'b str) -> &str { // 应用第一条规则,为每个参数标注一个生命周期 
+    fn announce_and_return_part<'s, 'b>(&'s self, announcement: &'b str) -> &str { // 应用第一条规则,为每个参数标注一个生命周期 
         println!("Attention please: {}", announcement);
         self.part
     }
@@ -49,7 +49,7 @@ impl<'a> ImportantExcerpt<'a> {
 
 
 impl<'a> ImportantExcerpt<'a> {
-    fn announce_and_return_part<'b>(&'a self, announcement: &'b str) -> &'a str { // 应用第三条规则
+    fn announce_and_return_part<'s, 'b>(&'s self, announcement: &'b str) -> &'s str { // 应用第三条规则
         println!("Attention please: {}", announcement);
         self.part
     }
