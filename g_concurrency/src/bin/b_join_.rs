@@ -4,21 +4,20 @@
 // C++参考: CPPStudy\i_concurrency\base\constructor_join0_.cpp
 
 use std::thread;
-use std::time::Duration;
+use std::time::{Duration, Instant};
 
 fn main() {
     let handle = thread::spawn(|| {
-        for i in 1..10 {
-            println!("hi number {} from the spawned thread!", i);
-            thread::sleep(Duration::from_millis(1));
-        }
+        println!("子线程：开始任务，需要 3 秒。");
+        thread::sleep(Duration::from_secs(3));
+        println!("子线程：任务完成！");
     });
 
-    for i in 1..5 {
-        println!("hi number {} from the main thread!", i);
-        thread::sleep(Duration::from_millis(1));
-    }
+    println!("主线程：开始自己的任务，需要 1 秒。");
+    thread::sleep(Duration::from_secs(1));
+    println!("主线程：自己的任务完成，调用 join 等待子线程……");
 
+    let wait_start = Instant::now();
     /*
     pub fn join(self) -> Result<T>
 
@@ -29,4 +28,5 @@ fn main() {
             This function may panic on some platforms if a thread attempts to join itself or otherwise may create a deadlock with joining threads.
      */
     handle.join().unwrap();
+    println!("主线程：join 等待结束，等待了 {:.2} 秒。",wait_start.elapsed().as_secs_f64());
 }
