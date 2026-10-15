@@ -24,7 +24,7 @@ fn main() {
     /*
     Spawns a new thread, returning a JoinHandle for it.
 
-    spawn 的函数签名如下:
+    spawn函数签名如下:
     pub fn spawn<F, T>(f: F) -> JoinHandle<T>
     where
         F: FnOnce() -> T,
