@@ -17,6 +17,4 @@ fn main() {
     });
     // *****************************************************************
     handle.join().unwrap();
-    // // error[E0382]: borrow of moved value: `v` 
-    // println!("{:?}", v);
 }
