@@ -33,7 +33,7 @@ fn main() {
         *num = 6; // MutexGuard是一个智能指针(实现了Deref、DerefMut、Drop特质) 
         
         println!("{:?}", m); // print->Mutex { data: <locked>, poisoned: false, .. }
-    } // 离开作用域时,data被自动丢弃(Drop特质),锁将被解锁
+    } // 离开作用域时,num被自动丢弃(Drop特质),锁将被解锁
 
     println!("{:?}", m) // print->Mutex { data: 6, poisoned: false, .. }
 }
