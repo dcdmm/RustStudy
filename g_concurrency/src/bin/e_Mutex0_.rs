@@ -65,12 +65,14 @@ fn t1() {
     use std::sync::Arc;
     use std::thread;
 
+    // 两个线程共用同一把锁
     let printer = Arc::new(Mutex::new(()));
     let child_printer = Arc::clone(&printer);
+
     let handle = thread::spawn(move || {
-        let _guard = child_printer.lock().unwrap();
+        let _guard = child_printer.lock().unwrap(); // 拿不到锁就等待
         print_report("A");
-    }); 
+    }); // 整份报告打印完后,自动解锁
 
     {
         let _guard = printer.lock().unwrap();
