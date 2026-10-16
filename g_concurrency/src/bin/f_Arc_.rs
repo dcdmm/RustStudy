@@ -9,43 +9,42 @@ use std::rc::Rc;
 use std::sync::{Arc, Mutex};
 use std::thread;
 
-// #[test]
-// fn error0() {
-//     let counter = Mutex::new(0); // `counter`: move occurs because `counter` has type `Mutex<i32>`, which does not implement the `Copy` trait
-//     let mut handles = vec![];
-//     for _ in 0..10 {
-//         // `move ||`: value moved into closure here, in previous iteration of loop
-//         let handle = thread::spawn(move || {
-//             let mut num = counter.lock().unwrap();
-//             *num += 1;
-//         });
-//         handles.push(handle);
-//     }
-//     for handle in handles {
-//         handle.join().unwrap();
-//     }
-//     // error[E0382]: borrow of moved value: `counter`
-//     println!("Result: {}", *counter.lock().unwrap());
-// }
+#[test]
+fn error0() {
+    // let counter = Mutex::new(0); // `counter`: move occurs because `counter` has type `Mutex<i32>`, which does not implement the `Copy` trait
+    // let mut handles = vec![];
+    // for _ in 0..10 {
+    //     // error[E0382]: use of moved value: `counter`
+    //     // `move ||`: value moved into closure here, in previous iteration of loop
+    //     let handle = thread::spawn(move || {
+    //         let mut num = counter.lock().unwrap();
+    //         *num += 1;
+    //     });
+    //     handles.push(handle);
+    // }
+    // for handle in handles {
+    //     handle.join().unwrap();
+    // }
+}
 
-// #[test]
-// fn error1() {
-//     let counter = Rc::new(Mutex::new(0));
-//     let mut handles = vec![];
-//     for _ in 0..10 {
-//         let counter = Rc::clone(&counter);
-//         // error[E0277]: `Rc<Mutex<i32>>` cannot be sent between threads safely
-//         let handle = thread::spawn(move || {
-//             let mut num = counter.lock().unwrap();
-//             *num += 1;
-//         });
-//         handles.push(handle);
-//     }
-//     for handle in handles {
-//         handle.join().unwrap();
-//     }
-//     println!("Result: {}", *counter.lock().unwrap());
-// }
+#[test]
+fn error1() {
+    // let counter = Rc::new(Mutex::new(0));
+    // let mut handles = vec![];
+    // for _ in 0..10 {
+    //     let counter = Rc::clone(&counter);
+    //     // error[E0277]: `Rc<std::sync::Mutex<i32>>` cannot be sent between threads safely
+    //     let handle = thread::spawn(move || {
+    //         let mut num = counter.lock().unwrap();
+    //         *num += 1;
+    //     });
+    //     handles.push(handle);      
+    // }
+    // for handle in handles {
+    //     handle.join().unwrap();
+    // }
+    // println!("Result: {}", *counter.lock().unwrap());
+}
 
 // Using an Arc<T> to wrap the Mutex<T> to be able to share ownership across multiple threads
 #[test]
