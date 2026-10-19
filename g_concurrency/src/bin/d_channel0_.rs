@@ -6,8 +6,7 @@ One increasingly popular approach to ensuring safe concurrency is message passin
 To accomplish message-sending concurrency, Rust's standard library provides an implementation of channels. A channel is a general programming concept by which data is sent from one thread to another.
 */
 
-use std::sync::mpsc;
-use std::{sync::mpsc::TrySendError, thread, time::Duration};
+use std::{sync::mpsc, thread, time::Duration};
 
 fn main() {
     /*
@@ -20,7 +19,7 @@ fn main() {
     // Moving tx to a spawned thread and sending "hi"
     thread::spawn(move || {
         let val = String::from("hi");
-        // Sends a value on this synchronous channel. This function will block until space in the internal buffer becomes available or a receiver is available to hand off the message to.
+        // Attempts to send a value on this channel, returning it back if it could not be sent.This method will never block the caller in order to wait for space to become available.
         // The send method returns a Result<T, E> type, so if the receiver has already been dropped and there’s nowhere to send a value, the send operation will return an error.
         tx.send(val).unwrap(); // `val`: value moved here
 
@@ -72,6 +71,8 @@ fn iter_test() {
 
 #[test]
 fn test_sync_channel() {
+    use std::sync::mpsc::TrySendError;
+
     // Creates a new synchronous, bounded channel.
     // This channel has an internal buffer on which messages will be queued. bound specifies the buffer size. When the internal buffer becomes full, future sends will block waiting for the buffer to open up.
     let (tx, rx) = mpsc::sync_channel(1);
