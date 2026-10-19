@@ -84,7 +84,9 @@ fn test_sync_channel() {
     assert_eq!(tx.try_send(20), Err(TrySendError::Full(20)));
     println!("缓冲区已有10,尝试发送20时返回Full");
 
-    // 独立线程接收并收集通道消息
+    // 在独立线程中接收同一通道上各发送端的消息,并收集为Vec
+    // 缓冲区为空且仍有发送端时,阻塞等待新消息
+    // 所有发送端释放且缓冲区为空后,结束迭代并返回收集结果
     let receiver = thread::spawn(move || {
         let mut received = Vec::new();
         for value in rx {
@@ -102,10 +104,9 @@ fn test_sync_channel() {
     });
     tx1.send(40).unwrap();
 
-    // 主线程发送完成,显式释放其持有的发送端
     // 所有发送端释放且缓冲区为空后,接收迭代才会结束
     // 若保留tx1,主线程等待接收线程退出,接收线程等待tx1释放,形成循环等待
-    drop(tx1);
+    drop(tx1); // 主线程发送完成,显式释放其持有的发送端
     sender.join().unwrap();
     receiver.join().unwrap();
 }
