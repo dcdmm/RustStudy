@@ -84,19 +84,28 @@ fn test_sync_channel() {
     assert_eq!(tx.try_send(20), Err(TrySendError::Full(20)));
     println!("缓冲区已有10,尝试发送20时返回Full");
 
-    let handle = thread::spawn(move || {
-        tx.try_send(20).unwrap();
+    // 独立线程接收并收集通道消息
+    let receiver = thread::spawn(move || {
+        let mut received = Vec::new();
+        for value in rx {
+            println!("收到:{value}");
+            received.push(value);
+        }
+        println!("所有发送端已释放,接收结束");
+        received
     });
 
-    let xx = rx.recv().unwrap();
-    println!("首先收到:{xx}");
+    // 子线程发送20和30,主线程发送40,跨线程顺序不固定
+    let sender = thread::spawn(move || {
+        tx.send(20).unwrap();
+        tx.send(30).unwrap();
+    });
+    tx1.send(40).unwrap();
 
-    tx1.send(30).unwrap();
+    drop(tx1);
+    sender.join().unwrap();
+    let mut received = receiver.join().unwrap();
 
-    let yy = rx.recv().unwrap();
-    println!("收到:{yy}");
-
-    let zz = rx.recv().unwrap();
-    println!("最后收到:{zz}");
-    handle.join().unwrap();
+    received.sort_unstable();
+    assert_eq!(received, vec![10, 20, 30, 40]);
 }
