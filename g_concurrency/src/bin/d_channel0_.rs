@@ -7,8 +7,7 @@ To accomplish message-sending concurrency, Rust's standard library provides an i
 */
 
 use std::sync::mpsc;
-use std::thread;
-use std::time::Duration;
+use std::{sync::mpsc::TrySendError, thread, time::Duration};
 
 fn main() {
     /*
@@ -21,6 +20,7 @@ fn main() {
     // Moving tx to a spawned thread and sending "hi"
     thread::spawn(move || {
         let val = String::from("hi");
+        // Sends a value on this synchronous channel. This function will block until space in the internal buffer becomes available or a receiver is available to hand off the message to.
         // The send method returns a Result<T, E> type, so if the receiver has already been dropped and there’s nowhere to send a value, the send operation will return an error.
         tx.send(val).unwrap(); // `val`: value moved here
 
@@ -68,4 +68,34 @@ fn iter_test() {
     assert_eq!(iter.next(), Some(2));
     assert_eq!(iter.next(), Some(3));
     assert_eq!(iter.next(), None);
+}
+
+#[test]
+fn test_sync_channel() {
+    // Creates a new synchronous, bounded channel.
+    // This channel has an internal buffer on which messages will be queued. bound specifies the buffer size. When the internal buffer becomes full, future sends will block waiting for the buffer to open up.
+    let (tx, rx) = mpsc::sync_channel(1);
+    let tx1 = tx.clone();
+    tx.send(10).unwrap();
+
+    // Attempts to send a value on this channel without blocking.
+    // This method differs from send by returning immediately if the channel’s buffer is full or no receiver is waiting to acquire some data. Compared with send, this function has two failure cases instead of one (one for disconnection, one for a full buffer
+    assert_eq!(tx.try_send(20), Err(TrySendError::Full(20)));
+    println!("缓冲区已有10,尝试发送20时返回Full");
+
+    let handle = thread::spawn(move || {
+        tx.try_send(20).unwrap();
+    });
+
+    let xx = rx.recv().unwrap();
+    println!("首先收到:{xx}");
+
+    tx1.send(30).unwrap();
+
+    let yy = rx.recv().unwrap();
+    println!("收到:{yy}");
+
+    let zz = rx.recv().unwrap();
+    println!("最后收到:{zz}");
+    handle.join().unwrap();
 }
