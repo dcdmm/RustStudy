@@ -44,19 +44,19 @@ mod tests {
 
     #[tokio::test]
     async fn test_02_compare() {
-        // 普通函数顺序执行:先完成 A,再开始 B
+        // 普通函数顺序执行:先完成A,再开始B
         fn sequential() {
             work_sync("A");
             work_sync("B");
         }
 
-        // 异步函数顺序执行:逐个.await,先完成 A,再开始 B
+        // 异步函数顺序执行:逐个.await,先完成A,再开始B
         async fn async_sequential() {
             work("A").await;
             work("B").await;
         }
 
-        // 异步并发执行:等待 A 时可以推进 B,两者都完成才继续
+        // 异步并发执行:等待A时可以推进B,两者都完成才继续
         async fn concurrent() {
             tokio::join!(work("A"), work("B"));
         }
