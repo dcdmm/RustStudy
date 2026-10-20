@@ -1,23 +1,3 @@
-// 第17.2节:使用 async 实现并发
-// 原文:https://doc.rust-lang.org/book/ch17-02-concurrency-with-async.html
-// 延续 h_async0_base.rs 的结构,按 test_01 到 test_07 的顺序阅读和运行
-// 运行全部示例:cargo test -p g_concurrency --bin h_async1_concurrency -- --nocapture --test-threads=1
-// 单独运行示例:cargo test -p g_concurrency --bin h_async1_concurrency test_06 -- --nocapture
-// main 留空,学习示例通过测试运行
-//
-// 本文件沿用项目已有的 Tokio,与书中 trpl 的 API 对照如下
-// trpl::block_on(...)          -> #[tokio::test] 自动创建运行时并驱动测试
-// trpl::spawn_task(...)        -> tokio::spawn(...)
-// trpl::sleep(...).await       -> tokio::time::sleep(...).await
-// trpl::join(a, b).await       -> tokio::join!(a, b)
-// trpl::join!(a, b, c)         -> tokio::join!(a, b, c)
-// trpl::channel()              -> tokio::sync::mpsc::unbounded_channel()
-//
-// 先记住:async 构造 Future,await 等待结果,spawn 创建任务,join! 并发等待多个 Future
-// 默认的 #[tokio::test] 使用单线程运行时,本文件展示单线程也能实现并发
-// await 遇到尚未就绪的 Future 才会暂停当前执行,并非每次 await 都一定让出执行机会
-// 不要在这里用 thread::sleep 替代异步 sleep,否则会阻塞线程,其他任务也无法推进
-
 fn main() {}
 
 #[cfg(test)]
@@ -26,7 +6,6 @@ mod tests {
     use tokio::sync::mpsc::{self, error::TryRecvError};
     use tokio::time::{Duration, sleep};
 
-    // 01. spawn 创建任务,JoinHandle 用于等待任务完成并获取结果
     #[tokio::test]
     async fn test_01_spawn_and_join_handle() {
         let handle = tokio::spawn(async {
@@ -37,15 +16,11 @@ mod tests {
             3
         });
 
-        // spawn 已经把任务交给运行时,不需要先 await handle 才能调度它
         for i in 1..=2 {
             println!("主任务:第{i}次计数");
             sleep(Duration::from_millis(20)).await;
         }
 
-        // handle.await 返回 Result,unwrap 取出任务正常完成时的返回值
-        // 若不等待,测试返回后运行时会关闭,未完成的异步任务可能提前结束
-        // 单独 drop(handle) 不会取消任务,不要把它和关闭运行时混淆
         let count = handle.await.unwrap();
         println!("已等待子任务完成,共计数{count}次");
         assert_eq!(count, 3);
