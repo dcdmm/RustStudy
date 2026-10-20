@@ -8,55 +8,92 @@ mod tests {
 
     #[tokio::test]
     async fn test_01_spawn_and_join_handle() {
-        let handle = tokio::spawn(async {
+        let start = Instant::now();
+        let handle = tokio::spawn(async move {
             for i in 1..=3 {
-                println!("子任务:第{i}次计数");
-                sleep(Duration::from_millis(20)).await;
+                println!(
+                    "[{:>4}毫秒] 子任务:第{i}次计数",
+                    start.elapsed().as_millis()
+                );
+                sleep(Duration::from_millis(1000)).await;
             }
+            println!("[{:>4}毫秒] 子任务:执行完成", start.elapsed().as_millis());
             3
         });
 
         for i in 1..=2 {
-            println!("主任务:第{i}次计数");
-            sleep(Duration::from_millis(20)).await;
+            println!(
+                "[{:>4}毫秒] 主任务:第{i}次计数",
+                start.elapsed().as_millis()
+            );
+            sleep(Duration::from_millis(1000)).await;
         }
 
+        println!(
+            "[{:>4}毫秒] 主任务:循环结束,开始await子任务",
+            start.elapsed().as_millis()
+        );
         let count = handle.await.unwrap();
-        println!("已等待子任务完成,共计数{count}次");
-        assert_eq!(count, 3);
+        println!(
+            "[{:>4}毫秒] 主任务:已等待子任务完成,共计数{count}次",
+            start.elapsed().as_millis()
+        );
+        println!("总耗时:{:.3}秒", start.elapsed().as_secs_f64());
     }
 
-    // 02. join! 同时推进多个 Future,全部完成后按参数顺序返回结果元组
+    // 普通函数:阻塞当前线程200毫秒
+    fn work_sync(name: &str) {
+        println!("{name}开始");
+        std::thread::sleep(Duration::from_millis(200));
+        println!("{name}完成");
+    }
+
+    // 异步函数:等待200毫秒期间可以推进其他异步操作
+    async fn work(name: &str) {
+        println!("{name}开始");
+        sleep(Duration::from_millis(200)).await;
+        println!("{name}完成");
+    }
+
     #[tokio::test]
-    async fn test_02_join_futures() {
-        let base = 40;
+    async fn test_02_compare() {
+        // 普通函数顺序执行:先完成A,再开始B
+        fn sequential() {
+            work_sync("A");
+            work_sync("B");
+        }
 
-        // 普通 async 块允许借用当前作用域的数据,这里不必创建独立任务
-        let first = async {
-            println!("A开始");
-            sleep(Duration::from_millis(40)).await;
-            println!("A完成");
-            base + 2
-        };
-        let second = async {
-            println!("B开始");
-            sleep(Duration::from_millis(20)).await;
-            println!("B完成");
-            "B的结果"
-        };
+        // 异步函数顺序执行:逐个.await,先完成A,再开始B
+        async fn async_sequential() {
+            work("A").await;
+            work("B").await;
+        }
 
-        // 仅创建上面的两个 Future 时,它们的代码还没有执行
-        println!("两个Future已创建,现在交给join!执行");
-        let (number, text) = tokio::join!(first, second);
-        println!("两个Future都完成了:{number},{text}");
-        assert_eq!(number, 42);
-        assert_eq!(text, "B的结果");
+        // 异步并发执行:等待A时可以推进B,两者都完成才继续
+        async fn concurrent() {
+            tokio::join!(work("A"), work("B"));
+        }
 
-        // 若改成 first.await; second.await;,这两个普通 Future 就会顺序执行
-        // 若先 spawn 两个任务,再依次 await 它们的 handle,任务仍然可以并发执行
-        // join! 的分支在当前任务中交替推进,并发不等于在多个线程上并行
-        // Tokio 默认轮换优先 poll 的分支,不要依赖不同分支的固定输出顺序
-        // API 说明:https://docs.rs/tokio/latest/tokio/macro.join.html
+        let sequential_start = Instant::now();
+        sequential();
+        println!(
+            "sequential运行时间:{:.3}毫秒",
+            sequential_start.elapsed().as_secs_f64() * 1000.0
+        );
+
+        let async_sequential_start = Instant::now();
+        async_sequential().await;
+        println!(
+            "async_sequential运行时间:{:.3}毫秒",
+            async_sequential_start.elapsed().as_secs_f64() * 1000.0
+        );
+
+        let concurrent_start = Instant::now();
+        concurrent().await;
+        println!(
+            "concurrent运行时间:{:.3}毫秒",
+            concurrent_start.elapsed().as_secs_f64() * 1000.0
+        );
     }
 
     // 03. 异步 channel:发送消息不必 await,接收消息需要 await
