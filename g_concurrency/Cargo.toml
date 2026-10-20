@@ -8,4 +8,4 @@ edition = "2024"
 [dependencies]
 
 [dev-dependencies]
-tokio = { version = "1", features = ["rt", "macros", "time"] }
+tokio = { version = "1", features = ["rt", "macros", "time", "sync"] }
