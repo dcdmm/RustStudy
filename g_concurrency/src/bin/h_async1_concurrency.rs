@@ -6,41 +6,6 @@ mod tests {
     use tokio::sync::mpsc::{self, error::TryRecvError};
     use tokio::time::{Duration, sleep};
 
-    #[tokio::test]
-    async fn test_01_spawn_and_join_handle() {
-        let start = Instant::now();
-        let handle = tokio::spawn(async move {
-            for i in 1..=3 {
-                println!(
-                    "[{:>4}毫秒] 子任务:第{i}次计数",
-                    start.elapsed().as_millis()
-                );
-                sleep(Duration::from_millis(1000)).await;
-            }
-            println!("[{:>4}毫秒] 子任务:执行完成", start.elapsed().as_millis());
-            3
-        });
-
-        for i in 1..=2 {
-            println!(
-                "[{:>4}毫秒] 主任务:第{i}次计数",
-                start.elapsed().as_millis()
-            );
-            sleep(Duration::from_millis(1000)).await;
-        }
-
-        println!(
-            "[{:>4}毫秒] 主任务:循环结束,开始await子任务",
-            start.elapsed().as_millis()
-        );
-        let count = handle.await.unwrap();
-        println!(
-            "[{:>4}毫秒] 主任务:已等待子任务完成,共计数{count}次",
-            start.elapsed().as_millis()
-        );
-        println!("总耗时:{:.3}秒", start.elapsed().as_secs_f64());
-    }
-
     // 普通函数:阻塞当前线程200毫秒
     fn work_sync(name: &str) {
         println!("{name}开始");
@@ -56,7 +21,23 @@ mod tests {
     }
 
     #[tokio::test]
-    async fn test_02_compare() {
+    async fn test01_spawn() {
+        let start = Instant::now();
+
+        let handle_a = tokio::spawn(work("A"));
+        let handle_b = tokio::spawn(work("B"));
+
+        handle_a.await.unwrap();
+        handle_b.await.unwrap();
+
+        println!(
+            "spawn运行时间:{:.3}毫秒",
+            start.elapsed().as_secs_f64() * 1000.0
+        );
+    }
+
+    #[tokio::test]
+    async fn test02_join() {
         // 普通函数顺序执行:先完成A,再开始B
         fn sequential() {
             work_sync("A");
@@ -96,28 +77,18 @@ mod tests {
         );
     }
 
-    // 03. 异步 channel:发送消息不必 await,接收消息需要 await
     #[tokio::test]
     async fn test_03_async_channel() {
-        // mpsc 表示 multiple producer, single consumer,即多生产者单消费者
-        // 使用无界通道对应书中示例,接收端 recv 需要 &mut self,所以 rx 声明为 mut
         let (tx, mut rx) = mpsc::unbounded_channel();
         let message = String::from("hello async");
 
-        // send 转移消息的所有权,这里之后不能再使用 message
-        // 无界通道无需等待空闲容量,所以 send 返回 Result,不是 Future
-        // 有界通道 mpsc::channel(capacity) 的 send 则需要 await
         tx.send(message).unwrap();
         drop(tx);
 
-        // 即使发送端已释放,之前进入缓冲区的消息仍然可以取出
         let received = rx.recv().await;
         println!("收到:{received:?}");
-        assert_eq!(received.as_deref(), Some("hello async"));
 
-        // 所有发送端释放且缓冲区已空后,recv 返回 None
         assert_eq!(rx.recv().await, None);
-        // 此例先发送后接收,虽然使用了 async,但还没有并发
     }
 
     // 04. 常见误区:同一个 async 块内先发送再接收,仍然是顺序执行

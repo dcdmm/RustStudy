@@ -25,7 +25,7 @@ mod tests {
     }
 
     #[tokio::test]
-    async fn test_03_await_chain() {
+    async fn test_02_await_chain() {
         struct Number(u32);
 
         impl Number {
