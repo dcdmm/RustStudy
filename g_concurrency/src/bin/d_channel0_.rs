@@ -104,7 +104,6 @@ fn test_sync_channel() {
     });
     tx1.send(40).unwrap();
 
-    // 所有发送端释放且缓冲区为空后,接收迭代才会结束
     // 若保留tx1,主线程等待接收线程退出,接收线程等待tx1释放,形成循环等待
     drop(tx1); // 主线程发送完成,显式释放其持有的发送端
     sender.join().unwrap();
