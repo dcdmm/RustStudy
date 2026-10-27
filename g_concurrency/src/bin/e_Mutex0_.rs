@@ -30,7 +30,7 @@ fn main() {
             This function might panic when called if the lock is already held by the current thread.
          */
         let mut num = m.lock().unwrap();
-        *num = 6; // MutexGuard是一个智能指针(实现了Deref、DerefMut、Drop特质) 
+        *num = 6; // MutexGuard是一个智能指针(实现了Deref、DerefMut、Drop trait) 
 
         println!("{:?}", m); // print->Mutex { data: <locked>, poisoned: false, .. }
     } // 离开作用域时,num被自动丢弃(Drop特质),锁将被解锁

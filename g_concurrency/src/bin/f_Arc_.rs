@@ -64,7 +64,7 @@ fn right() {
 
     A cycle between Arc pointers will never be deallocated. For this reason, Weak is used to break cycles. For example, a tree could have strong Arc pointers from parent nodes to children, and Weak pointers from children back to their parents.
      */
-    let counter = Arc::new(Mutex::new(0)); // Arc是一个智能指针(实现了Deref、Drop特质) 
+    let counter = Arc::new(Mutex::new(0)); // Arc是一个智能指针(实现了Deref、Drop trait) 
     let mut handles = vec![];
 
     for _ in 0..10 {
