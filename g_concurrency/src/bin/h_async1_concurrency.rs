@@ -6,14 +6,14 @@ mod tests {
     use tokio::sync::mpsc::{self, error::TryRecvError};
     use tokio::time::{Duration, sleep};
 
-    // 普通函数:阻塞当前线程200毫秒
+    // 普通: 阻塞当前线程约200毫秒
     fn work_sync(name: &str) {
         println!("{name}开始");
         std::thread::sleep(Duration::from_millis(200));
         println!("{name}完成");
     }
 
-    // 异步函数:等待200毫秒期间可以推进其他异步操作
+    // 异步: 等待定时器时不阻塞当前线程,可通过join!/spawn与其他异步操作并发
     async fn work(name: &str) {
         println!("{name}开始");
         sleep(Duration::from_millis(200)).await;
@@ -22,29 +22,26 @@ mod tests {
 
     #[tokio::test]
     async fn test01_spawn_and_join() {
-        // 普通函数顺序执行:先完成A,再开始B
+        // 普通函数顺序执行: 先完成A,再开始B
         fn sequential() {
             work_sync("A");
             work_sync("B");
         }
 
-        // 异步函数顺序执行:逐个 .await,先完成 A,再开始 B
+        // 异步函数顺序执行: 逐个.await,先完成A,再开始B
         async fn async_sequential() {
             work("A").await;
             work("B").await;
         }
 
-        // join! 在当前任务中并发推进两个 Future,等待两者都完成
         async fn concurrent_join() {
             tokio::join!(work("A"), work("B"));
         }
 
-        // spawn 创建两个独立任务,由运行时调度
         async fn concurrent_spawn() {
             let handle_a = tokio::spawn(work("A"));
             let handle_b = tokio::spawn(work("B"));
 
-            // 两个任务都已提交给运行时,逐个 .await 仍可并发执行
             handle_a.await.unwrap();
             handle_b.await.unwrap();
         }
@@ -52,7 +49,7 @@ mod tests {
         let sequential_start = Instant::now();
         sequential();
         println!(
-            "sequential运行时间:{:.3}毫秒",
+            "sequential:{:.3}毫秒",
             sequential_start.elapsed().as_secs_f64() * 1000.0
         );
 
