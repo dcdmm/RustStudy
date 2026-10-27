@@ -2,9 +2,9 @@ fn main() {}
 
 #[cfg(test)]
 mod tests {
-    use tokio::time::{Duration, sleep};
     use std::time::Instant;
-    
+    use tokio::time::{Duration, sleep};
+
     #[tokio::test]
     async fn test_01_base() {
         // 异步函数
@@ -62,16 +62,18 @@ mod tests {
 
     #[tokio::test]
     async fn test03_spawn_and_join() {
-        // 普通函数顺序执行: 先完成A,再开始B
+        // 普通函数顺序执行: 先完成A,再开始B,最后完成C
         fn sequential() {
             work_sync("A");
             work_sync("B");
+            work_sync("C");
         }
 
-        // 异步函数顺序执行: 逐个.await,先完成A,再开始B
+        // 异步函数顺序执行: 逐个.await,先完成A,再开始B,最后完成C
         async fn async_sequential() {
             work("A").await;
             work("B").await;
+            work("C").await;
         }
 
         // Python版本
@@ -92,6 +94,26 @@ mod tests {
         //     await handle_a
         //     await handle_b
 
+        async fn concurrent_join() {
+            tokio::join!(work("A"), work("B"));
+
+            println!("执行后续代码");
+
+            work("C").await;
+        }
+
+        async fn concurrent_spawn() {
+            let handle_a = tokio::spawn(work("A"));
+            let handle_b = tokio::spawn(work("B"));
+            let handle_c = tokio::spawn(work("B"));
+
+            println!("执行后续代码");
+
+            handle_a.await.unwrap();
+            handle_b.await.unwrap();
+            handle_c.await.unwrap();
+        }
+
         let sequential_start = Instant::now();
         sequential();
         println!(
@@ -104,6 +126,20 @@ mod tests {
         println!(
             "async_sequential运行时间:{:.3}毫秒",
             async_sequential_start.elapsed().as_secs_f64() * 1000.0
+        );
+
+        let join_start = Instant::now();
+        concurrent_join().await;
+        println!(
+            "join运行时间:{:.3}毫秒",
+            join_start.elapsed().as_secs_f64() * 1000.0
+        );
+
+        let spawn_start = Instant::now();
+        concurrent_spawn().await;
+        println!(
+            "spawn运行时间:{:.3}毫秒",
+            spawn_start.elapsed().as_secs_f64() * 1000.0
         );
     }
 }
