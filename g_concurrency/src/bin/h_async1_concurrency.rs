@@ -7,7 +7,7 @@ mod tests {
     use tokio::time::{Duration, sleep};
 
     #[tokio::test]
-    async fn test03_async_channel() {
+    async fn test01_async_channel() {
         let (tx, mut rx) = mpsc::unbounded_channel();
         let message = String::from("hello async");
 

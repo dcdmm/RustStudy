@@ -109,7 +109,7 @@ mod tests {
         //     print(f"任务返回值: ({name_a}, {name_b}, {name_c})")
 
         async fn concurrent_join() {
-            // 对应python await asyncio.gather
+            // 参考python await asyncio.gather
             let (name_a, name_b) = tokio::join!(work("A"), work("B"));
             println!("join!返回值: ({name_a}, {name_b})");
 
@@ -120,7 +120,7 @@ mod tests {
         }
 
         async fn concurrent_spawn() {
-            // 对应python asyncio.create_task
+            // 参考python asyncio.create_task
             let handle_a = tokio::spawn(work("A"));
             let handle_b = tokio::spawn(work("B"));
             let handle_c = tokio::spawn(work("C"));
