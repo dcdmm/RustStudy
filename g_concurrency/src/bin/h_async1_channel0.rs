@@ -56,7 +56,7 @@ mod tests {
         let receiver = async {
             let mut received = Vec::new();
             for _ in 0..3 { 
-                let value = rx.recv().await.unwrap();
+                let value = rx.recv().await.unwrap(); // 通道为空时挂起,join!切换到sender执行
                 println!("接收:{value}");
                 received.push(value);
             }
@@ -74,19 +74,19 @@ mod tests {
     }
 
     #[tokio::test]
-    async fn test_06_async_move_closes_channel() {
+    async fn test03_move() {
         let (tx, mut rx) = mpsc::unbounded_channel();
         let start = Instant::now();
 
-        let sender = async move {
+        let sender = async move { // tx的所有权移入sender
             for value in ["hi", "from", "async"] {
                 tx.send(value).unwrap();
                 sleep(Duration::from_millis(20)).await;
             }
-        };
+        }; // sender执行完毕时tx随之drop,通道关闭
         let receiver = async {
             let mut received = Vec::new();
-            while let Some(value) = rx.recv().await {
+            while let Some(value) = rx.recv().await { 
                 println!("接收:{value},经过{}毫秒", start.elapsed().as_millis());
                 received.push(value);
             }
@@ -99,32 +99,32 @@ mod tests {
     }
 
     #[tokio::test]
-    async fn test_07_multiple_producers() {
+    async fn test04_multiple_producers() {
         let (tx, mut rx) = mpsc::unbounded_channel();
-        let tx1 = tx.clone();
+        let tx1 = tx.clone(); // clone得到多个发送端(共用同一个通道)
 
         let sender_a = async move {
             for value in ["A1", "A2", "A3"] {
                 tx1.send(value).unwrap();
                 sleep(Duration::from_millis(20)).await;
             }
-        };
+        }; // 释放tx1
 
         let receiver = async {
             let mut received = Vec::new();
-            while let Some(value) = rx.recv().await {
+            while let Some(value) = rx.recv().await { // tx1和tx都释放后才返回None
                 println!("收到多个生产者的消息:{value}");
                 received.push(value);
             }
             received
         };
 
-        let sender_b = async move {
+        let sender_b = async move { 
             for value in ["B1", "B2"] {
                 tx.send(value).unwrap();
                 sleep(Duration::from_millis(35)).await;
             }
-        };
+        }; // 释放tx
 
         let ((), (), received) = tokio::join!(sender_a, sender_b, receiver);
 
