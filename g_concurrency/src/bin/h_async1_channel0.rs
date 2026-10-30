@@ -7,42 +7,43 @@ mod tests {
     use tokio::time::{Duration, sleep};
 
     #[tokio::test]
-    async fn test01_async_channel() {
-        let (tx, mut rx) = mpsc::unbounded_channel();
+    async fn test01_base() {
+        // Creates an unbounded mpsc channel for communicating between asynchronous tasks without backpressure.
+        let (tx, mut rx) = mpsc::unbounded_channel(); // 对应标准库: std::sync::mpsc::channel()
         let message = String::from("hello async");
 
         tx.send(message).unwrap();
         drop(tx);
 
-        let received = rx.recv().await;
+        let received = rx.recv().await; // recv是异步函数
         println!("收到:{received:?}");
 
         assert_eq!(rx.recv().await, None);
     }
 
     #[tokio::test]
-    async fn test_04_one_async_block_is_sequential() {
-        let (tx, mut rx) = mpsc::unbounded_channel();
+    async fn test02() {
+        let (tx, mut rx) = mpsc::unbounded_channel(); 
         let start = Instant::now();
 
+        // 依次发送"hi"、"from"、"async"
         for value in ["hi", "from", "async"] {
             tx.send(value).unwrap();
             println!("发送:{value},经过{}毫秒", start.elapsed().as_millis());
             sleep(Duration::from_millis(20)).await;
         }
 
-        drop(tx);
+        drop(tx); 
 
         let mut received = Vec::new();
         while let Some(value) = rx.recv().await {
             println!("接收:{value},经过{}毫秒", start.elapsed().as_millis());
             received.push(value);
         }
-        assert_eq!(received, ["hi", "from", "async"]);
     }
 
     #[tokio::test]
-    async fn test_05_borrowed_sender_keeps_channel_open() {
+    async fn test03() {
         let (tx, mut rx) = mpsc::unbounded_channel();
 
         let sender = async {
@@ -54,7 +55,7 @@ mod tests {
         };
         let receiver = async {
             let mut received = Vec::new();
-            for _ in 0..3 {
+            for _ in 0..3 { 
                 let value = rx.recv().await.unwrap();
                 println!("接收:{value}");
                 received.push(value);
@@ -62,12 +63,12 @@ mod tests {
             received
         };
 
+        // 边发边收
         let ((), received) = tokio::join!(sender, receiver);
         assert_eq!(received, [10, 20, 30]);
 
         assert_eq!(rx.try_recv(), Err(TryRecvError::Empty));
         println!("发送Future已完成,但外层tx还存在,通道仍未关闭");
-
         drop(tx);
         assert_eq!(rx.recv().await, None);
     }

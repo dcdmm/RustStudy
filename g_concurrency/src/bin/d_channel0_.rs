@@ -71,12 +71,16 @@ fn iter_test() {
 
 #[test]
 fn test_sync_channel() {
-    use std::sync::mpsc::TrySendError;
+    use std::sync::mpsc::{TryRecvError, TrySendError};
 
     // Creates a new synchronous, bounded channel.
     // This channel has an internal buffer on which messages will be queued. bound specifies the buffer size. When the internal buffer becomes full, future sends will block waiting for the buffer to open up.
     let (tx, rx) = mpsc::sync_channel(1);
     let tx1 = tx.clone();
+
+    // Attempts to return a pending value on this receiver without blocking.
+    // This method will never block the caller in order to wait for data to become available. Instead, this will always return immediately with a possible option of pending data on the channel.This is useful for a flavor of "optimistic check" before deciding to block on a receiver.
+    assert_eq!(rx.try_recv(), Err(TryRecvError::Empty));
     tx.send(10).unwrap();
 
     // Attempts to send a value on this channel without blocking.
@@ -89,10 +93,18 @@ fn test_sync_channel() {
     // 所有发送端释放且缓冲区为空后,结束迭代并返回收集结果
     let receiver = thread::spawn(move || {
         let mut received = Vec::new();
-        for value in rx {
+
+        let value = rx.try_recv().unwrap();
+        println!("收到: {value}");
+        received.push(value);
+
+        for value in &rx {
             println!("收到:{value}");
             received.push(value);
         }
+
+        // 所有发送端已释放且缓冲区为空时返回Disconnected
+        assert_eq!(rx.try_recv(), Err(TryRecvError::Disconnected));
         println!("所有发送端已释放,接收结束");
         received
     });
