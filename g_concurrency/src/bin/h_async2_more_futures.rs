@@ -133,12 +133,15 @@ mod tests {
     #[tokio::test]
     async fn test06_no_preemption() {
         let work = async {
-            // slow阻塞线程,计时器没有机会报告超时
+            // slow让整个线程停住3秒,timeout也在这个线程上,这3秒内无法检查时间
             slow("阻塞工作", 3000);
+            // 工作在此暂停,timeout才有机会检查时间,发现已超时就返回Err
+            // 去掉这一行,工作会直接完成,timeout不检查时间,返回Ok
+            sleep(Duration::from_millis(2)).await;
             "阻塞工作完成"
         };
         let start = Instant::now();
-        let result = tokio::time::timeout(Duration::from_millis(1), work).await;
+        let result = tokio::time::timeout(Duration::from_millis(10), work).await;
 
         println!("限制1毫秒,实际耗时:{:?},结果:{result:?}", start.elapsed());
         assert_eq!(result, Ok("阻塞工作完成"));
