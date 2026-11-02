@@ -4,6 +4,7 @@ fn main() {}
 mod tests {
     use std::cell::RefCell;
     use std::time::Instant;
+    use tokio::runtime::Runtime;
     use tokio::sync::mpsc;
     use tokio::time::{Duration, sleep};
 
@@ -145,5 +146,26 @@ mod tests {
 
         println!("限制1毫秒,实际耗时:{:?},结果:{result:?}", start.elapsed());
         assert_eq!(result, Ok("阻塞工作完成"));
+    }
+
+    #[test]
+    fn test07_block_on() {
+        let runtime = tokio::runtime::Builder::new_current_thread()
+            .enable_all()
+            .build()
+            .expect("创建运行时失败");
+        fn get_number(runtime: &Runtime) -> u32 {
+            let future = async {
+                sleep(Duration::from_millis(10)).await;
+                42
+            };
+
+            // 普通函数运行异步代码,block_on会阻塞当前线程,直到future执行完
+            runtime.block_on(future)
+        }
+
+        let result = get_number(&runtime);
+        println!("{result}");
+        assert_eq!(result, 42);
     }
 }
