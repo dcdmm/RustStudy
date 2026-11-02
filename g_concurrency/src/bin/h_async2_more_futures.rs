@@ -138,7 +138,7 @@ mod tests {
             slow("阻塞工作", 3000);
             // 工作在此暂停,timeout才有机会检查时间,发现已超时就返回Err
             // 去掉这一行,工作会直接完成,timeout不检查时间,返回Ok
-            sleep(Duration::from_millis(2)).await;
+            // sleep(Duration::from_millis(2)).await;
             "阻塞工作完成"
         };
         let start = Instant::now();
