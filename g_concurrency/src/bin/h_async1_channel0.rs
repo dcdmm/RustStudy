@@ -18,6 +18,8 @@ mod tests {
         let received = rx.recv().await; // recv是异步函数
         println!("收到:{received:?}");
 
+        // Receives the next value for this receiver.
+        // This method returns `None` if the channel has been closed and there are no remaining messages in the channel's buffer. 
         assert_eq!(rx.recv().await, None);
     }
 
