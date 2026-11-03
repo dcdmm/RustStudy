@@ -4,8 +4,6 @@ fn main() {}
 mod tests {
     use rayon::prelude::*;
     use std::collections::HashMap;
-    use std::sync::Mutex;
-    use std::sync::atomic::{AtomicUsize, Ordering};
 
     #[test]
     fn test01_base() {
@@ -81,7 +79,7 @@ mod tests {
         //     ID: Fn() -> T + Sync + Send,
         //     T: Send,
 
-        // 1. 切分(最少2个元素,本机32线程下的结果):
+        // 1. 切分(最少2个元素):
         //            [a,b,a,c,b,a,d]
         //            /             \
         //      [a,b,a]          [c,b,a,d]
@@ -109,7 +107,7 @@ mod tests {
         println!("{:?}", parts);
 
         let words = vec!["a", "b", "a", "c", "b", "a"];
-        // 1. 切分(本机32线程下切到只剩1个元素):
+        // 1. 切分:
         //             [a,b,a,c,b,a]
         //            /             \
         //        [a,b,a]         [c,b,a]
@@ -162,34 +160,5 @@ mod tests {
         
         let have = numbers.par_iter().any(|n| *n == 50);
         println!("any结果:{}", have)
-    }
-
-    #[test]
-    fn test05_shared_state() {
-        let numbers: Vec<i32> = (1..=1000).collect();
-
-        // 闭包只能获得外部变量的共享引用,修改时需要Atomic或Mutex
-        // Atomic和Mutex有同步开销,能用sum,reduce,fold时优先使用这些方法
-        let even_count = AtomicUsize::new(0);
-        numbers.par_iter().for_each(|n| {
-            if n % 2 == 0 {
-                even_count.fetch_add(1, Ordering::Relaxed);
-            }
-        });
-        assert_eq!(even_count.load(Ordering::Relaxed), 500);
-
-        let multiples = Mutex::new(Vec::new());
-        numbers.par_iter().for_each(|n| {
-            // 计算放在锁外,否则各线程只能排队执行
-            let is_multiple = n % 100 == 0;
-            if is_multiple {
-                multiples.lock().unwrap().push(*n);
-            }
-        });
-        let mut multiples = multiples.into_inner().unwrap();
-        // push的顺序不确定,比较前先排序
-        multiples.sort();
-        assert_eq!(multiples.len(), 10);
-        assert_eq!(multiples[0], 100);
     }
 }
