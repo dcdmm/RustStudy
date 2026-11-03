@@ -110,11 +110,14 @@ mod tests {
             .for_each(|n| *shared.lock().unwrap() += n);
         assert_eq!(shared.into_inner().unwrap(), 10);
 
-        // 与thread::spawn不同,闭包可以直接借用外部数据,不需要Arc和move
         let number3 = vec![1, 2, 3, 4];
         let offset = 10;
+        // op2没有使用move,保存的是offset的引用
         let op2 = |n| n + offset;
-        let shifted: Vec<i32> = number3.par_iter().map(op2).collect();
+        // thread::spawn要求闭包满足'static: 新线程可能比当前函数运行得更久,闭包不能借用局部变量,只能用move拥有数据
+        // map不要求闭包满足'static: rayon的并行计算在当前函数内完成,所有线程结束后才返回,线程不会比当前函数运行得更久
+        // 因此闭包借用局部变量即可,不需要move,也不需要Arc
+        let shifted: Vec<i32>  = number3.par_iter().map(op2).collect();
         assert_eq!(shifted, [11, 12, 13, 14]);
     }
 
@@ -130,8 +133,7 @@ mod tests {
         // [9, 10]      → 求和 → 19
         assert_eq!(chunk_sums, [10, 26, 19]);
 
-        // par_chunks_mut分块修改,各块互不重叠,不需要加锁
-        // 此处模拟按行处理图像,每行4个像素
+        // par_chunks_mut(4)每4个元素分为一块,可并行修改各块中的原始数据
         let mut pixels = vec![0u8; 12];
         pixels
             .par_chunks_mut(4)
@@ -144,13 +146,12 @@ mod tests {
     fn test06_sort() {
         let mut values = vec![5, 3, 8, 1, 9, 2];
 
-        // par_sort是稳定排序,相等元素保持原有的相对顺序
+        // par_sort按升序排列元素,直接修改原Vec
         values.par_sort();
         assert_eq!(values, [1, 2, 3, 5, 8, 9]);
 
-        // par_sort_unstable不保证相等元素的相对顺序,通常更快
-        // by后缀的版本可自定义比较规则,此处为降序
-        values.par_sort_unstable_by(|a, b| b.cmp(a));
+        // par_sort_by自定义比较规则,b.cmp(a)按降序排列元素
+        values.par_sort_by(|a, b| b.cmp(a));
         assert_eq!(values, [9, 8, 5, 3, 2, 1]);
     }
 }
