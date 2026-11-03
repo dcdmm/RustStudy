@@ -95,22 +95,37 @@ mod tests {
         println!("{:?}", parts);
 
         let words = vec!["a", "b", "a", "c", "b", "a"];
-        // 1. 切分(最少3个元组):
-        //          [a,b,a,c,b,a]
-        //          /           \
-        //      [a,b,a]       [c,b,a]
-        // 2. 分别计算[a,b,a]和[c,b,a],每个都先执行fold,再把fold的结果交给reduce
-        //    fold: 先调用fold的HashMap::new得到初始值{},再用fold的闭包|mut map, word|把其中的单词逐个计入
-        //        [a,b,a]: 初始值{} → 计入a得到{a: 1} → 计入b得到{a: 1, b: 1} → 计入a得到{a: 2, b: 1}
-        //        [c,b,a]: 初始值{} → 计入c得到{c: 1} → 计入b得到{b: 1, c: 1} → 计入a得到{a: 1, b: 1, c: 1}
+        // 1. 切分(本机32线程下切到只剩1个元素):
+        //             [a,b,a,c,b,a]
+        //            /             \
+        //        [a,b,a]         [c,b,a]
+        //        /     \         /     \
+        //      [a]   [b,a]     [c]   [b,a]
+        //            /   \           /   \
+        //          [b]   [a]       [b]   [a]
+        // 2. 分别计算[a],[b],[a],[c],[b],[a],每个都先执行fold,再把fold的结果交给reduce
+        //    fold: 先调用fold的HashMap::new得到初始值{},再用fold的闭包|mut map, word|把其中的单词计入
+        //        [a]: 初始值{} → 计入a得到{a: 1}
+        //        [b]: 初始值{} → 计入b得到{b: 1}
+        //        [a]: 初始值{} → 计入a得到{a: 1}
+        //        [c]: 初始值{} → 计入c得到{c: 1}
+        //        [b]: 初始值{} → 计入b得到{b: 1}
+        //        [a]: 初始值{} → 计入a得到{a: 1}
         //    reduce: 先调用reduce的HashMap::new得到初始值{},再用reduce的闭包|mut merged, map|把fold的结果合并进来,结果不变
-        //        [a,b,a]: 初始值{}和{a: 2, b: 1}合并为{a: 2, b: 1}
-        //        [c,b,a]: 初始值{}和{a: 1, b: 1, c: 1}合并为{a: 1, b: 1, c: 1}
-        // 3. 合并结果,只有reduce参与: 用reduce的闭包|mut merged, map|把左右两边的HashMap合并,相同单词的计数相加
+        //        [a]: 初始值{}和{a: 1}合并为{a: 1}
+        //        [b]: 初始值{}和{b: 1}合并为{b: 1}
+        //        [a]: 初始值{}和{a: 1}合并为{a: 1}
+        //        [c]: 初始值{}和{c: 1}合并为{c: 1}
+        //        [b]: 初始值{}和{b: 1}合并为{b: 1}
+        //        [a]: 初始值{}和{a: 1}合并为{a: 1}
+        // 3. 合并结果,只有reduce参与: 用reduce的闭包|mut merged, map|把树中左右两边的HashMap合并,相同单词的计数相加,从下往上逐层合并
+        //    [a,b,a]中的[b]和[a]: {b: 1}和{a: 1}合并为{a: 1, b: 1}
+        //    [c,b,a]中的[b]和[a]: {b: 1}和{a: 1}合并为{a: 1, b: 1}
+        //    [a]和[b,a]: {a: 1}和{a: 1, b: 1}合并为{a: 2, b: 1}
+        //    [c]和[b,a]: {c: 1}和{a: 1, b: 1}合并为{a: 1, b: 1, c: 1}
         //    [a,b,a]和[c,b,a]: {a: 2, b: 1}和{a: 1, b: 1, c: 1}合并为{a: 3, b: 2, c: 1}
         let counts_fold = words
             .par_iter()
-            .with_min_len(3)
             .fold(HashMap::new, |mut map, word| {
                 *map.entry(*word).or_insert(0) += 1;
                 map
