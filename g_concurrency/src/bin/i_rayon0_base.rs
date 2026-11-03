@@ -90,20 +90,20 @@ mod tests {
         //
         // let mut total = 0;
         // let op1 = |n| total += n;
-        // // // error[E0525]: expected a closure that implements the `Fn` trait, but this closure only implements `FnMut`
+        // // error[E0525]: expected a closure that implements the `Fn` trait, but this closure only implements `FnMut`
         // numbers1.par_iter().for_each(op1);
         //
         // 修复:
         let total: i32 = numbers1.par_iter().sum();
         assert_eq!(total, 10);
 
+        let numbers2 = vec![1, 2, 3, 4];
         // let shared = std::cell::RefCell::new(0);
         // let op1 = |n| *shared.borrow_mut() += n;
         // // error[E0277]: `RefCell<i32>` cannot be shared between threads safely
         // numbers2.par_iter().for_each(op1);
         //
         // 修复:
-        let numbers2 = vec![1, 2, 3, 4];
         let shared = Mutex::new(0);
         numbers2
             .par_iter()
@@ -114,10 +114,9 @@ mod tests {
         let offset = 10;
         // op2没有使用move,保存的是offset的引用
         let op2 = |n| n + offset;
-        // thread::spawn要求闭包满足'static: 新线程可能比当前函数运行得更久,闭包不能借用局部变量,只能用move拥有数据
-        // map不要求闭包满足'static: rayon的并行计算在当前函数内完成,所有线程结束后才返回,线程不会比当前函数运行得更久
-        // 因此闭包借用局部变量即可,不需要move,也不需要Arc
-        let shifted: Vec<i32>  = number3.par_iter().map(op2).collect();
+        // thread::spawn要求'static: spawn立即返回,是否等待线程结束由调用者决定,闭包可能在当前函数结束后执行
+        // map不要求'static: 执行并行迭代的操作会等待任务完成后返回,确保借用的数据在任务执行期间有效
+        let shifted: Vec<i32> = number3.par_iter().map(op2).collect();
         assert_eq!(shifted, [11, 12, 13, 14]);
     }
 
