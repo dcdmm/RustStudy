@@ -30,7 +30,7 @@ fn t0() {
     }
     macro_rules! exprc {
         ($e:expr) => {
-            exprc_tt_whole!($e) // $($lhs:tt)*可以匹配opaque AST((这里为expr类型))
+            exprc_tt_whole!($e) // $($lhs:tt)*可以匹配opaque AST(这里为expr类型)
         };
     }
     exprc!(1 + 1);
@@ -54,7 +54,7 @@ fn t0() {
             expre_literal!($l); // opaque AST不能和token匹配
         };
     }
-    // error: no rules expected the token `xxx`
+    // error: no rules expected `expr` metavariable
     // expre!(xxx);
 }
 
@@ -72,7 +72,7 @@ fn t1() {
         ($lhs:expr) => {};
     }
     macro_rules! ttb {
-        ($($t:tt)+) => { ttb_expr!($($t)+) }; // tokens 1 + 1可以和$expr匹配(1 + 1是表达式)
+        ($($t:tt)+) => { ttb_expr!($($t)+) }; // tokens 1 + 1可以和$lhs:expr匹配(1 + 1是表达式)
     }
     ttb!(1 + 1);
 
