@@ -48,6 +48,7 @@ fn t1() {
     repeat!(println!("Hello"));
 
     let mut x = 0;
+    // 宏展开时复制代码而非求值,x += 1执行3次
     repeat!(x += 1);
     println!("{x}"); // print->3
 
