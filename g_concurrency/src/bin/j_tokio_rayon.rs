@@ -30,11 +30,14 @@ mod tests {
     }
 
     async fn count_primes(range: Range<u64>) -> usize {
+        // 直接调用par_iter时,当前线程要等到计算结束才能继续,期间无法执行其他异步任务
+        // rayon::spawn把计算交给rayon线程池后立即返回,当前线程不用等待
         let (sender, receiver) = oneshot::channel();
         rayon::spawn(move || {
             let count = range.into_par_iter().filter(|n| is_prime(*n)).count();
             let _ = sender.send(count);
         });
+        // 等待结果时让出线程,其他异步任务可以继续执行
         receiver.await.unwrap()
     }
 
