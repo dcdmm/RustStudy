@@ -1,10 +1,10 @@
 ### 目录
 
-* a_basic--->基础
-* b_basic--->基础
-* c_pattern_matching--->模式匹配
-* d_error_handling--->错误处理
-* e_container--->容器
+* crates/a_basic--->基础
+* crates/b_basic--->基础
+* crates/c_pattern_matching--->模式匹配
+* crates/d_error_handling--->错误处理
+* crates/e_container--->容器
 * f_advanced--->高级
 * g_concurrency--->多线程
 * h_file_operate--->文件操作

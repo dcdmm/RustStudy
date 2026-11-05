@@ -3,11 +3,11 @@ resolver = "2"
 
 # members — Packages to include in the workspace.
 members = [
-    "a_basic",
-    "b_basic",
-    "c_pattern_matching",
-    "d_error_handling",
-    "e_container",
+    "crates/a_basic",
+    "crates/b_basic",
+    "crates/c_pattern_matching",
+    "crates/d_error_handling",
+    "crates/e_container",
     "f_advanced",
     "g_concurrency", 
     "h_file_operate",
