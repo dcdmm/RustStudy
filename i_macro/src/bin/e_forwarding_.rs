@@ -7,7 +7,7 @@ When forwarding a matched fragment to another macro-by-example, matchers in the 
 fn t0() {
     macro_rules! expra_expr {
         ($lhs:expr) => {
-            println!("expra_expr: {}", stringify!($lhs));
+            println!("expra : {}", stringify!($lhs));
         };
     }
     macro_rules! expra {
@@ -20,8 +20,8 @@ fn t0() {
     macro_rules! exprb_tt_whole {
         ($lhs:tt) => {
             // invisible delimiter无文本表示,stringify!不会输出
-            println!("文本: {}", stringify!($lhs * 2));
-            println!("计算结果: {}", stringify!($lhs * 2)); // 实际计算顺序为: (1+1)*2
+            println!("exprb文本: {}", stringify!($lhs * 2));
+            println!("exprb计算结果: {}", stringify!($lhs * 2)); // 实际计算顺序为: (1+1)*2
         };
     }
     macro_rules! exprb {
@@ -33,7 +33,10 @@ fn t0() {
     exprb!(1 + 1);
 
     macro_rules! exprc_tt_whole {
-        ($($lhs:tt)*) => {};
+        ($($lhs:tt)*) => {
+            println!("exprc文本: {}", stringify!($($lhs)* * 2));
+            println!("exprc计算结果: {}", $($lhs)* * 2); // 实际计算顺序为: (1+1)*2
+        };
     }
     macro_rules! exprc {
         ($e:expr) => {

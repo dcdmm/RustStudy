@@ -26,7 +26,7 @@ Build the documentation for the local package and all dependencies. The output i
 /// # Examples
 ///
 /// ```
-/// use crate::add_one;
+/// use x_docs::add_one;
 ///
 /// let arg = 5;
 /// let answer = add_one(arg);
@@ -50,7 +50,7 @@ pub fn add_one(x: i32) -> i32 {
 /// PrimaryColor枚举的创建
 ///
 /// ```rust
-/// use crate::kinds::PrimaryColor;
+/// use x_docs::kinds::PrimaryColor;
 ///
 /// let _ = PrimaryColor::Blue;
 /// ```
@@ -58,7 +58,7 @@ pub fn add_one(x: i32) -> i32 {
 /// SecondaryColor枚举的创建
 ///
 /// ```rust
-/// use crate::kinds::SecondaryColor;
+/// use x_docs::kinds::SecondaryColor;
 ///
 /// let _ = SecondaryColor::Green;
 /// ```

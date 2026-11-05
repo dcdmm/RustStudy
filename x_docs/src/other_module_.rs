@@ -11,7 +11,7 @@ pub mod public_struct {
     /// # Examples
     ///
     /// ```rust
-    /// use crate::other_module_::public_struct;
+    /// use x_docs::other_module_::public_struct;
     ///
     /// let _ = public_struct::Breakfast::summer("rust");
     /// ```
@@ -34,7 +34,7 @@ pub mod public_struct {
     /// # Examples
     ///
     /// ```rust
-    /// use crate::other_module_::public_struct;
+    /// use x_docs::other_module_::public_struct;
     /// let x = public_struct::Breakfast::summer("rust base");
     /// let x_bool = x.startwiths_rust();
     /// assert_eq!(x_bool, true);
