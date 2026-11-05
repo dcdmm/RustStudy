@@ -40,6 +40,8 @@ fn t0() {
     }
     macro_rules! exprc {
         ($e:expr) => {
+            // $e整体算作1个token tree,$($lhs:tt)*仅重复1次,无法拆成3个tt
+            // 对比: 直接调用exprc_tt_whole!(1 + 1)时匹配3个tt,计算结果为3
             exprc_tt_whole!($e) // $($lhs:tt)*可以匹配opaque AST(这里为expr类型)
         };
     }

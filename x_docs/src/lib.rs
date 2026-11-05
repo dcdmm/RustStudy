@@ -35,7 +35,8 @@ Build the documentation for the local package and all dependencies. The output i
 /// ```
 /// # Panics
 ///
-/// 如果x的值小于-1,将发生恐慌
+/// - 如果`x < -1`,将触发panic
+/// - 开启整数溢出检查时,如果`x == i32::MAX`,`x + 1`将溢出并触发panic
 pub fn add_one(x: i32) -> i32 {
     if x < -1 {
         panic!("!");

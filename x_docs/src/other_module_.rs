@@ -17,7 +17,8 @@ pub mod public_struct {
     /// ```
     pub struct Breakfast {
         pub toast: String,
-        seasonal_fruit: String, // 结构体Breakfast文档Fields中不含seasonal_fruit字段(cargo build生成时)
+        // cargo doc默认生成的Breakfast API文档Fields列表不显示私有字段
+        seasonal_fruit: String,
     }
 
     impl Breakfast {
@@ -29,17 +30,17 @@ pub mod public_struct {
         }
     }
 
-    /// 字段toast是否以rust开头
-    ///
-    /// # Examples
-    ///
-    /// ```rust
-    /// use x_docs::other_module_::public_struct;
-    /// let x = public_struct::Breakfast::summer("rust base");
-    /// let x_bool = x.startwiths_rust();
-    /// assert_eq!(x_bool, true);
-    /// ```
     impl Breakfast {
+        /// 字段toast是否以rust开头
+        ///
+        /// # Examples
+        ///
+        /// ```rust
+        /// use x_docs::other_module_::public_struct;
+        /// let x = public_struct::Breakfast::summer("rust base");
+        /// let x_bool = x.startwiths_rust();
+        /// assert_eq!(x_bool, true);
+        /// ```
         pub fn startwiths_rust(&self) -> bool {
             self.toast.starts_with("rust")
         }
