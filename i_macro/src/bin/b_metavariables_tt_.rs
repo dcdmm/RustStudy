@@ -6,7 +6,9 @@ fn t0() {
             println!("{}", stringify!($token));
         };
     }
+    // 单个token
     print_token!(*); // print->*
+    // 单个token
     print_token!(Hello); // print->Hello
     print_token!({ HELLO }); // print->{ HELLO }
 
