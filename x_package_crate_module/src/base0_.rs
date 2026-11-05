@@ -21,7 +21,7 @@ mod front_of_house {
         hosting::add_to_waitlist(); // 相对路径
 
         // error[E0603]: function `seat_at_table` is private
-        // hosting::seat_at_table(); // 函数pulic_function位于模块hosting父模块(front_of_house)中
+        // hosting::seat_at_table(); // 函数public_function位于模块hosting父模块(front_of_house)中
 
         println!("This is a public function.");
     }
@@ -48,15 +48,15 @@ pub fn eat_at_restaurant() {
     front_of_house::hosting::add_to_waitlist();
 
     // error[E0603]: function `seat_at_table` is private
-    // front_of_house::hosting::seat_at_table(); // 函数eat_at_restaurant位于模块hosting父模块(front_of_house)的父模块(base0)中
+    // front_of_house::hosting::seat_at_table(); // 函数eat_at_restaurant位于模块hosting父模块(front_of_house)的父模块(base0_)中
 }
 
 fn public_api() {}
 
 mod other_module {
     fn my_method() {
-        // 模块other_module、模块front_of_house、函数public_api都属于当前模块(base0)中
-        super::front_of_house::hosting::add_to_waitlist(); // 同一模块中访问私有项
-        super::public_api(); // 同一模块中访问私有项
+        // 模块front_of_house、函数public_api均为模块base0_的私有项,模块other_module是base0_的子模块
+        super::front_of_house::hosting::add_to_waitlist(); // 子模块访问父模块的私有项
+        super::public_api(); // 子模块访问父模块的私有项
     }
 }
