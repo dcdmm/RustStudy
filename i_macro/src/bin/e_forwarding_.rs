@@ -67,15 +67,11 @@ fn t1() {
     }
     macro_rules! exprc1 {
         ($a:expr, $b:expr) => {
-            exprf_tt_many!($a * $b) // 若改用$lhs:tt匹配,报错: no rules expected `*`
+            exprf_tt_many!($a * $b)
         };
     }
     exprc1!(1 + 1, 2 + 3); // 实际计算顺序为: (1+1)*(2+3)
-}
 
-#[allow(warnings)]
-#[test]
-fn t2() {
     macro_rules! exprd_tt_split {
         ($lhs:tt $op:tt $rhs:tt) => {};
     }
@@ -90,46 +86,31 @@ fn t2() {
 
 #[allow(warnings)]
 #[test]
-fn t3() {
-    macro_rules! expre_literal {
+fn t2() {
+    macro_rules! expr_literal {
         (xxx) => {};
     }
-    macro_rules! expre {
+    macro_rules! expr {
+        // $l:expr将xxx解析为expr类型的opaque AST
         ($l:expr) => {
-            expre_literal!($l); // opaque AST不能和token匹配
+            expr_literal!($l); // opaque AST不能和token匹配
         };
     }
     // error: no rules expected `expr` metavariable
-    // expre!(xxx);
-}
+    // expr!(xxx);
 
-#[test]
-fn t1x() {
-    macro_rules! tta_tt {
-        ($lhs:tt $op:tt $rhs:tt) => {};
-    }
-    macro_rules! tta {
-        ($($t:tt)+) => { tta_tt!($($t)+) }; // tokens 1 + 1可以和$lhs:tt $op:tt $rhs:tt匹配
-    }
-    tta!(1 + 1);
-
-    macro_rules! ttb_expr {
-        ($lhs:expr) => {};
-    }
-    macro_rules! ttb {
-        ($($t:tt)+) => { ttb_expr!($($t)+) }; // tokens 1 + 1可以和$lhs:expr匹配(1 + 1是表达式)
-    }
-    ttb!(1 + 1);
-
-    macro_rules! ttc_literal {
-        (xxx) => {};
-    }
-    macro_rules! ttc {
-        ($l:tt) => {
-            ttc_literal!($l); // token xxx可以和token xxx匹配
+    macro_rules! tt_literal {
+        (xxx) => {
+            println!("tt_literal匹配成功: {}", stringify!(xxx));
         };
     }
-    ttc!(xxx);
+    macro_rules! tt {
+        // $l:tt不解析xxx,转发后仍是原始ident token xxx(ident,lifetime,tt属于例外)
+        ($l:tt) => {
+            tt_literal!($l); // token xxx可以和token xxx匹配
+        };
+    }
+    tt!(xxx);
 }
 
 fn main() {}
