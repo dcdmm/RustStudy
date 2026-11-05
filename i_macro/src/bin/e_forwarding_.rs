@@ -6,7 +6,9 @@ When forwarding a matched fragment to another macro-by-example, matchers in the 
 #[test]
 fn t0() {
     macro_rules! expra_expr {
-        ($lhs:expr) => {};
+        ($lhs:expr) => {
+            println!("expra_expr: {}", stringify!($lhs));
+        };
     }
     macro_rules! expra {
         ($e:expr) => {
@@ -16,10 +18,15 @@ fn t0() {
     expra!(1 + 1);
 
     macro_rules! exprb_tt_whole {
-        ($lhs:tt) => {};
+        ($lhs:tt) => {
+            // invisible delimiter无文本表示,stringify!不会输出
+            println!("文本: {}", stringify!($lhs * 2));
+            println!("计算结果: {}", stringify!($lhs * 2)); // 实际计算顺序为: (1+1)*2
+        };
     }
     macro_rules! exprb {
         ($e:expr) => {
+            // 转发时$e被隐形括号(invisible delimiter)包裹,整体算作1个token tree
             exprb_tt_whole!($e) // $lhs:tt可以匹配opaque AST(这里为expr类型)
         };
     }
