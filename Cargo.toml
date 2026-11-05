@@ -6,7 +6,7 @@ members = [
     "a_basic",
     "b_basic",
     "c_pattern_matching",
-    "d_error_handing",
+    "d_error_handling",
     "e_container",
     "f_advanced",
     "g_concurrency", 
