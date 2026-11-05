@@ -7,7 +7,7 @@
 /*
 cargo doc [options]: Build a package’s documentation
 
-# ESCRIPTION
+# DESCRIPTION
 Build the documentation for the local package and all dependencies. The output is placed in target/doc in rustdoc’s usual format.
 
 # OPTIONS

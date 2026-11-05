@@ -45,6 +45,20 @@ fn t0() {
     }
     exprc!(1 + 1);
 
+    // 转发多个expr: $a和$b各算1个tt,加上*共3个tt
+    macro_rules! exprf_tt_many {
+        ($($lhs:tt)*) => {
+            println!("exprf文本: {}", stringify!($($lhs)*));
+            println!("exprf计算结果: {}", $($lhs)*); // 实际计算顺序为: (1+1)*(2+3)
+        };
+    }
+    macro_rules! exprc1 {
+        ($a:expr, $b:expr) => {
+            exprf_tt_many!($a * $b) // 若改用$lhs:tt匹配,报错: no rules expected `*`
+        };
+    }
+    exprc1!(1 + 1, 2 + 3);
+
     macro_rules! exprd_tt_split {
         ($lhs:tt $op:tt $rhs:tt) => {};
     }

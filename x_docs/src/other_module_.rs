@@ -6,7 +6,7 @@
 pub mod public_struct {
     /// public_struct模块下Breakfast结构体
     ///
-    /// 这个结构体必须通过关联函数sumer创建
+    /// 这个结构体必须通过关联函数summer创建
     ///
     /// # Examples
     ///
