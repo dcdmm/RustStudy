@@ -12,7 +12,7 @@ A module without a body is loaded from an external file.
   * 方式一: src/util/util_sub.rs
   * 方式二(参考:file_path_style2/file_path_style2_sub/mod.rs): src/util/util_sub/mod.rs
 
-注意:方式一、方式二不能同时存在
+注意:同一个模块方式一、方式二不能同时存在
 
 
 #### 方式一示例
