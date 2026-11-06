@@ -5,6 +5,7 @@ pub mod base1_;
 mod base2_public_structs_enum_;
 
 mod file_path_style1;
+use file_path_style1::file_path_style1_sub::arithmetic11_::mul_div::add;
 mod file_path_style2;
 use file_path_style2::file_path_style2_sub::arithmetic3_::primary::pt;
 
@@ -21,8 +22,8 @@ fn main() {
     // use file_path_style1::arithmetic0_::sum_sub::sub;
 
     // error[E0603]: module `mul_div` is private
-    // use file_path_style2::arithmetic1_::mul_div;
+    // use file_path_style2::arithmetic21_::mul_div;
 
-    // error[E0603]: module `arithmetic2_` is private
-    // use file_path_style2::arithmetic2_;
+    // error[E0603]: module `arithmetic22_` is private
+    // use file_path_style2::arithmetic22_;
 }

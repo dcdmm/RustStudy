@@ -6,11 +6,11 @@ A module item is a module, surrounded in braces, named, and prefixed with the ke
 A module without a body is loaded from an external file.
 
 * For a module named util declared in the crate root(`mod util;`), the compiler will look for the module’s code in:
-  * 方式一(参考:file_path_style1/arithmetic0_.rs): src/util.rs
-  * 方式二(参考:file_path_style2/mod.rs): src/util/mod.rs
+  * 方式一(参考:src/file_path_style1.rs): src/util.rs
+  * 方式二(参考:src/file_path_style2/mod.rs): src/util/mod.rs
 * For a module named util_sub that is a submodule of util(`mod util_sub;`), the compiler will look for the module’s code in:
-  * 方式一: src/util/util_sub.rs
-  * 方式二(参考:file_path_style2/file_path_style2_sub/mod.rs): src/util/util_sub/mod.rs
+  * 方式一(参考:src/file_path_style1/file_path_style1_sub.rs): src/util/util_sub.rs
+  * 方式二(参考:src/file_path_style2/file_path_style2_sub/mod.rs): src/util/util_sub/mod.rs
 
 注意:同一个模块方式一、方式二不能同时存在
 
