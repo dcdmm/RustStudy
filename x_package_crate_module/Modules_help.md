@@ -17,6 +17,8 @@ A module without a body is loaded from an external file.
 
 #### 方式一示例
 
+以lib.rs为例,编译器从lib.rs开始,每遇到一个`mod xxx;`就引入对应文件作为子模块(如`mod util;`引入util.rs),再在该文件中继续查找`mod`,逐层向下,最终所有文件组成一棵模块树一起编译
+
 ```text
 ├── src/
 │   ├── lib.rs
