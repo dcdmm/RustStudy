@@ -1,8 +1,8 @@
 #![allow(warnings)]
 
 mod base0_;
-mod base2_public_structs_enum_;
 pub mod base1_;
+mod base2_public_structs_enum_;
 
 mod file_path_style1;
 mod file_path_style2;
@@ -18,11 +18,11 @@ mod keyword_use2_;
 fn main() {
     use file_path_style1::arithmetic0_::sum_sub::sum;
     // error[E0603]: function `sub` is private
-    // use style1::arithmetic0_::sum_sub::sub;
+    // use file_path_style1::arithmetic0_::sum_sub::sub;
 
     // error[E0603]: module `mul_div` is private
-    // use style2::arithmetic1_::mul_div;
+    // use file_path_style2::arithmetic1_::mul_div;
 
     // error[E0603]: module `arithmetic2_` is private
-    // use style2::arithmetic2_;
+    // use file_path_style2::arithmetic2_;
 }
