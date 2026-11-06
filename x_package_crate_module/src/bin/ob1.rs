@@ -1,3 +1,4 @@
+// x_package_crate_module为库名,根文件为src/lib.rs
 use x_package_crate_module::base1_::outer_mod::inner_mod::pub_mod_visible_fn; // pub修饰
 // error[E0603]: function `crate_visible_fn` is private
 // use x_package_crate_module::base1_::outer_mod::inner_mod::crate_visible_fn; // pub(crate)修饰(仅当前crate可见)
