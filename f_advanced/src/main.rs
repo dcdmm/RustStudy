@@ -1,6 +1,3 @@
-#![allow(non_snake_case)]
-#![allow(warnings)]
-
 mod lifetime;
 mod closure;
 mod iterator;

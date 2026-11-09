@@ -10,7 +10,6 @@ pub trait Draw {
     fn draw(&self);
 }
 
-#[allow(warnings)]
 pub struct Screen {
     /*
     dyn is a prefix of a trait object’s type.
