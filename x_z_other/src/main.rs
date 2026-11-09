@@ -1,4 +1,4 @@
-// 在crate根文件(main.rs或lib.rs)开头添加#![attribute],作用于整个crate
+// 在crate根文件(main.rs或lib.rs)开头添加#![attribute],作用于以该文件为根的整个crate
 #![allow(non_snake_case)]
 
 mod attributes;

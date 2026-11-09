@@ -3,33 +3,21 @@
 
 // 每个.rs文件都是一个模块,在文件开头添加#![attribute],作用于该文件对应的模块
 
-// #![allow(unstable_name_collisions)]
-// #![warn(unstable_name_collisions)]
-// #![deny(unstable_name_collisions)]
-#![forbid(unstable_name_collisions)]
+// lint级别:
+// #![allow(unused_mut)] // 允许
+// #![warn(unused_mut)] // 警告
+// #![deny(unused_mut)] // 产生error
+#![forbid(unused_mut)] // 产生error
 
 // 默认为warn
-// The unstable_name_collisions lint detects that you have used a name that the standard library plans to add in the future.
+// The unused_mut lint detects mut variables which don't need to be mutable.
 #[test]
-fn lint_unstable_name_collisions_test() {
-    trait MyIterator: Iterator {
-        // is_partitioned is an unstable method that already exists on the Iterator trait
-        fn is_partitioned(self) -> bool
-        where
-            Self: Sized,
-        {
-            true
-        }
-    }
+fn lint_unused_mut_test() {
+    // 默认时警告信息===>warning: variable does not need to be mutable
 
-    impl<T: ?Sized> MyIterator for T where T: Iterator {}
-
-    let x = vec![1, 2, 3];
-
-    // 默认时警告信息===>warning: a method with this name may be added to the standard library in the future
-
-    // error: a method with this name may be added to the standard library in the future
-    // let _ = x.iter().is_partitioned();
+    // error: variable does not need to be mutable
+    // let mut x = 5;
+    // println!("{x}");
 }
 
 // 默认为warn
@@ -41,12 +29,16 @@ fn lint_warngings_test() {
     let a = 4.34;
 }
 
-// 默认为warn
+// non_snake_case: 默认为warn
 // The non_snake_case lint detects variables, methods, functions, lifetime parameters and modules that don't have snake case names.
-#[allow(non_snake_case)]
+//
+// unused_variables: 默认为warn
+// The unused_variables lint detects variables which are not used in any way.
+#[allow(non_snake_case, unused_variables)]
 #[test]
-fn lint_non_snake_case_test() {
+fn lint_non_snake_unused_variables_case_test() {
     // 默认时警告信息===>warning: variable `MY_VALUE` should have a snake case name
+    // 默认时警告信息===>warning: unused variable: `MY_VALUE`
     let MY_VALUE = 5;
 }
 
