@@ -101,7 +101,7 @@ fn t1() {
     #[derive(Debug)]
     struct Joo;
     let a = Joo; // `a`: move occurs because `a` has type `Joo`, which does not implement the `Copy` trait
-                 // `a` has moved into `b`, and so cannot be used
+    // `a` has moved into `b`, and so cannot be used
     let b = a;
     // error[E0382]: borrow of moved value: `a`
     // println!("{a:?}");
