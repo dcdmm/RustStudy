@@ -5,7 +5,7 @@ Copies happen implicitly, for example as part of an assignment y = x. The behavi
 
 Cloning is an explicit action, x.clone(). The implementation of Clone can provide any type-specific behavior necessary to duplicate values safely. For example, the implementation of Clone for String needs to copy the pointed-to string buffer in the heap. A simple bitwise copy of String values would merely copy the pointer, leading to a double free down the line. For this reason, String is Clone but not Copy.
 
-Clone is a supertrait of Copy, so everything which is Copy must also implement Clone. If a type is Copy then its Clone implementation only needs to return *self (see the example above).
+Clone is a supertrait of Copy, so everything which is Copy must also implement Clone. If a type is Copy then its Clone implementation only needs to return *self.
 
 A type can implement Copy if all of its components implement Copy.
 
@@ -20,7 +20,7 @@ fn clone(&self) -> Self
 
 // # 常见实现
 /*
-Copy/Clone: bool/char/f32/f64/i8/i16/i32/i64/i128/u8/u16/u32/u64/u128/()/isize/usize/Error
+Copy/Clone: bool/char/f32/f64/i8/i16/i32/i64/i128/u8/u16/u32/u64/u128/()/isize/usize/fmt::Error
 Copy/Clone:
     Option<T>/[T; N]
         T: Copy,/T: Clone,
@@ -46,9 +46,6 @@ Clone:
         S: Clone,
 Clone: Thread
 Clone:
-    Box<T, A>
-        T: Clone,
-        A: Allocator + Clone,
     Box<T, A>
         T: Clone,
         A: Allocator + Clone,
