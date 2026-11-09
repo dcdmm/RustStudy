@@ -14,8 +14,8 @@
 #[test]
 fn lint_unstable_name_collisions_test() {
     trait MyIterator: Iterator {
-        // is_sorted is an unstable method that already exists on the Iterator trait
-        fn is_sorted(self) -> bool
+        // is_partitioned is an unstable method that already exists on the Iterator trait
+        fn is_partitioned(self) -> bool
         where
             Self: Sized,
         {
@@ -30,7 +30,7 @@ fn lint_unstable_name_collisions_test() {
     // 默认时警告信息===>warning: a method with this name may be added to the standard library in the future
 
     // error: a method with this name may be added to the standard library in the future
-    // let _ = x.iter().is_sorted();
+    // let _ = x.iter().is_partitioned();
 }
 
 // 默认为warn
@@ -46,7 +46,7 @@ fn lint_warngings_test() {
 // The non_snake_case lint detects variables, methods, functions, lifetime parameters and modules that don't have snake case names.
 #[allow(non_snake_case)]
 #[test]
-fn link_non_snake_case_test() {
+fn lint_non_snake_case_test() {
     // 默认时警告信息===>warning: variable `MY_VALUE` should have a snake case name
     let MY_VALUE = 5;
 }
@@ -55,7 +55,7 @@ fn link_non_snake_case_test() {
 // The dead_code lint detects unused, unexported items.
 #[allow(dead_code)]
 #[test]
-fn link_dead_code_test() {
+fn lint_dead_code_test() {
     // 默认时警告信息===>warning: function `foo` is never used
     fn foo() {}
 }
