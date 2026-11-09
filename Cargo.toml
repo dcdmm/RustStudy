@@ -21,3 +21,14 @@ members = [
 
     "z_tests"
 ]
+
+# 供workspace成员继承的lint配置
+# 
+# 继承: 成员需在自身Cargo.toml中显式声明以下内容: 
+# [lints]
+# workspace = true
+# 
+# 成员继承后,该成员不能再单独设置任何lint(如[lints.rust]、[lints.clippy])
+[workspace.lints.rust]
+non_snake_case = "allow"
+warnings = "allow"

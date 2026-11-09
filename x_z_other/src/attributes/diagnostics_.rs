@@ -12,10 +12,11 @@
 // 默认为warn
 // The unused_mut lint detects mut variables which don't need to be mutable.
 #[test]
-// #[allow(unused_mut)]  // 取消注释后覆盖模块级deny,该函数内不再产生error
+// #[allow(unused_mut)]  // 取消注释后覆盖外层deny,该函数内不再产生error
 fn lint_unused_mut_test() {
     // 默认时警告信息===>warning: variable does not need to be mutable
 
+    // #[allow(unused_mut)]  // (最内层)取消注释后覆盖外层deny,该语句不再产生error
     // error: variable does not need to be mutable
     // let mut x = 5;
     // println!("{x}");
