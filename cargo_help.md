@@ -1,3 +1,2 @@
 ```shell
-cargo doc
 ```
