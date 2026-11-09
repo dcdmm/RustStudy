@@ -1,4 +1,4 @@
-#![allow(non_snake_case)]
+// 影响整个crate(即main.rs或lib.rs代码前添加#![attribute])
 #![allow(warnings)]
 
 mod attributes;
