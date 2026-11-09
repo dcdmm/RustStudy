@@ -2,7 +2,7 @@ pub fn add(left: usize, right: usize) -> usize {
     left + right
 }
 
-// #[cfg(test)]修饰的模块仅在被测试时,才会被编译和执行
+// #[cfg(test)]: 条件编译,被修饰的item仅在测试构建(如cargo test)时编译,普通构建(如cargo build)时不编译
 #[cfg(test)]
 mod tests {
     use super::*;
