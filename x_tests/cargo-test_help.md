@@ -21,6 +21,11 @@ When no target selection options are given, cargo test will build the following 
 
 #### 示例
 
+* 测试所有名称包含tests_0的项
+```shell
+cargo test tests_0  # 不指定target,在lib、bin和integration tests中匹配所有包含tests_0的项
+```
+
 * 测试src/lib.rs
 ```shell
 cargo test --lib
@@ -28,22 +33,22 @@ cargo test --lib
 
 * 测试src/main.rs
 ```shell
-cargo test --bin y_test # y_test为包名
+cargo test --bin x_tests # x_tests为包名
 ```
 
 * 测试src/main.rs tests_0模块
 ```shell
-cargo test --bin y_test -- tests_0  # 会匹配main.rs中所有包含tests_0的项
+cargo test --bin x_tests -- tests_0  # 会匹配main.rs中所有包含tests_0的项
 ```
 
 * 测试src/main.rs tests_0模块下函数main_test0_t0
 ```shell
-cargo test --bin y_test -- tests_0::main_test0_t0  # 会匹配main.rs tests_0模块下所有包含main_test0_t0的项
+cargo test --bin x_tests -- tests_0::main_test0_t0  # 会匹配main.rs tests_0模块下所有包含main_test0_t0的项
 ```
 
-* 测试src/main.rs tests_0函数t0
+* 测试src/main.rs函数t0
 ```shell
-cargo test --bin y_test -- t0  # 会匹配mian.rs中所有包含t0的项
+cargo test --bin x_tests -- t0 --exact  # --exact表示完全匹配,不加时会匹配main.rs中所有包含t0的项
 ```
 
 * 测试src/bin/bin_test.rs
@@ -69,7 +74,7 @@ cargo test --test integration_test0 -- t0 # 会匹配integration_test0.rs所有�
 * 测试src/normal_test.rs
   * main.rs ===> mod normal_test;
      ```shell
-     cargo test --bin y_test -- normal_test # y_test为包名
+     cargo test --bin x_tests -- normal_test 
      ```
    * lib.rs ===> mod normal_test;
      ```shell
