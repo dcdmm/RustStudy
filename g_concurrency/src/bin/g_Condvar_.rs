@@ -1,5 +1,3 @@
-#![allow(non_snake_case)]
-
 // Struct std::sync::Condvar
 
 // C++参考: CPPStudy\i_concurrency\condition_variable_.cpp

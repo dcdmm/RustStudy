@@ -1,5 +1,3 @@
-#![allow(non_snake_case)]
-
 // Using Mutexes to Allow Access to Data from One Thread at a Time
 // C++参考: CPPStudy\i_concurrency\mutex_.cpp
 

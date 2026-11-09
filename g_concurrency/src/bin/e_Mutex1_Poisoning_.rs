@@ -1,5 +1,3 @@
-#![allow(non_snake_case)]
-
 // Struct std::sync::Mutex
 
 // Poisoning

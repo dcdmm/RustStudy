@@ -1,5 +1,3 @@
-#![allow(non_snake_case)]
-
 // Waiting for All Threads to Finish Using join Handles
 // C++参考: CPPStudy\i_concurrency\base\constructor_join0_.cpp
 

@@ -1,6 +1,3 @@
-#![allow(non_snake_case)]
-#![allow(warnings)]
-
 // Sharing a Mutex<T> Between Multiple Threads
 // C++参考: CPPStudy\i_concurrency\mutex_.cpp
 
