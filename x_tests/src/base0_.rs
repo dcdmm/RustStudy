@@ -2,7 +2,7 @@ pub fn add(left: usize, right: usize) -> usize {
     left + right
 }
 
-// #[cfg(test)]: 条件编译,仅在`cargo test`时编译并执行测试代码,`cargo build`时不编译这些代码
+// #[cfg(test)]: 条件编译,被修饰的代码仅在测试构建(如`cargo test`)时编译,普通构建(如`cargo build`)时不编译
 #[cfg(test)]
 mod tests {
     use super::*;
