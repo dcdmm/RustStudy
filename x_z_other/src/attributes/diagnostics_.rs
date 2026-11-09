@@ -1,7 +1,7 @@
 // 参考: https://doc.rust-lang.org/reference/attributes/diagnostics.html
 // 参考: https://doc.rust-lang.org/rustc/lints/index.html
 
-// 每个.rs文件本身就是一个模块,在当前文件代码前添加#![attribute]即影响该模块
+// 每个.rs文件都是一个模块,在文件开头添加#![attribute],作用于该文件对应的模块
 
 // #![allow(unstable_name_collisions)]
 // #![warn(unstable_name_collisions)]
