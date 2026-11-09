@@ -19,7 +19,7 @@ When no target selection options are given, cargo test will build the following 
 * integration tests
 * doc tests for the lib target
 
-#### 示例
+#### 常见命令
 
 * 测试所有名称包含tests_0的项
 ```shell
