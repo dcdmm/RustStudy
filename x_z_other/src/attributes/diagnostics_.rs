@@ -6,12 +6,13 @@
 // lint级别:
 // #![allow(unused_mut)] // 允许
 // #![warn(unused_mut)] // 警告
-// #![deny(unused_mut)] // 产生error
-#![forbid(unused_mut)] // 产生error
+#![deny(unused_mut)] // 产生error,内层可用#[allow]覆盖
+// #![forbid(unused_mut)] // 产生error,内层不可覆盖
 
 // 默认为warn
 // The unused_mut lint detects mut variables which don't need to be mutable.
 #[test]
+// #[allow(unused_mut)]  // 取消注释后覆盖模块级deny,该函数内不再产生error
 fn lint_unused_mut_test() {
     // 默认时警告信息===>warning: variable does not need to be mutable
 
