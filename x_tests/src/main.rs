@@ -4,6 +4,7 @@ mod base0_;
 mod base1_macro_assert_;
 mod base2_return_Result_;
 mod base3_attribute_should_panic_;
+mod base3_show_output_;
 mod normal_test;
 
 #[cfg(test)]
