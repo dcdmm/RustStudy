@@ -9,7 +9,7 @@ struct Pair<T> {
 }
 
 // 没有额外约束
-#[allow(warnings)]
+// #[allow(warnings)]
 impl<T> Pair<T> {
     fn new(x: T, y: T) -> Self {
         Self { x, y }
