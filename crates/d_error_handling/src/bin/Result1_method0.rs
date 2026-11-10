@@ -1,5 +1,3 @@
-#![allow(non_snake_case)]
-
 // std::result::Result
 
 /*

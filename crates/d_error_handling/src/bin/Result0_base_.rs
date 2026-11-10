@@ -1,5 +1,3 @@
-#![allow(non_snake_case)]
-
 // Recoverable Errors with Result
 
 /*
@@ -11,12 +9,9 @@ enum Result<T, E> {
 }
 ```
  */
-#[allow(warnings)]
 use std::fs::File;
-#[allow(warnings)]
 use std::io::ErrorKind;
 
-#[allow(warnings)]
 #[test]
 fn t0() {
     let greeting_file_result = File::open("hello_base0.txt");
@@ -29,7 +24,6 @@ fn t0() {
 }
 
 // Handling different kinds of errors in different ways
-#[allow(warnings)]
 #[test]
 fn t1() {
     let greeting_file_result = File::open("hello_base1.txt");

@@ -1,6 +1,3 @@
-#![allow(non_snake_case)]
-#![allow(warnings)]
-
 // Shortcuts for Panic on Error
 
 /*

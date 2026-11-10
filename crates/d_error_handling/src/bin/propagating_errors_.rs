@@ -1,5 +1,3 @@
-#![allow(warnings)]
-
 // Propagating Errors
 
 use std::error::Error;
