@@ -53,4 +53,73 @@ fn catch_all() {
     println!("{}", u1);
 }
 
+// *****************************************************************
+// matches!
+
+/*
+matches!(EXPRESSION, PATTERN)
+matches!(EXPRESSION, PATTERN if GUARD)
+
+判断表达式的值是否匹配pattern,源码:
+macro_rules! matches {
+    ($expression:expr, $pattern:pat $(if $guard:expr)? $(,)?) => {
+        #[allow(non_exhaustive_omitted_patterns)]
+        match $expression {
+            $pattern $(if $guard)? => true,
+            _ => false
+        }
+    };
+}
+*/
+
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+}
+
+#[test]
+fn matches_t0() {
+    let msg = Message::Write(String::from("hi"));
+
+    let is_write = match msg {
+        Message::Write(_) => true,
+        _ => false,
+    };
+
+    let is_write_m = matches!(msg, Message::Write(_)); // 与上等价
+
+    assert!(is_write && is_write_m);
+}
+
+#[test]
+fn matches_t1() {
+    // 配合|和范围模式
+    let c = 'k';
+    assert!(matches!(c, 'a'..='z' | 'A'..='Z'));
+    assert!(!matches!(c, '0'..='9'));
+
+    // 配合match guard
+    let msg = Message::Move { x: 3, y: -1 };
+    assert!(matches!(msg, Message::Move { x, .. } if x > 0));
+}
+
+#[test]
+fn matches_t2() {
+    // 配合迭代器使用
+
+    let msgs = vec![
+        Message::Quit,
+        Message::Write(String::from("hi")),
+        Message::Move { x: 1, y: 2 },
+        Message::Quit,
+    ];
+    let quit_count = msgs.iter().filter(|m| matches!(m, Message::Quit)).count();
+    assert_eq!(quit_count, 2);
+
+    let s = "a1b2c3";
+    let digits: String = s.chars().filter(|c| matches!(c, '0'..='9')).collect();
+    assert_eq!(digits, "123");
+}
+
 fn main() {}

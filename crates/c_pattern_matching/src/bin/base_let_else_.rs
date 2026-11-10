@@ -48,12 +48,12 @@ fn t1() {
         println!("{x}");
     }
     // // error[E0425]: cannot find value `x` in this scope
-    // println!("{x}"); // if let绑定的变量只在其代码块内可用
+    // println!("{x}"); // if let绑定的变量仅在其代码块内可用
 
     let Some(y) = s else {
         panic!("s为None");
     };
-    println!("{y}"); // let...else绑定的变量在后续代码中可用
+    println!("{y}"); // let ... else绑定的变量在当前作用域的后续代码中可用
 }
 
 #[test]

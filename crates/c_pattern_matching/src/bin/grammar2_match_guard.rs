@@ -7,11 +7,13 @@ fn main() {
         Some(x) => println!("The number {} is odd", x),
         None => (),
     }
+    // println!("{x}"); // x仅在对应match分支内有效
 
-    let x = 4;
-    let y = false;
-    match x {
-        4 | 5 | 6 if y => println!("yes"), // 优先级顺序为:(4 | 5 | 6) if y
+    
+    let a = 4;
+    let b = false;
+    match a {
+        4 | 5 | 6 if b => println!("yes"), // 优先级顺序为:(4 | 5 | 6) if y
         _ => println!("no"),
     }
 }

@@ -46,5 +46,49 @@ fn t1() {
      */
     (&&f).foo(); // &&f(Deref coercion) ---> &f
     (&&&f).foo(); // &&&f(Deref coercion) ---> &&f(Deref coercion) ---> &f
-    (&&&&f).foo(); 
+    (&&&&f).foo();
+}
+
+#[test]
+fn t2() {
+    struct MyBox<T>(T);
+
+    impl<T> Deref for MyBox<T> {
+        type Target = T;
+
+        fn deref(&self) -> &T {
+            println!("MyBox::deref被调用");
+            &self.0
+        }
+    }
+
+    struct Dog {
+        name: String,
+    }
+
+    impl Dog {
+        fn bark(&self) {
+            println!("{} 汪汪", self.name);
+        }
+    }
+
+    let d = MyBox(Dog {
+        name: String::from("旺财"),
+    });
+
+    // MyBox<Dog>没有bark方法,通过Deref得到&Dog后调用Dog::bark
+    d.bark(); // 等价于: Dog::bark(Deref::deref(&d))
+    /*
+    print->
+    MyBox::deref被调用
+    旺财 汪汪
+     */
+
+    // 字段访问同理
+    println!("{}", d.name);
+    /*
+    print->
+    MyBox::deref被调用
+    旺财
+     */
 }
