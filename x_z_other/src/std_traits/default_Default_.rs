@@ -22,7 +22,7 @@ fn t0() {
     }
 
     let default_v = SomeOptions::default();
-    let default_v1: SomeOptions = Default::default(); // 遇上等价
+    let default_v1: SomeOptions = Default::default(); // 与上等价
     println!("{:?}", default_v);
 }
 
