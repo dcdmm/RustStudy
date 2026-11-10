@@ -12,3 +12,4 @@ mod ops_Add_;
 mod ops_AddAssign_;
 mod default_Default_;
 mod fmt_Debug_;
+mod fmt_Display_;
