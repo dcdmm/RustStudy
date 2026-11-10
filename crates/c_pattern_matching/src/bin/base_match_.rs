@@ -57,10 +57,7 @@ fn catch_all() {
 // matches!
 
 /*
-matches!(EXPRESSION, PATTERN)
-matches!(EXPRESSION, PATTERN if GUARD)
-
-判断表达式的值是否匹配pattern,源码:
+判断表达式的值"是否"匹配pattern,源码:
 macro_rules! matches {
     ($expression:expr, $pattern:pat $(if $guard:expr)? $(,)?) => {
         #[allow(non_exhaustive_omitted_patterns)]
