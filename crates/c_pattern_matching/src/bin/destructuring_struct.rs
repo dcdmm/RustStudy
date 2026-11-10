@@ -1,6 +1,5 @@
 // 模式匹配(解构结构体)
 
-#[allow(warnings)]
 struct Point {
     x: i32,
     y: i32,

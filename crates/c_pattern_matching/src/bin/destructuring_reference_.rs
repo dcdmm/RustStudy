@@ -1,6 +1,5 @@
 // 解构引用(参考matching_named_variables_.rs)
 
-#[allow(warnings)]
 fn main() {
     struct Point {
         x: i32,

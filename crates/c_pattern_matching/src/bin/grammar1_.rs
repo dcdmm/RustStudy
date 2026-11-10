@@ -1,6 +1,5 @@
 // 模式匹配语法(Ignoring Values in a Pattern)
 
-#[allow(warnings)]
 struct Point {
     x: i32,
     y: i32,
