@@ -126,8 +126,11 @@ fn t1_1() {
     }
 
     let x = 5;
-    let y = MyBox::new(x); // y不是Pointer types
+    let y = MyBox::new(x); // y不是指针类型
 
     // Rust substitutes the * operator with a call to the deref method and then a plain dereference so we don’t have to think about whether or not we need to call the deref method. This Rust feature lets us write code that functions identically whether we have a regular reference or a type that implements Deref.
-    assert_eq!(5, *y); // 实际执行为: *Deref::deref(&y) 或 *(y.deref())
+    let r: &i32 = Deref::deref(&y);
+    assert_eq!(5, *r);
+
+    assert_eq!(5, *y); // *y等价于: *Deref::deref(&y) 或 *(y.deref())
 }
