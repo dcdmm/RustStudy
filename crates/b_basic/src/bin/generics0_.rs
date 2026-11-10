@@ -38,14 +38,12 @@ struct Point {
 ```
 */
 // In Struct Definitions
-#[allow(warnings)]
 struct Point<T> {
     // fields x and y are both that same type, whatever that type may be
     x: T,
     y: T,
 }
 
-#[allow(warnings)]
 struct Point1<T, U> {
     // x and y are both generics but could have different types, we can use multiple generic type parameters
     x: T,
@@ -53,13 +51,11 @@ struct Point1<T, U> {
 }
 
 // In Enum Definitions
-#[allow(warnings)]
 enum Option<T> { // the Option<T> enum that the standard library provides
     Some(T),
     None,
 }
 
-#[allow(warnings)]
 enum Result<T, E> { // Enums can use multiple generic types as well
     Ok(T),
     Err(E),

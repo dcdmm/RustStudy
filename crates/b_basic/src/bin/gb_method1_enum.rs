@@ -1,6 +1,5 @@
 // 为枚举实现方法
 
-#[allow(warnings)]
 enum Message {
     Quit,
     Move { x: i32, y: i32 },

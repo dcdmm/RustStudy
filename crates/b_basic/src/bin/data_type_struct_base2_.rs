@@ -2,7 +2,6 @@
 
 struct Color(i32, f32, i32); // 字段没有名称,且以分号结尾
 
-#[allow(warnings)]
 struct Point(i32, f32, f64);
 
 fn main() {

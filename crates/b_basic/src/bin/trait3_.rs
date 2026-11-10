@@ -1,5 +1,3 @@
-#![allow(warnings)]
-
 // trait(Returning Types that Implement Traits)
 
 trait Summary {

@@ -1,5 +1,3 @@
-#![allow(warnings)]
-
 // trait(Traits as Parameters/Trait Bound Syntax)
 
 /*

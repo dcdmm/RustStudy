@@ -7,7 +7,6 @@ trait Summary {
     }
 }
 
-#[allow(warnings)]
 struct NewsArticle {
     headline: String,
     location: String,
@@ -22,7 +21,6 @@ impl Summary for NewsArticle {
     }
 }
 
-#[allow(warnings)]
 struct Tweet {
     username: String,
     content: String,

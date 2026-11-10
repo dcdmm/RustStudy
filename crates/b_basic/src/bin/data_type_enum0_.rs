@@ -8,14 +8,12 @@ enum IpAddrkind {
 
 fn route(_ip_kind: IpAddrkind) {}
 
-#[allow(warnings)]
 enum IpAddr {
     // can put data directly into each enum variant
     V4(String),
     V6(String),
 }
 
-#[allow(warnings)]
 enum IpAddr1 {
     // each variant can have different types and amounts of associated data.
     V4(u8, u16, u32, u64),
@@ -23,7 +21,6 @@ enum IpAddr1 {
 }
 
 // This code illustrates that you can put any kind of data inside an enum variant: strings, numeric types, or structs, for example. You can even include another enum
-#[allow(warnings)]
 enum Message {
     Quit,                       // Quit has no data associated with it at all.
     Move { x: i32, y: i32 },    // Move has named fields like a struct does.

@@ -21,7 +21,6 @@ fn main() {
     let _y_turbofish = Result1::Ok::<u8, &str>(34);
 }
 
-#[allow(warnings)]
 #[test]
 fn t0() {
     use std::sync::mpsc;
@@ -44,7 +43,6 @@ fn t0() {
     let (s2, r2) = mpsc::channel::<i32>();
 }
 
-#[allow(warnings)]
 #[test]
 fn t2() {
     let a = [1, 2, 3];
