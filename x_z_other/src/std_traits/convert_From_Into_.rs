@@ -92,6 +92,7 @@ fn t1() {
         lon: f64,
     }
 
+    // 规定Coordinate怎么变成 Point
     impl From<Coordinate> for Point {
         fn from(coord: Coordinate) -> Self {
             Point {
