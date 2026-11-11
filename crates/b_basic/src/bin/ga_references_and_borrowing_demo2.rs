@@ -53,37 +53,6 @@ fn t0() {
     assert_eq!(p.name, "jerry");
 }
 
-#[test]
-fn t1() {
-    // 字段拆分借用: 编译器能区分同一个struct的不同字段,但不会分析方法内部用了哪些字段
 
-    struct Game {
-        players: Vec<String>,
-        log: Vec<String>,
-    }
-
-    impl Game {
-        fn add_log(&mut self, msg: String) {
-            self.log.push(msg);
-        }
-
-        fn start(&mut self) {
-            for p in &self.players {
-                // // error[E0502]: cannot borrow `*self` as mutable because it is also borrowed as immutable
-                // self.add_log(format!("{p} joined")); // 方法借用的是整个self,与&self.players冲突
-
-                self.log.push(format!("{p} joined")); // 直接访问字段,只借用self.log,与&self.players不冲突
-            }
-            self.add_log(String::from("game start")); // 循环结束后&self.players已失效,可以调用方法
-        }
-    }
-
-    let mut g = Game {
-        players: vec![String::from("tom"), String::from("jerry")],
-        log: vec![],
-    };
-    g.start();
-    assert_eq!(g.log, vec!["tom joined", "jerry joined", "game start"]);
-}
 
 fn main() {}
