@@ -72,23 +72,14 @@ fn t2() {
         }
     }
 
-    let d = MyBox(Dog {
-        name: String::from("旺财"),
-    });
-
-    // MyBox<Dog>没有bark方法,通过Deref得到&Dog后调用Dog::bark
+    let d = MyBox(Dog {name: String::from("旺财")});
     d.bark(); // 等价于: Dog::bark(Deref::deref(&d))
     /*
-    print->
-    MyBox::deref被调用
-    旺财 汪汪
-     */
-
-    // 字段访问同理
-    println!("{}", d.name);
-    /*
-    print->
-    MyBox::deref被调用
-    旺财
+    bark的签名为fn bark(&self),要求接收者类型为&Dog
+    1. *d: Dog // MyBox实现了Deref<Target = Dog>,解引用一层
+    2. &*d: &Dog // 匹配
+    3. Dog::bark(&*d)
+    4. Dog::bark(&*Deref::deref(&d)) // *d = *Deref::deref(&d)
+    5. Dog::bark(Deref::deref(&d))
      */
 }
