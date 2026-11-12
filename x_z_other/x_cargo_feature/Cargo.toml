@@ -1,0 +1,10 @@
+[package]
+name = "x_cargo_feature"
+version = "0.1.0"
+edition = "2024"
+
+# 定义feature
+[features]
+display = []
+
+[dependencies]

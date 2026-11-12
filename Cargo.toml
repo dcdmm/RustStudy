@@ -16,9 +16,8 @@ members = [
     "x_package_crate_module",
     "x_tests",
     "x_z_other", 
-
     "y_serde_serde_json",
-
+    "x_z_other/x_cargo_feature",
     "z_tests"
 ]
 
