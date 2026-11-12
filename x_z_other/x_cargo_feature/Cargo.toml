@@ -4,7 +4,17 @@ version = "0.1.0"
 edition = "2024"
 
 # 定义feature
+# 格式: feature名 = [开启时连带开启的其他feature]
 [features]
+# default = ["display"] # default为特殊feature,其中列出的feature默认开启;此处未设置,即默认全部关闭
 display = []
 
 [dependencies]
+# 使用第三方库的条件编译: 在依赖中通过features开启该库定义的feature
+# serde的Cargo.toml中: derive = ["serde_derive"]
+# serde的lib.rs中: #[cfg(feature = "serde_derive")] pub use serde_derive::{Deserialize, Serialize};
+# 即只有开启derive时,serde才提供#[derive(Serialize)]
+serde = { version = "1.0", features = ["derive"] }
+# 不开启: serde = "1.0"
+# 注意: 需用cargo build -p x_cargo_feature验证;cargo build --workspace时,y_serde_serde_json中开启的derive会合并进来,不会报错
+serde_json = "1.0"
