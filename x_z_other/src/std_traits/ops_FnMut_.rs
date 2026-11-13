@@ -75,6 +75,7 @@ fn t13() {
     fn update_string_fn(pstr: &str) -> &str {
         pstr
     }
+    // 闭包不适用函数的省略规则,参数和返回值的&str各自获得独立的生命周期,不会自动关联
     // error: lifetime may not live long enough
     // let update_string0 = |pstr: &str| -> &str { pstr }; // 无法确定返回值生命周期(依赖上下文)足够长
 
