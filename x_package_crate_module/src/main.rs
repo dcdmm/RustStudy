@@ -16,7 +16,14 @@ mod keyword_use0_; // 与上等价
 mod keyword_use1_;
 mod keyword_use2_;
 
+// x_package_crate_module为库名(根文件为src/lib.rs),使用lib.rs中的内容:
+// 1. lib crate内部(lib.rs及其mod引入的文件): use crate::xxx
+// 2. 同一package中的其他crate(如main.rs、src/bin/*.rs、tests/*.rs): use x_package_crate_module::xxx,无需mod,也无需在[dependencies]中声明
+use x_package_crate_module::hello_from_lib;
+
 fn main() {
+    hello_from_lib(); // print->hello from lib.rs
+
     use file_path_style1::arithmetic0_::sum_sub::sum;
     // error[E0603]: function `sub` is private
     // use file_path_style1::arithmetic0_::sum_sub::sub;
