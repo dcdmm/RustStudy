@@ -2,6 +2,7 @@
 #![allow(non_snake_case)]
 
 mod attributes;
+mod cargo_feature_test;
 #[allow(warnings)]
 mod std_functions;
 #[allow(warnings)]

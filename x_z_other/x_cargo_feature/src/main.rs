@@ -3,28 +3,13 @@
 // 1. cargo run -p x_cargo_feature                    -> 不开启display
 // 2. cargo run -p x_cargo_feature --features display -> 开启display
 
-use serde::Serialize;
-
-// 需在Cargo.toml中启用serde的derive feature
-#[derive(Serialize)]
-struct Point {
-    x: i32,
-    y: i32,
-}
-
-// 开启display时才编译这段代码
-#[cfg(feature = "display")]
-impl std::fmt::Display for Point {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "<<<{}, {}>>>", self.x, self.y)
-    }
-}
+use x_cargo_feature::Point; 
 
 fn main() {
     let p = Point { x: 1, y: 2 };
 
     // 1. #[cfg]: 条件不成立时,代码直接被删除
-    // 下面的println!依赖上面的impl,未开启display时两者一起被删除
+    // 下面的println!依赖lib.rs中的impl,未开启display时两者一起被删除
     #[cfg(feature = "display")]
     println!("{p}"); // print-><<<1, 2>>>
 

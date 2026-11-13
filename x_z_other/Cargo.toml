@@ -10,3 +10,5 @@ edition = "2024"
 unsafe_code = "warn"
 
 [dependencies]
+# 依赖x_cargo_feature,并开启它的display feature
+x_cargo_feature = { path = "x_cargo_feature", features = ["display"] }
