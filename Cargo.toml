@@ -39,7 +39,7 @@ rust-version = "1.85" # 最低支持的Rust版本(MSRV),本地rustc低于该版�
 # serde.workspace = true
 # serde_json.workspace = true
 #
-# 继承后可以追加features,但不能修改version(如: serde = { workspace = true, features = ["rc"] })
+# 继承后只能追加features,但不能修改version(如: serde = { workspace = true, features = ["rc"] })
 #
 # 版本写法(省略前缀时等同于^):
 # "1.0"    -> >=1.0.0, <2.0.0
@@ -60,15 +60,3 @@ serde_json = "1.0"
 [workspace.lints.rust]
 non_snake_case = "allow"
 warnings = "allow"
-
-# 编译配置(profile),只在workspace根的Cargo.toml中生效,写在成员中会被忽略
-#
-# 内置profile: cargo build使用dev,cargo build --release使用release
-# 自定义profile: 用inherits继承内置profile后覆盖部分配置
-# 使用: cargo build -p y_serde_serde_json --profile dist,产物在target/dist/
-[profile.dist]
-inherits = "release"
-lto = true        # 链接时优化,运行更快、体积更小,编译更慢
-codegen-units = 1 # 不并行生成代码,换取更好的优化
-panic = "abort"   # panic时直接终止进程,不做栈展开
-strip = true      # 去除符号信息,减小体积
