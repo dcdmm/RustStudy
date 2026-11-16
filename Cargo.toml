@@ -49,15 +49,17 @@ rust-version = "1.85" # 最低支持的Rust版本(MSRV),本地rustc低于该版�
 # "~1.2.3" -> >=1.2.3, <1.3.0
 # "=1.2.3" -> 只能是1.2.3
 #
-# 成员依赖另一个成员时使用path依赖,有两种写法:
+# 成员之间的依赖(path依赖):
 # 1. 在成员中直接写路径(相对于成员自身的Cargo.toml)
 #    z_tests中: i_macro = { path = "../i_macro" }
 # 2. 在根Cargo.toml中写路径(相对于根Cargo.toml),成员再继承
 #    根Cargo.toml中: i_macro = { path = "i_macro" }
 #    z_tests中:      i_macro.workspace = true
 #
-# path依赖不限于成员,可以指向任何本地crate:
-# 在workspace目录内会自动成为成员,在workspace目录外只是普通依赖(不共用workspace配置)
+# path依赖也可以指向workspace外的本地crate(不会成为成员),如my_utils与RustStudy在同一目录下:
+# 1. z_tests中: my_utils = { path = "../../my_utils" }
+# 2. 根Cargo.toml中: my_utils = { path = "../my_utils" }
+#    z_tests中:      my_utils.workspace = true
 [workspace.dependencies]
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
