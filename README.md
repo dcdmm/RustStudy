@@ -48,3 +48,9 @@ cargo remove rand                    # 删除依赖
 cargo update                         # 更新依赖版本(Cargo.lock)
 cargo tree                           # 查看依赖树
 ```
+
+#### 文档和测试
+
+[文档](x_docs\cargo-doc_help.md)
+
+[测试](x_tests\cargo-test_help.md)
