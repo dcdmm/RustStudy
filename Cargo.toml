@@ -1,5 +1,7 @@
 [workspace]
-resolver = "2"
+# 依赖解析器版本,只在workspace根设置,所有成员共用(单个package通常不写,默认跟随edition)
+# edition对应的默认resolver: 2015/2018 -> "1",2021 -> "2",2024 -> "3"
+resolver = "3"
 
 # members — Packages to include in the workspace.
 members = [
