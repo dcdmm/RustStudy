@@ -1,8 +1,10 @@
 [package]
 name = "y_serde_serde_json"
-version = "0.1.0"
-edition = "2024"
+# 继承根Cargo.toml中[workspace.package]的字段
+version.workspace = true
+edition.workspace = true
 
 [dependencies]
-serde = { version = "1.0", features = [ "derive" ] }
-serde_json = "1.0"
+# 继承根Cargo.toml中[workspace.dependencies]的依赖(serde已开启derive feature)
+serde.workspace = true
+serde_json.workspace = true

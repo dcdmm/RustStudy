@@ -21,9 +21,31 @@ members = [
     "z_tests"
 ]
 
+# 供workspace成员继承的package字段
+#
+# 继承: 成员在自身[package]中声明`字段名.workspace = true`,如`version.workspace = true`
+# 示例见y_serde_serde_json/Cargo.toml
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+
+# 供workspace成员继承的依赖,版本在此统一管理
+#
+# 继承: 成员在自身[dependencies]中声明`依赖名.workspace = true`
+# 成员可以追加features(与此处的features合并),如`serde = { workspace = true, features = ["rc"] }`,但不能修改version
+#
+# 版本语法(省略前缀时等同于^)
+# "1.0"    -> >=1.0.0, <2.0.0
+# "0.8.5"  -> >=0.8.5, <0.9.0(主版本为0时,第二位被视为主版本)
+# "~1.2.3" -> >=1.2.3, <1.3.0
+# "=1.2.3" -> 精确等于1.2.3
+[workspace.dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
 # 供workspace成员继承的lint配置
 # 
-# 继承: 成员需在自身Cargo.toml中显式声明以下内容: 
+# 成员需在自身Cargo.toml中显式声明以下内容: 
 # [lints]
 # workspace = true
 # 
@@ -31,3 +53,15 @@ members = [
 [workspace.lints.rust]
 non_snake_case = "allow"
 warnings = "allow"
+
+# 编译配置(profile),只在workspace根的Cargo.toml中生效,写在成员中会被忽略
+#
+# 内置profile: cargo build使用dev,cargo build --release使用release
+# 自定义profile: 用inherits继承内置profile后覆盖部分配置
+# 使用: cargo build -p y_serde_serde_json --profile dist,产物在target/dist/
+[profile.dist]
+inherits = "release"
+lto = true        # 链接时优化,运行更快、体积更小,编译更慢
+codegen-units = 1 # 不并行生成代码,换取更好的优化
+panic = "abort"   # panic时直接终止进程,不做栈展开
+strip = true      # 去除符号信息,减小体积
