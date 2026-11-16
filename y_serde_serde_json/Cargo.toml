@@ -1,8 +1,8 @@
 [package]
 name = "y_serde_serde_json"
-# 继承根Cargo.toml中[workspace.package]的字段
-version.workspace = true
-edition.workspace = true
+version.workspace = true # 继承workspace的0.1.0
+edition.workspace = true # 继承workspace的2024
+rust-version = "1.90"    # 不继承workspace的1.85,成员自定义
 
 [dependencies]
 # 继承根Cargo.toml中[workspace.dependencies]的依赖(serde已开启derive feature)

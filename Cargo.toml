@@ -23,11 +23,15 @@ members = [
 
 # 供workspace成员继承的package字段
 #
-# 继承: 成员在自身[package]中声明`字段名.workspace = true`,如`version.workspace = true`
-# 示例见y_serde_serde_json/Cargo.toml
+# 成员需在自身[package]中按字段显式声明,如:
+# version.workspace = true
+# edition.workspace = true
+#
+# 同一字段继承后不能再单独设置(如: 继承version后不能再写version = "0.2.0")
 [workspace.package]
-version = "0.1.0"
-edition = "2024"
+version = "0.1.0"     # package版本号,格式为主版本.次版本.修订号
+edition = "2024"      # 编译器按哪一版语法规则编译代码(可选: 2015/2018/2021/2024)
+rust-version = "1.85" # 最低支持的Rust版本(MSRV),本地rustc低于该版本时报错
 
 # 供workspace成员继承的依赖,版本在此统一管理
 #
@@ -43,7 +47,7 @@ edition = "2024"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 
-# 供workspace成员继承的lint配置
+# 供workspace成员继承的rustc lint配置
 # 
 # 成员需在自身Cargo.toml中显式声明以下内容: 
 # [lints]
