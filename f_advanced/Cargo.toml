@@ -5,6 +5,7 @@ edition = "2024"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+# 继承workspace中所有的lint配置
 [lints]
 workspace = true
 
