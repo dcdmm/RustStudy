@@ -9,8 +9,9 @@ edition = "2024"
 
 [dev-dependencies]
 rayon = "1"
-tokio ={ version = "1", features = ["rt", "macros", "time", "sync"] }
+tokio = { version = "1", features = ["rt", "macros", "time", "sync"] }
 tokio-stream = "0.1"
+futures = "0.3"
 
 [lints.rust]
 non_snake_case = "allow"
