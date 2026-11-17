@@ -2,7 +2,6 @@ fn main() {}
 
 #[cfg(test)]
 mod tests {
-    use futures::stream::{self, StreamExt};
     use std::sync::Arc;
     use std::time::Instant;
     use tokio::sync::Semaphore;
