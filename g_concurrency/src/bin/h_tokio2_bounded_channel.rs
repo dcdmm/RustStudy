@@ -9,7 +9,7 @@ mod tests {
     #[tokio::test]
     async fn test01_base() {
         // Creates a bounded mpsc channel for communicating between asynchronous tasks with backpressure.
-        let (tx, mut rx) = mpsc::channel(2); // 缓冲区最多存2条消息
+        let (tx, mut rx) = mpsc::channel(2); // 缓冲区最多存2条消息(对应标准库: std::sync::mpsc::sync_channel)
 
         // 与unbounded_channel不同,send需要.await(缓冲区满时要等待空位)
         tx.send(1).await.unwrap();

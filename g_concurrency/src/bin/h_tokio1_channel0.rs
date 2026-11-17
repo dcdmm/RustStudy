@@ -9,7 +9,7 @@ mod tests {
     #[tokio::test]
     async fn test01_base() {
         // Creates an unbounded mpsc channel for communicating between asynchronous tasks without backpressure.
-        let (tx, mut rx) = mpsc::unbounded_channel(); // 对应标准库: std::sync::mpsc::channel()
+        let (tx, mut rx) = mpsc::unbounded_channel(); // 对应标准库: std::sync::mpsc::channel
         let message = String::from("hello async");
 
         tx.send(message).unwrap();

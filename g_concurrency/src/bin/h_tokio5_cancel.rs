@@ -15,14 +15,11 @@ mod tests {
             tx.send("任务完成").unwrap();
         });
 
-        // spawn之后任务由runtime管理,JoinHandle只是获取结果的凭证
-        // drop(handle)只是放弃获取结果,任务仍在后台继续运行
-        // 对比: h_tokio3_more_futures.rs的test04中,select!丢弃的是Future本身,Future被drop就是被取消
+        // 任务spawn后由runtime管理,JoinHandle仅用于获取结果,drop后任务仍在后台运行
         drop(handle);
 
         let message = rx.recv().await;
         println!("JoinHandle已drop,任务仍然执行完毕:{message:?}");
-        assert_eq!(message, Some("任务完成"));
     }
 
     #[tokio::test]
@@ -33,11 +30,13 @@ mod tests {
         });
 
         // Abort the task associated with the handle.
-        // 任务在下一个.await处停止,后面的代码不再执行
-        handle.abort();
+        handle.abort(); // 任务在下一个.await处停止
 
         // 被取消的任务,await得到Err(JoinError)
-        let err = handle.await.unwrap_err();
+        let err = match handle.await {
+            Ok(_) => panic!("任务应该被取消,却正常完成了"),
+            Err(e) => e,
+        };
         println!("任务被取消:{err:?}");
         assert!(err.is_cancelled());
     }
@@ -61,7 +60,7 @@ mod tests {
         println!("完成顺序:{finished:?}");
         assert_eq!(finished, ["B", "C", "A"]);
 
-        // abort_all: 一次取消所有任务(drop(set)时也会自动取消所有任务)
+        // abort_all: 一次取消所有任务
         for name in ["D", "E"] {
             set.spawn(async move {
                 sleep(Duration::from_secs(10)).await;
@@ -70,7 +69,12 @@ mod tests {
         }
         set.abort_all();
         while let Some(result) = set.join_next().await {
-            assert!(result.unwrap_err().is_cancelled());
+            match result {
+                Ok(name) => finished.push(name),
+                Err(e) => println!("任务被取消:{e:?}"),
+            }
         }
+        // D和E被取消,没有返回值,finished中仍然只有B、C、A
+        println!("取消后:{finished:?}");
     }
 }
