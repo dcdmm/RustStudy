@@ -1,0 +1,10 @@
+[package]
+name = "cpu_tasks"
+version = "0.1.0"
+description = "CPU密集型任务: 用rayon并行计算"
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+rayon.workspace = true
+serde.workspace = true

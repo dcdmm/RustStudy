@@ -2,7 +2,8 @@
 name = "y_tauri"
 version = "0.1.0"
 description = "Tauri 2 + React + TypeScript + Vite 学习案例"
-edition = "2024"
+edition.workspace = true
+rust-version.workspace = true
 
 [lib]
 # lib名加_lib后缀是为了和bin名(y_tauri)区分,否则在Windows上会冲突
@@ -17,22 +18,19 @@ tauri-build = { version = "2", features = [] }
 
 [dependencies]
 tauri = { version = "2", features = [] }
-# command的参数和返回值、Channel消息、事件payload都通过JSON在前端和Rust之间传递
-serde = { version = "1", features = ["derive"] }
-# 自定义错误类型,自动实现std::error::Error和Display
-thiserror = "2"
-# Tauri内部使用的就是tokio runtime,这里只需要time feature(tokio::time::sleep)
-tokio = { version = "1", features = ["time"] }
 tauri-plugin-opener = "2"
+# command的参数和返回值、Channel消息、事件payload都通过JSON在前端和Rust之间传递
+serde.workspace = true
+# 自定义错误类型,自动实现std::error::Error和Display
+thiserror.workspace = true
+# Tauri内部使用的就是tokio runtime: time用于tokio::time::sleep,sync用于oneshot channel
+tokio = { workspace = true, features = ["time", "sync"] }
+# 用rayon::spawn把CPU密集任务交给rayon线程池
+rayon.workspace = true
+# workspace内的库(y_tauri/crates/)
+cpu_tasks.workspace = true
+io_tasks.workspace = true
 
 [dev-dependencies]
 # 单元测试中查看数据序列化后的JSON(也就是前端收到的内容)
-serde_json = "1"
-
-# release优化配置,参考: https://tauri.app/concept/size/#cargo-configuration
-[profile.release]
-codegen-units = 1 # 减少并行编译单元,换取更好的优化
-lto = true        # 链接时优化
-opt-level = 3     # 最高优化等级
-panic = "abort"   # panic时直接终止,不展开栈
-strip = true      # 去掉符号信息,减小exe体积
+serde_json.workspace = true

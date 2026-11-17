@@ -1,0 +1,50 @@
+# y_tauri的Cargo workspace: Tauri应用 + 独立的Rust库
+#
+# 1. src-tauri: Tauri应用的Rust后端
+# 2. crates/cpu_tasks: CPU密集型任务,用rayon并行计算
+# 3. crates/io_tasks: IO密集型任务,用tokio异步并发
+#
+# 所有成员共用一个target目录(y_tauri/target)和一个Cargo.lock
+#
+# 常用命令(在y_tauri目录下执行):
+# cargo test -p cpu_tasks                                # 只测试cpu_tasks,不需要编译Tauri,很快
+# cargo run -p cpu_tasks --example cpu_bench --release   # 运行cpu_tasks的示例
+# cargo test --workspace                                 # 测试所有成员
+[workspace]
+resolver = "3"
+members = ["src-tauri", "crates/*"]
+
+# 供成员继承的package字段
+[workspace.package]
+edition = "2024"
+# 最低支持的Rust版本(MSRV),必须不低于依赖的要求(tauri 2.12要求1.90)
+# resolver = "3"会根据rust-version选择依赖版本: 写得太低时,cargo会自动选用旧版本的依赖,
+# 导致Rust端的tauri和npm端的@tauri-apps/api版本不一致,tauri build会报错
+rust-version = "1.90"
+
+# 供成员继承的依赖,版本统一在这里管理
+[workspace.dependencies]
+# workspace内部的crate
+cpu_tasks = { path = "crates/cpu_tasks" }
+io_tasks = { path = "crates/io_tasks" }
+# 第三方crate
+rayon = "1.12"
+reqwest = "0.13"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+tokio = "1"
+
+# 开发模式(npm run tauri dev)下也对cpu_tasks开启优化
+# 否则debug编译的计算代码比release慢几十倍,单线程和并行的对比就没有参考意义了
+[profile.dev.package.cpu_tasks]
+opt-level = 3
+
+# release优化配置,参考: https://tauri.app/concept/size/#cargo-configuration
+# profile只能写在workspace根目录的Cargo.toml中,写在成员中不生效
+[profile.release]
+codegen-units = 1 # 减少并行编译单元,换取更好的优化
+lto = true        # 链接时优化
+opt-level = 3     # 最高优化等级
+panic = "abort"   # panic时直接终止,不展开栈
+strip = true      # 去掉符号信息,减小exe体积

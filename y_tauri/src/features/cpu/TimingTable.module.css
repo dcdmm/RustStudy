@@ -1,0 +1,23 @@
+.cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.track {
+  flex: 1;
+  min-width: 80px;
+}
+
+.bar {
+  min-width: 2px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: var(--accent);
+}
+
+.ms {
+  min-width: 72px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}

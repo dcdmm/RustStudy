@@ -29,8 +29,8 @@ export default defineConfig({
         }
       : undefined,
     watch: {
-      // 3. 不监听src-tauri,Rust代码的变化由Tauri CLI负责重新编译
-      ignored: ["**/src-tauri/**"],
+      // 3. 不监听Rust相关目录: Rust代码的变化由Tauri CLI负责重新编译,target中的编译产物文件非常多
+      ignored: ["**/src-tauri/**", "**/crates/**", "**/target/**"],
     },
   },
 });

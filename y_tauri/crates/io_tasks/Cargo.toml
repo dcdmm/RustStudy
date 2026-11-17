@@ -1,0 +1,17 @@
+[package]
+name = "io_tasks"
+version = "0.1.0"
+description = "IO密集型任务: 用tokio异步并发执行网络请求"
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+# 基于tokio的HTTP客户端
+reqwest.workspace = true
+serde.workspace = true
+# rt: JoinSet;sync: Semaphore;time: timeout
+tokio = { workspace = true, features = ["rt", "sync", "time"] }
+
+[dev-dependencies]
+# 测试和示例需要: #[tokio::test]/#[tokio::main]宏、多线程runtime、本地TCP测试服务器
+tokio = { workspace = true, features = ["macros", "rt-multi-thread", "net", "io-util"] }

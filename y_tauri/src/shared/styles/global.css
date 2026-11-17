@@ -51,6 +51,7 @@ code {
 }
 
 input,
+textarea,
 button {
   padding: 6px 12px;
   border: 1px solid var(--border);
@@ -61,7 +62,14 @@ button {
 }
 
 input[type="number"] {
-  width: 90px;
+  width: 120px;
+}
+
+textarea {
+  width: 100%;
+  font-family: Consolas, "Cascadia Code", monospace;
+  font-size: 13px;
+  resize: vertical;
 }
 
 button {
@@ -123,4 +131,38 @@ button:disabled {
 
 .info-list dd {
   margin: 0;
+}
+
+/* 数据表格 */
+.table {
+  width: 100%;
+  margin-top: 8px;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table th,
+.table td {
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+  /* 长网址、长错误信息允许在任意位置换行 */
+  overflow-wrap: anywhere;
+}
+
+.table td.error {
+  color: var(--error);
+}
+
+.table th {
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* 数字列: 右对齐,数字等宽,方便上下对比 */
+.table .num {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }

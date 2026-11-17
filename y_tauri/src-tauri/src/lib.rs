@@ -9,12 +9,15 @@
 // 5. uptime.rs              -> event/           事件: Rust主动向前端广播
 // 6. 无(前端直接调用)        -> window/          窗口API + 权限(capabilities)
 // 7. tauri_plugin_opener    -> plugin/          插件
+// 8. commands/cpu.rs        -> cpu/             CPU密集: 调用crates/cpu_tasks(rayon)
+// 9. commands/io.rs         -> io/              IO密集: 调用crates/io_tasks(tokio)
 
 mod commands;
 mod error;
 mod uptime;
 
 use commands::counter::Counter;
+use tauri::Manager;
 
 // 桌面端由main.rs调用;移动端由mobile_entry_point宏生成入口
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -27,6 +30,9 @@ pub fn run() {
         // 应用启动完成、窗口创建之前执行一次,适合做初始化和启动后台任务
         .setup(|app| {
             uptime::spawn(app.handle().clone());
+            // 创建网址检测器并交给Tauri托管: 内部的HTTP连接池在所有请求之间共用
+            // 创建可能失败,所以放在setup中用?处理;app.manage需要use tauri::Manager
+            app.manage(io_tasks::UrlChecker::new()?);
             Ok(())
         })
         // 注册command,没有注册的command前端调用时会报错: Command xxx not found
@@ -37,6 +43,12 @@ pub fn run() {
             commands::counter::get_count,
             commands::counter::increment,
             commands::countdown::countdown,
+            commands::cpu::cpu_threads,
+            commands::cpu::count_primes,
+            commands::cpu::prime_scaling,
+            commands::cpu::word_frequency,
+            commands::cpu::sort_numbers,
+            commands::io::check_urls,
         ])
         // generate_context!在编译期读取tauri.conf.json
         .run(tauri::generate_context!())
