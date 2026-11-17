@@ -1,0 +1,16 @@
+.layout {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: 1fr auto;
+  height: 100%;
+}
+
+/* 内容区单独滚动,菜单和状态栏固定 */
+.content {
+  overflow-y: auto;
+  padding: 20px 28px;
+}
+
+.inner {
+  max-width: 760px;
+}

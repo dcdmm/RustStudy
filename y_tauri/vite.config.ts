@@ -1,14 +1,16 @@
-import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-// @ts-expect-error type error without @types/node package
-import process from "node:process";
+import { defineConfig } from "vite";
 
 // 移动端开发时由Tauri CLI设置,桌面端开发时为undefined
 const host = process.env.TAURI_DEV_HOST;
 
 // https://vite.dev/config/
-export default defineConfig(() => ({
+export default defineConfig({
   plugins: [react()],
+  // 使用tsconfig.app.json中的paths配置,让@/指向src/
+  resolve: {
+    tsconfigPaths: true,
+  },
 
   // 以下配置专门为Tauri准备
   //
@@ -31,4 +33,4 @@ export default defineConfig(() => ({
       ignored: ["**/src-tauri/**"],
     },
   },
-}));
+});

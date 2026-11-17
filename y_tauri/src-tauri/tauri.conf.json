@@ -13,12 +13,17 @@
     "windows": [
       {
         "title": "y_tauri - Tauri 学习案例",
-        "width": 800,
-        "height": 720
+        "width": 960,
+        "height": 680,
+        "minWidth": 720,
+        "minHeight": 480
       }
     ],
     "security": {
-      "csp": null
+      "csp": {
+        "default-src": "'self'",
+        "connect-src": "ipc: http://ipc.localhost"
+      }
     }
   },
   "bundle": {

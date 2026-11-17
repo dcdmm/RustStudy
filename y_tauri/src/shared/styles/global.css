@@ -1,0 +1,126 @@
+/* 全局样式: 颜色变量、基础元素、各页面通用的工具类 */
+/* 组件自己的样式写在同目录的*.module.css中(CSS Modules,类名只在该组件内生效) */
+
+:root {
+  --bg: #f6f6f6;
+  --fg: #0f0f0f;
+  --muted: #6b6b6b;
+  --surface: #ffffff;
+  --sidebar-bg: #ececec;
+  --border: #dddddd;
+  --accent: #24c8db;
+  --accent-soft: rgba(36, 200, 219, 0.15);
+  --error: #e5484d;
+
+  font-family: Inter, "Microsoft YaHei", Avenir, Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--fg);
+  background-color: var(--bg);
+}
+
+/* 跟随系统深色模式 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #2a2a2a;
+    --fg: #f0f0f0;
+    --muted: #a0a0a0;
+    --surface: #363636;
+    --sidebar-bg: #222222;
+    --border: #4a4a4a;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+code {
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: Consolas, "Cascadia Code", monospace;
+  font-size: 13px;
+  background-color: var(--accent-soft);
+}
+
+input,
+button {
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font: inherit;
+  color: var(--fg);
+  background-color: var(--bg);
+}
+
+input[type="number"] {
+  width: 90px;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* ========== 工具类 ========== */
+
+/* 横向排列 */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 输出结果 */
+.output {
+  min-height: 1.5em;
+  margin: 8px 0 0;
+  color: var(--accent);
+}
+
+.row .output {
+  margin: 0;
+}
+
+.output.error {
+  color: var(--error);
+}
+
+/* 说明文字 */
+.hint {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* 键值对列表 */
+.info-list {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 4px 16px;
+  margin: 0;
+}
+
+.info-list dt {
+  color: var(--muted);
+}
+
+.info-list dd {
+  margin: 0;
+}

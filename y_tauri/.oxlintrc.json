@@ -1,0 +1,47 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "typescript", "oxc"],
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "react/exhaustive-deps": "warn",
+    "react/only-export-components": ["warn", { "allowConstantExport": true }]
+  },
+  "overrides": [
+    {
+      "files": ["src/features/**"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": ["@/features/**", "../**"],
+                "message": "feature之间不能互相引用,多个feature共用的代码放到src/shared/"
+              },
+              {
+                "group": ["@/app/**"],
+                "message": "feature不能引用app层,依赖方向: app -> features -> shared"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["src/shared/**"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": ["@/features/**", "@/app/**", "../../**"],
+                "message": "shared不能依赖features和app,依赖方向: app -> features -> shared"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -17,8 +17,17 @@ tauri-build = { version = "2", features = [] }
 
 [dependencies]
 tauri = { version = "2", features = [] }
-# command的参数和返回值、事件的payload都通过JSON在前端和Rust之间传递
+# command的参数和返回值、Channel消息、事件payload都通过JSON在前端和Rust之间传递
 serde = { version = "1", features = ["derive"] }
+# 自定义错误类型,自动实现std::error::Error和Display
+thiserror = "2"
+# Tauri内部使用的就是tokio runtime,这里只需要time feature(tokio::time::sleep)
+tokio = { version = "1", features = ["time"] }
+tauri-plugin-opener = "2"
+
+[dev-dependencies]
+# 单元测试中查看数据序列化后的JSON(也就是前端收到的内容)
+serde_json = "1"
 
 # release优化配置,参考: https://tauri.app/concept/size/#cargo-configuration
 [profile.release]
