@@ -44,8 +44,10 @@ mod tests {
     #[tokio::test]
     async fn test03_joinset() {
         // A collection of tasks spawned on a Tokio runtime.
+        // JoinSet: 统一管理一组spawn的任务,适合任务数量不固定、需要统一收集结果或统一取消的场景
         let mut set = JoinSet::new();
         for (name, ms) in [("A", 60), ("B", 20), ("C", 40)] {
+            // 与tokio::spawn相同,任务立即开始运行,区别是JoinHandle由set保存
             set.spawn(async move {
                 sleep(Duration::from_millis(ms)).await;
                 name
@@ -55,23 +57,24 @@ mod tests {
         // join_next按完成的先后顺序返回结果,全部取完后返回None
         let mut finished = Vec::new();
         while let Some(result) = set.join_next().await {
-            finished.push(result.unwrap());
+            finished.push(result.unwrap()); // 任务正常完成,取出返回值
         }
         println!("完成顺序:{finished:?}");
+        // 三个任务同时开始,B(20毫秒)最先完成,A(60毫秒)最后完成
         assert_eq!(finished, ["B", "C", "A"]);
 
-        // abort_all: 一次取消所有任务
         for name in ["D", "E"] {
             set.spawn(async move {
                 sleep(Duration::from_secs(10)).await;
                 name
             });
         }
+        // abort_all: 一次取消所有任务(任务不会从set中移除,需用join_next等待它们真正结束)
         set.abort_all();
         while let Some(result) = set.join_next().await {
             match result {
-                Ok(name) => finished.push(name),
-                Err(e) => println!("任务被取消:{e:?}"),
+                Ok(name) => finished.push(name), 
+                Err(e) => println!("任务被取消:{e:?}"), // 被取消的任务返回Err(JoinError)
             }
         }
         // D和E被取消,没有返回值,finished中仍然只有B、C、A
