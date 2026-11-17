@@ -1,0 +1,29 @@
+[package]
+name = "y_tauri"
+version = "0.1.0"
+description = "Tauri 2 + React + TypeScript + Vite 学习案例"
+edition = "2024"
+
+[lib]
+# lib名加_lib后缀是为了和bin名(y_tauri)区分,否则在Windows上会冲突
+# 参考: https://github.com/rust-lang/cargo/issues/8519
+name = "y_tauri_lib"
+# staticlib/cdylib供移动端(Android/iOS)使用,rlib供桌面端main.rs使用
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+# 在build.rs中使用,编译期读取tauri.conf.json、capabilities等配置
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+# command的参数和返回值、事件的payload都通过JSON在前端和Rust之间传递
+serde = { version = "1", features = ["derive"] }
+
+# release优化配置,参考: https://tauri.app/concept/size/#cargo-configuration
+[profile.release]
+codegen-units = 1 # 减少并行编译单元,换取更好的优化
+lto = true        # 链接时优化
+opt-level = 3     # 最高优化等级
+panic = "abort"   # panic时直接终止,不展开栈
+strip = true      # 去掉符号信息,减小exe体积

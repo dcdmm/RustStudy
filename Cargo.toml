@@ -23,6 +23,13 @@ members = [
     "z_tests"
 ]
 
+# exclude — Packages to exclude from the workspace.
+#
+# y_tauri/src-tauri是独立的Tauri项目,依赖多编译慢,排除后:
+# 1. 在根目录执行cargo build/test时不会编译它
+# 2. 它有自己的Cargo.lock和target目录(y_tauri/src-tauri/target)
+exclude = ["y_tauri"]
+
 # 供workspace成员继承的package字段
 #
 # 成员需在自身[package]中按字段显式声明,如:

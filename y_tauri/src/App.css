@@ -1,0 +1,93 @@
+:root {
+  --bg: #f6f6f6;
+  --fg: #0f0f0f;
+  --card-bg: #ffffff;
+  --border: #dddddd;
+  --accent: #24c8db;
+
+  font-family: Inter, "Microsoft YaHei", Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--fg);
+  background-color: var(--bg);
+}
+
+/* 跟随系统深色模式 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #2f2f2f;
+    --fg: #f6f6f6;
+    --card-bg: #3a3a3a;
+    --border: #555555;
+  }
+}
+
+body {
+  margin: 0;
+}
+
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+h1 {
+  text-align: center;
+}
+
+h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+}
+
+.card {
+  margin-bottom: 16px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background-color: var(--card-bg);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.output {
+  min-height: 1.5em;
+  margin: 8px 0 0;
+  color: var(--accent);
+}
+
+.row .output {
+  margin: 0;
+}
+
+input,
+button {
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 16px;
+  color: var(--fg);
+  background-color: var(--bg);
+}
+
+input[type="number"] {
+  width: 80px;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
