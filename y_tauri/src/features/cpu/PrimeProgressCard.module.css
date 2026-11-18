@@ -1,0 +1,9 @@
+.progress {
+  margin-top: 8px;
+}
+
+.bar {
+  flex: 1;
+  height: 8px;
+  accent-color: var(--accent);
+}

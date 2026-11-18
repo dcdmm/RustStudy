@@ -1,9 +1,11 @@
+use std::sync::Mutex;
 use std::time::{Duration, Instant};
 
 use io_tasks::{UrlCheck, UrlChecker};
 use serde::Deserialize;
 use tauri::State;
 use tauri::ipc::Channel;
+use tokio_util::sync::CancellationToken;
 
 use crate::error::{AppResult, ensure_range};
 
@@ -18,32 +20,62 @@ pub enum CheckMode {
     Concurrent,
 }
 
+#[derive(Default)]
+pub struct UrlCheckJob {
+    token: Mutex<CancellationToken>,
+}
+
+impl UrlCheckJob {
+    fn start(&self) -> CancellationToken {
+        let mut current = self.token.lock().unwrap();
+        current.cancel();
+        *current = CancellationToken::new();
+        current.clone()
+    }
+
+    fn cancel(&self) {
+        self.token.lock().unwrap().cancel();
+    }
+}
+
 #[tauri::command]
 pub async fn check_urls(
     checker: State<'_, UrlChecker>,
+    job: State<'_, UrlCheckJob>,
     urls: Vec<String>,
     mode: CheckMode,
     max_concurrency: usize,
     timeout_ms: u64,
     on_result: Channel<UrlCheck>,
-) -> AppResult<u64> {
+) -> AppResult<Option<u64>> {
     ensure_range("网址数量", urls.len(), 1, MAX_URLS)?;
     ensure_range("maxConcurrency", max_concurrency, 1, MAX_CONCURRENCY)?;
     ensure_range("timeoutMs", timeout_ms, 100, MAX_TIMEOUT_MS)?;
 
+    let token = job.start();
     let timeout = Duration::from_millis(timeout_ms);
     let send = |check: &UrlCheck| {
         let _ = on_result.send(check.clone());
     };
 
     let start = Instant::now();
-    match mode {
-        CheckMode::Sequential => checker.check_sequential(&urls, timeout, send).await,
-        CheckMode::Concurrent => {
-            checker
-                .check_concurrent(&urls, max_concurrency, timeout, send)
-                .await
+    let check = async {
+        match mode {
+            CheckMode::Sequential => checker.check_sequential(&urls, timeout, send).await,
+            CheckMode::Concurrent => {
+                checker
+                    .check_concurrent(&urls, max_concurrency, timeout, send)
+                    .await
+            }
         }
     };
-    Ok(start.elapsed().as_millis() as u64)
+    tokio::select! {
+        _ = check => Ok(Some(start.elapsed().as_millis() as u64)),
+        _ = token.cancelled() => Ok(None),
+    }
+}
+
+#[tauri::command]
+pub fn cancel_check_urls(job: State<'_, UrlCheckJob>) {
+    job.cancel();
 }

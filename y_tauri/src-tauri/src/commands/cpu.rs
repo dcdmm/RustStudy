@@ -1,13 +1,18 @@
+use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::{Arc, Mutex};
 use std::time::Instant;
 
 use cpu_tasks::word_freq::WordCount;
 use cpu_tasks::{pool, primes, sample, sort, word_freq};
 use serde::Serialize;
+use tauri::State;
+use tauri::ipc::Channel;
 use tokio::sync::oneshot;
 
 use crate::error::{AppError, AppResult, ensure_range};
 
 const MAX_PRIME_LIMIT: u64 = 20_000_000;
+const MAX_PROGRESS_LIMIT: u64 = 1_000_000_000;
 const MAX_WORD_COUNT: usize = 10_000_000;
 const MAX_SORT_LEN: usize = 10_000_000;
 
@@ -111,4 +116,43 @@ pub async fn sort_numbers(len: usize) -> AppResult<Vec<Timing>> {
         vec![seq, par]
     })
     .await
+}
+
+#[derive(Default)]
+pub struct PrimeJob {
+    cancel: Mutex<Arc<AtomicBool>>,
+}
+
+impl PrimeJob {
+    fn start(&self) -> Arc<AtomicBool> {
+        let mut current = self.cancel.lock().unwrap();
+        current.store(true, Ordering::Relaxed);
+        *current = Arc::new(AtomicBool::new(false));
+        Arc::clone(&current)
+    }
+
+    fn cancel(&self) {
+        self.cancel.lock().unwrap().store(true, Ordering::Relaxed);
+    }
+}
+
+#[tauri::command]
+pub async fn count_primes_with_progress(
+    job: State<'_, PrimeJob>,
+    limit: u64,
+    on_progress: Channel<u32>,
+) -> AppResult<Option<u64>> {
+    ensure_range("limit", limit, 1, MAX_PROGRESS_LIMIT)?;
+    let cancel = job.start();
+    run_on_rayon(move || {
+        primes::count_primes_cancellable(limit, &cancel, |percent| {
+            let _ = on_progress.send(percent);
+        })
+    })
+    .await
+}
+
+#[tauri::command]
+pub fn cancel_count_primes(job: State<'_, PrimeJob>) {
+    job.cancel();
 }

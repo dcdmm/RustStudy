@@ -23,7 +23,11 @@ export function checkUrls(
   urls: string[],
   options: CheckOptions,
   onResult: (check: UrlCheck) => void,
-): Promise<number> {
+): Promise<number | null> {
   const channel = new Channel<UrlCheck>(onResult);
-  return invoke<number>("check_urls", { urls, ...options, onResult: channel });
+  return invoke<number | null>("check_urls", { urls, ...options, onResult: channel });
+}
+
+export function cancelCheckUrls(): Promise<void> {
+  return invoke("cancel_check_urls");
 }

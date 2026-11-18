@@ -1,4 +1,4 @@
-import { invoke } from "@tauri-apps/api/core";
+import { Channel, invoke } from "@tauri-apps/api/core";
 
 export type Timing = {
   label: string;
@@ -35,4 +35,13 @@ export function wordFrequency(wordCount: number): Promise<WordFreqReport> {
 
 export function sortNumbers(len: number): Promise<Timing[]> {
   return invoke<Timing[]>("sort_numbers", { len });
+}
+
+export function countPrimesWithProgress(limit: number, onProgress: (percent: number) => void): Promise<number | null> {
+  const channel = new Channel<number>(onProgress);
+  return invoke<number | null>("count_primes_with_progress", { limit, onProgress: channel });
+}
+
+export function cancelCountPrimes(): Promise<void> {
+  return invoke("cancel_count_primes");
 }

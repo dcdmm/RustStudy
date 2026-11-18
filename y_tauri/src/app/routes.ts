@@ -7,6 +7,7 @@ import ChannelPage from "@/features/channel/ChannelPage.tsx";
 import EventPage from "@/features/event/EventPage.tsx";
 import WindowPage from "@/features/window/WindowPage.tsx";
 import PluginPage from "@/features/plugin/PluginPage.tsx";
+import FilesPage from "@/features/files/FilesPage.tsx";
 import CpuPage from "@/features/cpu/CpuPage.tsx";
 import IoPage from "@/features/io/IoPage.tsx";
 
@@ -46,13 +47,14 @@ export const routeGroups: RouteGroup[] = [
     routes: [
       { path: "/window", label: "6. 窗口与权限", Component: WindowPage },
       { path: "/plugin", label: "7. 插件", Component: PluginPage },
+      { path: "/files", label: "8. 文件与数据", Component: FilesPage },
     ],
   },
   {
     title: "性能",
     routes: [
-      { path: "/cpu", label: "8. CPU密集: rayon", Component: CpuPage },
-      { path: "/io", label: "9. IO密集: tokio", Component: IoPage },
+      { path: "/cpu", label: "9. CPU密集: rayon", Component: CpuPage },
+      { path: "/io", label: "10. IO密集: tokio", Component: IoPage },
     ],
   },
 ];

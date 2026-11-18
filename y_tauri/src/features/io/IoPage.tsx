@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Card from "@/shared/components/Card.tsx";
 import PageHeader from "@/shared/components/PageHeader.tsx";
-import { checkUrls, type CheckMode, type Outcome, type UrlCheck } from "./api.ts";
+import { cancelCheckUrls, checkUrls, type CheckMode, type Outcome, type UrlCheck } from "./api.ts";
 
 const DEFAULT_URLS = [
   "https://www.baidu.com",
@@ -26,7 +26,7 @@ export default function IoPage() {
   const [maxConcurrency, setMaxConcurrency] = useState("4");
   const [timeoutMs, setTimeoutMs] = useState("3000");
   const [rows, setRows] = useState<UrlCheck[]>([]);
-  const [totals, setTotals] = useState<Partial<Record<CheckMode, number>>>({});
+  const [totals, setTotals] = useState<Partial<Record<CheckMode, string>>>({});
   const [running, setRunning] = useState<CheckMode | null>(null);
   const [error, setError] = useState("");
 
@@ -44,7 +44,7 @@ export default function IoPage() {
         { mode, maxConcurrency: Number(maxConcurrency), timeoutMs: Number(timeoutMs) },
         (check) => setRows((prev) => [...prev, check]),
       );
-      setTotals((prev) => ({ ...prev, [mode]: totalMs }));
+      setTotals((prev) => ({ ...prev, [mode]: totalMs === null ? "已取消" : `${totalMs.toLocaleString()} ms` }));
     } catch (err) {
       setError(String(err));
     } finally {
@@ -52,10 +52,18 @@ export default function IoPage() {
     }
   }
 
+  async function cancel() {
+    try {
+      await cancelCheckUrls();
+    } catch (err) {
+      setError(String(err));
+    }
+  }
+
   return (
     <>
       <PageHeader
-        title="9. IO密集: tokio"
+        title="10. IO密集: tokio"
         description="网络请求的大部分时间在等待服务器响应;tokio在等待时去执行其他任务,少量线程就能同时处理大量请求"
       />
 
@@ -89,9 +97,12 @@ export default function IoPage() {
               {running === mode ? "执行中..." : MODE_LABELS[mode]}
             </button>
           ))}
+          <button onClick={cancel} disabled={running === null}>
+            取消
+          </button>
           <span className="output">
-            {MODES.filter((mode) => totals[mode] !== undefined)
-              .map((mode) => `${MODE_LABELS[mode]}总耗时: ${totals[mode]!.toLocaleString()} ms`)
+            {MODES.filter((mode) => totals[mode])
+              .map((mode) => `${MODE_LABELS[mode]}: ${totals[mode]}`)
               .join(" | ")}
           </span>
         </div>

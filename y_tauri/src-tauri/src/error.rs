@@ -18,6 +18,12 @@ pub enum AppError {
 
     #[error(transparent)]
     ThreadPool(#[from] rayon::ThreadPoolBuildError),
+
+    #[error(transparent)]
+    Io(#[from] std::io::Error),
+
+    #[error(transparent)]
+    Json(#[from] serde_json::Error),
 }
 
 impl Serialize for AppError {

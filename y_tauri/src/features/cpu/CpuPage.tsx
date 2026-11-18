@@ -3,6 +3,7 @@ import Card from "@/shared/components/Card.tsx";
 import PageHeader from "@/shared/components/PageHeader.tsx";
 import { countPrimes, cpuThreads, sortNumbers, wordFrequency } from "./api.ts";
 import BenchForm from "./BenchForm.tsx";
+import PrimeProgressCard from "./PrimeProgressCard.tsx";
 import TimingTable from "./TimingTable.tsx";
 
 export default function CpuPage() {
@@ -26,7 +27,7 @@ export default function CpuPage() {
   return (
     <>
       <PageHeader
-        title="8. CPU密集: rayon"
+        title="9. CPU密集: rayon"
         description={`计算量大的任务用rayon分配到所有CPU核心上并行执行,本机rayon线程数: ${threads ?? "..."}`}
       />
       {error && <p className="output error">错误: {error}</p>}
@@ -61,6 +62,8 @@ export default function CpuPage() {
           {(timings) => <TimingTable timings={timings} />}
         </BenchForm>
       </Card>
+
+      <PrimeProgressCard />
     </>
   );
 }

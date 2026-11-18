@@ -14,10 +14,13 @@ tauri-build = { version = "2", features = [] }
 
 [dependencies]
 tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
 tauri-plugin-opener = "2"
 serde.workspace = true
+serde_json.workspace = true
 thiserror.workspace = true
-tokio = { workspace = true, features = ["time", "sync"] }
+tokio = { workspace = true, features = ["fs", "macros", "sync", "time"] }
+tokio-util.workspace = true
 rayon.workspace = true
 cpu_tasks.workspace = true
 io_tasks.workspace = true
