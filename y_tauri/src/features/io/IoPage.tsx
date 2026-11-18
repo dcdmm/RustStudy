@@ -14,6 +14,8 @@ const DEFAULT_URLS = [
   "https://not-exist.invalid",
 ].join("\n");
 
+const MODES: CheckMode[] = ["sequential", "concurrent"];
+
 const MODE_LABELS: Record<CheckMode, string> = {
   sequential: "顺序执行",
   concurrent: "并发执行",
@@ -82,14 +84,13 @@ export default function IoPage() {
           </label>
         </div>
         <div className="row">
-          {(["sequential", "concurrent"] as const).map((mode) => (
+          {MODES.map((mode) => (
             <button key={mode} onClick={() => run(mode)} disabled={running !== null}>
               {running === mode ? "执行中..." : MODE_LABELS[mode]}
             </button>
           ))}
           <span className="output">
-            {(["sequential", "concurrent"] as const)
-              .filter((mode) => totals[mode] !== undefined)
+            {MODES.filter((mode) => totals[mode] !== undefined)
               .map((mode) => `${MODE_LABELS[mode]}总耗时: ${totals[mode]!.toLocaleString()} ms`)
               .join(" | ")}
           </span>
@@ -114,7 +115,7 @@ export default function IoPage() {
               {rows.map((row, index) => {
                 const { text, ok } = describe(row.outcome);
                 return (
-                  <tr key={row.url}>
+                  <tr key={index}>
                     <td className="num">{index + 1}</td>
                     <td>{row.url}</td>
                     <td className={ok ? undefined : "error"}>{text}</td>

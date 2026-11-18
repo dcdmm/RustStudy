@@ -7,12 +7,17 @@ import TimingTable from "./TimingTable.tsx";
 
 export default function CpuPage() {
   const [threads, setThreads] = useState<number | null>(null);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     let ignore = false;
-    cpuThreads().then((n) => {
-      if (!ignore) setThreads(n);
-    });
+    cpuThreads()
+      .then((n) => {
+        if (!ignore) setThreads(n);
+      })
+      .catch((err) => {
+        if (!ignore) setError(String(err));
+      });
     return () => {
       ignore = true;
     };
@@ -24,6 +29,7 @@ export default function CpuPage() {
         title="8. CPU密集: rayon"
         description={`计算量大的任务用rayon分配到所有CPU核心上并行执行,本机rayon线程数: ${threads ?? "..."}`}
       />
+      {error && <p className="output error">错误: {error}</p>}
 
       <Card title="统计质数: par_iter、rayon::join、线程池">
         <BenchForm label="统计2到N之间的质数,N =" defaultValue={2_000_000} max={20_000_000} run={countPrimes}>

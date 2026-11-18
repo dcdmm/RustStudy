@@ -5,7 +5,13 @@ import PageHeader from "@/shared/components/PageHeader.tsx";
 
 export default function CommandPage() {
   const [message, formAction, isPending] = useActionState(
-    (_prev: string, formData: FormData) => greet(String(formData.get("name"))),
+    async (_prev: string, formData: FormData) => {
+      try {
+        return await greet(String(formData.get("name")));
+      } catch (err) {
+        return `错误: ${err}`;
+      }
+    },
     "",
   );
 

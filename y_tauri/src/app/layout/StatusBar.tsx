@@ -9,9 +9,13 @@ export default function StatusBar() {
 
   useEffect(() => {
     let ignore = false;
-    Promise.all([getName(), getVersion()]).then(([name, version]) => {
-      if (!ignore) setAppLabel(`${name} v${version}`);
-    });
+    Promise.all([getName(), getVersion()])
+      .then(([name, version]) => {
+        if (!ignore) setAppLabel(`${name} v${version}`);
+      })
+      .catch((err) => {
+        if (!ignore) setAppLabel(`错误: ${err}`);
+      });
     return () => {
       ignore = true;
     };

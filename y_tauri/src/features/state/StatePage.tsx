@@ -5,19 +5,29 @@ import PageHeader from "@/shared/components/PageHeader.tsx";
 
 export default function StatePage() {
   const [count, setCount] = useState<number | null>(null);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     let ignore = false;
-    getCount().then((n) => {
-      if (!ignore) setCount(n);
-    });
+    getCount()
+      .then((n) => {
+        if (!ignore) setCount(n);
+      })
+      .catch((err) => {
+        if (!ignore) setError(String(err));
+      });
     return () => {
       ignore = true;
     };
   }, []);
 
   async function handleClick() {
-    setCount(await increment());
+    try {
+      setCount(await increment());
+      setError("");
+    } catch (err) {
+      setError(String(err));
+    }
   }
 
   return (
@@ -32,6 +42,7 @@ export default function StatePage() {
           <button onClick={handleClick}>+1</button>
           <span className="output">Rust中的count = {count ?? "..."}</span>
         </div>
+        {error && <p className="output error">错误: {error}</p>}
       </Card>
     </>
   );

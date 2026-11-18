@@ -14,17 +14,23 @@ type AppInfo = {
 export default function HomePage() {
   const [appInfo, setAppInfo] = useState<AppInfo | null>(null);
   const [system, setSystem] = useState<SystemInfo | null>(null);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     let ignore = false;
-    Promise.all([getName(), getVersion(), getIdentifier(), getTauriVersion()]).then(
-      ([name, version, identifier, tauriVersion]) => {
+    const onError = (err: unknown) => {
+      if (!ignore) setError(String(err));
+    };
+    Promise.all([getName(), getVersion(), getIdentifier(), getTauriVersion()])
+      .then(([name, version, identifier, tauriVersion]) => {
         if (!ignore) setAppInfo({ name, version, identifier, tauriVersion });
-      },
-    );
-    systemInfo().then((info) => {
-      if (!ignore) setSystem(info);
-    });
+      })
+      .catch(onError);
+    systemInfo()
+      .then((info) => {
+        if (!ignore) setSystem(info);
+      })
+      .catch(onError);
     return () => {
       ignore = true;
     };
@@ -36,6 +42,7 @@ export default function HomePage() {
         title="首页"
         description="Tauri: 用Web技术写界面,用Rust写后端逻辑,由系统自带的WebView渲染,打包成很小的桌面应用"
       />
+      {error && <p className="output error">错误: {error}</p>}
 
       <Card title="应用信息: Tauri内置JS API">
         <dl className="info-list">
