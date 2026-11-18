@@ -1,6 +1,6 @@
 [workspace]
-# 依赖解析器版本,只在workspace根设置,所有成员共用(单个package通常不写,默认跟随edition)
-# edition对应的默认resolver: 2015/2018 -> "1",2021 -> "2",2024 -> "3"
+# 依赖解析器版本,在工作区根目录统一设置,所有成员共用
+# 独立包通常可省略此项,默认按edition选择: 2015/2018 → "1"，2021 → "2"，2024 → "3"
 resolver = "3"
 
 # members — Packages to include in the workspace.
@@ -23,11 +23,7 @@ members = [
     "z_tests"
 ]
 
-# exclude — Packages to exclude from the workspace.
-#
-# y_tauri是独立的Tauri项目(自己也是一个workspace: src-tauri + crates/*),依赖多编译慢,排除后:
-# 1. 在根目录执行cargo build/test时不会编译它
-# 2. 它有自己的Cargo.lock和target目录(y_tauri/Cargo.lock、y_tauri/target)
+# 根目录下不在members中的package需在此排除(自带[workspace]的除外),否则在其中执行cargo会报错
 exclude = ["y_tauri"]
 
 # 供workspace成员继承的package字段
