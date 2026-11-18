@@ -3,9 +3,7 @@ import { greet } from "./api.ts";
 import Card from "@/shared/components/Card.tsx";
 import PageHeader from "@/shared/components/PageHeader.tsx";
 
-// 1. Command: 调用Rust函数并获取返回值
 export default function CommandPage() {
-  // React 19的Action: 表单提交时执行,返回值成为新的state,isPending表示是否正在执行
   const [message, formAction, isPending] = useActionState(
     (_prev: string, formData: FormData) => greet(String(formData.get("name"))),
     "",

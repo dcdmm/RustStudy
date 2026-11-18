@@ -1,7 +1,6 @@
 import type { Timing } from "./api.ts";
 import styles from "./TimingTable.module.css";
 
-// 耗时对比表: 条形长度表示耗时,加速比以第一行为基准
 export default function TimingTable({ timings }: { timings: Timing[] }) {
   const baseline = timings[0]?.ms ?? 0;
   const slowest = Math.max(...timings.map((timing) => timing.ms));

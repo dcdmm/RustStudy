@@ -10,9 +10,7 @@ const DEFAULT_URLS = [
   "https://www.rust-lang.org",
   "https://crates.io",
   "https://tauri.app",
-  // 不可达的地址,用来演示超时
   "http://10.255.255.1",
-  // 不存在的域名,用来演示请求失败
   "https://not-exist.invalid",
 ].join("\n");
 
@@ -21,7 +19,6 @@ const MODE_LABELS: Record<CheckMode, string> = {
   concurrent: "并发执行",
 };
 
-// 9. IO密集: tokio并发网络请求
 export default function IoPage() {
   const [urlsText, setUrlsText] = useState(DEFAULT_URLS);
   const [maxConcurrency, setMaxConcurrency] = useState("4");
@@ -40,7 +37,6 @@ export default function IoPage() {
     setRows([]);
     setError("");
     try {
-      // 每完成一个网址就追加一行,表格的顺序就是完成的顺序
       const summary = await checkUrls(
         urls,
         { mode, maxConcurrency: Number(maxConcurrency), timeoutMs: Number(timeoutMs) },
@@ -159,7 +155,6 @@ export default function IoPage() {
   );
 }
 
-// 把检测结果转换为显示的文字,ok为false时显示为红色
 function describe(outcome: Outcome): { text: string; ok: boolean } {
   switch (outcome.kind) {
     case "response":

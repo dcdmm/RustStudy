@@ -3,14 +3,10 @@ import { getCount, increment } from "./api.ts";
 import Card from "@/shared/components/Card.tsx";
 import PageHeader from "@/shared/components/PageHeader.tsx";
 
-// 3. 状态管理: 数据保存在Rust端的托管状态(State)中
 export default function StatePage() {
-  // null表示还没从Rust读取到
   const [count, setCount] = useState<number | null>(null);
 
-  // 页面打开时从Rust读取当前值
   useEffect(() => {
-    // ignore: 组件已卸载时不再更新state(React官方推荐的写法)
     let ignore = false;
     getCount().then((n) => {
       if (!ignore) setCount(n);

@@ -1,4 +1,3 @@
-// state调用Rust的入口,对应Rust: commands/counter.rs
 import { invoke } from "@tauri-apps/api/core";
 
 export function getCount(): Promise<number> {

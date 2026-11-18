@@ -8,8 +8,6 @@ type RunFormProps = {
   action: (formData: FormData) => void;
 };
 
-// 一个数字输入框 + 运行按钮,输入的值以"value"为名提交
-// 输入框用受控组件: React 19在表单Action执行后会重置非受控输入框,受控的则保留输入
 export default function RunForm({ label, defaultValue, max, pending, action }: RunFormProps) {
   const [value, setValue] = useState(String(defaultValue));
 

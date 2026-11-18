@@ -3,15 +3,12 @@ import { getCurrentWindow } from "@tauri-apps/api/window";
 import Card from "@/shared/components/Card.tsx";
 import PageHeader from "@/shared/components/PageHeader.tsx";
 
-// 6. 窗口与权限: 前端直接调用Tauri内置的窗口API,不需要写Rust代码
-// 但每个API都需要在src-tauri/capabilities/default.json中授权
 export default function WindowPage() {
   const [title, setTitle] = useState("");
   const [alwaysOnTop, setAlwaysOnTop] = useState(false);
   const [titleMessage, setTitleMessage] = useState("");
   const [deniedMessage, setDeniedMessage] = useState("");
 
-  // 读取当前窗口的标题和置顶状态(读取类权限已包含在core:default中)
   useEffect(() => {
     let ignore = false;
     const appWindow = getCurrentWindow();
@@ -26,7 +23,6 @@ export default function WindowPage() {
     };
   }, []);
 
-  // 需要权限: core:window:allow-set-title
   async function applyTitle() {
     try {
       await getCurrentWindow().setTitle(title);
@@ -36,13 +32,11 @@ export default function WindowPage() {
     }
   }
 
-  // 需要权限: core:window:allow-set-always-on-top
   async function toggleAlwaysOnTop(checked: boolean) {
     await getCurrentWindow().setAlwaysOnTop(checked);
     setAlwaysOnTop(checked);
   }
 
-  // 需要权限: core:window:allow-set-resizable,但capabilities中故意没有授权
   async function tryDenied() {
     try {
       await getCurrentWindow().setResizable(false);

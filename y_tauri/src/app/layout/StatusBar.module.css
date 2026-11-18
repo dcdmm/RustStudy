@@ -1,5 +1,4 @@
 .statusBar {
-  /* 横跨布局的两列 */
   grid-column: 1 / -1;
   display: flex;
   justify-content: space-between;

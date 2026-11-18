@@ -3,9 +3,7 @@ import { countdown, type CountdownEvent } from "./api.ts";
 import Card from "@/shared/components/Card.tsx";
 import PageHeader from "@/shared/components/PageHeader.tsx";
 
-// 把Channel消息转换为界面上显示的文字
 function describe(event: CountdownEvent): string {
-  // switch联合类型的event字段,TS会自动收窄类型: case "tick"中才能访问event.data
   switch (event.event) {
     case "tick":
       return `剩余 ${event.data.remaining} 秒`;
@@ -14,7 +12,6 @@ function describe(event: CountdownEvent): string {
   }
 }
 
-// 4. Channel: 接收一次command调用过程中的多条进度消息
 export default function ChannelPage() {
   const [status, setStatus] = useState("未开始");
   const [running, setRunning] = useState(false);
@@ -22,7 +19,6 @@ export default function ChannelPage() {
   async function start() {
     setRunning(true);
     try {
-      // Rust每通过Channel send一次,回调就执行一次;全部结束后await才返回
       await countdown(5, (event) => setStatus(describe(event)));
     } catch (err) {
       setStatus(`错误: ${err}`);

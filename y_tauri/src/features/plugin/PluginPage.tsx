@@ -3,12 +3,10 @@ import { openUrl } from "@tauri-apps/plugin-opener";
 import Card from "@/shared/components/Card.tsx";
 import PageHeader from "@/shared/components/PageHeader.tsx";
 
-// 7. 插件: 用官方的opener插件,通过系统默认程序打开链接
 export default function PluginPage() {
   const [message, setMessage] = useState("");
   const [scopeMessage, setScopeMessage] = useState("");
 
-  // 需要权限: opener:default(允许打开http/https/mailto/tel链接)
   async function openTauriSite() {
     try {
       await openUrl("https://tauri.app");
@@ -18,7 +16,6 @@ export default function PluginPage() {
     }
   }
 
-  // file://不在opener:default允许的范围(scope)内,会被拒绝
   async function tryOutOfScope() {
     try {
       await openUrl("file:///C:/");

@@ -5,7 +5,6 @@ import { countPrimes, type PrimesReport } from "./api.ts";
 import RunForm from "./RunForm.tsx";
 import TimingTable from "./TimingTable.tsx";
 
-// 并行迭代器: 对应crates/cpu_tasks/src/primes.rs
 export default function PrimesCard() {
   const [result, action, pending] = useActionState(
     (_prev: Attempt<PrimesReport> | null, formData: FormData) =>

@@ -11,23 +11,17 @@ type AppInfo = {
   tauriVersion: string;
 };
 
-// 首页: 获取信息的两种方式
-// 1. Tauri内置的JS API: 不用写Rust代码,但需要在capabilities中有对应权限
-// 2. 自己写的command: 想返回什么就返回什么
 export default function HomePage() {
   const [appInfo, setAppInfo] = useState<AppInfo | null>(null);
   const [system, setSystem] = useState<SystemInfo | null>(null);
 
   useEffect(() => {
-    // ignore: 组件已卸载时不再更新state(React官方推荐的写法)
     let ignore = false;
-    // 方式1: @tauri-apps/api/app中的函数,需要core:app相关权限(core:default已包含)
     Promise.all([getName(), getVersion(), getIdentifier(), getTauriVersion()]).then(
       ([name, version, identifier, tauriVersion]) => {
         if (!ignore) setAppInfo({ name, version, identifier, tauriVersion });
       },
     );
-    // 方式2: 调用自己写的command,Rust返回的结构体在前端就是一个对象
     systemInfo().then((info) => {
       if (!ignore) setSystem(info);
     });

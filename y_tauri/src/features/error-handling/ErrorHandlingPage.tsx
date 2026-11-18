@@ -7,19 +7,15 @@ type DivideResult = { ok: true; value: number } | { ok: false; error: string };
 
 async function calculate(_prev: DivideResult | null, formData: FormData): Promise<DivideResult> {
   try {
-    // Rust返回Ok(v)时,await得到v
     const value = await divide(Number(formData.get("a")), Number(formData.get("b")));
     return { ok: true, value };
   } catch (err) {
-    // Rust返回Err(e)时,Promise被reject,err就是AppError序列化后的字符串
     return { ok: false, error: String(err) };
   }
 }
 
-// 2. 错误处理: command返回Result时,前端如何处理错误
 export default function ErrorHandlingPage() {
   const [result, formAction, isPending] = useActionState(calculate, null);
-  // 输入框用受控组件: React 19在表单Action执行后会重置非受控输入框,受控的则保留输入
   const [a, setA] = useState("10");
   const [b, setB] = useState("0");
 

@@ -6,31 +6,18 @@ edition.workspace = true
 rust-version.workspace = true
 
 [lib]
-# lib名加_lib后缀是为了和bin名(y_tauri)区分,否则在Windows上会冲突
-# 参考: https://github.com/rust-lang/cargo/issues/8519
 name = "y_tauri_lib"
-# staticlib/cdylib供移动端(Android/iOS)使用,rlib供桌面端main.rs使用
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]
-# 在build.rs中使用,编译期读取tauri.conf.json、capabilities等配置
 tauri-build = { version = "2", features = [] }
 
 [dependencies]
 tauri = { version = "2", features = [] }
 tauri-plugin-opener = "2"
-# command的参数和返回值、Channel消息、事件payload都通过JSON在前端和Rust之间传递
 serde.workspace = true
-# 自定义错误类型,自动实现std::error::Error和Display
 thiserror.workspace = true
-# Tauri内部使用的就是tokio runtime: time用于tokio::time::sleep,sync用于oneshot channel
 tokio = { workspace = true, features = ["time", "sync"] }
-# 用rayon::spawn把CPU密集任务交给rayon线程池
 rayon.workspace = true
-# workspace内的库(y_tauri/crates/)
 cpu_tasks.workspace = true
 io_tasks.workspace = true
-
-[dev-dependencies]
-# 单元测试中查看数据序列化后的JSON(也就是前端收到的内容)
-serde_json.workspace = true

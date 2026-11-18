@@ -6,7 +6,6 @@ type CardProps = {
   children: ReactNode;
 };
 
-// 内容卡片,页面中的每个小示例放在一个Card中
 export default function Card({ title, children }: CardProps) {
   return (
     <section className={styles.card}>

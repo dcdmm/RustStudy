@@ -4,11 +4,9 @@ import styles from "./PageHeader.module.css";
 type PageHeaderProps = {
   title: string;
   description: ReactNode;
-  // 本页面对应的源码文件,学习时对照着看
   sources?: string[];
 };
 
-// 页面顶部: 标题 + 说明 + 对应的源码文件
 export default function PageHeader({ title, description, sources = [] }: PageHeaderProps) {
   return (
     <header className={styles.header}>

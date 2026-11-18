@@ -5,7 +5,6 @@ import { wordFrequency, type WordFreqReport } from "./api.ts";
 import RunForm from "./RunForm.tsx";
 import TimingTable from "./TimingTable.tsx";
 
-// fold + reduce: 对应crates/cpu_tasks/src/word_freq.rs
 export default function WordFreqCard() {
   const [result, action, pending] = useActionState(
     (_prev: Attempt<WordFreqReport> | null, formData: FormData) =>

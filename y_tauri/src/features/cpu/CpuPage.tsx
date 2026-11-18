@@ -7,7 +7,6 @@ import ScalingCard from "./ScalingCard.tsx";
 import SortCard from "./SortCard.tsx";
 import WordFreqCard from "./WordFreqCard.tsx";
 
-// 8. CPU密集: rayon并行计算
 export default function CpuPage() {
   const [threads, setThreads] = useState<number | null>(null);
 

@@ -12,7 +12,6 @@ import IoPage from "@/features/io/IoPage.tsx";
 
 export type PageRoute = {
   path: string;
-  // 侧边栏菜单中显示的名字
   label: string;
   Component: ComponentType;
 };
@@ -22,8 +21,6 @@ export type RouteGroup = {
   routes: PageRoute[];
 };
 
-// 页面配置: 路由(router.ts)和左侧菜单(layout/Sidebar.tsx)都根据它生成
-// 新增页面只需要在这里加一项
 export const routeGroups: RouteGroup[] = [
   {
     title: "开始",

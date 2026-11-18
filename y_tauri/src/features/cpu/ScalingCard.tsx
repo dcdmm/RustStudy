@@ -5,7 +5,6 @@ import { primeScaling, type Timing } from "./api.ts";
 import RunForm from "./RunForm.tsx";
 import TimingTable from "./TimingTable.tsx";
 
-// 自定义线程池: 对应crates/cpu_tasks/src/pool.rs
 export default function ScalingCard() {
   const [result, action, pending] = useActionState(
     (_prev: Attempt<Timing[]> | null, formData: FormData) => attempt(primeScaling(Number(formData.get("value")))),

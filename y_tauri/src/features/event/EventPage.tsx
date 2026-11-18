@@ -8,14 +8,11 @@ type LogItem = {
   receivedAt: string;
 };
 
-// 5. 事件: 监听Rust主动广播的消息
 export default function EventPage() {
   const [logs, setLogs] = useState<LogItem[]>([]);
 
-  // 事件名"uptime"有类型检查,payload的类型也会自动推断为{ uptimeSecs: number }
   useTauriEvent("uptime", (payload) => {
     const item = { uptimeSecs: payload.uptimeSecs, receivedAt: new Date().toLocaleTimeString() };
-    // 只保留最近5条
     setLogs((prev) => [item, ...prev].slice(0, 5));
   });
 

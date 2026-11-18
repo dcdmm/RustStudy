@@ -5,7 +5,6 @@ import { sortNumbers, type Timing } from "./api.ts";
 import RunForm from "./RunForm.tsx";
 import TimingTable from "./TimingTable.tsx";
 
-// rayon::join: 对应crates/cpu_tasks/src/sort.rs
 export default function SortCard() {
   const [result, action, pending] = useActionState(
     (_prev: Attempt<Timing[]> | null, formData: FormData) => attempt(sortNumbers(Number(formData.get("value")))),
