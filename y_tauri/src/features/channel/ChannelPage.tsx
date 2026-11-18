@@ -32,7 +32,6 @@ export default function ChannelPage() {
       <PageHeader
         title="4. Channel"
         description="async command执行耗时任务时,通过Channel把进度多次推送给前端,适合下载进度、日志输出等场景"
-        sources={["src/features/channel/", "src-tauri/src/commands/countdown.rs"]}
       />
 
       <Card title="5秒倒计时">
@@ -42,20 +41,6 @@ export default function ChannelPage() {
           </button>
           <span className="output">{status}</span>
         </div>
-      </Card>
-
-      <Card title="要点">
-        <ol>
-          <li>
-            <code>async fn</code>: 在tokio中执行,不会卡住界面;普通command在主线程执行
-          </li>
-          <li>
-            前端<code>new Channel(回调)</code>作为参数传给Rust,Rust通过<code>on_event.send()</code>多次发送
-          </li>
-          <li>
-            Rust枚举加<code>#[serde(tag = "event", content = "data")]</code>,在TS中对应联合类型
-          </li>
-        </ol>
       </Card>
     </>
   );

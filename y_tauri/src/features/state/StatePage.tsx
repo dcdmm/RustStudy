@@ -25,7 +25,6 @@ export default function StatePage() {
       <PageHeader
         title="3. 状态管理"
         description="用.manage()把数据交给Tauri托管,command参数中声明State<'_, T>即可拿到,前端调用时不需要传"
-        sources={["src/features/state/", "src-tauri/src/commands/counter.rs", "src-tauri/src/lib.rs"]}
       />
 
       <Card title="计数器">
@@ -33,7 +32,6 @@ export default function StatePage() {
           <button onClick={handleClick}>+1</button>
           <span className="output">Rust中的count = {count ?? "..."}</span>
         </div>
-        <p className="hint">切换到其他页面或按F5刷新后再回来,数值仍然保留: 数据保存在Rust进程中,而不是前端</p>
       </Card>
     </>
   );

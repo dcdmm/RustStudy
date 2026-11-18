@@ -1,7 +1,7 @@
 use std::time::{Duration, Instant};
 
 use io_tasks::{UrlCheck, UrlChecker};
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 use tauri::State;
 use tauri::ipc::Channel;
 
@@ -18,13 +18,6 @@ pub enum CheckMode {
     Concurrent,
 }
 
-#[derive(Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct CheckSummary {
-    count: usize,
-    total_ms: u64,
-}
-
 #[tauri::command]
 pub async fn check_urls(
     checker: State<'_, UrlChecker>,
@@ -33,7 +26,7 @@ pub async fn check_urls(
     max_concurrency: usize,
     timeout_ms: u64,
     on_result: Channel<UrlCheck>,
-) -> AppResult<CheckSummary> {
+) -> AppResult<u64> {
     ensure_range("网址数量", urls.len(), 1, MAX_URLS)?;
     ensure_range("maxConcurrency", max_concurrency, 1, MAX_CONCURRENCY)?;
     ensure_range("timeoutMs", timeout_ms, 100, MAX_TIMEOUT_MS)?;
@@ -44,7 +37,7 @@ pub async fn check_urls(
     };
 
     let start = Instant::now();
-    let results = match mode {
+    match mode {
         CheckMode::Sequential => checker.check_sequential(&urls, timeout, send).await,
         CheckMode::Concurrent => {
             checker
@@ -52,8 +45,5 @@ pub async fn check_urls(
                 .await
         }
     };
-    Ok(CheckSummary {
-        count: results.len(),
-        total_ms: start.elapsed().as_millis() as u64,
-    })
+    Ok(start.elapsed().as_millis() as u64)
 }

@@ -51,7 +51,6 @@ export default function WindowPage() {
       <PageHeader
         title="6. 窗口与权限"
         description="Tauri 2的安全模型: 前端能调用哪些API,由capabilities中的权限决定,没有授权的调用会被拒绝"
-        sources={["src/features/window/", "src-tauri/capabilities/default.json"]}
       />
 
       <Card title="修改窗口标题(已授权)">
@@ -72,24 +71,6 @@ export default function WindowPage() {
       <Card title="禁止调整窗口大小(未授权)">
         <button onClick={tryDenied}>调用setResizable(false)</button>
         <p className="output error">{deniedMessage}</p>
-        <p className="hint">
-          在capabilities中加上<code>core:window:allow-set-resizable</code>后就能调用成功
-        </p>
-      </Card>
-
-      <Card title="capabilities/default.json中的权限">
-        <ol>
-          <li>
-            <code>core:default</code>: 核心API的默认权限,主要是读取类(如获取标题、监听事件)
-          </li>
-          <li>
-            <code>core:window:allow-set-title</code>、<code>core:window:allow-set-always-on-top</code>: 本页用到的修改类权限
-          </li>
-          <li>
-            <code>opener:default</code>: opener插件的默认权限,见下一页
-          </li>
-        </ol>
-        <p className="hint">自己写的command默认都允许调用,不用在这里声明</p>
       </Card>
     </>
   );

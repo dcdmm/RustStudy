@@ -9,6 +9,7 @@ rust-version = "1.90"
 [workspace.dependencies]
 cpu_tasks = { path = "crates/cpu_tasks" }
 io_tasks = { path = "crates/io_tasks" }
+rand = "0.10"
 rayon = "1.12"
 reqwest = "0.13"
 serde = { version = "1", features = ["derive"] }

@@ -24,7 +24,6 @@ pub fn run() {
             commands::countdown::countdown,
             commands::cpu::cpu_threads,
             commands::cpu::count_primes,
-            commands::cpu::prime_scaling,
             commands::cpu::word_frequency,
             commands::cpu::sort_numbers,
             commands::io::check_urls,

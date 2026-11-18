@@ -29,10 +29,6 @@ export function countPrimes(limit: number): Promise<PrimesReport> {
   return invoke<PrimesReport>("count_primes", { limit });
 }
 
-export function primeScaling(limit: number): Promise<Timing[]> {
-  return invoke<Timing[]>("prime_scaling", { limit });
-}
-
 export function wordFrequency(wordCount: number): Promise<WordFreqReport> {
   return invoke<WordFreqReport>("word_frequency", { wordCount });
 }

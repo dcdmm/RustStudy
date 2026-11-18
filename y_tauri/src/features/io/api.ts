@@ -19,16 +19,11 @@ export type CheckOptions = {
   timeoutMs: number;
 };
 
-export type CheckSummary = {
-  count: number;
-  totalMs: number;
-};
-
 export function checkUrls(
   urls: string[],
   options: CheckOptions,
   onResult: (check: UrlCheck) => void,
-): Promise<CheckSummary> {
+): Promise<number> {
   const channel = new Channel<UrlCheck>(onResult);
-  return invoke<CheckSummary>("check_urls", { urls, ...options, onResult: channel });
+  return invoke<number>("check_urls", { urls, ...options, onResult: channel });
 }

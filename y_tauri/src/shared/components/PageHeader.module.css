@@ -11,13 +11,3 @@
   margin: 0;
   color: var(--muted);
 }
-
-.sources {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px;
-  margin: 8px 0 0;
-  font-size: 13px;
-  color: var(--muted);
-}

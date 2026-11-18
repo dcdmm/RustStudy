@@ -24,7 +24,6 @@ export default function ErrorHandlingPage() {
       <PageHeader
         title="2. 错误处理"
         description="command返回Result: Ok时Promise resolve,Err时Promise reject;错误类型用thiserror定义,并实现Serialize"
-        sources={["src/features/error-handling/", "src-tauri/src/commands/math.rs", "src-tauri/src/error.rs"]}
       />
 
       <Card title="调用divide(除数为0时返回Err)">

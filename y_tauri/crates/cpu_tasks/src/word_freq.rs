@@ -3,7 +3,7 @@ use std::collections::HashMap;
 use rayon::prelude::*;
 use serde::Serialize;
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+#[derive(Debug, Serialize)]
 pub struct WordCount {
     pub word: String,
     pub count: usize,

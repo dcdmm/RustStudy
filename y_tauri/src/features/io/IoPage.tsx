@@ -37,12 +37,12 @@ export default function IoPage() {
     setRows([]);
     setError("");
     try {
-      const summary = await checkUrls(
+      const totalMs = await checkUrls(
         urls,
         { mode, maxConcurrency: Number(maxConcurrency), timeoutMs: Number(timeoutMs) },
         (check) => setRows((prev) => [...prev, check]),
       );
-      setTotals((prev) => ({ ...prev, [mode]: summary.totalMs }));
+      setTotals((prev) => ({ ...prev, [mode]: totalMs }));
     } catch (err) {
       setError(String(err));
     } finally {
@@ -55,7 +55,6 @@ export default function IoPage() {
       <PageHeader
         title="9. IO密集: tokio"
         description="网络请求的大部分时间在等待服务器响应;tokio在等待时去执行其他任务,少量线程就能同时处理大量请求"
-        sources={["src/features/io/", "src-tauri/src/commands/io.rs", "crates/io_tasks/"]}
       />
 
       <Card title="并发检测网址">
@@ -126,30 +125,6 @@ export default function IoPage() {
             </tbody>
           </table>
         )}
-      </Card>
-
-      <Card title="要点">
-        <ol>
-          <li>
-            <code>async fn</code> + <code>.await</code>: 每个<code>.await</code>都是一个等待点,等待时线程去执行其他任务
-          </li>
-          <li>
-            <code>JoinSet</code>: 同时执行一组任务,<code>join_next()</code>按完成的先后顺序返回结果
-          </li>
-          <li>
-            <code>Semaphore</code>: 限制同时执行的任务数;把最大并发数改成1,并发执行就和顺序执行一样慢
-          </li>
-          <li>
-            <code>tokio::time::timeout</code>: 超时后future被drop,请求自动取消
-          </li>
-          <li>
-            <code>reqwest::Client</code>内部有连接池,在setup中创建一次,放到State中共用
-          </li>
-          <li>请求由Rust发出,不受WebView的CORS和CSP限制</li>
-        </ol>
-        <p className="hint">
-          不启动应用也能运行: <code>cargo run -p io_tasks --example check_urls</code>
-        </p>
       </Card>
     </>
   );

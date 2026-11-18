@@ -14,7 +14,6 @@ export default function CommandPage() {
       <PageHeader
         title="1. Command"
         description="前端通过invoke调用Rust中用#[tauri::command]标记的函数,参数和返回值自动通过JSON转换"
-        sources={["src/features/command/", "src-tauri/src/commands/greet.rs"]}
       />
 
       <Card title="调用greet">
@@ -25,23 +24,6 @@ export default function CommandPage() {
           </button>
         </form>
         <p className="output">{message}</p>
-      </Card>
-
-      <Card title="调用过程">
-        <ol>
-          <li>
-            前端: <code>invoke("greet", {"{ name }"})</code>,参数对象被序列化为JSON
-          </li>
-          <li>
-            Rust: 把JSON反序列化为<code>name: &amp;str</code>,执行<code>greet</code>
-          </li>
-          <li>Rust: 把返回的String序列化为JSON</li>
-          <li>前端: invoke返回的Promise resolve,得到字符串</li>
-        </ol>
-        <p className="hint">
-          新写的command必须在<code>lib.rs</code>的<code>generate_handler![]</code>中注册,否则会报错: Command xxx not
-          found
-        </p>
       </Card>
     </>
   );

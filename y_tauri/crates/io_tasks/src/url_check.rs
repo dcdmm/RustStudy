@@ -14,7 +14,7 @@ pub struct UrlCheck {
     pub outcome: Outcome,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+#[derive(Debug, Clone, Serialize)]
 #[serde(tag = "kind", rename_all = "camelCase")]
 pub enum Outcome {
     Response { status: u16, bytes: u64 },

@@ -8,6 +8,7 @@ fn main() {
 
     let limit = 2_000_000;
     bench("质数 iter()", || primes::count_primes_seq(limit));
+    bench("质数 rayon::join", || primes::count_primes_join(limit));
     bench("质数 par_iter()", || primes::count_primes_par(limit));
 
     let text = sample::text(5_000_000);
@@ -19,9 +20,6 @@ fn main() {
     let numbers = sample::numbers(5_000_000);
     bench("排序 sort_unstable", || {
         sort::sort_seq(&mut numbers.clone())
-    });
-    bench("排序 join快速排序", || {
-        sort::quick_sort_par(&mut numbers.clone())
     });
     bench("排序 par_sort_unstable", || {
         sort::sort_par(&mut numbers.clone())
