@@ -2,20 +2,27 @@ import { useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import "./App.css";
 
+// 与Rust的Greeting结构对应
+interface Greeting {
+  message: string;
+  isAdult: boolean;
+}
+
 function App() {
-  const [greetMsg, setGreetMsg] = useState("");
+  const [greeting, setGreeting] = useState<Greeting | null>(null);
   const [name, setName] = useState("");
   const [age, setAge] = useState(0);
   const [error, setError] = useState("");
 
   async function greet() {
     try {
-      // 调用Rust的greet command,参数按名字对应
-      setGreetMsg(await invoke<string>("greet", { name, age }));
+      // <Greeting>为Rust返回Ok中的类型,如返回String则写<string>
+      // 外层person对应Rust参数名,内层name和age对应Person的字段
+      setGreeting(await invoke<Greeting>("greet", { person: { name, age } }));
       setError("");
     } catch (e) {
       // invoke失败时进入catch,如Rust返回Err
-      setGreetMsg("");
+      setGreeting(null);
       setError(String(e));
     }
   }
@@ -42,7 +49,11 @@ function App() {
         />
         <button type="submit">Greet</button>
       </form>
-      <p>{greetMsg}</p>
+      {greeting && (
+        <p>
+          {greeting.message} ({greeting.isAdult ? "成年" : "未成年"})
+        </p>
+      )}
       <p style={{ color: "red" }}>{error}</p>
     </main>
   );
