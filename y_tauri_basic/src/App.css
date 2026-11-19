@@ -63,7 +63,8 @@ button {
   outline: none;
 }
 
-#greet-input {
+#greet-input,
+#age-input {
   margin-right: 5px;
 }
 
