@@ -6,10 +6,18 @@ function App() {
   const [greetMsg, setGreetMsg] = useState("");
   const [name, setName] = useState("");
   const [age, setAge] = useState(0);
+  const [error, setError] = useState("");
 
   async function greet() {
-    // 调用Rust的greet command,参数按名字对应
-    setGreetMsg(await invoke("greet", { name, age }));
+    try {
+      // 调用Rust的greet command,参数按名字对应
+      setGreetMsg(await invoke<string>("greet", { name, age }));
+      setError("");
+    } catch (e) {
+      // invoke失败时进入catch,如Rust返回Err
+      setGreetMsg("");
+      setError(String(e));
+    }
   }
 
   return (
@@ -35,6 +43,7 @@ function App() {
         <button type="submit">Greet</button>
       </form>
       <p>{greetMsg}</p>
+      <p style={{ color: "red" }}>{error}</p>
     </main>
   );
 }
