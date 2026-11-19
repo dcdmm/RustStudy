@@ -24,7 +24,7 @@ members = [
 ]
 
 # 根目录下不在members中的package需在此排除(自带[workspace]的除外),否则在其中执行cargo会报错
-exclude = ["y_tauri"]
+exclude = ["y_tauri_basic"]
 
 # 供workspace成员继承的package字段
 #
