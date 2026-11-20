@@ -16,7 +16,8 @@ function Greet() {
   async function greet() {
     try {
       // <Greeting>为Rust返回Ok中的类型,如返回String则写<string>
-      // 外层person对应Rust参数名,内层name和age对应Person的字段
+      // 外层key对应Rust函数的参数名person,snake_case参数名需写成camelCase
+      // 内层key对应Person的字段名,变量名与key相同时可简写(即{ name: name, age: age }可以简写为{ name, age })
       setGreeting(await invoke<Greeting>("greet", { person: { name, age } }));
       setError("");
     } catch (e) {
