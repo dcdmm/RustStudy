@@ -3,6 +3,7 @@ import Counter from "./b_state";
 import SlowTask from "./c_async";
 import TaskProgress from "./d_channel";
 import Ticker from "./e_event";
+import PickFile from "./f_plugin";
 import "./App.css";
 
 function App() {
@@ -17,6 +18,8 @@ function App() {
       <TaskProgress />
       <hr />
       <Ticker />
+      <hr />
+      <PickFile />
     </main>
   );
 }

@@ -7,6 +7,8 @@ mod e_event;
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        // 注册插件,其功能需在capabilities/default.json中授权
+        .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_opener::init())
         // 启动时创建Counter交给Tauri保管,全局只有一份
         // command参数写State<Counter>即可借用,按类型查找
