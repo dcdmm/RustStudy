@@ -15,7 +15,6 @@ function PrimeCounter() {
     setRunning(true);
     const mode = parallel ? "多线程" : "单线程";
     try {
-      // 计算期间界面不卡顿,可切换到其他页面
       const r = await invoke<PrimeResult>("count_primes", { limit, parallel });
       setLines((prev) => [...prev, `${mode}: ${r.count}个质数,耗时${r.ms}ms`]);
     } catch (e) {

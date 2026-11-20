@@ -5,6 +5,7 @@ mod d_channel;
 mod e_event;
 mod g_error;
 mod h_heavy;
+mod i_background;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -16,6 +17,7 @@ pub fn run() {
         // 启动时创建Counter交给Tauri保管,全局只有一份
         // command参数写State<Counter>即可借用,按类型查找
         .manage(b_state::Counter::default())
+        .manage(i_background::JobState::default())
         // 程序启动时执行一次,用于启动后台任务
         // handle()返回引用,clone后才能交给后台线程
         .setup(|app| {
@@ -31,7 +33,9 @@ pub fn run() {
             c_async::slow_async,
             d_channel::run_task,
             g_error::read_text,
-            h_heavy::count_primes
+            h_heavy::count_primes,
+            i_background::get_job,
+            i_background::start_job
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

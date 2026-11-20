@@ -1,16 +1,7 @@
-# 工作区: src-tauri为Tauri应用,crates下为不依赖Tauri的Rust库
 [workspace]
 resolver = "3"
 members = ["src-tauri", "crates/*"]
 
-# 计算密集的库在dev模式下也开启优化,否则运行很慢
+# dev模式下单独优化heavy,避免计算过慢
 [profile.dev.package.heavy]
 opt-level = 3
-
-# 工作区中profile只在根Cargo.toml中生效
-[profile.release]
-codegen-units = 1
-lto = true
-opt-level = 3
-panic = "abort"
-strip = true
