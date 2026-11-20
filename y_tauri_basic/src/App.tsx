@@ -2,6 +2,7 @@ import Greet from "./a_base";
 import Counter from "./b_state";
 import SlowTask from "./c_async";
 import TaskProgress from "./d_channel";
+import Ticker from "./e_event";
 import "./App.css";
 
 function App() {
@@ -14,6 +15,8 @@ function App() {
       <SlowTask />
       <hr />
       <TaskProgress />
+      <hr />
+      <Ticker />
     </main>
   );
 }
