@@ -10,6 +10,7 @@ pub fn run() {
         // 注册插件,其功能需在capabilities/default.json中授权
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_opener::init())
+        .plugin(tauri_plugin_store::Builder::new().build())
         // 启动时创建Counter交给Tauri保管,全局只有一份
         // command参数写State<Counter>即可借用,按类型查找
         .manage(b_state::Counter::default())

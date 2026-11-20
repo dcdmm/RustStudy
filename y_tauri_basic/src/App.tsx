@@ -4,7 +4,8 @@ import Counter from "./b_state";
 import SlowTask from "./c_async";
 import TaskProgress from "./d_channel";
 import Ticker from "./e_event";
-import PluginDemo from "./f_plugin";
+import PluginDemo from "./f_plugin0_dialog-opener";
+import Note from "./f_plugin1_store";
 import "./App.css";
 
 const pages = [
@@ -13,7 +14,8 @@ const pages = [
   { name: "c_async", element: <SlowTask /> },
   { name: "d_channel", element: <TaskProgress /> },
   { name: "e_event", element: <Ticker /> },
-  { name: "f_plugin", element: <PluginDemo /> },
+  { name: "f_plugin0_dialog-opener", element: <PluginDemo /> },
+  { name: "f_plugin1_store", element: <Note /> },
 ];
 
 function App() {
