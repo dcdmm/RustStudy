@@ -1,3 +1,4 @@
+// 插件作用: 前端运行于WebView,无法访问系统功能;插件用Rust实现这些功能,并提供JS API供前端调用
 import { useState } from "react";
 // dialog插件: 调用系统原生对话框
 // open选择文件或文件夹,save选择保存路径,message显示消息,ask/confirm请求确认
