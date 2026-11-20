@@ -1,33 +1,33 @@
 import { useEffect, useState } from "react";
-// store插件: 键值对存储,数据写入JSON文件,应用重启后仍保留
+// store插件: 键值对存储,数据写入JSON文件
 import { load } from "@tauri-apps/plugin-store";
-// dialog的save仅弹出另存为窗口并返回所选路径,不写入文件
 import { save } from "@tauri-apps/plugin-dialog";
 
 function Note() {
-  // load的参数即文件路径: 相对路径基于应用数据目录,绝对路径按原样使用
   const [path, setPath] = useState("settings.json");
   const [text, setText] = useState("");
   const [msg, setMsg] = useState("");
 
+  // 作用: 从文件读取上次保存的内容并显示,使应用重启后仍能看到
   useEffect(() => {
-    // 路径变化时读取该文件中保存的值,key不存在时返回undefined
     setMsg("");
+    // 1. 打开path对应的文件,得到store
     load(path)
+      // 2. 取出key为note的值,不存在时为undefined
       .then((store) => store.get<string>("note"))
+      // 3. 将值放入输入框,值为undefined时放入空字符串
       .then((value) => setText(value ?? ""))
       .catch((e) => setMsg(String(e)));
   }, [path]);
 
   async function saveNote() {
-    // 文件及所在目录不存在时自动创建;set修改后默认自动写入文件
     const store = await load(path);
+    // set后自动写入文件,文件不存在时自动创建;每次保存覆盖上一次的note
     await store.set("note", text);
     setMsg("已保存,重启应用后仍会显示");
   }
 
   async function pickByDialog() {
-    // 用户取消时返回null
     const selected = await save({ defaultPath: "settings.json" });
     if (selected) setPath(selected);
   }
