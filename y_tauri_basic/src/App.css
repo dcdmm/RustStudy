@@ -14,7 +14,43 @@
   -webkit-text-size-adjust: 100%;
 }
 
+body {
+  margin: 0;
+}
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 160px;
+  padding: 16px 8px;
+  border-right: 1px solid #dddddd;
+}
+
+.sidebar a {
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  background-color: #e8e8e8;
+}
+
+.sidebar a.active {
+  color: #396cd8;
+  background-color: #e8e8e8;
+  font-weight: 600;
+}
+
 .container {
+  flex: 1;
   margin: 0;
   padding-top: 10vh;
   display: flex;
@@ -80,6 +116,15 @@ button {
     background-color: #0f0f0f98;
   }
   button:active {
+    background-color: #0f0f0f69;
+  }
+
+  .sidebar {
+    border-right-color: #444444;
+  }
+
+  .sidebar a:hover,
+  .sidebar a.active {
     background-color: #0f0f0f69;
   }
 }
