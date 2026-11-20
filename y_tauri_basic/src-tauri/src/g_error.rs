@@ -1,26 +1,25 @@
 use serde::{Serialize, Serializer};
 
-// 自定义错误类型,每个变体代表一种错误
-// thiserror根据#[error]生成错误信息,即to_string()的结果
 #[derive(Debug, thiserror::Error)]
 pub enum AppError {
     #[error("路径不能为空")]
     EmptyPath,
-    // #[from]使?可将std::io::Error自动转换为AppError::Io
     #[error("读取文件失败: {0}")]
     Io(#[from] std::io::Error),
 }
 
-// 传给前端的错误结构
+// 出错时传给前端的数据,经JSON转换后即为前端catch中的e
 #[derive(Serialize)]
 struct ErrorBody {
     kind: &'static str,
     message: String,
 }
 
-// command返回的错误须实现Serialize;std::io::Error未实现,因此手动实现
+// Err须实现Serialize,Tauri才能将其转为JSON传给前端
+// AppError包含的std::io::Error未实现Serialize,无法derive,因此需手动实现
 impl Serialize for AppError {
     fn serialize<S: Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        // 各变体对应的字符串须与前端AppError中kind的取值一致
         let kind = match self {
             AppError::EmptyPath => "emptyPath",
             AppError::Io(_) => "io",
@@ -33,13 +32,12 @@ impl Serialize for AppError {
     }
 }
 
-// 读取文本文件的内容
+// 返回Ok时invoke得到String;返回Err时invoke抛出ErrorBody,前端进入catch
 #[tauri::command]
 pub fn read_text(path: String) -> Result<String, AppError> {
     if path.trim().is_empty() {
         return Err(AppError::EmptyPath);
     }
-    // 读取失败时,?将std::io::Error转换为AppError并返回Err
     let content = std::fs::read_to_string(path)?;
     Ok(content)
 }

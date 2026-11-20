@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 
-// 与Rust的ErrorBody结构对应,kind的取值与AppError的变体对应
+// 与Rust的ErrorBody结构对应
 interface AppError {
   kind: "emptyPath" | "io";
   message: string;
@@ -17,7 +17,7 @@ function ReadText() {
       setContent(await invoke<string>("read_text", { path }));
       setError(null);
     } catch (e) {
-      // e为Rust返回的Err序列化后的对象,可按kind区分错误类型
+      // Rust返回Err时invoke抛出ErrorBody转成的普通对象
       setContent("");
       setError(e as AppError);
     }
