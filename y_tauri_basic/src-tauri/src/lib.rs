@@ -1,5 +1,6 @@
 mod a_base;
 mod b_state;
+mod c_async;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -12,7 +13,9 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             a_base::greet,
             b_state::get_count,
-            b_state::increment
+            b_state::increment,
+            c_async::slow_sync,
+            c_async::slow_async
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
