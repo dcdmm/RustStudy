@@ -7,6 +7,7 @@ import Ticker from "./e_event";
 import PluginDemo from "./f_plugin0_dialog-opener";
 import Note from "./f_plugin1_store";
 import ReadText from "./g_error";
+import PrimeCounter from "./h_heavy";
 import "./App.css";
 
 const pages = [
@@ -18,6 +19,7 @@ const pages = [
   { name: "f_plugin0_dialog-opener", element: <PluginDemo /> },
   { name: "f_plugin1_store", element: <Note /> },
   { name: "g_error", element: <ReadText /> },
+  { name: "h_heavy", element: <PrimeCounter /> },
 ];
 
 function App() {
