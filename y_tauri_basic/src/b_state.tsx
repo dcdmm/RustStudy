@@ -5,7 +5,7 @@ function Counter() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    // 数值保存在Rust端,页面刷新后前端state清空,需重新读取
+    // 页面加载时从Rust读取当前值,结果交给setCount显示
     invoke<number>("get_count").then(setCount);
   }, []);
 

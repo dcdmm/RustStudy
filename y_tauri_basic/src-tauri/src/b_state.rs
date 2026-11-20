@@ -7,7 +7,6 @@ pub struct Counter {
     value: Mutex<u32>,
 }
 
-// counter由Tauri自动注入,前端无需传入
 #[tauri::command]
 pub fn get_count(counter: State<Counter>) -> u32 {
     *counter.value.lock().unwrap()

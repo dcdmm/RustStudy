@@ -16,7 +16,7 @@ pub struct Greeting {
     is_adult: bool,
 }
 
-// 前端invoke("greet", { person: { name, age } })调用,函数名和参数名需一致
+// 前端invoke("greet", { person: { name, age } })调用,函数名和参数名必须一致
 #[tauri::command]
 pub fn greet(person: Person) -> Result<Greeting, String> {
     if person.name.trim().is_empty() {

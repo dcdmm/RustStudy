@@ -5,9 +5,10 @@ mod b_state;
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
-        // 注册State,command参数写State<Counter>即可取到
+        // 启动时创建Counter交给Tauri保管,全局只有一份
+        // command参数写State<Counter>即可借用,按类型查找
         .manage(b_state::Counter::default())
-        // 登记前端可调用的command,其他模块中的command需pub并写模块路径
+        // 登记前端可调用的command
         .invoke_handler(tauri::generate_handler![
             a_base::greet,
             b_state::get_count,
