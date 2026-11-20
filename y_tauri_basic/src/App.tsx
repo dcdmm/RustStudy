@@ -6,6 +6,7 @@ import TaskProgress from "./d_channel";
 import Ticker from "./e_event";
 import PluginDemo from "./f_plugin0_dialog-opener";
 import Note from "./f_plugin1_store";
+import ReadText from "./g_error";
 import "./App.css";
 
 const pages = [
@@ -16,6 +17,7 @@ const pages = [
   { name: "e_event", element: <Ticker /> },
   { name: "f_plugin0_dialog-opener", element: <PluginDemo /> },
   { name: "f_plugin1_store", element: <Note /> },
+  { name: "g_error", element: <ReadText /> },
 ];
 
 function App() {

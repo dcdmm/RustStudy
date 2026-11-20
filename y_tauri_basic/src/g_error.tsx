@@ -1,0 +1,45 @@
+import { useState } from "react";
+import { invoke } from "@tauri-apps/api/core";
+
+// 与Rust的ErrorBody结构对应,kind的取值与AppError的变体对应
+interface AppError {
+  kind: "emptyPath" | "io";
+  message: string;
+}
+
+function ReadText() {
+  const [path, setPath] = useState("");
+  const [content, setContent] = useState("");
+  const [error, setError] = useState<AppError | null>(null);
+
+  async function read() {
+    try {
+      setContent(await invoke<string>("read_text", { path }));
+      setError(null);
+    } catch (e) {
+      // e为Rust返回的Err序列化后的对象,可按kind区分错误类型
+      setContent("");
+      setError(e as AppError);
+    }
+  }
+
+  return (
+    <section>
+      <input
+        style={{ marginRight: 5 }}
+        value={path}
+        onChange={(e) => setPath(e.currentTarget.value)}
+        placeholder="输入文件路径..."
+      />
+      <button onClick={read}>读取</button>
+      {error && (
+        <p style={{ color: "red" }}>
+          错误类型: {error.kind}, 错误信息: {error.message}
+        </p>
+      )}
+      <pre style={{ textAlign: "left", whiteSpace: "pre-wrap" }}>{content}</pre>
+    </section>
+  );
+}
+
+export default ReadText;

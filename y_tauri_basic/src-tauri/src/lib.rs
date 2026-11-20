@@ -3,6 +3,7 @@ mod b_state;
 mod c_async;
 mod d_channel;
 mod e_event;
+mod g_error;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -27,7 +28,8 @@ pub fn run() {
             b_state::increment,
             c_async::slow_sync,
             c_async::slow_async,
-            d_channel::run_task
+            d_channel::run_task,
+            g_error::read_text
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
