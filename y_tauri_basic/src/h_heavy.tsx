@@ -18,9 +18,7 @@ function PrimeCounter() {
   const [job, setJob] = useState<Job>({ running: false, results: [] });
 
   useEffect(() => {
-    // 任务状态保存在Rust中,打开页面时获取,切换页面后返回仍可恢复
     invoke<Job>("get_job").then(setJob);
-    // Rust中状态变化时发送job-changed事件,payload为最新状态
     const unlisten = listen<Job>("job-changed", (event) => setJob(event.payload));
     return () => {
       unlisten.then((stop) => stop());
@@ -35,7 +33,6 @@ function PrimeCounter() {
         value={limit}
         onChange={(e) => setLimit(Number(e.currentTarget.value))}
       />
-      {/* 结果通过job-changed事件获取,无需等待invoke返回 */}
       <button disabled={job.running} onClick={() => invoke("count_primes", { limit, parallel: false })}>
         单线程计算
       </button>

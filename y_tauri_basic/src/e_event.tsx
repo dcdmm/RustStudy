@@ -11,7 +11,7 @@ function Ticker() {
   const [tick, setTick] = useState<Tick | null>(null);
 
   useEffect(() => {
-    // 事件名须与Rust一致,event.payload为emit发送的数据
+`    // "tick"为事件名,对应Rust中app.emit("tick", ...)的第一个参数,两边须一致;event.payload为第二个参数
     const unlisten = listen<Tick>("tick", (event) => setTick(event.payload));
     // listen返回Promise,结果为取消监听的函数,组件卸载时调用
     return () => {

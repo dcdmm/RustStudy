@@ -19,7 +19,7 @@ pub fn run() {
         .manage(b_state::Counter::default())
         .manage(h_heavy::JobState::default())
         .manage(i_api::TodoState::default())
-        // 程序启动时执行一次,用于启动后台任务
+        // 启动时执行一次,tick线程持续运行至程序退出
         // handle()返回引用,clone后才能交给后台线程
         .setup(|app| {
             e_event::start_ticker(app.handle().clone());

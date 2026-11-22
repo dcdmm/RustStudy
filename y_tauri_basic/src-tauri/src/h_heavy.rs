@@ -3,7 +3,6 @@ use std::sync::Mutex;
 use std::time::Instant;
 use tauri::{AppHandle, Emitter, State};
 
-// 返回给前端的计算结果
 #[derive(Clone, Serialize)]
 pub struct PrimeResult {
     parallel: bool,
@@ -11,26 +10,24 @@ pub struct PrimeResult {
     ms: u64,
 }
 
-// 任务状态,前端通过get_job和job-changed事件获取
 #[derive(Default, Clone, Serialize)]
 pub struct Job {
     running: bool,
     results: Vec<PrimeResult>,
 }
 
-// 由Tauri托管,前端页面卸载后仍然保留
 #[derive(Default)]
 pub struct JobState {
     job: Mutex<Job>,
 }
 
-// 前端打开页面时调用,获取当前任务状态
 #[tauri::command]
 pub fn get_job(state: State<JobState>) -> Job {
     state.job.lock().unwrap().clone()
 }
 
-// 结果不通过返回值传递,而是写入JobState并发送job-changed事件,payload为最新状态
+// 计算由前端invoke此command启动,无需像e_event那样在setup中启动
+// app和state由Tauri自动传入,前端只需传limit和parallel
 #[tauri::command]
 pub async fn count_primes(
     app: AppHandle,
