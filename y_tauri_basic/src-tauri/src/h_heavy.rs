@@ -26,8 +26,6 @@ pub fn get_job(state: State<JobState>) -> Job {
     state.job.lock().unwrap().clone()
 }
 
-// 计算由前端invoke此command启动,无需像e_event那样在setup中启动
-// app和state由Tauri自动传入,前端只需传limit和parallel
 #[tauri::command]
 pub async fn count_primes(
     app: AppHandle,
@@ -35,7 +33,6 @@ pub async fn count_primes(
     limit: u64,
     parallel: bool,
 ) -> Result<(), String> {
-    // 锁须在await前释放,因此放在单独的代码块中
     {
         let mut job = state.job.lock().unwrap();
         job.running = true;
