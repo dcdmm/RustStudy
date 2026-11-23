@@ -21,7 +21,8 @@ pub fn start_ticker(app: AppHandle) {
                 seconds,
                 message: format!("第{}次发送", seconds),
             };
-            // 发送给所有监听tick的前端
+            // 发送tick事件,前端每收到一次就执行一次回调
+            // 页面未打开时无人接收,该次通知丢失;线程不受影响,继续计数
             app.emit("tick", tick).unwrap();
         }
     });
