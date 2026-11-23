@@ -1,5 +1,3 @@
-# y_tauri_basic
-
 ## Tauri常用命令
 
 | 命令 | 作用 |

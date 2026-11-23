@@ -6,6 +6,7 @@ import TaskProgress from "./d_channel";
 import Ticker from "./e_event";
 import PluginDemo from "./f_plugin0_dialog-opener";
 import Note from "./f_plugin1_store";
+import FileDemo from "./f_plugin2_fs";
 import ReadText from "./g_error";
 import PrimeCounter from "./h_heavy";
 import TodoPage from "./i_api/TodoPage";
@@ -19,6 +20,7 @@ const pages = [
   { name: "e_event", element: <Ticker /> },
   { name: "f_plugin0_dialog-opener", element: <PluginDemo /> },
   { name: "f_plugin1_store", element: <Note /> },
+  { name: "f_plugin2_fs", element: <FileDemo /> },
   { name: "g_error", element: <ReadText /> },
   { name: "h_heavy", element: <PrimeCounter /> },
   { name: "i_api", element: <TodoPage /> },
