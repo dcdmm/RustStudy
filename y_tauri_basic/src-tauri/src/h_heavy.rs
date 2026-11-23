@@ -49,6 +49,7 @@ pub async fn count_primes(
     // | 3. async + spawn_blocking | 专用线程     | 不卡 | 不受影响     |
     let result = tauri::async_runtime::spawn_blocking(move || {
         let start = Instant::now();
+        // 计算代码位于独立的crates/heavy,不依赖Tauri;
         let count = if parallel {
             heavy::count_primes_par(limit)
         } else {
