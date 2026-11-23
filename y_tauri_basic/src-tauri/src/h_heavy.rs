@@ -33,11 +33,13 @@ pub async fn count_primes(
     limit: u64,
     parallel: bool,
 ) -> Result<(), String> {
+    // 锁须在await前释放,否则编译不通过
     {
         let mut job = state.job.lock().unwrap();
         job.running = true;
+        // 通知前端计算开始,页面显示计算中
         app.emit("job-changed", job.clone()).unwrap();
-    }
+    } // 锁在此释放
 
     // 耗时计算的三种写法:
     // | 写法                      | 占用线程     | 窗口 | 其他异步任务 |
@@ -64,6 +66,7 @@ pub async fn count_primes(
     let mut job = state.job.lock().unwrap();
     job.results.push(result);
     job.running = false;
+    // 通知前端计算完成;结果已存入JobState,即使页面未打开导致通知丢失,返回页面时也可通过get_job取回
     app.emit("job-changed", job.clone()).unwrap();
     Ok(())
 }

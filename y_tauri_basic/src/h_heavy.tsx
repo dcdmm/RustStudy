@@ -18,7 +18,9 @@ function PrimeCounter() {
   const [job, setJob] = useState<Job>({ running: false, results: [] });
 
   useEffect(() => {
+    // 离开页面期间收不到通知,但结果已存入JobState,打开页面时通过get_job取回
     invoke<Job>("get_job").then(setJob);
+    // 登记job-changed的回调: Rust每emit一次,Tauri调用一次回调,用payload中的最新状态更新页面
     const unlisten = listen<Job>("job-changed", (event) => setJob(event.payload));
     return () => {
       unlisten.then((stop) => stop());
